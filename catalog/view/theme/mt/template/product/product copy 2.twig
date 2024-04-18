@@ -1,0 +1,1972 @@
+{{ header }}
+
+
+<section class="product_page" id="beginning" data-scroll-id="beginning">
+    <div class="product_page__breadcrumbs breadcrumbs">
+        {% for breadcrumb in breadcrumbs %}
+        <a class="breadcrumbs__link  {% if breadcrumb == breadcrumbs|last %} is-active {% endif %}"
+            href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+        {% if breadcrumb != breadcrumbs|last %}
+        <span class="slash">/</span>
+        {% endif %}
+        {% endfor %}
+    </div>
+    <h1 class="section_block__title">{{ heading_title }}</h1>
+    <div class="product_page__content" id="product">
+        <div class="product_page__gallery">
+            <div class="product_page__tag is-new">
+                <svg class="bg">
+                    <use xlink:href="#tag"></use>
+                </svg>
+                <div class="text">новинка</div>
+            </div>
+            <div class="product_page__gallery_wrap">
+                {% for image in imagesMain %}
+                <div class="product_page__gallery_pic">
+                    <picture class="image">
+                        <source data-lazy="data-lazy" data-srcset="{{ image.additional }}" type="image/jpg" />
+                        <img class="image" data-lazy="data-lazy" data-src="{{ image.additional }}"
+                            alt="{{ heading_title }}" />
+                    </picture>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="product_page__slider slider swiper">
+                <div class="swiper-wrapper">
+                    {% for imageq in imagesMain %}
+                    <a href="{{ imageq.additional }}" data-fancybox="prod" class="product_page__gallery_pic swiper-slide">
+                        <picture class="image">
+                            <source data-lazy="data-lazy" data-srcset="{{ imageq.additional }}" type="image/webp" />
+                            <img class="image" data-lazy="data-lazy" data-src="{{ imageq.additional }}"
+                                alt="{{ heading_title }}" />
+                        </picture>
+                    </a>
+                    {% endfor %}
+                </div>
+                <div class="product_page__slider_pagination"></div>
+            </div>
+        </div>
+        <div class="product_page_info">
+            <div class="product_page_info__container">
+                <div class="product_page_info__block product_page_info__block--fix">
+
+                    {% if stock == 'В наличии' %}
+                            <span
+                        class="product_page_info__text product_page_info__text--small in-stock" data-color="green">{{ stock }}</span>
+                            {% elseif stock == 'Нет в наличии' %} 
+                            <span
+                        class="product_page_info__text product_page_info__text--small in-stock" data-color="red">{{ stock }}</span>
+                            {% elseif stock == 'Ожидание 2-3 дня' %} 
+                            <span
+                        class="product_page_info__text product_page_info__text--small in-stock" data-color="blue">{{ stock }}</span>
+                            {% elseif stock == 'Предзаказ' %}
+                            <span
+                        class="product_page_info__text product_page_info__text--small in-stock" data-color="blue">{{ stock }}</span>
+                    {% endif %}
+                    <span
+                        class="product_page_info__text product_page_info__text--small green out-stock">{{ stock_status }}</span>
+                    <p class="product_page_info__title">{{ heading_title }}</p>
+                    {% if price %}
+                    {% if special %}
+                    <div class="product_page_info__line"> <span class="product_page_info__price">{{ special }}
+                            руб</span>
+                        <span class="product_page_info__price old">{{ price }} руб</span>
+                    </div>
+                    {% endif %}
+                    {% endif %}
+                    <p class="product_page_info__text">
+                        {{ description }}
+                    </p>
+                    <div class="product_page_info__buttons product_page_info__buttons--page">
+
+                        {% if theme_mt_product_cart_checked %}
+                        <div class="product_page_info__buttons_wrap">
+
+                            {% if theme_mt_product_cart_quantity_checked %}
+                            <div class="product_page_counter">
+                                <button class="product_page_counter__btn product_page_counter__btn--minus">
+                                    <svg class="icon">
+                                        <use xlink:href="#minus"></use>
+                                    </svg>
+                                </button>
+                                <p class="product_page_counter__text">количество:
+                                    <input type="number" pattern="[0-9]+" min="1" max="10" readonly
+                                        class="number-amount" name="quantity" value="{{ minimum }}" size="2"
+                                        id="input-quantity">
+                                </p>
+                                <button class="product_page_counter__btn product_page_counter__btn--plus">
+                                    <svg class="icon">
+                                        <use xlink:href="#plus"></use>
+                                    </svg>
+                                </button>
+                            </div>
+                            {% else %}
+                            <input type="hidden" name="quantity" value="{{ minimum }}" size="2" id="input-quantity">
+                            {% endif %}
+
+                            <!-- {% if theme_mt_product_cart_quantity_checked %}
+                            <div class="count-products_box">
+                                <div class="count-products_input">
+                                    <button class="amount-minus">-</button>
+                                    <input class="number-amount" name="quantity" value="{{ minimum }}" size="2"
+                                        id="input-quantity">
+                                    <button class="amount-plus">+</button>
+                                </div>
+                                <span>{{ theme_mt_product_cart_quantity }}</span>
+                            </div>
+                            {% else %}
+                            <input type="hidden" name="quantity" value="{{ minimum }}" size="2" id="input-quantity">
+                            {% endif %} -->
+
+                            <button type="button" id="button-cart" data-loading-text="{{ text_loading }}"
+                                class="product_page_info__btn product_page_info__btn--cart btn btn--filled btn--icon_right">
+                                <span class="btn__text btn__text--initial">добавить в корзину</span>
+                                <span class="btn__text btn__text--added">в корзине</span>
+                                <svg class="btn__icon btn__icon--initial btn__icon--white btn__icon--right">
+                                    <use xlink:href="#cart"></use>
+                                </svg>
+                                <svg class="btn__icon btn__icon--added btn__icon--black btn__icon--right">
+                                    <use xlink:href="#icon_okay"></use>
+                                </svg>
+                            </button>
+                            <input type="hidden" name="product_id" value="{{ product_id }}" />
+
+                        </div>
+                        {% endif %}
+
+                        {% if theme_mt_product_wishlist_checked %}
+                        <button class="product_page_info__btn product_page_info__btn--fav btn btn--grey btn--icon_right"
+                            onclick="{% if in_wishlist %}wishlist_remove('{{ product_id }}');{% else %}wishlist_add('{{ product_id }}');{% endif %} return false;"
+                            {% if not logged %}data-login="false" {% else %}data-login="true" {% endif %}>
+                            <span class="btn__text btn__text--initial">избранное</span>
+                            <span class="btn__text btn__text--added">в избранном</span>
+                            <svg class="btn__icon btn__icon--initial btn__icon--black btn__icon--right">
+                                <use xlink:href="#heart"></use>
+                            </svg>
+                            <svg class="btn__icon btn__icon--added btn__icon--red btn__icon--right">
+                                <use xlink:href="#heart_red"></use>
+                            </svg>
+                        </button>
+                        {% endif %}
+
+                       <!-- {% if theme_mt_product_wishlist_checked %}
+                        <button class="product-adds add-bookmark product-like {% if in_wishlist %}added{% endif %}"
+                            onclick="{% if in_wishlist %}wishlist_remove('{{ product_id }}');{% else %}wishlist_add('{{ product_id }}');{% endif %} return false;"
+                            {% if not logged %}data-login="false" {% else %}data-login="true" {% endif %}>
+                            {{ theme_mt_product_wishlist }}
+                        </button>
+                        {% endif %}-->
+                    </div>
+                </div>
+                <div class="product_page_info__block product_page_info__block--lenses product_page_info_lenses"
+                    data-tab-wrapper="">
+                    <div class="product_page_info_lenses__top">
+                        <p class="product_page_info__title">Варианты товара</p>
+                        <div class="product_page_info_lenses__tabs">
+                            <button class="product_page_info_lenses__tabs_btn is-active" data-tab-id="1">Одинаковые
+                                линзы</button>
+                            <button class="product_page_info_lenses__tabs_btn" data-tab-id="2">Различающиеся
+                                линзы</button>
+                        </div>
+                    </div>
+                    <div class="product_page_info_lenses__container">
+                        <div class="product_page_info_lenses__inner is-active" data-tab="1">
+                            {% for optionItem in options %}
+                                {% if optionItem.option_id == 13 or 
+                                optionItem.option_id == 14 or
+                                optionItem.option_id == 18 or 
+                                optionItem.option_id == 19 or 
+                                optionItem.option_id == 27 or 
+                                optionItem.option_id == 15 %}
+                                {{ optionItem.option_id }}
+                                <div class="product_page_info_lenses__dropdown">
+                                    <div class="product_page_info_dropdown" data-dropdown-block="">
+                                        <div class="product_page_info_dropdown__top" data-dropdown-block-btn>
+                                            <p class="product_page_info__caption">{{ optionItem.name }}</p>
+                                            <svg class="icon">
+                                                <use xlink:href="#link_arrow"></use>
+                                            </svg>
+                                        </div>
+                                        <div class="product_page_info_dropdown__content product_page_info_lenses__dropdown_content">
+                                            {% for optionItemVal in optionItem.product_option_value %}
+                                            <label
+                                                class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                                <input class="radio" type="radio" name="pwrD" value="" hidden="">
+                                                <p class="text">{{ optionItemVal.name }}</p>
+                                            </label>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="select select--outlined product_page_info__select" data-dropdown=""
+                                            data-dropdown-name="colors" data-dropdown-placeholder="Выбрать"
+                                            data-dropdown-readonly="true"
+                                            data-dropdown-options="[{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;}]">
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                            <div class="product_page_info_lenses__dropdown">
+                                <div class="product_page_info_dropdown" data-dropdown-block="">
+                                    <div class="product_page_info_dropdown__top" data-dropdown-block-btn>
+                                        <p class="product_page_info__caption">Оптическая сила (PWR / D)</p>
+                                        <svg class="icon">
+                                            <use xlink:href="#link_arrow"></use>
+                                        </svg>
+                                    </div>
+                                    <div
+                                        class="product_page_info_dropdown__content product_page_info_lenses__dropdown_content">
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="pwrD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="pwrD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="pwrD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="pwrD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="pwrD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="pwrD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="pwrD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="pwrD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="pwrD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="pwrD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="pwrD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="pwrD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="pwrD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="pwrD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="pwrD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="pwrD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                    </div>
+                                    <div class="select select--outlined product_page_info__select" data-dropdown=""
+                                        data-dropdown-name="colors" data-dropdown-placeholder="Выбрать"
+                                        data-dropdown-readonly="true"
+                                        data-dropdown-options="[{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;}]">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product_page_info_lenses__dropdown">
+                                <div class="product_page_info_dropdown" data-dropdown-block="">
+                                    <div class="product_page_info_dropdown__top" data-dropdown-block-btn>
+                                        <p class="product_page_info__caption">Радиус кривизны (BC)</p>
+                                        <svg class="icon">
+                                            <use xlink:href="#link_arrow"></use>
+                                        </svg>
+                                    </div>
+                                    <div
+                                        class="product_page_info_dropdown__content product_page_info_lenses__dropdown_content">
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="BC" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="BC" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="BC" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="BC" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                    </div>
+                                    <div class="select select--outlined product_page_info__select" data-dropdown=""
+                                        data-dropdown-name="colors" data-dropdown-placeholder="Выбрать"
+                                        data-dropdown-readonly="true"
+                                        data-dropdown-options="[{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;}]">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product_page_info_lenses__dropdown">
+                                <div class="product_page_info_dropdown" data-dropdown-block="">
+                                    <div class="product_page_info_dropdown__top" data-dropdown-block-btn>
+                                        <p class="product_page_info__caption">Оптическая сила цилиндра (CYL)</p>
+                                        <svg class="icon">
+                                            <use xlink:href="#link_arrow"></use>
+                                        </svg>
+                                    </div>
+                                    <div
+                                        class="product_page_info_dropdown__content product_page_info_lenses__dropdown_content">
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="CYL" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="CYL" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="CYL" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="CYL" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                    </div>
+                                    <div class="select select--outlined product_page_info__select" data-dropdown=""
+                                        data-dropdown-name="colors" data-dropdown-placeholder="Выбрать"
+                                        data-dropdown-readonly="true"
+                                        data-dropdown-options="[{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;}]">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product_page_info_lenses__dropdown">
+                                <div class="product_page_info_dropdown" data-dropdown-block="">
+                                    <div class="product_page_info_dropdown__top" data-dropdown-block-btn>
+                                        <p class="product_page_info__caption">Ось (AX)</p>
+                                        <svg class="icon">
+                                            <use xlink:href="#link_arrow"></use>
+                                        </svg>
+                                    </div>
+                                    <div
+                                        class="product_page_info_dropdown__content product_page_info_lenses__dropdown_content">
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="AX" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="AX" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="AX" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="AX" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                    </div>
+                                    <div class="select select--outlined product_page_info__select" data-dropdown=""
+                                        data-dropdown-name="colors" data-dropdown-placeholder="Выбрать"
+                                        data-dropdown-readonly="true"
+                                        data-dropdown-options="[{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;}]">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product_page_info_lenses__dropdown">
+                                <div class="product_page_info_dropdown" data-dropdown-block="">
+                                    <div class="product_page_info_dropdown__top" data-dropdown-block-btn>
+                                        <p class="product_page_info__caption">Диаметр (DIA)</p>
+                                        <svg class="icon">
+                                            <use xlink:href="#link_arrow"></use>
+                                        </svg>
+                                    </div>
+                                    <div
+                                        class="product_page_info_dropdown__content product_page_info_lenses__dropdown_content">
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="DIA" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="DIA" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="DIA" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="DIA" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                    </div>
+                                    <div class="select select--outlined product_page_info__select" data-dropdown=""
+                                        data-dropdown-name="colors" data-dropdown-placeholder="Выбрать"
+                                        data-dropdown-readonly="true"
+                                        data-dropdown-options="[{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;}]">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product_page_info_lenses__dropdown">
+                                <div class="product_page_info_dropdown" data-dropdown-block="">
+                                    <div class="product_page_info_dropdown__top" data-dropdown-block-btn>
+                                        <p class="product_page_info__caption">Аддидация (ADD)</p>
+                                        <svg class="icon">
+                                            <use xlink:href="#link_arrow"></use>
+                                        </svg>
+                                    </div>
+                                    <div
+                                        class="product_page_info_dropdown__content product_page_info_lenses__dropdown_content">
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="ADD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="ADD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="ADD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="ADD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                    </div>
+                                    <div class="select select--outlined product_page_info__select" data-dropdown=""
+                                        data-dropdown-name="colors" data-dropdown-placeholder="Выбрать"
+                                        data-dropdown-readonly="true"
+                                        data-dropdown-options="[{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;}]">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product_page_info_lenses__inner" data-tab="2">
+                            <div class="product_page_info_lenses__dropdown">
+                                <div class="product_page_info_dropdown" data-dropdown-block="">
+                                    <div class="product_page_info_dropdown__top" data-dropdown-block-btn>
+                                        <p class="product_page_info__caption product_page_info__caption--grey">Левый
+                                            глаз</p>
+                                        <p class="product_page_info__caption">Оптическая сила (PWR / D)</p>
+                                        <svg class="icon">
+                                            <use xlink:href="#link_arrow"></use>
+                                        </svg>
+                                    </div>
+                                    <div
+                                        class="product_page_info_dropdown__content product_page_info_lenses__dropdown_content">
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="pwrD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="pwrD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="pwrD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="pwrD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                    </div>
+                                    <div class="select select--outlined product_page_info__select" data-dropdown=""
+                                        data-dropdown-name="colors" data-dropdown-placeholder="Выбрать"
+                                        data-dropdown-readonly="true"
+                                        data-dropdown-options="[{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;}]">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product_page_info_lenses__dropdown">
+                                <div class="product_page_info_dropdown" data-dropdown-block="">
+                                    <div class="product_page_info_dropdown__top" data-dropdown-block-btn>
+                                        <p class="product_page_info__caption product_page_info__caption--grey">Правый
+                                            глаз</p>
+                                        <p class="product_page_info__caption">Оптическая сила (PWR / D)</p>
+                                        <svg class="icon">
+                                            <use xlink:href="#link_arrow"></use>
+                                        </svg>
+                                    </div>
+                                    <div
+                                        class="product_page_info_dropdown__content product_page_info_lenses__dropdown_content">
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="pwrD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="pwrD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="pwrD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="pwrD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                    </div>
+                                    <div class="select select--outlined product_page_info__select" data-dropdown=""
+                                        data-dropdown-name="colors" data-dropdown-placeholder="Выбрать"
+                                        data-dropdown-readonly="true"
+                                        data-dropdown-options="[{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;}]">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product_page_info_lenses__dropdown">
+                                <div class="product_page_info_dropdown" data-dropdown-block="">
+                                    <div class="product_page_info_dropdown__top" data-dropdown-block-btn>
+                                        <p class="product_page_info__caption product_page_info__caption--grey">Левый
+                                            глаз</p>
+                                        <p class="product_page_info__caption">Радиус кривизны (BC)</p>
+                                        <svg class="icon">
+                                            <use xlink:href="#link_arrow"></use>
+                                        </svg>
+                                    </div>
+                                    <div
+                                        class="product_page_info_dropdown__content product_page_info_lenses__dropdown_content">
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="BC" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="BC" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="BC" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="BC" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                    </div>
+                                    <div class="select select--outlined product_page_info__select" data-dropdown=""
+                                        data-dropdown-name="colors" data-dropdown-placeholder="Выбрать"
+                                        data-dropdown-readonly="true"
+                                        data-dropdown-options="[{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;}]">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product_page_info_lenses__dropdown">
+                                <div class="product_page_info_dropdown" data-dropdown-block="">
+                                    <div class="product_page_info_dropdown__top" data-dropdown-block-btn>
+                                        <p class="product_page_info__caption product_page_info__caption--grey">Правый
+                                            глаз</p>
+                                        <p class="product_page_info__caption">Радиус кривизны (BC)</p>
+                                        <svg class="icon">
+                                            <use xlink:href="#link_arrow"></use>
+                                        </svg>
+                                    </div>
+                                    <div
+                                        class="product_page_info_dropdown__content product_page_info_lenses__dropdown_content">
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="BC" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="BC" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="BC" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="BC" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                    </div>
+                                    <div class="select select--outlined product_page_info__select" data-dropdown=""
+                                        data-dropdown-name="colors" data-dropdown-placeholder="Выбрать"
+                                        data-dropdown-readonly="true"
+                                        data-dropdown-options="[{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;}]">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product_page_info_lenses__dropdown">
+                                <div class="product_page_info_dropdown" data-dropdown-block="">
+                                    <div class="product_page_info_dropdown__top" data-dropdown-block-btn>
+                                        <p class="product_page_info__caption product_page_info__caption--grey">Левый
+                                            глаз</p>
+                                        <p class="product_page_info__caption">Оптическая сила цилиндра (CYL)</p>
+                                        <svg class="icon">
+                                            <use xlink:href="#link_arrow"></use>
+                                        </svg>
+                                    </div>
+                                    <div
+                                        class="product_page_info_dropdown__content product_page_info_lenses__dropdown_content">
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="CYL" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="CYL" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="CYL" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="CYL" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                    </div>
+                                    <div class="select select--outlined product_page_info__select" data-dropdown=""
+                                        data-dropdown-name="colors" data-dropdown-placeholder="Выбрать"
+                                        data-dropdown-readonly="true"
+                                        data-dropdown-options="[{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;}]">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product_page_info_lenses__dropdown">
+                                <div class="product_page_info_dropdown" data-dropdown-block="">
+                                    <div class="product_page_info_dropdown__top" data-dropdown-block-btn>
+                                        <p class="product_page_info__caption product_page_info__caption--grey">Правый
+                                            глаз</p>
+                                        <p class="product_page_info__caption">Оптическая сила цилиндра (CYL)</p>
+                                        <svg class="icon">
+                                            <use xlink:href="#link_arrow"></use>
+                                        </svg>
+                                    </div>
+                                    <div
+                                        class="product_page_info_dropdown__content product_page_info_lenses__dropdown_content">
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="CYL" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="CYL" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="CYL" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="CYL" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                    </div>
+                                    <div class="select select--outlined product_page_info__select" data-dropdown=""
+                                        data-dropdown-name="colors" data-dropdown-placeholder="Выбрать"
+                                        data-dropdown-readonly="true"
+                                        data-dropdown-options="[{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;}]">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product_page_info_lenses__dropdown">
+                                <div class="product_page_info_dropdown" data-dropdown-block="">
+                                    <div class="product_page_info_dropdown__top" data-dropdown-block-btn>
+                                        <p class="product_page_info__caption product_page_info__caption--grey">Левый
+                                            глаз</p>
+                                        <p class="product_page_info__caption">Ось (AX)</p>
+                                        <svg class="icon">
+                                            <use xlink:href="#link_arrow"></use>
+                                        </svg>
+                                    </div>
+                                    <div
+                                        class="product_page_info_dropdown__content product_page_info_lenses__dropdown_content">
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="AX" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="AX" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="AX" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="AX" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                    </div>
+                                    <div class="select select--outlined product_page_info__select" data-dropdown=""
+                                        data-dropdown-name="colors" data-dropdown-placeholder="Выбрать"
+                                        data-dropdown-readonly="true"
+                                        data-dropdown-options="[{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;}]">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product_page_info_lenses__dropdown">
+                                <div class="product_page_info_dropdown" data-dropdown-block="">
+                                    <div class="product_page_info_dropdown__top" data-dropdown-block-btn>
+                                        <p class="product_page_info__caption product_page_info__caption--grey">Правый
+                                            глаз</p>
+                                        <p class="product_page_info__caption">Ось (AX)</p>
+                                        <svg class="icon">
+                                            <use xlink:href="#link_arrow"></use>
+                                        </svg>
+                                    </div>
+                                    <div
+                                        class="product_page_info_dropdown__content product_page_info_lenses__dropdown_content">
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="AX" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="AX" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="AX" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="AX" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                    </div>
+                                    <div class="select select--outlined product_page_info__select" data-dropdown=""
+                                        data-dropdown-name="colors" data-dropdown-placeholder="Выбрать"
+                                        data-dropdown-readonly="true"
+                                        data-dropdown-options="[{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;}]">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product_page_info_lenses__dropdown">
+                                <div class="product_page_info_dropdown" data-dropdown-block="">
+                                    <div class="product_page_info_dropdown__top" data-dropdown-block-btn>
+                                        <p class="product_page_info__caption product_page_info__caption--grey">Левый
+                                            глаз</p>
+                                        <p class="product_page_info__caption">Диаметр (DIA)</p>
+                                        <svg class="icon">
+                                            <use xlink:href="#link_arrow"></use>
+                                        </svg>
+                                    </div>
+                                    <div
+                                        class="product_page_info_dropdown__content product_page_info_lenses__dropdown_content">
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="DIA" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="DIA" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="DIA" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="DIA" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                    </div>
+                                    <div class="select select--outlined product_page_info__select" data-dropdown=""
+                                        data-dropdown-name="colors" data-dropdown-placeholder="Выбрать"
+                                        data-dropdown-readonly="true"
+                                        data-dropdown-options="[{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;}]">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product_page_info_lenses__dropdown">
+                                <div class="product_page_info_dropdown" data-dropdown-block="">
+                                    <div class="product_page_info_dropdown__top" data-dropdown-block-btn>
+                                        <p class="product_page_info__caption product_page_info__caption--grey">Правый
+                                            глаз</p>
+                                        <p class="product_page_info__caption">Диаметр (DIA)</p>
+                                        <svg class="icon">
+                                            <use xlink:href="#link_arrow"></use>
+                                        </svg>
+                                    </div>
+                                    <div
+                                        class="product_page_info_dropdown__content product_page_info_lenses__dropdown_content">
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="DIA" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="DIA" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="DIA" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="DIA" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                    </div>
+                                    <div class="select select--outlined product_page_info__select" data-dropdown=""
+                                        data-dropdown-name="colors" data-dropdown-placeholder="Выбрать"
+                                        data-dropdown-readonly="true"
+                                        data-dropdown-options="[{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;}]">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product_page_info_lenses__dropdown">
+                                <div class="product_page_info_dropdown" data-dropdown-block="">
+                                    <div class="product_page_info_dropdown__top" data-dropdown-block-btn>
+                                        <p class="product_page_info__caption product_page_info__caption--grey">Левый
+                                            глаз</p>
+                                        <p class="product_page_info__caption">Аддидация (ADD)</p>
+                                        <svg class="icon">
+                                            <use xlink:href="#link_arrow"></use>
+                                        </svg>
+                                    </div>
+                                    <div
+                                        class="product_page_info_dropdown__content product_page_info_lenses__dropdown_content">
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="ADD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="ADD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="ADD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="ADD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                    </div>
+                                    <div class="select select--outlined product_page_info__select" data-dropdown=""
+                                        data-dropdown-name="colors" data-dropdown-placeholder="Выбрать"
+                                        data-dropdown-readonly="true"
+                                        data-dropdown-options="[{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;}]">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product_page_info_lenses__dropdown">
+                                <div class="product_page_info_dropdown" data-dropdown-block="">
+                                    <div class="product_page_info_dropdown__top" data-dropdown-block-btn>
+                                        <p class="product_page_info__caption product_page_info__caption--grey">Правый
+                                            глаз</p>
+                                        <p class="product_page_info__caption">Аддидация (ADD)</p>
+                                        <svg class="icon">
+                                            <use xlink:href="#link_arrow"></use>
+                                        </svg>
+                                    </div>
+                                    <div
+                                        class="product_page_info_dropdown__content product_page_info_lenses__dropdown_content">
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="ADD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="ADD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="ADD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                        <label
+                                            class="product_page_info__colors_btn product_page_info__colors_btn--lenses">
+                                            <input class="radio" type="radio" name="ADD" value="" hidden="">
+                                            <p class="text">-8.50</p>
+                                        </label>
+                                    </div>
+                                    <div class="select select--outlined product_page_info__select" data-dropdown=""
+                                        data-dropdown-name="colors" data-dropdown-placeholder="Выбрать"
+                                        data-dropdown-readonly="true"
+                                        data-dropdown-options="[{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;},{&quot;key&quot;:&quot;-8.50&quot;,&quot;value&quot;:&quot;-8.50&quot;}]">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product_page_info__block product_page_info__block--scroll">
+                    <p class="product_page_info__caption">Выберите цвет</p>
+                    <div class="product_page_info__colors">
+                        <label class="product_page_info__colors_btn">
+                            <input class="radio" type="radio" name="color" value="" hidden="">
+                            <p class="text">чёрный</p>
+                        </label>
+                        <label class="product_page_info__colors_btn">
+                            <input class="radio" type="radio" name="color" value="" hidden="">
+                            <p class="text">красный</p>
+                        </label>
+                        <label class="product_page_info__colors_btn">
+                            <input class="radio" type="radio" name="color" value="" hidden="">
+                            <p class="text">белый</p>
+                        </label>
+                        <label class="product_page_info__colors_btn">
+                            <input class="radio" type="radio" name="color" value="" hidden="">
+                            <p class="text">оранжевый</p>
+                        </label>
+                    </div>
+                    <div class="select select--outlined product_page_info__select" data-dropdown=""
+                        data-dropdown-name="colors" data-dropdown-placeholder="Выбрать" data-dropdown-readonly="true"
+                        data-dropdown-options="[{&quot;key&quot;:&quot;Чёрный&quot;,&quot;value&quot;:&quot;Чёрный&quot;},{&quot;key&quot;:&quot;Красный&quot;,&quot;value&quot;:&quot;Красный&quot;},{&quot;key&quot;:&quot;Белый&quot;,&quot;value&quot;:&quot;Белый&quot;},{&quot;key&quot;:&quot;Оранжевый&quot;,&quot;value&quot;:&quot;Оранжевый&quot;}]">
+                    </div>
+                </div>
+
+
+                {% if attribute_groups %}
+                <div class="product_page_info__block product_page_info__block--scroll">
+                    <div class="product_page_info_dropdown" data-dropdown-block="">
+                        {% for attribute_group in attribute_groups %}
+                        {% if attribute_group.attribute_group_id == 7 %}
+                        <div class="product_page_info_dropdown__top" data-dropdown-block-btn>
+                            <p class="product_page_info__caption">{{ attribute_group.name }}</p>
+                            <svg class="icon">
+                                <use xlink:href="#link_arrow"></use>
+                            </svg>
+                        </div>
+                        <div class="product_page_info_dropdown__content">
+                            {% for attribute in attribute_group.attribute %}
+                            {% if attribute.name == 'Ширина' %}
+                            <div class="product_page_size_block">
+                                <div class="product_page_size_block__pic"><img class="image"
+                                        data-src="/image/catalog/assets/img/glasses_size_1.svg" alt="" data-lazy="" />
+                                </div>
+                                <p class="product_page_size_block__text">{{ attribute.name }}:</p>
+                                <p class="product_page_size_block__text">{{ attribute.text }}</p>
+                            </div>
+                            {% endif %}
+                            {% if attribute.name == 'Длина дужки' %}
+                            <div class="product_page_size_block">
+                                <div class="product_page_size_block__pic">
+                                    <img class="image" data-src="/image/catalog/assets/img/glasses_size_2.svg" alt=""
+                                        data-lazy="" />
+                                </div>
+                                <p class="product_page_size_block__text">{{ attribute.name }}:</p>
+                                <p class="product_page_size_block__text">{{ attribute.text }}</p>
+                            </div>
+                            {% endif %}
+                            {% if attribute.name == 'Высота линзы' %}
+                            <div class="product_page_size_block">
+                                <div class="product_page_size_block__pic"><img class="image"
+                                        data-src="/image/catalog/assets/img/glasses_size_3.svg" alt="" data-lazy="" />
+                                </div>
+                                <p class="product_page_size_block__text">{{ attribute.name }}:</p>
+                                <p class="product_page_size_block__text">{{ attribute.text }}</p>
+                            </div>
+                            {% endif %}
+                            {% if attribute.name == 'Ширина линзы' %}
+                            <div class="product_page_size_block">
+                                <div class="product_page_size_block__pic"><img class="image"
+                                        data-src="/image/catalog/assets/img/glasses_size_4.svg" alt="" data-lazy="" />
+                                </div>
+                                <p class="product_page_size_block__text">{{ attribute.name }}:</p>
+                                <p class="product_page_size_block__text">{{ attribute.text }}</p>
+                            </div>
+                            {% endif %}
+                            {% if attribute.name == 'Длина моста' %}
+                            <div class="product_page_size_block">
+                                <div class="product_page_size_block__pic"><img class="image"
+                                        data-src="/image/catalog/assets/img/glasses_size_5.svg" alt="" data-lazy="" />
+                                </div>
+                                <p class="product_page_size_block__text">{{ attribute.name }}:</p>
+                                <p class="product_page_size_block__text">{{ attribute.text }}</p>
+                            </div>
+                            {% endif %}
+
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+
+                {% if attribute_groups %}
+                <div class="product_page_info__block product_page_info__block--scroll">
+                    <div class="product_page_info_dropdown" data-dropdown-block="">
+                        {% for attribute_group in attribute_groups %}
+                        {% if attribute_group.attribute_group_id == 8 %}
+                        <div class="product_page_info_dropdown__top" data-dropdown-block-btn>
+                            <p class="product_page_info__caption">{{ attribute_group.name }}</p>
+                            <svg class="icon">
+                                <use xlink:href="#link_arrow"></use>
+                            </svg>
+                        </div>
+                        <div class="product_page_info_dropdown__content">
+                            {% for attribute in attribute_group.attribute %}
+                            <div class="product_page_characteristics_block">
+                                <p class="product_page_characteristics_block__text">{{ attribute.name }}</p>
+                                <p class="product_page_characteristics_block__text">{{ attribute.text }}</p>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="product_page_info__block product_page_info__block--scroll">
+                    <div class="product_page_info_dropdown" data-dropdown-block="">
+                        <div class="product_page_info_dropdown__top" data-dropdown-block-btn>
+                            <p class="product_page_info__caption">Гарантия</p>
+                            <svg class="icon">
+                                <use xlink:href="#link_arrow"></use>
+                            </svg>
+                        </div>
+                        <div class="product_page_info_dropdown__content product_page_info_dropdown__content--38">
+                            <p class="product_page_characteristics_block__text">Гарантия на все очки и на данную модель
+                                распространяется на все очки и линзы, как изготовленные в нашей компании, так и от
+                                сторонних брендов, в том числе и на продукцию заводов «Оптикс» и «Гелиос».</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="product_page_info__block product_page_info__block--scroll">
+                    <div class="product_page_info_dropdown" data-dropdown-block="">
+                        <div class="product_page_info_dropdown__top" data-dropdown-block-btn>
+                            <p class="product_page_info__caption">Оплата и доставка</p>
+                            <svg class="icon">
+                                <use xlink:href="#link_arrow"></use>
+                            </svg>
+                        </div>
+                        <div class="product_page_info_dropdown__content">
+                            <div class="product_page_delivery">
+                                <div class="product_page_delivery__block">
+                                    <div class="product_page_delivery__icon">
+                                        <svg class="svg_icon">
+                                            <use xlink:href="#delivery_icon_1"></use>
+                                        </svg>
+                                    </div>
+                                    <div class="product_page_delivery__info">
+                                        <p class="product_page_delivery__text product_page_delivery__text--bold">
+                                            Доставка курьером по Москве</p>
+                                        <p class="product_page_delivery__text">При заказе до 3000 руб. — 350 руб, при
+                                            заказе от 3000 руб. — бесплатно.</p>
+                                        <p class="product_page_delivery__text">Оплата картой, наличными или по QR-коду.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="product_page_delivery__block">
+                                    <div class="product_page_delivery__icon">
+                                        <svg class="svg_icon">
+                                            <use xlink:href="#delivery_icon_2"></use>
+                                        </svg>
+                                    </div>
+                                    <div class="product_page_delivery__info">
+                                        <p class="product_page_delivery__text product_page_delivery__text--bold">
+                                            Доставка по России (СДЭК или Почта России)</p>
+                                        <p class="product_page_delivery__text">Доставка рассчитывается менеджером после
+                                            оформления заказа.</p>
+                                        <p class="product_page_delivery__text">Оплата онлайн на сайте.</p>
+                                    </div>
+                                </div>
+                                <div class="product_page_delivery__block">
+                                    <div class="product_page_delivery__icon">
+                                        <svg class="svg_icon">
+                                            <use xlink:href="#delivery_icon_3"></use>
+                                        </svg>
+                                    </div>
+                                    <div class="product_page_delivery__info">
+                                        <p class="product_page_delivery__text product_page_delivery__text--bold">
+                                            Самовывоз</p>
+                                        <p class="product_page_delivery__text">Оплата картой, наличными или по QR-коду.
+                                        </p>
+                                    </div>
+                                </div><a class="product_page_delivery__btn btn btn--filled"
+                                    href="/delivery"><span class="btn__text">Подробнее о доставке и
+                                        оплате</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product_page_info__block product_page_info__block--scroll">
+                    <p class="product_page_info__caption">Помощь</p>
+                    <div class="product_page_info__help_buttons">
+                        <button class="product_page_info__help_btn btn btn--outlined"
+                            data-linked-modal="modal_try_on"><span class="btn__text">Как померить?</span></button>
+                            <a class="product_page_info__help_btn btn btn--outlined" href="/receipt"><span
+                                class="btn__text">изготовление по рецепту</span></a>
+                    </div>
+                </div>
+                <div class="product_page_info__block product_page_info__block--scroll">
+                    <p class="product_page_info__caption">Поделиться с друзьями</p>
+                    <div class="product_page_info__help_buttons product_page_info__help_buttons--socials"><a
+                            class="product_page_info__socials_btn" href="/"><img class="image"
+                                data-src="/image/catalog/assets/img/icon_inst.svg" alt="" data-lazy="" /></a><a
+                            class="product_page_info__socials_btn" href=""><img class="image"
+                                data-src="/image/catalog/assets/img/icon_tg.svg" alt="" data-lazy="" /></a><a
+                            class="product_page_info__socials_btn" href="/"><img class="image"
+                                data-src="/image/catalog/assets/img/icon_vk.svg" alt="" data-lazy="" /></a><a
+                            class="product_page_info__socials_btn" href=""><img class="image"
+                                data-src="/image/catalog/assets/img/icon_fb.svg" alt="" data-lazy="" /></a><a
+                            class="product_page_info__socials_btn" href="/"><img class="image"
+                                data-src="/image/catalog/assets/img/icon_ok.svg" alt="" data-lazy="" /></a><a
+                            class="product_page_info__socials_btn" href=""><img class="image"
+                                data-src="/image/catalog/assets/img/icon_tw.svg" alt="" data-lazy="" /></a><a
+                            class="product_page_info__socials_btn" href="/"><img class="image"
+                                data-src="/image/catalog/assets/img/icon_pin.svg" alt="" data-lazy="" /></a><a
+                            class="product_page_info__socials_btn" href=""><img class="image"
+                                data-src="/image/catalog/assets/img/icon_wa.svg" alt="" data-lazy="" /></a></div>
+                </div>
+            </div>
+            <div class="product_page_info__container">
+                <div class="product_page_info__block product_page_info__block--scroll">
+                    <p class="product_page_info__title">Бесплатная консультация</p>
+                    <p class="product_page_info__text product_page_info__text--margin14">Оставьте заявку на
+                        консультацию, <br class="mobile"> и мы перезвоним вам.</p>
+                    <form class="product_page_info_form" action="/mailer" data-mailer=""
+                        data-form-id="product_page_form">
+                        <input type="hidden" name="form" value="Бесплатная консультация (страница товара)">
+                        <div class="product_page_info_form__inputs">
+                            <div class="input_wrapper input_wrapper--textarea_grey" data-input-wrapper="">
+                                <textarea class="input_wrapper__textarea" name="question"
+                                    placeholder="Ваш вопрос"></textarea>
+                            </div>
+                            <div class="input_wrapper input_wrapper--outlined" data-input-wrapper="">
+                                <input class="input_wrapper__input input_wrapper__input--12" type="text" name="name"
+                                    required autocomplete="off">
+                                <label class="input_wrapper__label input_wrapper__label--12">Ваше имя</label>
+                                <div class="input_wrapper__tooltip" data-input-tooltip=""></div>
+                            </div>
+                            <div class="input_wrapper input_wrapper--outlined" data-input-wrapper="">
+                                <input class="input_wrapper__input input_wrapper__input--12" type="tel" name="phone"
+                                    required autocomplete="off">
+                                <label class="input_wrapper__label input_wrapper__label--12">Номер телефона</label>
+                                <div class="input_wrapper__tooltip" data-input-tooltip=""></div>
+                            </div>
+                        </div>
+                        <div class="product_page_info_form__bottom">
+                            <p class="product_page_info_form__text">Нажимая на кнопку, вы даёте своё соглашение <br
+                                    class="desktop"> на обработку персональных данных</p>
+                            <button class="product_page_info_form__btn btn btn--filled"><span
+                                    class="btn__text">отправить</span></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="product_page_info__block product_page_info__block--last"><a
+                    class="product_page_info__up_btn btn btn--filled" href="/#beginning" data-anchor="beginning">
+                    <div class="text">подняться наверх</div>
+                    <svg class="icon_up">
+                        <use xlink:href="#link_arrow"></use>
+                    </svg>
+                </a></div>
+        </div>
+    </div>
+</section>
+
+{% if products_variant %}
+<section class="hits">
+    <div class="hits__top">
+        <h2 class="section_block__title section_block__title--small">Похожие товары</h2>
+        <div class="hits__nav slider__buttons">
+            <button class="slider__button slider__button--prev hits__nav_btn--prev">
+                <svg class="icon">
+                    <use xlink:href="#link_arrow"></use>
+                </svg>
+            </button>
+            <button class="slider__button slider__button--next hits__nav_btn--next">
+                <svg class="icon">
+                    <use xlink:href="#link_arrow"></use>
+                </svg>
+            </button>
+        </div>
+    </div>
+    <div class="hits__slider slider swiper">
+        <div class="swiper-wrapper">
+            {% for product_variant in products_variant %}
+            <div class="hits_slide swiper-slide">
+                <div class="hits_slide__pic" data-linked-modal="modal_card">
+                    <div class="hits_slide__pic_wrap" data-hover-images="">
+                        {% for img in product_variant.imgDop %}
+                            <img class="image" data-lazy data-src="{{ img.thumb }}" alt="{{ heading_title }}">
+                        {% endfor %}
+                    </div>
+                    <img class="loader" data-src="/image/catalog/assets/img/loader.svg" alt="" data-lazy="" />
+                    <div class="hits_slide__hover_btn btn btn--filled">Быстрый просмотр</div>
+                    <button class="hits_slide__btn hits_slide__btn--mob"><img class="image image__empty"
+                            data-src="/image/catalog/assets/img/icon_fav_empty.svg" alt="" data-lazy="" /><img
+                            class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg" alt=""
+                            data-lazy="" />
+                    </button>
+                </div>
+                <a href="{{ product_variant.href }}" class="hits_slide_mobile btn btn--filled">
+                    Подробнее
+                </a>
+                <div class="hits_slide__info">
+                    <div class="hits_slide__left" data-linked-modal="modal_card">
+                        <p class="hits_slide__text hits_slide__text-name hits_slide__text--big">{{ product_variant.name }}</p>
+                        <p class="hits_slide__text">
+                            {{ product_variant.model }}
+                        </p>            
+                        {% if product_variant.stock == 'В наличии' %}
+                            <div class="hits_slide__stock" data-color="green">В наличии</div> 
+                            {% elseif product_variant.stock == 'Нет в наличии' %} 
+                            <div class="hits_slide__stock" data-color="red">Нет в наличии</div> 
+                            {% elseif product_variant.stock == 'Ожидание 2-3 дня' %} 
+                            <div class="hits_slide__stock" data-color="blue">Ожидание 2-3 дня</div> 
+                            {% elseif product_variant.stock == 'Предзаказ' %}
+                            <div class="hits_slide__stock" data-color="blue">Предзаказ</div> 
+                        {% endif %}
+
+
+                        <div style="display: none;">
+                        {% if product_variant.attrblock %}
+                            {% for attrblockitem in product_variant.attrblock %}
+                                {% if attrblockitem.attribute_group_id == 7 %}
+                                <div class="attrs__size">
+                                    <span class="attr__size-name">{{ attrblockitem.name }}</span>
+                                    {% for attributeitem in attrblockitem.attribute %}
+                                        {% if attributeitem.attribute_id == 16 %}
+                                        <div class="attr__size-category shir">
+                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
+                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
+                                        </div>
+                                        {% endif %}
+                                        {% if attributeitem.attribute_id == 13 %}
+                                        <div class="attr__size-category leng">
+                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
+                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
+                                        </div>
+                                        {% endif %}
+                                        {% if attributeitem.attribute_id == 14 %}
+                                        <div class="attr__size-category heig-lin">
+                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
+                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
+                                        </div>
+                                        {% endif %}
+                                        {% if attributeitem.attribute_id == 12 %}
+                                        <div class="attr__size-category shir-lin">
+                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
+                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
+                                        </div>
+                                        {% endif %}
+                                        {% if attributeitem.attribute_id == 15 %}
+                                        <div class="attr__size-category most-len">
+                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
+                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
+                                        </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                {% elseif attrblockitem.attribute_group_id == 8 %} 
+                                <div class="attrs__char">
+                                    <span class="attr__char-name">{{ attrblockitem.name }}</span>
+                                    {% for attributeitem in attrblockitem.attribute %}
+                                    <div class="attr__char-category">
+                                        <p class="attr__char-name">{{ attributeitem.name }}</p>
+                                        <p class="attr__char-cal">{{ attributeitem.text }}</p>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                        </div>
+
+                        <div class="hits_slide_option" style="display: none;">
+                            {% for option in product_variant.option %}
+                                {% if option.option_id == 5 %}
+                                    {% for optval in option.product_option_value %}
+                                    <div class="hits_slide_option_param">
+                                        <span>{{ optval.name }}</span>
+                                        <a href="{{ optval.quantity }}"></a>
+                                    </div>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+
+
+                        <a class="hits_slide__href" href="{{ product_variant.href }}"></a>
+                        <p class="hits_slide__descr" style="display: none;">{{ product_variant.description }}</p>
+                        <div class="hits_slide__price">
+                            {% if product_variant.special %}
+                                <p class="hits_slide__text normal"> <text>{{ product_variant.special }}</text> RUB</p>
+                                <p class="hits_slide__text old"><text>{{ product_variant.price }}</text> RUB</p>
+                            {% else %}
+                                <p class="hits_slide__text normal"> <text>{{ product_variant.price }}</text> RUB</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="hits_slide__right">
+
+                        <!-- {% if theme_mt_category_product_cart_checked %}
+                        <button class="button add-to-cart"
+                            onclick="add_in_cart('{{ product.product_id }}', '{{ product.minimum }}');">{{ theme_mt_category_product_cart_text }}</button>
+                        {% endif %} -->
+
+                        {% if product_variant.stock == 'В наличии' %}
+                            <button class="hits_slide__btn add-to-cart {% if product_variant.in_cart %} added{% endif %}" id="add-to-cart"
+                                    onclick="add_in_cart('{{ product_variant.product_id }}', '{{ product_variant.minimum }}'); return false;">
+                                    <img class="image image__empty" data-src="/image/catalog/assets/img/icon_cart_empty.svg"
+                                        alt="" data-lazy="" />
+                                    <img class="image image__active" data-src="/image/catalog/assets/img/icon_cart_active.svg"
+                                        alt="" data-lazy="" />
+                                </button>
+                        {% endif %}
+
+                        <button class="hits_slide__btn add-wish {% if product_variant.in_wishlist %} added{% endif %}"
+                            onclick="{% if product_accessory.in_wishlist %}wishlist_remove('{{ product_accessory.product_id }}');{% else %}wishlist_add('{{ product_accessory.product_id }}');{% endif %} return false;"
+                            {% if not logged %}data-login="false" {% else %}data-login="true" {% endif %}>
+                            <img class="image image__empty" data-src="/image/catalog/assets/img/icon_fav_empty.svg"
+                                alt="" data-lazy="" />
+                            <img class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg"
+                                alt="" data-lazy="" />
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+
+
+{% if products_accessory %}
+<section class="hits">
+    <div class="hits__top">
+        <h2 class="section_block__title section_block__title--small">Подобрать аксессуары</h2>
+        <div class="hits__nav slider__buttons">
+            <button class="slider__button slider__button--prev hits__nav_btn--prev">
+                <svg class="icon">
+                    <use xlink:href="#link_arrow"></use>
+                </svg>
+            </button>
+            <button class="slider__button slider__button--next hits__nav_btn--next">
+                <svg class="icon">
+                    <use xlink:href="#link_arrow"></use>
+                </svg>
+            </button>
+        </div>
+    </div>
+    <div class="hits__slider slider swiper">
+        <div class="swiper-wrapper">
+            {% for product_accessory in products_accessory %}
+            <div class="hits_slide swiper-slide">
+                <div class="hits_slide__pic" data-linked-modal="modal_card">
+                    <div class="hits_slide__pic_wrap" data-hover-images="">
+                        {% for img in product_accessory.imgDops %}
+                            <img class="image" data-lazy data-src="{{ img.thumb }}" alt="{{ heading_title }}">
+                        {% endfor %}
+                    </div>
+                    <img class="loader" data-src="/image/catalog/assets/img/loader.svg" alt="" data-lazy="" />
+                    <div class="hits_slide__hover_btn btn btn--filled">Быстрый просмотр</div>
+                    <button class="hits_slide__btn hits_slide__btn--mob"><img class="image image__empty"
+                            data-src="/image/catalog/assets/img/icon_fav_empty.svg" alt="" data-lazy="" /><img
+                            class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg" alt=""
+                            data-lazy="" />
+                    </button>
+                </div>
+                <a href="{{ product_accessory.href }}" class="hits_slide_mobile btn btn--filled">
+                    Подробнее
+                </a>
+                <div class="hits_slide__info">
+                    <div class="hits_slide__left" data-linked-modal="modal_card">
+                        <p class="hits_slide__text hits_slide__text-name hits_slide__text--big">{{ product_accessory.name }}</p>
+                        <p class="hits_slide__text">
+                            {{ product_accessory.model }}
+                        </p>            
+                        {% if product_accessory.stock == 'В наличии' %}
+                            <div class="hits_slide__stock" data-color="green">В наличии</div> 
+                            {% elseif product_accessory.stock == 'Нет в наличии' %} 
+                            <div class="hits_slide__stock" data-color="red">Нет в наличии</div> 
+                            {% elseif product_accessory.stock == 'Ожидание 2-3 дня' %} 
+                            <div class="hits_slide__stock" data-color="blue">Ожидание 2-3 дня</div> 
+                            {% elseif product_accessory.stock == 'Предзаказ' %}
+                            <div class="hits_slide__stock" data-color="blue">Предзаказ</div> 
+                        {% endif %}
+
+
+                        <div style="display: none;">
+                        {% if product_accessory.attrblock %}
+                            {% for attrblockitem in product_accessory.attrblock %}
+                                {% if attrblockitem.attribute_group_id == 7 %}
+                                <div class="attrs__size">
+                                    <span class="attr__size-name">{{ attrblockitem.name }}</span>
+                                    {% for attributeitem in attrblockitem.attribute %}
+                                        {% if attributeitem.attribute_id == 16 %}
+                                        <div class="attr__size-category shir">
+                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
+                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
+                                        </div>
+                                        {% endif %}
+                                        {% if attributeitem.attribute_id == 13 %}
+                                        <div class="attr__size-category leng">
+                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
+                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
+                                        </div>
+                                        {% endif %}
+                                        {% if attributeitem.attribute_id == 14 %}
+                                        <div class="attr__size-category heig-lin">
+                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
+                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
+                                        </div>
+                                        {% endif %}
+                                        {% if attributeitem.attribute_id == 12 %}
+                                        <div class="attr__size-category shir-lin">
+                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
+                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
+                                        </div>
+                                        {% endif %}
+                                        {% if attributeitem.attribute_id == 15 %}
+                                        <div class="attr__size-category most-len">
+                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
+                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
+                                        </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                {% elseif attrblockitem.attribute_group_id == 8 %} 
+                                <div class="attrs__char">
+                                    <span class="attr__char-name">{{ attrblockitem.name }}</span>
+                                    {% for attributeitem in attrblockitem.attribute %}
+                                    <div class="attr__char-category">
+                                        <p class="attr__char-name">{{ attributeitem.name }}</p>
+                                        <p class="attr__char-cal">{{ attributeitem.text }}</p>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                        </div>
+
+                        <div class="hits_slide_option" style="display: none;">
+                            {% for option in product_accessory.option %}
+                                {% if option.option_id == 5 %}
+                                    {% for optval in option.product_option_value %}
+                                    <div class="hits_slide_option_param">
+                                        <span>{{ optval.name }}</span>
+                                        <a href="{{ optval.quantity }}"></a>
+                                    </div>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+
+
+                        <a class="hits_slide__href" href="{{ product_accessory.href }}"></a>
+                        <p class="hits_slide__descr" style="display: none;">{{ product_accessory.description }}</p>
+                        <div class="hits_slide__price">
+                            {% if product_accessory.special %}
+                                <p class="hits_slide__text normal"> <text>{{ product_accessory.special }}</text> RUB</p>
+                                <p class="hits_slide__text old"><text>{{ product_accessory.price }}</text> RUB</p>
+                            {% else %}
+                                <p class="hits_slide__text normal"> <text>{{ product_accessory.price }}</text> RUB</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="hits_slide__right">
+
+                        <!-- {% if theme_mt_category_product_cart_checked %}
+                        <button class="button add-to-cart"
+                            onclick="add_in_cart('{{ product.product_id }}', '{{ product.minimum }}');">{{ theme_mt_category_product_cart_text }}</button>
+                        {% endif %} -->
+
+                        {% if product_accessory.stock == 'В наличии' %}
+                            <button class="hits_slide__btn add-to-cart {% if product_accessory.in_cart %} added{% endif %}" id="add-to-cart"
+                                    onclick="add_in_cart('{{ product_accessory.product_id }}', '{{ product_accessory.minimum }}'); return false;">
+                                    <img class="image image__empty" data-src="/image/catalog/assets/img/icon_cart_empty.svg"
+                                        alt="" data-lazy="" />
+                                    <img class="image image__active" data-src="/image/catalog/assets/img/icon_cart_active.svg"
+                                        alt="" data-lazy="" />
+                                </button>
+                        {% endif %}
+
+                        <button class="hits_slide__btn add-wish {% if product_accessory.in_wishlist %} added{% endif %}"
+                            onclick="{% if product_accessory.in_wishlist %}wishlist_remove('{{ product_accessory.product_id }}');{% else %}wishlist_add('{{ product_accessory.product_id }}');{% endif %} return false;"
+                            {% if not logged %}data-login="false" {% else %}data-login="true" {% endif %}>
+                            <img class="image image__empty" data-src="/image/catalog/assets/img/icon_fav_empty.svg"
+                                alt="" data-lazy="" />
+                            <img class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg"
+                                alt="" data-lazy="" />
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+
+{{ content_top }}
+
+
+
+
+
+
+
+<script>
+    // слайдер продукта
+    /* let product__slider = new Swiper('.product__block-slider', {
+        thumbs: {
+            swiper: {
+                el: '.product__block-navslider',
+                slidesPerView: "auto",
+                direction: 'vertical',
+                spaceBetween: 20,
+                navigation: {
+                    nextEl: '.block-navslider.arrow-down',
+                    prevEl: '.block-navslider.arrow-up',
+                },
+            }
+        },
+        slidesPerView: "auto",
+        spaceBetween: 25,
+        loop: false,
+        pagination: false,
+        autoplay: false,
+        navigation: {
+            nextEl: '.product-slider_arrows.arrow-next',
+            prevEl: '.product-slider_arrows.arrow-prev',
+        },
+        breakpoints: {
+            320: {
+                allowTouchMove: true,
+            },
+            1024: {
+                allowTouchMove: false,
+            },
+        },
+    }); */
+
+    //выбор даты и времени 
+    $('#datetimepicker').datetimepicker({
+        mask: true,
+        format: 'd.m.Y H:i',
+        lang: 'ru',
+    });
+
+    $.datetimepicker.setLocale('ru');
+
+    $('#button_datetime').click(function () {
+        $('#datetimepicker').datetimepicker('toggle');
+    });
+    //
+    $('#datepicker').datetimepicker({
+        mask: true,
+        format: 'd.m.Y',
+        lang: 'ru',
+    });
+
+    $.datetimepicker.setLocale('ru');
+
+    $('#button_date').click(function () {
+        $('#datepicker').datetimepicker('toggle');
+    });
+    //
+    $('#timepicker').datetimepicker({
+        mask: true,
+        format: 'H:i',
+        lang: 'ru',
+    });
+
+    $.datetimepicker.setLocale('ru');
+
+    $('#button_time').click(function () {
+        $('#timepicker').datetimepicker('toggle');
+    });
+
+    //галерея по клику на фото товара
+    lightGallery(document.getElementById('lightgallery'), {
+        hideBarsDelay: 99999,
+        backdropDuration: 0,
+        mode: 'lg-fade',
+        enableDrag: true,
+        closable: false,
+        appendCounterTo: '.lg',
+        addClass: 'product_gall',
+        nextHtml: '<svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="34" height="34" rx="17" fill="#EDEEE9"></rect><path d="M18.5179 22.5L17.4274 21.4207L21.0673 17.7688L10 17.7688L10 16.2312L21.0673 16.2312L17.4274 12.5793L18.5179 11.5L24 17L18.5179 22.5Z" fill="#1F1F1F"></path></svg>',
+        prevHtml: '<svg width="34" height="34" viewBox="0 0 34 34"" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="34" height="34" rx="17" fill="#EDEEE9"></rect><path d="M18.5179 22.5L17.4274 21.4207L21.0673 17.7688L10 17.7688L10 16.2312L21.0673 16.2312L17.4274 12.5793L18.5179 11.5L24 17L18.5179 22.5Z" fill="#1F1F1F"></path></svg>'
+    });
+
+    //слайдер "похожие товары"
+    /* let similar_slider = new Swiper('.descr__similar-slider', {
+        slidesPerView: "auto",
+        spaceBetween: 10,
+        loop: false,
+        pagination: false,
+        autoplay: false,
+        navigation: {
+            nextEl: '.similar-slider_arrows.arrow-next',
+            prevEl: '.similar-slider_arrows.arrow-prev',
+        },
+        breakpoints: {
+            1480: {
+                spaceBetween: 10,
+            },
+        },
+    }); */
+</script>
+
+<script>
+    // раскрывающийся текст 
+    let more_text = $(".more-text");
+    [].forEach.call(more_text, function (e) {
+        let more_button = $(e).find("button.more-text_open");
+        let get_content = $(e).find('.more-text_content').children();
+        let get_overflow = $(e).find('.more-text_content').attr("data-overflow");
+        let get_height = $(get_content).height();
+
+        const def_button_text = $(more_button).text();
+
+        $(get_content).css('max-height', get_overflow + 'px');
+
+        if (get_overflow >= get_height) {
+            $(more_button).css('display', 'none')
+            $(more_button).remove();
+        }
+
+        console.log('ovf' + get_overflow)
+        console.log('height' + get_height)
+
+        const fix_height = get_overflow;
+
+        $(more_button).click(function (e) {
+            let this_content = $(e.currentTarget).parent().find('.more-text_content')
+                .children();
+            $(this_content).parent().toggleClass('open');
+            $(this_content).parent().hasClass('open') ? ($(this_content).css('max-height', $(
+                    this_content).prop('scrollHeight') + 'px')) & $(more_button).text(
+                    'Свернуть') :
+                $(this_content).css('max-height', fix_height + 'px') & $(more_button).text(
+                    def_button_text)
+        })
+    });
+</script>
+
+
+<script type="text/javascript">
+    <!--
+    $('select[name=\'recurring_id\'], input[name="quantity"]').change(function () {
+        $.ajax({
+            url: 'index.php?route=product/product/getRecurringDescription',
+            type: 'post',
+            data: $(
+                'input[name=\'product_id\'], input[name=\'quantity\'], select[name=\'recurring_id\']'
+            ),
+            dataType: 'json',
+            beforeSend: function () {
+                $('#recurring-description').html('');
+            },
+            success: function (json) {
+                $('.alert-dismissible, .text-danger').remove();
+
+                if (json['success']) {
+                    $('#recurring-description').html(json['success']);
+                }
+            }
+        });
+    });
+    //
+    -->
+</script>
+<script type="text/javascript">
+    $('#button-cart').on('click', function () {
+        /*  console.log($(
+             '#product input[type=\'text\'], #product input[type=\'hidden\'], #product input[type=\'radio\']:checked, #product input[type=\'checkbox\']:checked, #product select, #product textarea, #input-quantity'
+             )); */
+        $.ajax({
+            url: 'index.php?route=checkout/cart/add',
+            type: 'post',
+            data: $(
+                '#product input[type=\'text\'], #product input[type=\'hidden\'], #product input[type=\'radio\']:checked, #product input[type=\'checkbox\']:checked, #product select, #product textarea, #input-quantity'
+            ),
+            dataType: 'json',
+            beforeSend: function () {
+                //$('#button-cart').button('loading');
+            },
+            complete: function () {
+                //$('#button-cart').button('reset');
+            },
+            success: function (json) {
+                $('.alert-dismissible, .text-danger').remove();
+                $('.form-group').removeClass('has-error');
+
+                if (json['error']) {
+                    if (json['error']['option']) {
+                        for (i in json['error']['option']) {
+                            var element = $('#input-option' + i.replace('_', '-'));
+
+                            if (element.parent().hasClass('input-group')) {
+                                element.parent().after('<div class="text-danger">' + json['error'][
+                                    'option'
+                                ][i] + '</div>');
+                            } else {
+                                element.after('<div class="text-danger">' + json['error']['option'][
+                                    i
+                                ] + '</div>');
+                            }
+                        }
+                    }
+
+                    if (json['error']['recurring']) {
+                        $('select[name=\'recurring_id\']').after('<div class="text-danger">' + json[
+                            'error']['recurring'] + '</div>');
+                    }
+
+                    // Highlight any found errors
+                    $('.text-danger').parent().addClass('has-error');
+                }
+
+                if (json['success']) {
+                    if ($("#cart_added").hasClass('notify_action')) {
+                        $('#cart_added').removeClass('notify_action');
+                    }
+                    $(document).find('#cart_added').addClass('notify_action').css('top', 90 + 'px');
+                    active_notify();
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+
+    function add_in_cart(product_id, quantity) {
+        var btn = this;
+        $.ajax({
+            url: 'index.php?route=checkout/cart/add',
+            type: 'post',
+            data: 'product_id=' + product_id + '&quantity=' + (typeof (quantity) != 'undefined' ? quantity : 1),
+            dataType: 'json',
+            success: function (json) {
+
+                if (json['redirect']) {
+                    location = json['redirect'];
+                }
+
+                if (json['success']) {
+                    if ($("#cart_added").hasClass('notify_action')) {
+                        $('#cart_added').removeClass('notify_action');
+                    }
+                    $(document).find('#cart_added').addClass('notify_action').css('top', 90 + 'px');
+                    active_notify();
+                    $(btn).html('В корзине');
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    }
+    //
+</script>
+
+<script type="text/javascript">
+    $('.date').datetimepicker({
+        language: '{{ datepicker }}',
+        pickTime: false
+    });
+
+    $('.datetime').datetimepicker({
+        language: '{{ datepicker }}',
+        pickDate: true,
+        pickTime: true
+    });
+
+    $('.time').datetimepicker({
+        language: '{{ datepicker }}',
+        pickDate: false
+    });
+
+    $('button[id^=\'button-upload\']').on('click', function () {
+        var node = this;
+
+        $('#form-upload').remove();
+
+        $('body').prepend(
+            '<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>'
+        );
+
+        $('#form-upload input[name=\'file\']').trigger('click');
+
+        if (typeof timer != 'undefined') {
+            clearInterval(timer);
+        }
+
+        timer = setInterval(function () {
+            if ($('#form-upload input[name=\'file\']').val() != '') {
+                clearInterval(timer);
+
+                $.ajax({
+                    url: 'index.php?route=tool/upload',
+                    type: 'post',
+                    dataType: 'json',
+                    data: new FormData($('#form-upload')[0]),
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function () {
+                        $(node).button('loading');
+                    },
+                    complete: function () {
+                        $(node).button('reset');
+                    },
+                    success: function (json) {
+                        $('.text-danger').remove();
+
+                        if (json['error']) {
+                            $(node).parent().find('input').after(
+                                '<div class="text-danger">' + json['error'] + '</div>');
+                        }
+
+                        if (json['success']) {
+                            alert(json['success']);
+
+                            $(node).parent().find('input').val(json['code']);
+                        }
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr
+                            .responseText);
+                    }
+                });
+            }
+        }, 500);
+    });
+</script>
+
+<script type="text/javascript">
+    $('#review').delegate('.pagination a', 'click', function (e) {
+        e.preventDefault();
+
+        $('#review').fadeOut('slow');
+
+        $('#review').load(this.href);
+
+        $('#review').fadeIn('slow');
+    });
+
+    $('#review').load('index.php?route=mt/product/product/review&id={{ product_id }}');
+
+    $('#button-review').on('click', function () {
+        $.ajax({
+            url: '/index.php?route=product/product/write&product_id={{ product_id }}',
+            type: 'post',
+            dataType: 'json',
+            data: $("#form-review").serialize(),
+            beforeSend: function () {},
+            complete: function () {},
+            success: function (json) {
+                $('.alert-dismissible').remove();
+
+                if (json['error']) {
+                    $('#review').after(
+                        '<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' +
+                        json['error'] + '</div>');
+                }
+
+                if (json['success']) {
+                    $('#review').after(
+                        '<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' +
+                        json['success'] + '</div>');
+
+                    $('input[name=\'name\']').val('');
+                    $('textarea[name=\'text\']').val('');
+                    $('input[name=\'rating\']:checked').prop('checked', false);
+                }
+            }
+        });
+    });
+</script>
+{{ footer }}

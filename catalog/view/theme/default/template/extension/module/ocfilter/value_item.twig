@@ -1,0 +1,50 @@
+{% if option.color %}
+    <div class="ocf-color" style="background-color: #{{ value.color }};"></div>
+{% endif %}
+
+{% if option.image %}
+    <div class="ocf-image" style="background-image: url({{ value.image }});"></div>
+{% endif %}
+
+{% if value.selected %}
+    <label id="v-{{ value.id }}" class="catalog_filters_sort__label ocf-selected" data-option-id="{{ option.option_id }}" style="display: flex; align-items:center; padding: 8px 0">
+      <input type="{{ option.type }}" name="ocf[{{ option.option_id }}]" value="{{ value.params }}" checked="checked" class="ocf-target radio" autocomplete="off" style="display: none;" />
+      <div class="catalog_filters_sort__radio">
+          <svg class="icon">
+              <use xlink:href="#checkmark"></use>
+          </svg>
+      </div>
+      <p>{{ value.name }}</p>
+      {% if show_counter %}
+      <small class="badge"></small>
+      {% endif %}
+    </label>
+{% elseif value.count %}
+    <label class="catalog_filters_sort__label" id="v-{{ value.id }}" data-option-id="{{ option.option_id }}" style="display: flex; align-items:center; padding: 8px 0">
+      <input type="{{ option.type }}" name="ocf[{{ option.option_id }}]" value="{{ value.params }}" class="ocf-target radio" autocomplete="off" style="display: none;" />
+      <div class="catalog_filters_sort__radio">
+          <svg class="icon">
+              <use xlink:href="#checkmark"></use>
+          </svg>
+      </div>
+      <p>{{ value.name }}</p>
+      {% if show_counter %}
+      <small class="badge">{{ value.count }}</small>
+      {% endif %}
+    </label>
+{% else %}
+    <label id="v-{{ value.id }}" class="disabled catalog_filters_sort__label" data-option-id="{{ option.option_id }}" style="padding: 8px 0; display: flex; align-items:center; opacity: .6;">
+      <input type="{{ option.type }}" name="ocf[{{ option.option_id }}]" value="" disabled="disabled" class="ocf-target" autocomplete="off" style="display: none;" />
+      <div class="catalog_filters_sort__radio">
+          <svg class="icon">
+              <use xlink:href="#checkmark"></use>
+          </svg>
+      </div>
+      <p>{{ value.name }}</p>
+      {% if show_counter %}
+      <small class="badge">0</small>
+      {% endif %}
+    </label>
+{% endif %}
+
+                            

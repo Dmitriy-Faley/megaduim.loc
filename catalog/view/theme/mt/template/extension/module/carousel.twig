@@ -1,0 +1,64 @@
+  <section class="brands">
+            <div class="container full-width_container">
+                <div class="brands__wrapper">
+
+                    <div class="swiper brands__slider">
+                        <div class="swiper-wrapper">
+						
+						{% for banner in banners %}
+                            <div class="swiper-slide brands__slide-item">
+                     			
+								{% if banner.link %}<a href="{{ banner.link }}"><img src="{{ banner.image }}" loading="lazy" alt="{{ banner.title }}" width="100%" height="100%" /></a>{% else %}<img src="{{ banner.image }}" loading="lazy" alt="{{ banner.title }}" width="100%" height="100%" />{% endif %}
+                           
+                            </div>							 
+						{% endfor %}
+							
+                            
+                        </div>
+                    </div>
+
+                    
+                    <div class="sliders-arrows prev">
+                        <div class="brands-slider_arrows arrow-prev">
+                            <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.48209 3.01466e-07L6.57264 1.07928L2.93265 4.73116L14 4.73116L14 6.26884L2.93265 6.26884L6.57264 9.92072L5.48209 11L-1.24572e-06 5.5L5.48209 3.01466e-07Z" fill="#1F1F1F"/>
+                            </svg>                             
+                        </div>
+                    </div>
+
+                    <div class="sliders-arrows next">
+                        <div class="brands-slider_arrows arrow-next">
+                            <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8.51791 11L7.42736 9.92073L11.0673 6.26884L-2.7402e-07 6.26884L-2.06805e-07 4.73116L11.0673 4.73116L7.42736 1.07928L8.51791 3.7233e-07L14 5.5L8.51791 11Z" fill="#1F1F1F"/>
+                            </svg>                                 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+		<script>
+            // слайдер брендов
+            let brands_slider = new Swiper('.brands__slider', {
+                slidesPerView: "auto",
+                spaceBetween: 25,
+                loop: false,
+                pagination: false,
+                autoplay: false,
+
+                breakpoints: {
+                    320: {
+                        allowTouchMove: true,
+                        navigation: false
+                    },
+                    1024: {
+                        allowTouchMove: false,
+                        navigation: {
+                            nextEl: '.brands .arrow-next',
+                            prevEl: '.brands .arrow-prev',
+                        },
+                    },
+                },
+            });
+        </script>
+		
+		

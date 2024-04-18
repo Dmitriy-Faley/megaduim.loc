@@ -1,0 +1,159 @@
+{{ header }}
+
+<section class="account">
+  <div class="account__column">
+    <div class="account__column_wrap">
+      <div class="account__breadcrumbs breadcrumbs">
+        {% for breadcrumb in breadcrumbs %}
+        <a class="breadcrumbs__link  {% if breadcrumb == breadcrumbs|last %} is-active {% endif %}"
+          href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+        {% if breadcrumb != breadcrumbs|last %}
+        <span class="slash">/</span>
+        {% endif %}
+        {% endfor %}
+      </div>
+      <h1 class="section_block__title">{{ heading_title }}</h1>
+    </div>
+
+    <div class="account__tabs">
+      <a class="account__tab is-active" href="{{ order }}">
+        <svg class="icon_main">
+          <use xlink:href="#acc_icon_1"></use>
+        </svg><span class="text text--desk">история заказов</span><span class="text text--mob">заказы</span>
+        <svg class="icon_arrow">
+          <use xlink:href="#link_arrow"></use>
+        </svg>
+      </a>
+      <a class="account__tab" href="{{ edit }}">
+        <svg class="icon_main">
+          <use xlink:href="#acc_icon_2"></use>
+        </svg><span class="text text--desk">личные данные</span><span class="text text--mob">данные</span>
+        <svg class="icon_arrow">
+          <use xlink:href="#link_arrow"></use>
+        </svg>
+      </a>
+      <a class="account__tab" href="{{ password }}">
+        <svg class="icon_main">
+          <use xlink:href="#acc_icon_3"></use>
+        </svg><span class="text text--desk">доп. информация</span><span class="text text--mob">аккаунт</span>
+        <svg class="icon_arrow">
+          <use xlink:href="#link_arrow"></use>
+        </svg>
+      </a>
+
+      <a href="/index.php?route=account/logout" class="account__btn_leave">
+        <svg class="icon_main">
+          <use xlink:href="#acc_icon_4"></use>
+        </svg><span class="text text--desk">выйти из аккаунта</span><span class="text text--mob">выход</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="account__content account__content--order_card">
+    <div class="account_order_card__top">
+      <h2 class="section_block__title section_block__title--small">№ {{ order_id }}</h2>
+      <p class="section_block__text section_block__text--green"><b>{{ text_date_added }} </b> {{ date_added }}</p>
+      <!-- <p class="section_block__text section_block__text--green">Доставлен 7 июля</p> -->
+    </div>
+    <div class="account_order_card__content">
+      <div class="account_order_card__info">
+        <p class="account_order_card__info_title">Информация о заказе</p>
+        <div class="account_order_card__info_wrap">
+          <p class="account_order_card__info_caption">Продавец</p>
+          <p class="account_order_card__info_text">Диоптрика</p>
+        </div>
+
+        {% if payment_method %}
+        <div class="account_order_card__info_wrap">
+          <p class="account_order_card__info_caption">Получатель</p>
+          <p class="account_order_card__info_text">{{ shipping_first_last_name }}</p>
+          <a href="tel:{{ telephone }}" class="account_order_card__info_text">{{ telephone }}</a>
+          <a href="mailto:{{ email }}" class="account_order_card__info_text">{{ email }}</a>
+        </div>
+        {% endif %}
+                  
+
+
+        {% if shipping_company %}
+        <div class="account_order_card__info_wrap">
+          <p class="account_order_card__info_caption">Компания</p>
+          <p class="account_order_card__info_text">{{ shipping_company }}</p>
+        </div>
+        {% endif %}
+
+        {% if payment_method %}
+        <div class="account_order_card__info_wrap">
+          <p class="account_order_card__info_caption">Оплата</p>
+          <p class="account_order_card__info_text">{{ payment_method }}</p>
+        </div>
+        {% endif %}
+
+        {% if shipping_method %}
+        <div class="account_order_card__info_wrap">
+          <p class="account_order_card__info_caption">Доставка</p>
+          <p class="account_order_card__info_text">{{ shipping_method }} </p>
+        </div>
+        {% endif %}
+
+        {% if shipping_address %}
+        <div class="account_order_card__info_wrap">
+          <p class="account_order_card__info_caption">Адрес доставки</p>
+          <p class="account_order_card__info_text">{{ shipping_address }}</p>
+        </div>
+        {% endif %}
+        
+        <div class="account_order_card__info_wrap">
+          <p class="account_order_card__info_caption">Дата создания заказа</p>
+          <p class="account_order_card__info_text">{{ date_added }}</p>
+        </div>
+
+        {% for total in totals %}
+        <div class="account_order_card__info_wrap">
+          <p class="account_order_card__info_caption">{{ total.title }}</p>
+          <p class="account_order_card__info_text">{{ total.text }}</p>
+        </div>
+        {% endfor %}
+        
+
+        {% if histories %}
+          {% for history in histories %}
+        <div class="account_order_card__info_wrap status">
+          <p class="account_order_card__info_caption">Статус</p>
+          <p class="account_order_card__info_text">{{ history.status }}</p>
+        </div>
+        {% endfor %}
+          {% else %}
+          {{ text_no_results }}
+        {% endif %}
+
+        <div class="account_order_card__info_wrap">
+          <p class="account_order_card__info_caption">Трек-номер</p>
+          <p class="account_order_card__info_text">{{ order_id }}</p>
+        </div>
+      </div>
+      <div class="account_order_card__products">
+        <p class="account_order_card__info_title">Товары</p>
+        <div class="account_order_card__products_cards">
+        
+        {% for product in products %}
+          <a href="{{ product.href }}" class="account_order_card__products_card">
+            <div class="account_order_card__products_img">
+              <picture class="image">
+                <!-- <source data-lazy="data-lazy" data-srcset="{{ product.image }}" type="image/webp" />
+                <source data-lazy="data-lazy" data-srcset="{{ product.image }}" type="image/jpg" /> -->
+                <img class="image" data-lazy="data-lazy" data-src="{{ product.image }}" alt="" />
+              </picture>
+            </div>
+            <p class="account_order_card__products_text">{{ product.name }}</p>
+            <p class="account_order_card__products_text account_order_card__products_text--small">{{ product.price }} RUB</p>
+          </a>
+          {% endfor %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+{{ footer }}

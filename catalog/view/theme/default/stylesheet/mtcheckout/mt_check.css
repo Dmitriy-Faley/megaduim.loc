@@ -1,0 +1,2721 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+:active, :hover, :focus {
+    outline: 0;
+    outline-offset: 0;
+}
+
+@keyframes donut-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.donut {
+  display: inline-block;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: var(--color-primary) !important;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: donut-spin 1.2s linear infinite;
+}
+
+
+input[type="text"]:focus::placeholder, input[type="password"]:focus::placeholder, input[type="email"]:focus::placeholder, input[type="tel"]:focus::placeholder, input[type="search"]:focus::placeholder, textarea:focus::placeholder, select:focus::placeholder, .input:focus::placeholder {
+  color: inherit !importantl;  
+} 
+
+.mtcheck-body {
+  padding-top: 30px;
+}
+
+.mtcheck-body a, .mtcheck-body .link {	
+	text-underline-offset: 5px !important;
+	border:0;
+}
+
+.mtcheck-body a, .mtcheck-body button {
+	transition: all 0.2s linear !important;
+	border: none;
+	letter-spacing: unset;
+}
+
+.mtcheck-popup__body p, .mtcheck-popup__body ul li, .mtcheck-popup__body ol li {
+	font-size: 13px;
+}
+
+.mtcheck-body .mtbtn {
+  height: auto !important;
+}
+
+.mtcheck-body {
+	text-transform: none;
+}	
+
+.mtcheck-body .card {
+    border-radius: 6px;
+}
+
+/*.mtcheck-body #remove-all button:hover, .mtcheck-body #buy-everything button:hover, .mtcheck-body button.active, .mtcheck-body .mtbtn:hover, .mtcheck-body input[type="button"].mtbtn:hover, .mtcheck-body .mtbtn.active {
+	background: none;
+	box-shadow: none;
+}*/
+
+.mtcheck-body input#button-confirm[type="button"].mtbtn:hover {
+	background: var(--color-primary-hover) !important;	
+    background-color: var(--color-primary-hover) !important;	
+	transition: all 0.2s linear !important;
+}
+
+.mtcheck-body a:hover, button:hover {
+	transition: all 0.2s linear !important;
+}
+	
+.mtcheck-body a:hover, .sdek_pvz_info a:hover {
+	text-decoration: underline;	
+	border: none;	
+}
+
+.mtcheck-products, #user_block,  #shipping_block, #payment_block {
+	margin-bottom: 22px;
+}
+
+
+:root {	 
+    --design-mw: 914px;
+    --container-horizontal-offset: 20px;
+    --mw: calc(var(--design-mw) + var(--container-horizontal-offset) * 2);		
+}
+
+.mtcheck-body label {
+	margin: 0; padding: 0;
+}
+
+.mtcheck-display .checkbox__text::before {
+	display: none;
+}
+
+
+
+.mtcheck-product__count {
+	margin-right: 20px;
+}
+
+.mtcheck-body {	
+    font-family: inherit;    
+	max-width: 1690px;
+	margin: 0 auto;
+	font-weight: 400;
+}
+
+.mtcheck-container {
+/*    max-width: var(--mw);*/
+    padding: 0 var(--container-horizontal-offset);
+    margin: 0 auto;
+	margin-top: 29px;
+}
+
+.mtcheck-display__wrapper {
+	margin-top: 30px; 
+	margin-bottom: 30px;
+}
+
+
+.mtcheck-body .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+}
+
+.mtcheck-body .mtbtn-reset {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    outline: none;
+	padding: 0;
+	font-weight: 400;
+	font-size: 15px;
+}
+
+.mtcheck-body .list-reset {
+    list-style: none;
+}
+
+.mtcheck-body fieldset {
+    padding: 0;
+    border: none;
+}
+
+/* Components */
+
+.mtcheck-product__price .price {
+	font-size: 15px;
+	white-space: nowrap;	
+}
+
+
+.mtcheck-product__price {
+	display: flex;
+	align-items: center;
+	flex-wrap: nowrap;	
+}
+
+.price.mt_price {display: inline-block !important;}
+
+.mtcheck-body .title {    
+    line-height: 1.31;
+}
+
+.mtcheck-product__info .title--sm {
+	padding-bottom: 3px;
+}
+
+.mtcheck-body button {
+	text-transform: none;	
+}
+
+.mtcheck-body .title--primary {
+    color: var(--color-dark);
+}
+
+.mtcheck-body .title--xl {
+    font-size: 22px;
+}
+
+.mtcheck-body .title--md {
+    font-size: 18px;
+	font-weight: 500;
+}
+
+.mtcheck-body .title--sm {
+    font-size: 16px;
+}
+
+.mtcheck-body .text {
+    line-height: 1.33;
+}
+
+.mtcheck-body .text--md {
+    font-size: 15px;
+}
+
+.mtcheck-body .text--sm, .mtcheck-body .link {
+    font-size: 14px;
+}
+
+.mtcheck-body .text--xs {
+    font-size: 13px;
+}
+
+.mtcheck-product__left .text--xs {
+    font-size: 12px;
+}
+
+.mtcheck-body .text--primary {
+    color: var(--color-dark);
+}
+
+.mtcheck-body .text--secondary {
+    color: #949597;
+}
+
+.mtcheck-body .text--thindly {
+    color: var(--color-dark);
+	opacity:0.8;
+}
+
+.mtcheck-body .link, .sdek_pvz_info a {
+    position: relative;
+    color: var(--color-thindly);
+    text-decoration: underline !important;
+	transition: all 0.2s linear;
+	opacity:0.9;
+}
+
+.mtcheck-body .link, .sdek_pvz_info a:hover {
+	text-decoration: none !important;
+}
+
+.cdek_description {  
+  padding: 9px 12px !important;
+  margin: 10px 0 10px 0 !important;
+  color: var(--color-dark) !important; 
+}  
+
+span.delivery.radio__text, span.payment.radio__text {padding-right:10px;}
+
+.mtcheck-body .link:hover, .sdek_pvz_info a:hover {
+	opacity:1;
+	transition: all 0.2s linear;
+	text-decoration: underline !important;
+}
+
+/*.mtcheck-body .link {
+ background-image: linear-gradient(to bottom, red 33%, transparent 33%, transparent 66%, red 66%, red);
+  background-position: 0 1.03em;
+  background-repeat: repeat-x;
+  background-size: 2px 6px;
+} */ 
+
+.mtcheck-body .checkbox, .mtcheck-body .radio, .mtcheck-body .mt_checkbox {
+    display: flex;
+    align-items: center;
+    cursor: pointer;	
+	/*flex-wrap: wrap;*/
+}
+
+
+.mtcheck-body .checkbox__input,
+.mtcheck-body .radio__input {
+    position: absolute;
+    appearance: none;
+}
+
+.mtcheck-body .checkbox__display {
+    display: inline-block;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin-right: 14px;
+    cursor: pointer;
+    /*background-color: var(--color-light);*/
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 12px;
+    border: 1px solid var(--color-cararra);
+    border-radius: 3px;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+.mtcheck-body .checkbox__text {
+    font-size: 13px;
+    line-height: 1.46;
+	font-weight: 400;
+    color: var(--color-dark);
+	opacity:0.8;
+}
+
+.mtcheck-body .checkbox__text a {
+    color: currentcolor;
+}
+
+.mtcheck-body .checkbox__input:checked ~ .checkbox__display {
+    background-color: var(--color-primary);
+    background-image: url("../mtcheckout/images/tick.svg");
+    border-color: var(--color-primary);	
+}
+
+.mtcheck-body .checkbox--sm .checkbox__display {
+    width: 17px;
+    height: 17px;
+    background-size: 9px;
+}
+
+.mtcheck-body .checkbox--gray .checkbox__display {
+    border-color: var(--color-silver-sand);
+}
+
+.mtcheck-body .checkbox--gray .checkbox__text {
+    color: #8b8b8b;
+}
+
+.mtcheck-body .checkbox--gray .checkbox__input:checked ~ .checkbox__display {
+    background-color: var(--color-silver-sand);
+    border-color: var(--color-silver-sand);
+}
+
+.mtcheck-body .checkbox--blue .checkbox__input:checked ~ .checkbox__display {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.mtcheck-body .radio__display {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 17px;
+    height: 17px;
+    margin-right: 10px;
+    border: 3px solid var(--color-silver-sand);
+    border-radius: 100%;
+    transition: border-color 0.2s ease-in-out;
+}
+
+.mtcheck-body .radio__display::after {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    content: "";
+    background-color: var(--color-primary);
+    border-radius: 100%;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.mtcheck-body .radio__text {
+    font-size: 15px;
+    line-height: 1.26;
+    color: var(--color-dark);
+    transition: color 0.2s ease-in-out;
+}
+
+.mtcheck-body .radio__input:checked ~ .radio__display {
+    border-color: var(--color-primary);
+}
+
+.mtcheck-body .radio__input:checked ~ .radio__display::after {
+    opacity: 1;
+}
+
+.mtcheck-body .radio__input:checked ~ .radio__text {
+    color: var(--color-primary);	
+	font-weight: 400;
+	word-break: break-word;
+}
+
+.mtcheck-body .counter {
+    display: inline-grid;
+    grid-template-columns: repeat(3, 34px);
+    grid-auto-rows: 36px;
+    align-items: center;
+    /*background-color: var(--color-light);*/
+    border: 1px solid var(--color-cararra);
+    border-radius: 3px;
+}
+
+.mtcheck-body .counter__display {
+    order: 1;
+    height: 100%;
+    font-size: 13px;
+    color: var(--color-dark);
+    text-align: center;
+    border: none;
+    outline: none;
+    appearance: textfield;
+}
+
+.mtcheck-body .counter__display::-webkit-outer-spin-button,
+.counter__display::-webkit-inner-spin-button {
+    appearance: none;
+}
+
+.mtcheck-body .counter__action {
+    height: 100%;
+    font-size: 20px;
+    line-height: 1;
+    color: var(--color-dark);
+    cursor: pointer;
+}
+
+.mtcheck-body .counter__action--decrement {
+    order: 0;
+}
+
+.mtcheck-body .counter__action--increment {
+    order: 2;
+}
+
+.mtcheck-body .info-mtbtn {
+    width: 22px;
+    height: 22px;
+    background-image: url("../mtcheckout/images/info.svg");
+    background-size: 100% 100%;
+    transform: translateY(3px);
+}
+
+
+
+.mtcheck-body .mtbtn--primary {
+    display: inline-block;
+    border-radius: 5px;
+    transition: background-color 0.2s ease-in-out;
+	height: auto !important;
+    color: var(--color-light);
+    background-color: var(--color-primary);
+	height: auto !important;	
+	transition: all 0.2s linear !important;
+	font-weight: 400;
+}
+
+.mtcheck-body .mtbtn--primary:hover {
+	background: var(--color-primary-hover) !important;	
+    background-color: var(--color-primary-hover) !important;	
+	transition: all 0.2s linear !important;
+}
+
+
+.mtcheck-body .mtbtn--blue {
+    color: var(--color-light);
+    background-color: var(--color-primary);
+    border-radius: 50px;
+}
+
+.mtcheck-body .mtbtn--blue:hover {
+    background-color: var(--color-primary-hover);
+	transition: all 0.2s linear !important;
+}
+
+.mtcheck-body .card {
+    padding: 0 var(--container-horizontal-offset);
+    margin: 0 calc(var(--container-horizontal-offset) * -1);
+    box-shadow: 0 0 28px 3px rgba(0, 0, 0, 0.06);
+	background-color: #fff;
+}
+
+.mtcheck-body .input,
+.mtcheck-body .textarea {
+    padding: 15px !important;
+    font-size: 15px;
+    color: var(--color-dark);
+    background-color: #f5f6f7 !important;
+	background: #f5f6f7 !important;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+	width: 100%;
+	font-weight: 400;
+	text-transform: none;
+}
+
+.mtcheck-offers__coupon .input {
+	border-radius: 10px 0px 0px 10px;
+}
+
+
+.mtcheck-body .input::placeholder,
+.mtcheck-body .textarea::placeholder {
+    color: #635e5e;
+	text-transform: none;
+}
+
+.mtcheck-body .input[type="number"]::-webkit-outer-spin-button,
+.mtcheck-body .input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.mtcheck-body input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.mtcheck-body .textarea {
+    width: 100%;
+    padding: 19px 30px 23px 15px !important;
+    line-height: 1.33;
+    resize: none;
+}
+
+.mtcheck-body .select {
+    position: relative;
+    cursor: pointer;
+}
+
+.mtcheck-body .select--opened .select__display {
+    border-radius: 10px 10px 0 0;
+}
+
+.mtcheck-body .select--opened .select__display::after {
+    transform: rotate(180deg);
+}
+
+.mtcheck-body .select--opened .select__items {
+    visibility: visible;
+    opacity: 1;
+	z-index: 9999;
+	border: 1px solid #F5F6F7;
+	box-shadow: 0 15px 15px 2px rgb(0 0 0 / 7%);
+	border-radius: 0px 0px 10px 10px; 
+}
+
+.mtcheck-body .select__display {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 15px;
+    font-size: 15px;
+    color: var(--color-dark);
+    background-color: #f5f6f7;
+    border-radius: 10px;
+    transition: border-radius 0.2s ease-in-out;
+}
+
+.mtcheck-body .select__display::after {
+    display: inline-block;
+    width: 10px;
+    height: 6px;
+    content: "";
+    background-image: url("../mtcheckout/images/arrow-down.svg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    transition: transform 0.2s ease-in-out;
+}
+
+.mtcheck-body .select__items {
+    position: absolute;
+    bottom: 0px;
+    z-index: 100;
+    width: 100%;
+    height: 400px;
+    overflow-y: auto;
+    visibility: hidden;
+    background-color: #fff;
+    opacity: 0;
+    transition: visibility 0.2s ease-in-out, opacity 0.2s ease-in-out;
+    transform: translateY(100%);
+}
+
+.mtcheck-body .select__item {
+    padding: 8px 16px;
+    font-size: 13px;
+    color: var(--color-dark);
+	text-align: left;
+}
+
+.mtcheck-body .select__item--active {
+    background-color: var(--color-alto);
+}
+
+.mtcheck-body .message {
+    position: absolute;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    /*justify-content: space-between;*/
+    padding: 13px 30px 13px 20px;
+    font-size: 14px;
+    line-height: 1.32;
+    color: var(--color-light);
+    border-radius: 10px;
+}
+
+.mtcheck-popup .message {
+    position: relative;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.mtcheck-register .message {
+    position: relative;
+    margin-top: 15px;
+}
+
+.mtcheck-body .message__close {
+    display: inline-block;
+    flex-shrink: 0;
+    width: 10px;
+    height: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+    background-color: transparent;
+    background-image: url("../mtcheckout/images/white-cross.svg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border: none;
+    outline: none;
+}
+
+.mtcheck-body .message::before {
+    display: inline-block;
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    margin-right: 20px;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 100% 100%;	
+}
+
+.mtcheck-body .message {
+	text-align: left;
+}	
+
+.mtcheck-body .message--warning {
+    background-color: var(--color-red);
+}
+
+.mtcheck-body .message--warning::before {
+    background-image: url("../mtcheckout/images/warning.svg");
+}
+
+.mtcheck-body .message--danger {
+    background-color: var(--color-red);
+}
+
+
+.mtcheck-body .input--danger {
+    position: relative;
+    border: 1px solid var(--color-red);
+}
+
+.mtcheck-body .message--danger::before {
+    background-image: url("../mtcheckout/images/danger.svg");
+}
+
+.mtcheck-body .input--label {
+    position: relative;
+}
+
+.mtcheck-body .message--success {
+    background-color: var(--color-green);
+}
+
+.mtcheck-body .message--success::before {
+    background-image: url("../mtcheckout/images/success.svg");
+}
+
+.mtcheck-body .message--notice {
+    background-color: var(--color-secondary);
+}
+
+.mtcheck-body .message--notice::before {
+    background-image: url("../mtcheckout/images/danger.svg");
+}
+
+
+
+.mtcheck-body [data-tab] {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.2s ease-in-out, opacity 0.2s ease-in-out;
+    transform: translate(-10000px);
+}
+
+.mtcheck-body [data-tab="true"] {
+    position: static;
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+}
+
+/* - Partials - */
+
+/* mtcheck-display */
+
+
+.mtcheck-display__title {
+    margin-bottom: 26px;
+}
+
+/* mtcheck-products */
+
+.mtcheck-products__head {
+    margin-bottom: 22px;
+}
+
+.mtcheck-products__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 34px;
+    margin: 0 -10px -4px 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+.mtcheck-products__actions--active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.mtcheck-products__action {
+    margin: 0 10px 4px 0;
+}
+
+.mtcheck-products__info {
+    display: none;
+    flex-basis: 293px;
+    justify-content: space-between;
+    padding: 0 25px;
+    margin-left: auto;
+}
+
+.mtcheck-product {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 15px 0 26px;
+    border-bottom: 1px dotted var(--color-cararra);
+}
+
+.mtcheck-product__left,
+.mtcheck-product__right {
+    display: flex;
+    justify-content: space-between;
+}
+
+.mtcheck-product__left {
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.mtcheck-product__right {
+    align-items: flex-start;
+    width: 100%;
+}
+
+.mtcheck-product .checkbox, .mtcheck-product .mt_checkbox {
+    position: absolute;
+    top: 24px;
+    left: -12px;
+	z-index: 9;
+}
+
+.mtcheck-product .checkbox__display {
+    width: 25px;
+    height: 25px;
+}
+
+.mtcheck-product__image {
+    display: flex;
+    flex: 0 0 80px;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    margin-right: 14px;
+    position: relative;
+    border-radius: 8px;
+}
+
+.mtcheck-product__image:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(41, 43, 83, 0.03);
+    z-index: 2;
+    border-radius: 8px;
+}
+
+.mtcheck-product__image img {
+    width: 100%;
+	line-height: 1.2;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.mtcheck-product__name {
+    display: inline-block;
+    margin-bottom: 0px;
+    text-decoration: none;
+}
+
+.mtcheck-product__properties {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -14px -4px 0;
+}
+
+.mtcheck-product__property {
+    margin: 0 14px 4px 0;
+}
+
+.mtcheck-product__sign {
+    display: block;
+    margin-top: 12px;
+    color: var(--color-secondary);
+}
+
+.mtcheck-product__wrapper {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.mtcheck-product__price {
+    margin-right: 15px;
+    font-weight: 500;
+}
+
+
+.mtcheck-product__price span {
+    font-size: 13px;
+    font-weight: 400;
+	padding: 0 3px;
+}
+
+.mtcheck-products__sum {
+	font-weight: 600;
+}
+
+.mtcheck-product__restore {
+    margin-right: 18px;
+    font-size: 14px;
+}
+
+.mtcheck-product__remove {
+    width: 13px;
+    height: 13px;
+    cursor: pointer;
+    background-image: url("../mtcheckout/images/cross.svg");
+    background-size: 100% 100%;
+}
+
+.mtcheck-products__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 0;
+}
+
+.mtcheck-products__count {
+    font-weight: 400;
+}
+
+.mtcheck-products__sum span {
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.mtcheck-product--deleted .mtcheck-product__info {
+    color: var(--color-silver-sand);
+    text-decoration: line-through;
+	font-size: 14px;
+}
+
+/* mtcheck-user */
+
+.mtcheck-body .mtcheck-user {
+    padding: 34px var(--container-horizontal-offset) 30px;
+}
+
+.mtcheck-user__head {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.mtcheck-user__column {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 0 -12px 5px 0;
+}
+
+
+.mtcheck-user__buy {
+    padding: 9px 18px !important;
+    font-size: 14px !important;	
+	margin: 5px 0px;	
+}
+
+.mtcheck-user__description {
+    margin-bottom: 20px;
+}
+
+
+.mtcheck-user__status-change {
+    display: block;
+}
+
+.mtcheck-user__status-current {
+	display: none;
+}
+
+.mtcheck-user__status-current {
+    margin-bottom: 2px;
+}
+
+/* mtcheck-register */
+
+.mtcheck-register__type {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -28px 17px 0;
+}
+
+.mtcheck-register__type .radio {
+    margin: 0 28px 13px 0;
+}
+
+.mtcheck-register .input {
+    width: 100%;
+}
+
+.mtcheck-register .input--label:not(:last-child) .input,
+.mtcheck-login .input--label:not(:last-child) .input,
+.mtcheck-register .select {
+    margin-bottom: 12px;
+}
+
+.mtcheck-register .input--min {
+    width: 83%;
+}
+
+.mtcheck-register .message {
+    margin-top: 0;
+    margin-bottom: 15px;
+	font-weight: 400;
+}
+
+.mtcheck-register .input--label:last-child .message {
+    margin-top: 15px;
+}
+
+.mtcheck-register .input--min ~ .message {
+    width: 83%;
+}
+
+.mtcheck-register__data {
+    margin-bottom: 25px;
+}
+
+.mtcheck-register__location {
+    margin-bottom: 29px;
+}
+
+.mtcheck-register__comment {
+    margin-bottom: 25px;
+	margin-top: 5px;
+}
+
+.mtcheck-register__password {
+    margin-bottom: 29px;
+}
+
+.mtcheck-register__password .text {
+    margin-bottom: 14px;
+}
+
+.mtcheck-register__permits .checkbox:not(:last-child) {
+    margin-bottom: 12px;
+}
+
+/* mtcheck-login */
+
+.mtcheck-login__data {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+}
+
+.mtcheck-login [type="submit"] {
+    padding: 14px 0;
+    border-radius: 10px;
+}
+
+.mtcheck-body .mtcheck-pay,
+.mtcheck-body .mtcheck-delivery {
+    padding: 35px var(--container-horizontal-offset) 38px;
+}
+
+/* mtcheck-delivery */
+
+.mtcheck-delivery__head {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.mtcheck-delivery__title {
+    margin-right: 12px;
+}
+
+.mtcheck-delivery__description {
+    margin-bottom: 23px;
+}
+
+.mtcheck-delivery__type {
+    width: 100%;
+}
+
+.mtcheck-delivery__type .radio__display {
+    margin-right: 19px;
+}
+
+.mtcheck-delivery__type .radio__text {
+    max-width: 100%;
+}
+
+.mtcheck-delivery__type-price {
+    margin-left: auto;
+	white-space: nowrap;
+}
+
+.mtcheck-delivery__type:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+.mtcheck-delivery .message {
+    position: static;
+    max-width: 282px;
+    margin-top: 29px;
+    margin-left: calc(var(--container-horizontal-offset) * -1);
+    border-radius: 0 10px 10px 0;
+}
+
+/* mtcheck-pay */
+
+.mtcheck-pay__head {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.mtcheck-pay__title {
+    margin-right: 12px;
+}
+
+.mtcheck-pay__description {
+    margin-bottom: 23px;
+}
+
+.mtcheck-pay__type .radio__text {
+    /*width: 100%;*/
+}
+
+.mtcheck-pay__type:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+/* mtcheck-confirm */
+
+.mtcheck-body .mtcheck-confirm {
+    padding: 31px var(--container-horizontal-offset) 58px;
+}
+
+.mtcheck-confirm__head {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.mtcheck-confirm__title {
+    margin-right: 12px;
+}
+
+.mtcheck-offers {
+    margin-bottom: 32px;
+}
+
+.mtcheck-offers__coupon,
+.mtcheck-offers__certificate {
+    position: relative;
+    display: flex;
+}
+
+.mtcheck-offers__coupon {
+    margin-bottom: 10px;
+}
+
+.mtcheck-offers input {
+    flex: 1;
+    border-radius: 5px 0 0 5px;
+}
+
+.mtcheck-offers [type="submit"] {
+    position: relative;
+    flex-basis: 65px;
+    border-radius: 0 5px 5px 0;
+	height: auto !important;
+}
+
+.mtcheck-offers [type="submit"]::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    content: "";
+    background-image: url("../mtcheckout/images/tick.svg");
+    background-repeat: no-repeat;
+    background-size: 15px;
+    transform: translate(-50%, -50%);
+}
+
+.mtcheck-offers span {
+    display: none;
+}
+
+/* mtcheck-table */
+
+.mtcheck-table__item {
+    display: flex;
+    align-items: center;
+	justify-content: space-between;
+}
+
+.mtcheck-table__item-name {
+    max-width: initial;	
+}
+
+.mtcheck-table__item p {
+	padding: 0;
+	margin: 0;
+}
+
+.mtcheck-table__item-name span {
+    color: #949597;
+}
+
+.mtcheck-table__item-value {
+    display: flex;
+    flex: 1 0;
+    align-items: flex-end;
+    white-space: pre;
+}
+
+.mtcheck-table__item-value::before {
+    display: inline-block;
+    flex: 1;
+    min-width: 20px;
+    margin: 0 6px;
+    content: "";
+    border-bottom: 1px dotted var(--color-cararra);
+}
+
+.mtcheck-table__item-value span {
+    display: flex;
+}
+
+.mtcheck-table__item:not(:last-child) {
+    margin-bottom: 14px;
+}
+
+.mtcheck-table__item.mtcheck-table__item--margin {
+    margin-bottom: 28px;
+}
+
+/* mtcheck-total */
+
+.mtcheck-total {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-top: 25px;
+}
+
+.mtcheck-total__sum {
+    font-weight: 700;
+	margin-left: 10px;
+}
+
+.mtcheck-total__sum span {
+    font-size: 15px;
+    font-weight: 400;
+    margin-left: 5px;
+}
+
+/* mtcheck-submit */
+
+.mtcheck-submit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 32px;
+	gap: 30px;
+}
+
+.mtcheck-submit__button {
+    width: 100%;
+    padding: 15px 25px !important;
+    margin-bottom: 18px;
+    font-size: 17px !important;
+	height: auto !important;
+}
+
+.mtcheck-submit__by-phone {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+
+
+.mtcheck-submit .checkbox__text {
+    
+}
+
+/* mtcheck-summary */
+
+.mtcheck-summary {
+    min-width: 400px;
+    position: sticky;
+    top: 30px;
+    display: none;
+    padding: 30px 26px;
+    margin-top: 67px;
+    background-color: var(--color-light);
+    border-radius: 6px;
+    box-shadow: 0 5px 20px rgb(0 0 0 / 10%);
+}
+
+.mtcheck-summary__head {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.mtcheck-summary__title {
+    margin-right: 8px;
+    font-size: 27px;
+}
+
+.mtcheck-summary__sum {
+    margin-left: auto;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.mtcheck-summary__sum span {
+    font-size: 20px;
+    font-weight: 400;
+    margin-left: 5px;
+}
+
+.mtcheck-summary .mtcheck-table__item-name {
+    display: flex;
+    align-items: center;
+}
+
+.mtcheck-summary .mtcheck-table__item-name span {
+    display: inline-block;
+    width: 202px;
+    margin-left: 6px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mtcheck-summary .mtcheck-table__item-value {
+    justify-content: flex-end;
+}
+
+.mtcheck-summary .mtcheck-table__item-value::before {
+    display: none;
+}
+
+.mtcheck-summary .mtcheck-submit {
+    flex-direction: column;
+    align-items: center;
+}
+
+.mtcheck-summary .mtcheck-submit__button {
+    order: 0;
+    max-width: initial;
+    margin-bottom: 20px;
+	height: auto !important;
+}
+
+.mtcheck-summary .mtcheck-submit__by-phone {
+    order: 1;
+    margin: 0 0 25px;
+}
+
+.mtcheck-summary .mtcheck-submit .checkbox {
+    order: 2;
+    margin: 0 auto;
+}
+
+.mtcheck-summary .mtcheck-submit .checkbox__text {
+    max-width: 315px;
+}
+
+/* mtcheck-popup */
+
+.mtcheck-popup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.25);
+    transition: opacity 0.5s;
+}
+
+.mtcheck-popup.is-open {
+    position: fixed;
+    opacity: 1;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999999;
+}
+
+@keyframes popup {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.mtcheck-popup__wrapper {
+    position: relative;
+    background: #ffffff;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+}
+
+.mtcheck-popup__close {
+    position: absolute;
+    top: -18px;
+    right: -18px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    transition: transform 0.2s linear;
+}
+
+.mtcheck-popup__close::before {
+    position: absolute;
+    content: "";
+    width: 25px;
+    height: 2px;
+    background-color: #ffffff;
+    border-radius: 0.5px;
+    top: calc(50% - 0.5px);
+    transform: rotate(45deg);
+}
+.mtcheck-popup__close::after {
+    position: absolute;
+    content: "";
+    width: 25px;
+    height: 2px;
+    background-color: #ffffff;
+    border-radius: 0.5px;
+    top: calc(50% - 0.5px);
+    transform: rotate(-45deg);
+}
+
+.mtcheck-popup__close:hover {
+    transform: scale(1.1);
+}
+
+.mtcheck-popup__body {
+    overflow-y: auto;
+    max-height: 90vh;
+}
+
+.mtcheck-popup__body::-webkit-scrollbar {
+    width: 10px;
+}
+.mtcheck-popup__body::-webkit-scrollbar-track {
+    background: transparent; /* цвет дорожки */
+}
+.mtcheck-popup__body::-webkit-scrollbar-thumb {
+    background-color: var(--color-thindly); /* цвет плашки */
+    border-radius: 20px;
+}
+
+.mtcheck-popup__title {
+    margin-bottom: 8px;
+}
+
+.mtcheck-popup__text {
+	margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.mtcheck-popup__columns {
+    display: flex;
+    margin-bottom: 24px;
+}
+
+.mtcheck-popup__body .input--label {
+    width: 100%;
+}
+
+.mtcheck-popup__body input[name="firstName"] {
+    margin-bottom: 24px;
+}
+
+.mtcheck-popup__right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    flex-direction: column;
+}
+
+.mtcheck-popup__count {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+}
+
+.mtcheck-popup__sum {
+    margin-left: auto;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.mtcheck-popup__sum span {
+    font-size: 20px;
+    font-weight: 400;
+    margin-left: 5px;
+}
+
+.mtcheck-popup__comment {
+    margin-bottom: 40px;
+}
+
+.mtcheck-popup__submit-block {
+    display: flex;
+}
+
+.mtcheck-popup__checkbox .checkbox__text {
+    font-size: 13px;
+}
+
+.mtcheck-popup__button {
+    padding: 15px 30px !important;
+}
+
+.mtcheck-popup__success-submit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.mtcheck-popup__success-submit h1 {
+    margin-bottom: 25px;
+}
+.mtcheck-popup__success-submit p {
+    line-height: 1.42;
+}
+
+.mtcheck-delivery__title,
+.mtcheck-summary__title,
+.mtcheck-pay__title,
+.mtcheck-confirm__title {
+    margin-bottom: 0;
+}
+
+.mtcheck-submit_privacy {max-width: 480px;hyphens: auto;margin-bottom: 22px;}
+
+    .mtcheck-popup__wrapper {
+        padding: 15px;
+        width: 84%;
+        margin: 0 auto;
+    }
+    .mtcheck-popup__columns {
+        flex-direction: column;
+    }
+    .mtcheck-popup__columns > div {
+        flex-basis: 100%;
+    }
+    .mtcheck-popup__columns > div input {
+        width: 100%;
+        margin-bottom: 24px;
+    }
+    .mtcheck-popup__submit-block {
+        flex-direction: column;
+    }
+    .mtcheck-popup__submit-block {
+        flex-direction: column;
+    }
+    .mtcheck-popup__checkbox {
+        margin-bottom: 24px !important;
+    }
+	
+	
+.min_sum_text {
+	background-color: var(--color-red);
+	color: #fff;
+	padding: 15px 30px;
+	font-size: 15px;
+	border-radius: 8px;
+	display: table;
+}
+	
+
+.mtcheck-body .text--bold {
+    font-weight: bold;
+}
+
+.mtcheck-address__item p {
+    margin: 0;
+}
+
+.mtcheck-address__item .radio {
+    align-items: flex-start;
+    padding: 26px 17px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 1px solid transparent;
+    transition: border 0.2s;
+}
+
+.mtcheck-address__item .outlined {
+    border-color: #80a584;
+}
+
+.mtcheck-address__item .radio__text {
+    color: #000;
+}
+
+.mtcheck-address__item .radio__input:checked ~ .radio__text {
+    color: #000;
+}
+
+.mtcheck-address__item .mtcheck-address__comment {
+    margin-top: 10px;
+    color: #8b8b8b;
+}
+
+.mtcheck-address__item .radio__input:checked ~ .mtcheck-address__comment {
+    color: #8b8b8b;
+}
+
+.mtcheck-address__item .mtcheck-address__full-address {
+    margin-bottom: 10px;
+}
+
+.mtcheck-address__add-address {
+    padding-top: 10px;
+	margin-bottom: 30px;
+}
+
+.mtcheck-address__add-button {
+    margin-left: 22px;
+}
+
+.mtcheck-address__edit-button {
+    margin-left: 20px;
+}
+
+.mtcheck-address__add-form {
+    margin-top: 37px;    
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.mtcheck-address__add-form .textarea {
+    margin-bottom: 0;
+}
+	
+
+
+
+
+.mt_confirm {	
+	width: 100%;
+	margin-top: 20px;
+}
+
+.mt_confirm .pull-right {
+	float: none !important;
+}
+
+
+
+
+.mt_confirm .mtbtn-primary {		
+	width: 100%;
+	padding: 15px 30px;
+	margin-bottom: 18px;
+	font-size: 17px;  
+  	color: var(--color-light);
+	background-color: var(--color-primary);
+	text-shadow: none;
+	border: none;
+	background-image: none;
+	background-repeat: none;	
+}
+
+
+
+.mt_confirm label, .mt_confirm p {
+	font-size: 15px;
+}
+.mt_confirm .radio input::after {
+	display: inline-block;
+	width: 5px;
+	height: 5px;
+	content: "";
+	background-color: var(--color-primary);
+	border-radius: 100%;
+	opacity: 0;
+	transition: opacity 0.2s ease-in-out;
+}
+
+
+
+.radio__text__terms {
+	color: #949597; font-size: 14px;
+	display: inline;
+	}
+	
+.mt_confirm .well {
+	box-shadow: none;
+	background-color: #F5F6F7;
+	border: none;
+	border-radius: 10px;
+	outline: none;
+	padding: 17px 21px;
+}
+
+
+.card.mtcheck-confirm {margin-bottom: 30px;}
+
+.mtcheck-submit_privacy a {text-decoration: underline;}
+.mtcheck-submit_privacy a:hover {text-decoration: none;}
+
+.mtcheck-product__wrapper p {margin-bottom: 0;margin-top: 0;}
+
+
+
+.mtcheck-product__info .text {margin-bottom: 0px !important;}
+.mtcheck-product__info .title--sm {text-decoration: underline;}
+.mtcheck-product__info .title--sm:hover {text-decoration: none;}
+
+.mtcheck-body .input:not([data-required^='0']) {
+}
+
+.mtcheck-body .card {
+	border: none !important;
+}
+
+.checkbox input[type="checkbox"]:checked ~ .checkbox__text::before {display: none;}
+.mt_checkbox input[type="checkbox"]:checked ~ .checkbox__text::before {display: none;}
+.checkbox__text {padding: 0;}
+
+
+.checkbox.noactive .checkbox__display {
+	background-color: #fff !important;
+	border: 1px solid var(--color-cararra) !important;
+}
+
+.mt_checkbox.noactive .checkbox__display {
+	background-color: #fff !important;
+	border: 1px solid var(--color-cararra) !important;
+}
+
+
+
+.mtcheck-user .mtcheck-register__location .select__item:first-child {color: var(--color-cararra); display:none;}
+.mtcheck-offers__coupon .mtbtn {padding: 0 30px;}
+
+.mtcheck-body .select::after {
+	display:none !important;
+}
+
+
+.mt_checkout_dostavka_title {
+	font-size: 13px;
+	color: var(--color-dark);
+	opacity: 0.7;
+	margin: 3px 0px 10px 0px;
+}
+
+.mtcheck-user .info-mtbtn {
+    margin: 0 17px 0 0;
+}
+
+	
+.mtcheck-user__title {
+    margin: 0 12px 0 0;	
+}	
+
+.mtcheck-submit_buttons {
+	display: flex;	
+	flex-direction: column;
+	align-items: center;
+}
+
+.delivery.radio__text {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 3px;	
+}
+
+.delivery.radio__text .x-shipping-desc {
+	font-size: 14px !important;
+	color: #949597 !important;
+	
+}
+
+
+
+
+
+
+
+@media (min-width: 360px) {
+    .mtcheck-products__actions {
+        flex-direction: row;
+    }
+}	
+
+
+
+
+@media (min-width: 425px) {
+    :root {
+        --container-horizontal-offset: 35px;
+    }
+
+    .mtcheck-delivery__type .radio__text,
+    .mtcheck-pay__type .radio__text {
+        width: auto;
+    }
+}
+
+
+
+@media (min-width: 768px) {
+	
+	.mtcheck-submit_oformit {
+		white-space: nowrap;
+	}
+	
+	.mtcheck-submit_buttons, .mtcheck-submit {
+		flex-direction: row;
+		justify-content: end;
+	}
+
+	.mtcheck-submit {
+		margin-top: 20px;
+	}
+
+	.mtcheck-submit .link.text {
+		margin-right: 20px;
+		white-space: nowrap;
+	}
+	
+	.mtcheck-user__head {
+		flex-direction: row;
+	}
+	
+    .mtcheck-user__head {
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .mtcheck-user__status {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+    }
+    .mtcheck-user__status-current {
+        display: block;
+    }		
+	
+	.mt_confirm .mtbtn-primary  {		
+	}
+	
+	span.delivery.radio__text, span.payment.radio__text {
+		padding-right:10px;
+	}
+	
+    .mtcheck-body .title--xl {
+        font-size: 25px;
+    }
+
+    .mtcheck-body .title--md {
+        font-size: 20px;
+    }
+
+    .mtcheck-body .title--sm {
+        font-size: 17px;
+    }
+
+    .mtcheck-body .text--md {
+        font-size: 16px;
+    }
+
+    .mtcheck-body .text--sm, .mtcheck-body .link {
+        font-size: 15px;
+        line-height: 1.53;
+    }
+
+    .mtcheck-body .text--xs {
+        font-size: 14px;
+    }
+	
+	.mtcheck-product__left .text--xs {
+    font-size: 13px;
+}
+
+    .mtcheck-body .checkbox__text {
+        font-size: 14px;
+    }
+
+    .mtcheck-body .radio__text {
+        font-size: 16px;
+    }
+
+    .mtcheck-body .counter {
+        grid-template-columns: 38px 32px 38px;
+    }
+
+    .mtcheck-body .counter__action {
+        font-size: 24px;
+    }
+
+    .mtcheck-body .counter__display {
+        font-size: 14px;
+    }
+
+    .mtcheck-body .input,
+    .mtcheck-body .textarea {
+        padding: 17px 21px !important;
+        font-size: 16px;
+    }
+
+    .mtcheck-body .input ~ .message {
+        margin-top: 15px;
+    }
+
+    .mtcheck-body .input.input--min {
+        width: 100%;
+    }
+
+    .mtcheck-body .input.input--min ~ .message {
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .mtcheck-body .select__display {
+        font-size: 16px;
+    }
+
+    .mtcheck-body .select__item {
+        font-size: 15px;
+    }
+
+    .mtcheck-body .select__display {    
+        padding: 17px 21px;
+    }
+	
+	.mtcheck-body .select__item {
+		padding: 8px 21px;
+	}
+
+    
+    .mtcheck-display__title {
+        margin-bottom: 36px;
+    }
+
+    .mtcheck-products__head {
+        display: flex;
+        align-items: center;
+        margin-bottom: 16px;
+    }
+
+    .mtcheck-products__actions {
+        padding-left: 17px;
+    }
+
+    .mtcheck-products__action {
+        margin: 0 16px 4px 0;
+    }
+
+    .mtcheck-product {
+        flex-wrap: nowrap;
+        align-items: center;
+        padding: 14px 0;
+    }
+
+    .mtcheck-product.mtcheck-product--deleted {
+        padding-left: 117px;
+    }
+
+    .mtcheck-product__left {
+        /*flex: 0 1 382px;*/
+		flex: 0 1 100%;
+        justify-content: flex-start;
+        margin-bottom: 0;
+		padding-right: 30px;
+    }
+
+    .mtcheck-product__wrapper {
+        margin-top: 0;
+    }
+
+    .mtcheck-product__right {
+        /*flex-basis: 330px;*/
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .mtcheck-product__image {
+        margin-right: 37px;
+    }
+
+    .mtcheck-product__info {
+        flex: 1 1 240px;
+    }
+
+    .mtcheck-product__properties {
+        margin: 0 -9px 0 0;
+    }
+
+    .mtcheck-product__property {
+        margin: 0 9px 0 0;
+    }
+
+    .mtcheck-product__count {
+        position: relative;
+        text-align: center;
+    }
+
+    .mtcheck-product__sign {
+        position: absolute;
+        max-width: 120px;
+        margin-top: 6px;
+        font-size: 13px;
+    }
+
+    .mtcheck-product__price {
+        margin-right: 25px;
+    }
+
+    .mtcheck-product--deleted .mtcheck-product__right {
+        justify-content: flex-end;
+    }
+
+    .mtcheck-body .mtcheck-user {
+        padding: 55px var(--container-horizontal-offset) 53px;
+    }
+
+    .mtcheck-user__head {
+        flex-direction: column;
+        justify-content: space-between;
+        margin-bottom: 16px;
+    }
+
+    .mtcheck-user__column {
+        margin: 0;
+    }
+
+
+
+
+
+    .mtcheck-user__buy {
+        margin: 0 0 0 12px;
+    }
+
+    .mtcheck-user__status {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .mtcheck-user__description {
+        margin-bottom: 26px;
+    }
+
+    .mtcheck-register__data {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px 13px;
+        margin-bottom: 32px;
+    }
+
+    .mtcheck-register .input--label:not(:last-child) .input,
+    .mtcheck-register .select {
+        margin-bottom: 0;
+    }
+
+    .mtcheck-register__location {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px 14px;
+        margin-bottom: 23px;
+    }
+
+    .mtcheck-register__password {
+        margin-bottom: 35px;
+    }
+
+    .mtcheck-register__password .text {
+        font-size: 15px;
+    }
+
+    .mtcheck-register__password fieldset {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+    }
+
+    .mtcheck-login .input:not(:last-child) {
+        margin-bottom: 0;
+    }
+
+    .mtcheck-login__data {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px 13px;
+    }
+
+    .mtcheck-login [type="submit"] {
+        grid-column: span 2;
+        padding: 17px 0;
+    }
+
+    .mtcheck-delivery,
+    .mtcheck-pay {
+        padding: 42px var(--container-horizontal-offset) 45px;
+    }
+
+    .mtcheck-pay__head {
+        margin-bottom: 15px;
+    }
+
+    .mtcheck-body .mtcheck-confirm {
+        padding: 37px var(--container-horizontal-offset) 34px;
+    }
+
+    .mtcheck-confirm__head {
+        margin-bottom: 22px;
+    }
+
+    .mtcheck-offers {
+        margin-bottom: 39px;
+    }
+
+    .mtcheck-offers span {
+        display: inline-block;
+        font-size: 15px;
+    }
+
+    .mtcheck-offers [type="submit"] {
+        padding: 16px 24px !important;
+    }
+
+    .mtcheck-offers [type="submit"]::after {
+        background-image: none;
+    }
+
+    .mtcheck-offers__coupon {
+        margin-bottom: 18px;
+    }
+
+    .mtcheck-table__item-value::before {
+        margin: 0 15px;
+    }
+
+    .mtcheck-table__item.mtcheck-table__item--margin {
+        margin-bottom: 34px;
+    }
+
+    .mtcheck-total__sum span {
+        font-size: 20px;
+    }    
+
+    .mtcheck-submit__button {
+        max-width: 287px;
+    }
+
+    .mtcheck-submit__by-phone {
+        margin-bottom: 20px;
+    }
+
+    .mtcheck-submit .checkbox__display {
+        margin-right: 10px;
+    }
+
+    .mtcheck-submit .checkbox__text {
+        
+    }
+	
+}
+
+
+
+
+
+@media (min-width: 830px) {
+    .mtcheck-popup .input--label .message {
+        position: absolute;
+        margin: 0;
+        width: 70%;
+        top: -14px;
+        right: -15px;
+        transform: translateX(100%);
+    }
+    .mtcheck-product__left {
+        /*flex: 0 1 460px;*/
+		flex: 0 1 100%;
+		padding-right: 30px;
+    }
+    .mtcheck-popup__wrapper {
+        width: 90%;
+        padding: 50px 40px 75px 80px;
+    }
+    .mtcheck-popup__body {
+        padding-right: 30px;
+    }
+    .mtcheck-popup__columns {
+        flex-direction: row;
+    }
+    .mtcheck-popup__columns > div {
+        flex-basis: 50%;
+    }
+    .mtcheck-popup__columns > div input {
+        width: 100%;
+        margin-bottom: 24px;
+    }
+    .mtcheck-popup__columns input[name="phone"] {
+        margin-bottom: 0;
+    }
+    .mtcheck-popup__submit-block {
+        flex-direction: row;
+        align-items: center;
+    }
+    .mtcheck-popup__checkbox {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    .mtcheck-popup__button {
+        margin-left: 50px;
+        font-size: 17px;
+    }
+}
+
+
+
+
+
+
+@media (min-width: 1024px) {
+	
+.mtcheck-popup__body p, .mtcheck-popup__body ul li, .mtcheck-popup__body ol li {
+	font-size: 15px;
+}
+	
+.mtcheck-products, #user_block,  #shipping_block, #payment_block {
+	margin-bottom: 0px;
+}
+
+.mt_confirm .pull-right {
+	float: right !important;
+}
+	
+.mt_confirm .mtbtn-primary {
+	font-size: 20px;
+	order: 0;
+	max-width: initial;
+	margin-bottom: 19px;	
+	float: right;
+}	
+	
+	.mt_confirm .radio input::after {
+  width: 7px;
+  height: 7px;
+	}
+	
+.min_sum_text {	
+	padding: 20px 40px;
+	font-size: 16px;	
+}
+	
+	
+.mtcheck-total {    
+    justify-content: flex-end;    
+}
+
+
+	
+	.mtcheck-user__head {        
+        flex-direction: row;
+        align-items: center;
+    }
+	
+	.mtcheck-display__wrapper {margin-top: 50px;}
+	
+	.mtcheck-product__price .price {font-size: 18px;}
+	
+	.mtcheck-submit_privacy {max-width: inherit;margin-bottom: 0px;}
+	
+	
+    .mtcheck-body .title--xl {
+        font-size: 30px;
+    }
+
+    .mtcheck-body .title--md {
+        font-size: 25px;
+    }
+
+    .mtcheck-body .title--sm {
+        font-size: 19px;
+    }
+
+    .mtcheck-body .text--md {
+        font-size: 17px;
+    }
+
+    .mtcheck-body .text--sm, .mtcheck-body .link {
+        font-size: 16px;
+    }
+
+    .mtcheck-body .text--xs {
+        font-size: 15px;
+    }
+	
+	.mtcheck-product__left .text--xs {
+    font-size: 14px;
+}
+
+    .mtcheck-body .card {
+        border-radius: 10px;
+    }
+
+    .mtcheck-body .checkbox__display {
+        width: 25px;
+        height: 25px;
+    }
+
+    .mtcheck-body .checkbox__text {
+        font-size: 13px;		
+    }
+
+    .mtcheck-body .counter {
+        grid-auto-rows: 42px;
+    }
+
+    .mtcheck-body .counter__display {
+        font-size: 16px;
+    }
+
+    .mtcheck-body .radio__display {
+        width: 21px;
+        height: 21px;
+        margin-right: 16px;
+    }
+
+    .mtcheck-body .checkbox--gray .checkbox__text {
+        font-size: 13px;
+		font-weight: 400;
+    }
+
+    .mtcheck-body .radio__display::after {
+        width: 7px;
+        height: 7px;
+    }
+
+    .mtcheck-body .input,
+    .mtcheck-body .radio__text,
+    .mtcheck-body .select__display,
+    .mtcheck-body .textarea {
+        font-size: 16px;
+    }
+
+    .mtcheck-body .select__item {
+        font-size: 16px;		
+    }
+
+    
+    .mtcheck-display__title {
+        margin-bottom: 42px;
+    }
+
+    .mtcheck-display__left {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 48px 58px;
+    }
+
+    .mtcheck-products__actions {
+        padding-left: 47px;
+    }
+
+    .mtcheck-products__info {
+        display: flex;
+    }
+
+    .mtcheck-products__head .checkbox__display {
+        margin-right: 20px;
+    }
+
+    .mtcheck-product {
+        padding: 15px var(--container-horizontal-offset);
+        margin: 0 calc(var(--container-horizontal-offset) * -1);
+    }
+
+    .mtcheck-product__left {
+        /*flex: 0 1 532px;*/
+		flex: 0 1 100%;
+		padding-right: 30px;
+    }
+
+    .mtcheck-product__right {
+        flex-basis: 380px;
+    }
+
+    .mtcheck-product .checkbox {
+        position: static;
+    }
+	
+	.mtcheck-product .mt_checkbox {
+        position: static;
+    }
+
+    .mtcheck-product .checkbox__display {
+        margin-right: 30px;
+    }
+
+    .mtcheck-product__restore {
+        font-size: 16px;
+    }
+
+    .mtcheck-product__properties {
+        margin: 2px -30px -4px 0;
+    }
+
+    .mtcheck-product__property {
+        margin: 0 30px 4px 0;
+    }
+
+    .mtcheck-product__count {
+        position: static;
+    }
+
+    .mtcheck-product__sign {
+        max-width: initial;
+        margin-top: 8px;
+        transform: translateX(-25%);
+    }
+
+    .mtcheck-product.mtcheck-product--deleted {
+        padding-left: calc(172px + var(--container-horizontal-offset));
+    }
+
+    .mtcheck-body .mtcheck-user {
+        padding: 33px var(--container-horizontal-offset) 43px;
+    }
+
+    .mtcheck-user__head {
+        margin-bottom: 20px;
+    }
+
+    .mtcheck-user .info-mtbtn {
+        margin-right: 26px;
+    }
+
+    .mtcheck-user__buy,
+    .mtcheck-login [type="submit"] {
+        font-size: 16px !important;
+    }
+
+    .mtcheck-user__status {
+        /*flex-direction: row;
+        align-items: center;*/
+    }
+
+    .mtcheck-user__status-current {
+        margin-right: 9px;
+    }
+
+    .mtcheck-user__description {
+        margin-bottom: 20px;
+    }
+
+    .mtcheck-register__type .radio {
+        margin-right: 62px;
+    }
+
+    .mtcheck-register__data {
+        gap: 19px 26px;
+        margin-bottom: 25px;
+    }
+
+    .mtcheck-register__location {
+        gap: 22px 26px;
+        margin-bottom: 41px;
+    }
+
+    .mtcheck-register__comment {
+        margin-bottom: 15px;
+    }
+
+    .mtcheck-register__password .text {
+        margin-bottom: 18px;
+        font-size: 16px;
+    }
+
+    .mtcheck-register__password fieldset {
+        gap: 26px;
+    }
+
+    .mtcheck-login__data {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .mtcheck-login [type="submit"] {
+        grid-column: span 1;
+    }
+
+    .mtcheck-delivery,
+    .mtcheck-pay {
+        padding: 30px var(--container-horizontal-offset) 45px;
+    }
+
+    .mtcheck-delivery__description,
+    .mtcheck-pay__description {
+        margin-bottom: 32px;
+    }
+
+    .mtcheck-body .mtcheck-delivery {
+        margin: 0 0 0 calc(var(--container-horizontal-offset) * -1);
+    }
+
+    .mtcheck-pay {
+        margin: 0 calc(var(--container-horizontal-offset) * -1) 0 0;
+    }
+
+    .mtcheck-confirm__head {
+        margin-bottom: 35px;
+    }
+
+    .mtcheck-confirm__row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .mtcheck-offers {
+        flex-basis: 380px;
+        margin-right: 34px;
+    }
+
+    .mtcheck-offers__coupon {
+        margin-bottom: 22px;
+    }
+
+    .mtcheck-info {
+        flex: 1 0 500px;
+    }
+
+    .mtcheck-table__item-name,
+    .mtcheck-table__item-value {
+        font-size: 17px;
+    }
+
+    .mtcheck-table__item.mtcheck-table__item--margin {
+        margin-bottom: 30px;
+    }
+
+    .mtcheck-total__title {
+        font-size: 19px;
+		margin-right: 20px;
+		font-weight: 600;
+    }
+
+    .mtcheck-submit {        
+        flex-direction: row;
+        margin-top: 30px;	
+		justify-content: space-between;	
+		display: flex;
+		align-items: center;		
+    }
+	
+	
+	.mtcheck-submit_buttons {justify-content: flex-end;display: flex;align-items: center;}
+
+    .mtcheck-submit .checkbox {
+        order: 0;
+    }
+
+    .mtcheck-submit .checkbox__text {
+
+    }
+
+    .mtcheck-submit__by-phone {
+        order: 1;
+        margin: 0 5px 0 auto;
+		padding: 0;
+    }    
+
+    .mtcheck-submit__button {
+        order: 2;
+        margin-bottom: 0;
+        font-size: 18px;
+    }
+
+    .mtcheck-body .mtcheck-products,
+    .mtcheck-body .mtcheck-user,
+    .mtcheck-body .mtcheck-confirm {
+        grid-column: span 2;
+    }
+    .mtcheck-popup__wrapper {
+        max-width: 930px;
+        width: 100%;
+    }
+}
+
+
+
+
+
+
+@media (min-width: 1366px) {
+    :root {
+        --design-mw: 1154px;
+    }
+
+    .mtcheck-body .title--xl {
+        font-size: 36px;
+    }
+
+    
+    .mtcheck-display__left {
+        gap: 65px 74px;
+    }
+
+    .mtcheck-product {
+        padding: 26px var(--container-horizontal-offset);
+    }
+
+    .mtcheck-product__name {
+        margin-bottom: 0px;
+    }
+
+    .mtcheck-product__left {
+        /*flex: 0 1 753px;*/
+		flex: 0 1 100%;
+		padding-right: 30px;
+    }
+
+    .mtcheck-register__data,
+    .mtcheck-register__password fieldset {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .mtcheck-login__data {
+        grid-template-columns: 267px 267px 152px;
+    }
+
+    .mtcheck-login [type="submit"] {
+        border-radius: 5px;
+    }
+
+    .mtcheck-delivery .message {
+        max-width: 480px;
+        margin-top: 36px;
+        font-size: 15px;
+    }
+
+    .mtcheck-offers {
+        margin-right: 44px;
+    }
+
+    .mtcheck-submit .checkbox__text {
+    
+    }
+
+    .mtcheck-popup h1.mtcheck-popup__title {
+        font-size: 36px;
+        line-height: 48px;
+    }
+
+    .mtcheck-popup__success-submit p {
+        font-size: 19px;
+    }
+}
+
+
+
+
+
+
+@media (min-width: 1600px) {
+    :root {
+        --design-mw: 1475px;
+    }
+
+    .mtcheck-body .title--xl {
+        font-size: 40px;
+    }
+
+    
+    .mtcheck-display__title {
+        margin-bottom: 57px;
+    }
+
+    .mtcheck-display__wrapper {
+        display: grid;
+        grid-template-columns: 100% 1fr;
+        gap: calc(65px + var(--container-horizontal-offset));
+        align-items: start;
+    }
+
+    .mtcheck-display__left {
+        gap: 60px 58px;
+    }
+
+    .mtcheck-product__left {
+        /*flex: 0 1 532px;*/
+		flex: 0 1 100%;
+		padding-right: 30px;
+    }
+
+    .mtcheck-register__data,
+    .mtcheck-register__password fieldset {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /*.mtcheck-confirm .mtcheck-submit {
+        display: none;
+    }*/
+
+    .mtcheck-summary {
+		display: none;
+        /*display: flex;
+        flex-direction: column;*/
+    }
+}
+
+
+
+
+
+
+@media (min-width: 1920px) {
+    :root {
+        --design-mw: 1704px;
+    }
+
+    .mtcheck-body .title--xl {
+        font-size: 44px;
+    }
+
+    
+    .mtcheck-display__wrapper {
+        grid-template-columns: 100% 1fr;
+    }
+
+    .mtcheck-product__left {
+        /*flex: 0 1 728px;*/
+		flex: 0 1 100%;
+    }
+
+    .mtcheck-register__data,
+    .mtcheck-register__password fieldset {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+
+

@@ -1,0 +1,29 @@
+<div class="card mtcheck-pay">
+  <div class="donut payment"></div>
+  <div class="mtcheck-pay__head">
+    {% if module_mt_checkout_oplata_title %}<div class="mt_title title--md title--primary mtcheck-pay__title">{{ module_mt_checkout_oplata_title_text }}</div>{% endif %}
+    {% if module_mt_checkout_oplata_info %}<button class="mtbtn-reset info-mtbtn" aria-label="Открыть модальное окно" data-modal="payment"></button>{% endif %}
+  </div>
+  {% if module_mt_checkout_global_oplata_textup %}<div class="text text--sm text--secondary text--thindly mtcheck-pay__description">
+    {{ module_mt_checkout_global_oplata_textup_text }}
+  </div>{% endif %}
+  <div class="mtcheck-pay__types">
+    {% if payment_methods %}
+    {% for payment_method in payment_methods %}
+    <label class="radio mtcheck-pay__type">
+        {% if payment_method.code == code or not code %}
+        {% set code = payment_method.code %}
+        <input type="radio" name="pay-type" class="visually-hidden radio__input" data-title='{{ payment_method.title|raw }}' data-code="{{ payment_method.code }}" value="{{ payment_method.code }}" {% if (code == payment_method.code ) or code == '' or (payment_method == payment_methods|last and code == '') %} checked {% endif %}>
+        {% else %}
+        <input type="radio" name="pay-type" class="visually-hidden radio__input" data-title='{{ payment_method.title|raw }}' data-code="{{ payment_method.code }}" value="{{ payment_method.code }}" {% if (code == payment_method.code ) or code == '' or (payment_method == payment_methods|last and code == '') %} checked {% endif %}>
+        {% endif %}
+        <span class="radio__display"></span>
+        <span class="payment radio__text">{{ payment_method.title|raw }} 
+        {% if payment_method.terms %}
+        <div class="radio__text__terms">{{ payment_method.terms }}</div>
+        {% endif %} </span>
+    </label>
+    {% endfor %}
+    {% endif %}
+  </div>
+</div>

@@ -1,0 +1,27 @@
+{% if items %}
+<div class="mtaction">
+	<div class="mtaction-header">
+		<h2>{{ name }}</h2>
+	</div>
+
+	
+	<div class="mtaction-items">		
+		{% for item in items %}
+		{% if item.link %}<a href="{{ item.link }}">{% endif %}
+			<div class="mtaction-items__item">		
+				<div class="mtaction-items__item_image">
+					{% if item.special %}<div class="item_image__disclaimer"><span>{{ item.special }}</span></div>{% endif %}
+					{% if item.icon %}<img src="{{ item.icon }}" loading="lazy" alt="{{ item.title }}" width="100%" height="100%">{% endif %}
+				</div>
+				<div class="mtaction-items__item_text">
+					{% if item.title %}<div class="item_text__header">{{ item.title }}</div>{% endif %}
+					{% if item.description %}<div class="item_text__description">{{ item.description }}</div>{% endif %}
+				</div>
+			</div>
+		{% if item.link %}</a>{% endif %}
+		{% endfor %}
+		
+	</div>
+
+</div>
+{% endif %}

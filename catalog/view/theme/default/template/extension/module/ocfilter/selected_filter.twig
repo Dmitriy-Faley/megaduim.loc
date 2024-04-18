@@ -1,0 +1,12 @@
+{% if selecteds %}
+<div class="list-group-item selected-options">
+  {% for option in selecteds %}
+  <div class="ocfilter-option">
+    <span>{{ option.name }}:</span>
+    {% for value in option.values %}
+    <button type="button" onclick="location = '{{ value.href }}';" class="btn btn-xs btn-danger" style="padding: 1px 4px;"><i class="fa fa-times"></i> {{ value.name }}</button>
+    {% endfor %}
+  </div>
+  {% endfor %}
+</div>
+{% endif %}

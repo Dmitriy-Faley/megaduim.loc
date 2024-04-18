@@ -1,0 +1,25 @@
+{% if items %}
+<div class="mtaction">
+	<div class="mtaction-header">
+		<h2>Акции</h2>
+	</div>
+
+	
+	<div class="mtaction-items">		
+		{% for item in items %}
+		<div class="mtaction-items__item">		
+			<div class="mtaction-items__item_image">
+				<div class="item_image__disclaimer"><span>Скидка %</span></div>
+				<img src="{{ item.icon }}" loading="lazy" width="100%" height="100%">
+			</div>
+			<div class="mtaction-items__item_text">
+				<div class="item_text__header">{{ item.title }}</div>
+				<div class="item_text__description">За доставку продуктов и за все новые покупки в нашем магазине</div>
+			</div>
+		</div>	
+		{% endfor %}
+		
+	</div>
+
+</div>
+{% endif %}

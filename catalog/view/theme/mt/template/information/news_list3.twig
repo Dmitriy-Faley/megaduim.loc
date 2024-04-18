@@ -1,0 +1,54 @@
+{{ header }}
+
+<section class="news">
+    <div class="news__breadcrumbs breadcrumbs">
+        {% for breadcrumb in breadcrumbs %}
+        <a class="breadcrumbs__link  {% if breadcrumb == breadcrumbs|last %} is-active {% endif %}"
+            href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+        {% if breadcrumb != breadcrumbs|last %}
+        <span class="slash">/</span>
+        {% endif %}
+        {% endfor %}
+    </div>
+    <h1 class="section_block__title">{{ heading_title }}</h1>
+    <!-- <div class="news__buttons">
+        <button class="news__sort_btn btn btn--grey btn--icon_right" data-sort-btn="">
+            <span class="btn__text">сначала новые</span>
+            <svg class="btn__icon btn__icon--black btn__icon--right">
+                <use xlink:href="#icon_sort"></use>
+            </svg>
+        </button>
+    </div> --> 
+ 
+    <div class="news__content">
+        
+        {% for result in news %}
+        <a class="news_card" href="{{ result.href }}">
+            {% if result.thumb %}
+            <div class="news_card__img">
+                <img class="image desktop" data-src="{{ result.thumb }}" alt="{{ result.name }}" data-lazy="" />
+                <img class="image mobile" data-src="{{ result.thumb_adaptive }}" alt="{{ result.name }}" data-lazy="" />
+            </div>
+            {% endif %}
+            <p class="news_card__date">{{ result.date }}</p>
+            <p class="news_card__title">{{ result.name }}
+            </p>
+            <p class="news_card__text">{{ result.intro }}</p>
+        </a>
+        {% endfor %}
+
+    </div>
+    
+    <!-- <div class="news__pagination pagination">
+        <button class="pagination__btn_more btn btn--grey"><span class="btn__text">Показать ещё</span></button>
+        <div class="pagination__wrap">
+            <button class="pagination__num is-active">1</button>
+            <button class="pagination__num">2</button>
+            <button class="pagination__num">3</button>
+            <button class="pagination__num">...</button>
+            <button class="pagination__num">12</button>
+        </div>
+    </div> -->
+</section>
+
+{{ footer }}

@@ -1,0 +1,1628 @@
+{{ header }}{{ column_left }}
+<div id="content" class="mt_exp">
+
+
+  <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-module" class="form-horizontal">
+  <div class="page-header">
+      <div class="container-fluid">
+         <div class="pull-right">
+            <button type="submit" form="form-module" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>        
+         </div>
+         <h1>Модуль оформление заказа</h1>
+		 <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+            <ul class="maintabs">
+               <li class="header_links__item active"><a id="export-tab" href="#export" data-toggle="tab">Настройки</a></li>               
+               <li class="header_links__item"><a id="support-tab" href="#support" data-toggle="tab">Техподдержка</a></li>
+            </ul>
+         </div>
+      </div>
+   
+   <div class="b_admin_panel">
+   <div class="container-fluid">
+	  
+	 <div class="tab-content">  
+      
+	  <!-- Настройки -->   
+      <div class="admin_panel tab-pane active in fade" id="export">
+         <div class="panel_navigation flex">
+            <ul class="nav nav-tabs">
+                <li class="nav_item active"><a class="title" href="#globalsettings" data-toggle="tab">Общие</a></li>
+                <li class="nav_item"><a class="title" href="#cartsettings" data-toggle="tab">Корзина</a></li>
+			    <li class="nav_item"><a class="title" href="#clients" data-toggle="tab">Данные покупателя</a></li>
+				<li class="nav_item"><a class="title" href="#dostavka" data-toggle="tab">Доставка</a></li>
+				<li class="nav_item"><a class="title" href="#oplata" data-toggle="tab">Оплата</a></li>
+				<li class="nav_item"><a class="title" href="#itogo" data-toggle="tab">Итого</a></li>
+            </ul>
+         </div>
+         <div class="tab-content panel_section">
+            <!-- начало белого поля настройки -->
+
+			<!-- Вкладка 1 -->
+            <div id="globalsettings" class="tab-pane active">	
+			
+		
+		<h3>Заголовок</h3>			
+			
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Текст заголовка</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" value="1" name="module_mt_checkout_global_title_box" {% if (module_mt_checkout_global_title_box) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<input type="text" name="module_mt_checkout_global_title" value="{{ module_mt_checkout_global_title }}" class="form-control" placeholder="Оформление заказа">
+				</div>									
+            </div>
+			</div>	
+			
+
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Текст вверху</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" value="1" name="module_mt_checkout_top_text_box" {% if (module_mt_checkout_top_text_box) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<textarea name="module_mt_checkout_top_text" id="" class="form-control" placeholder="Произвольный текст, с поддержкой HTML">{{ module_mt_checkout_top_text }}</textarea>
+				</div>									
+            </div>
+			</div>	
+			
+
+			<div class="mtp-row">			
+				<div class="mtp-row_left">
+					<div class="mtp-row__title">Текст внизу</div>
+					<div class="mtp-row__circle">				
+						<div class="switch_change">
+						<label class="switch">
+							<input class="form_control" type="checkbox" value="1" name="module_mt_checkout_bottom_text_box" {% if (module_mt_checkout_bottom_text_box) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+						</label>
+						</div>				
+					</div>
+				</div>
+				<div class="mtp-row_right">			
+					<div class="mtp-row__input">
+					<textarea name="module_mt_checkout_bottom_text" id="" class="form-control" placeholder="Произвольный текст, с поддержкой HTML">{{ module_mt_checkout_bottom_text }}</textarea>
+					</div>									
+            </div>
+			</div>	
+			<div class="mtp-row">			
+				<div class="mtp-row_left">
+					<div class="mtp-row__title">Пропускать корзину</div>
+					<div class="mtp-row__circle">				
+						<div class="switch_change">
+						<label class="switch">
+							<input class="form_control" type="checkbox" value="1" name="module_mt_checkout_skip_cart" {% if (module_mt_checkout_skip_cart) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+						</label>
+						</div>				
+					</div>
+				</div>
+			</div>	
+			
+		<div class="mtp-space"></div>
+		<h3>Оформление</h3>					
+
+
+			
+			
+
+			
+			
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Основной цвет (кнопки, чекбоксы и т.п.)</div>
+				<div class="mtp-row__circle">									
+					<input type="text" name="module_mt_checkout_global_colormain" value="{{ module_mt_checkout_global_colormain }}" placeholder="#80A584" class="form-control minicolors" />
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<span class="text_small">--color-primary</span>
+				</div>									
+            </div>
+			</div>				
+			
+			
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Цвет текста в кнопках</div>
+				<div class="mtp-row__circle">									
+					<input type="text" name="module_mt_checkout_global_colorbackground" value="{{ module_mt_checkout_global_colorbackground }}" placeholder="#FFFFFF" class="form-control minicolors" />
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<span class="text_small">--color-light</span>
+				</div>									
+            </div>
+			</div>	
+			
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Цвет кнопок при наведении</div>
+				<div class="mtp-row__circle">									
+					<input type="text" name="module_mt_checkout_global_colorbutton" value="{{ module_mt_checkout_global_colorbutton }}" placeholder="#80A584" class="form-control minicolors" />
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<span class="text_small">--color-primary-hover</span>
+				</div>									
+            </div>
+			</div>	
+
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Цвет ссылок</div>
+				<div class="mtp-row__circle">									
+					<input type="text" name="module_mt_checkout_global_coloricon" value="{{ module_mt_checkout_global_coloricon }}" placeholder="#7099B9" class="form-control minicolors" />
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<span class="text_small">--color-thindly</span>
+				</div>									
+            </div>
+			</div>	
+		
+			
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Цвет шрифта</div>
+				<div class="mtp-row__circle">									
+					<input type="text" name="module_mt_checkout_global_colorfont" value="{{ module_mt_checkout_global_colorfont }}" placeholder="#1F1F1F" class="form-control minicolors" />
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<span class="text_small">--color-dark</span>
+				</div>									
+            </div>
+			</div>
+			
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Цвет подсказки</div>
+				<div class="mtp-row__circle">									
+					<input type="text" name="module_mt_checkout_global_colorhint" value="{{ module_mt_checkout_global_colorhint }}" placeholder="#FC6904" class="form-control minicolors" />
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<span class="text_small">--color-secondary</span>
+				</div>									
+            </div>
+			</div>				
+			
+			
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Цвет успешного уведомления</div>
+				<div class="mtp-row__circle">									
+					<input type="text" name="module_mt_checkout_global_colorsuccess" value="{{ module_mt_checkout_global_colorsuccess }}" placeholder="#A1B812" class="form-control minicolors" />
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				&nbsp;
+				</div>									
+            </div>
+			</div>	
+
+			
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Цвет ошибки уведомления</div>
+				<div class="mtp-row__circle">									
+					<input type="text" name="module_mt_checkout_global_colorerror" value="{{ module_mt_checkout_global_colorerror }}" placeholder="#E60607" class="form-control minicolors" />
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				&nbsp;
+				</div>									
+            </div>
+			</div>
+
+						
+		<div class="mtp-space"></div>
+		<h3>Быстрый заказ</h3>		
+			
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Текст заголовка в форме</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" value="1" name="module_mt_checkout_global_quickformtitle_box" {% if (module_mt_checkout_global_quickformtitle_box) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<input type="text" name="module_mt_checkout_global_quickformtitle" value="{{ module_mt_checkout_global_quickformtitle }}" class="form-control" placeholder="Быстрый заказ -">
+				</div>									
+            </div>
+			</div>	
+			
+
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Описание в форме</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" value="1" name="module_mt_checkout_global_quickformdesc_box" {% if (module_mt_checkout_global_quickformdesc_box) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<textarea name="module_mt_checkout_global_quickformdesc" id="" class="form-control" placeholder="Ваш заказ будет отправлен нашим менеджерам без регистрации. Мы сразу же свяжемся с вами!">{{ module_mt_checkout_global_quickformdesc }}</textarea>
+				</div>									
+            </div>
+			</div>		
+
+		<div class="mtp-space"></div>
+		<h3>Дополнительный CSS</h3>		
+		
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">CSS на странице оформления заказа</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" value="1" name="module_mt_checkout_global_css_checked" {% if (module_mt_checkout_global_css_checked) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<textarea name="module_mt_checkout_global_css" id="" class="form-control" placeholder="CSS код">{{ module_mt_checkout_global_css }}</textarea>
+				</div>									
+            </div>
+			</div>				
+						
+			
+			
+			</div>
+			<!-- Конец вкладки 1 -->		
+			
+            	 
+            <!-- Вкладка 2 -->
+            <div id="cartsettings" class="tab-pane">
+               
+			
+			<div class="mtp-row">			
+			{# <div class="mtp-row_left">
+				<div class="mtp-row__title">Отображение всего блока</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" value="1" name="module_mt_checkout_cart" {% if (module_mt_checkout_cart) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div> #}
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				&nbsp;
+				</div>									
+            </div>
+			</div>		
+
+					
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Опция «Выбрать все»</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" value="1" name="module_mt_checkout_cart_item" {% if (module_mt_checkout_cart_item) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<input type="text" name="module_mt_checkout_cart_item_text" value="{{ module_mt_checkout_cart_item_text }}" class="form-control" placeholder="Выбрать все">
+				</div>									
+            </div>
+			</div>			
+
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Текст «Удалить»</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" value="1" name="module_mt_checkout_cart_delete" {% if (module_mt_checkout_cart_delete) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<input type="text" name="module_mt_checkout_cart_delete_text" value="{{ module_mt_checkout_cart_delete_text }}" class="form-control" placeholder="удалить из корзины">
+				</div>									
+            </div>
+			</div>
+
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Текст «Быстрый заказ»</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" value="1" name="module_mt_checkout_cart_click" {% if (module_mt_checkout_cart_click) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<input type="text" name="module_mt_checkout_cart_click_text" value="{{ module_mt_checkout_cart_click_text }}" class="form-control" placeholder="купить в 1 клик">
+				</div>									
+            </div>
+			</div>		
+
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Текст «Количество»</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" value="1" name="module_mt_checkout_cart_quanity" {% if (module_mt_checkout_cart_quanity) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<input type="text" name="module_mt_checkout_cart_quanity_text" value="{{ module_mt_checkout_cart_quanity_text }}" class="form-control" placeholder="кол-во">
+				</div>									
+            </div>
+			</div>	
+
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Текст «Сумма»</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" value="1" name="module_mt_checkout_cart_sum" {% if (module_mt_checkout_cart_sum) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<input type="text" name="module_mt_checkout_cart_sum_text" value="{{ module_mt_checkout_cart_sum_text }}" class="form-control" placeholder="сумма">
+				</div>									
+            </div>
+			</div>		
+
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Текст «Товаров»</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" value="1" name="module_mt_checkout_cart_tovary" {% if (module_mt_checkout_cart_tovary) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<input type="text" name="module_mt_checkout_cart_tovary_text" value="{{ module_mt_checkout_cart_tovary_text }}" class="form-control" placeholder="Товаров, ">
+				</div>									
+            </div>
+			</div>
+
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Текст «шт»</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" value="1" name="module_mt_checkout_cart_unit" {% if (module_mt_checkout_cart_unit) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<input type="text" name="module_mt_checkout_cart_unit_text" value="{{ module_mt_checkout_cart_unit_text }}" class="form-control" placeholder="шт.">
+				</div>									
+            </div>
+			</div>		
+
+			{# <div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Отображать общее количество товаров в корзине</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" value="1" name="module_mt_checkout_cart_products" {% if (module_mt_checkout_cart_products) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				&nbsp;								
+            </div>
+			</div>	 #}
+			
+			{# <div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Подтверждение при удалении товаров из корзины</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_cart_recovery" {% if (module_mt_checkout_cart_recovery) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div> #}
+			{# <div class="mtp-row_right">			
+				&nbsp;								
+            </div>
+			</div>						 #}
+
+			<div class="mtp-row">			
+				<div class="mtp-row_left">
+					<div class="mtp-row__title">Минимальная сумма заказа</div>
+					<div class="mtp-row__circle">				
+						<div class="switch_change">
+						<label class="switch">
+							<input class="form_control" type="checkbox" value="1" name="module_mt_checkout_min_sum" {% if (module_mt_checkout_min_sum) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+						</label>
+						</div>				
+					</div>
+				</div>
+				<div class="mtp-row_right">			
+					<div class="mtp-row__input mini" style="margin-right: 10px;">
+						<input type="text" name="module_mt_checkout_min_sum_data" value="{{ module_mt_checkout_min_sum_data }}" class="form-control" placeholder="1000">				
+					</div>									
+					<div class="mtp-row__input">				
+						<input type="text" name="module_mt_checkout_min_sum_text" value="{{ module_mt_checkout_min_sum_text }}" class="form-control" placeholder="Минимальная сумма для заказа {{ min_sum_data }} вам нужно ещё добавить товаров на X руб.">
+					</div>							
+            </div>
+			</div>	
+			           
+            
+			</div>
+			<!-- Конец вкладки 2 -->				
+					
+			
+            <!-- Вкладка 3 -->
+            <div id="clients" class="tab-pane">
+			
+			{# <div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Отображение всего блока</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_clients" {% if (module_mt_checkout_clients) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				&nbsp;
+				</div>									
+            </div>
+			</div>	 #}
+			
+			
+			<div class="mtp-space"></div>
+			<h3>Заголовок</h3>	
+			
+			
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Текст заголовка</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_clients_title" {% if (module_mt_checkout_clients_title) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<input type="text" name="module_mt_checkout_clients_title_text" value="{{ module_mt_checkout_clients_title_text }}" class="form-control" placeholder="Данные покупателя">
+				</div>									
+            </div>
+			</div>	
+			
+			
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Дополнительная информация</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_clients_info" {% if (module_mt_checkout_clients_info) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<input type="text" name="module_mt_checkout_clients_info_text" value="{{ module_mt_checkout_clients_info_text }}" class="form-control" placeholder="ID статьи, которая всплывает в окне">
+				</div>									
+            </div>
+			</div>				
+			
+
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Текст вверху</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_global_clients_textup" {% if (module_mt_checkout_global_clients_textup) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<textarea name="module_mt_checkout_global_clients_textup_text" id="" class="form-control" placeholder="Укажите свои контактные данные для получения заказа. В зависимости от вашего выбора могут меняться условия доставки и оплаты.">{{ module_mt_checkout_global_clients_textup_text }}</textarea>
+				</div>									
+            </div>
+			</div>	
+
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Возможность регистрации</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_global_clients_register" {% if (module_mt_checkout_global_clients_register) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">				
+				<input type="text" name="module_mt_checkout_global_clients_register_text" value="{{ module_mt_checkout_global_clients_register_text }}" class="form-control" placeholder="Уже зарегистрированы?">				
+				<br>
+				<input type="text" name="module_mt_checkout_global_clients_login_text" value="{{ module_mt_checkout_global_clients_login_text }}" class="form-control" placeholder="войти в свой аккаунт">								
+				</div>									
+            </div>
+			</div>				
+
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Быстрый заказ</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_global_clients_quick" {% if (module_mt_checkout_global_clients_quick) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">				
+				<input type="text" name="module_mt_checkout_global_clients_quick_text" value="{{ module_mt_checkout_global_clients_quick_text }}" class="form-control" placeholder="Заказ без регистрации">								
+				</div>									
+            </div>
+			</div>	
+			
+			
+			<div class="mtp-space"></div>
+			<h3>Поля</h3>	
+
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Выбор группы покупателя</div>				
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_global_clients_pole_group" {% if (module_mt_checkout_global_clients_pole_group) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">								
+				{# <div class="mtp-row__check">
+					<div class="mtp-row__check one"><label class="checkbox_label"><input type="checkbox" id="" class="checkbox_params" name="module_mt_checkout_global_clients_pole_group_1" value=""><span class="checkbox_content">Default</span></label></div>
+					<div class="mtp-row__check one"><label class="checkbox_label"><input type="checkbox" id="" class="checkbox_params" name="module_mt_checkout_global_clients_pole_group_2" value=""><span class="checkbox_content">Оптовики</span></label></div>		
+				</div> 								 #}
+         </div>										
+         </div>			
+			
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Имя</div>				
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_global_clients_pole_name" {% if (module_mt_checkout_global_clients_pole_name) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input pole">				
+					<input type="text" name="module_mt_checkout_global_clients_pole_name_text" value="{{ module_mt_checkout_global_clients_pole_name_text }}" class="form-control" placeholder="Имя">		
+				</div>		
+				<div class="mtp-row__check">
+					<label class="checkbox_label">
+				    <input type="checkbox" id="all_category" {% if module_mt_checkout_global_clients_pole_name_req %}checked{% endif %} name="module_mt_checkout_global_clients_pole_name_req"><span class="checkbox_content"></span>
+				    </label>
+				</div> 				
+            </div>										
+            </div>
+			
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Фамилия</div>				
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_global_clients_pole_fam" {% if (module_mt_checkout_global_clients_pole_fam) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input pole">				
+					<input type="text" name="module_mt_checkout_global_clients_pole_fam_text" value="{{ module_mt_checkout_global_clients_pole_fam_text	 }}" class="form-control" placeholder="Фамилия">		
+				</div>		
+				<div class="mtp-row__check">
+					<label class="checkbox_label">
+				    <input type="checkbox" id="all_category" {% if module_mt_checkout_global_clients_pole_fam_req %}checked{% endif %} name="module_mt_checkout_global_clients_pole_fam_req"><span class="checkbox_content"></span>
+				    </label>
+				</div> 				
+            </div>										
+            </div>
+			
+			
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Отчество</div>				
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_global_clients_pole_otch" {% if (module_mt_checkout_global_clients_pole_otch) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input pole">				
+					<input type="text" name="module_mt_checkout_global_clients_pole_otch_text" value="{{ module_mt_checkout_global_clients_pole_otch_text }}" class="form-control" placeholder="Отчество">		
+				</div>		
+				<div class="mtp-row__check">
+					<label class="checkbox_label">
+				    <input type="checkbox" id="all_category" {% if module_mt_checkout_global_clients_pole_otch_req %}checked{% endif %} name="module_mt_checkout_global_clients_pole_otch_req"><span class="checkbox_content"></span>
+				    </label>
+				</div> 				
+            </div>										
+            </div>		
+
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Телефон</div>				
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_global_clients_pole_phone" {% if (module_mt_checkout_global_clients_pole_phone) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input pole">				
+					<input type="text" name="module_mt_checkout_global_clients_pole_phone_text" value="{{ module_mt_checkout_global_clients_pole_phone_text }}" class="form-control" placeholder="Телефон">		
+				</div>		
+				<div class="mtp-row__check">
+					<label class="checkbox_label">
+				    <input type="checkbox" id="all_category" {% if module_mt_checkout_global_clients_pole_phone_req %}checked{% endif %} name="module_mt_checkout_global_clients_pole_phone_req" checked="checked"><span class="checkbox_content"></span>
+				    </label>
+				</div> 				
+            </div>										
+            </div>		
+			
+			
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Емейл</div>				
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_global_clients_pole_email" {% if (module_mt_checkout_global_clients_pole_email) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input pole">				
+					<input type="text" name="module_mt_checkout_global_clients_pole_email_text" value="{{ module_mt_checkout_global_clients_pole_email_text }}" class="form-control" placeholder="Емейл">		
+				</div>		
+				<div class="mtp-row__check">
+					<label class="checkbox_label">
+				    <input type="checkbox" id="all_category" name="module_mt_checkout_global_clients_pole_email_req" {% if module_mt_checkout_global_clients_pole_email_req %}checked="checked"{% endif %}><span class="checkbox_content"></span>
+				    </label>
+				</div> 				
+            </div>										
+            </div>		
+
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Индекс</div>				
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_global_clients_pole_index" {% if (module_mt_checkout_global_clients_pole_index) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input pole">				
+					<input type="text" name="module_mt_checkout_global_clients_pole_index_text" value="{{ module_mt_checkout_global_clients_pole_index_text }}" class="form-control" placeholder="Индекс">		
+				</div>		
+				<div class="mtp-row__check">
+					<label class="checkbox_label">
+				    <input type="checkbox" id="all_category" {% if module_mt_checkout_global_clients_pole_index_req %}checked{% endif %} name="module_mt_checkout_global_clients_pole_index_req"><span class="checkbox_content"></span>
+				    </label>
+				</div> 				
+            </div>										
+            </div>	
+							
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Компания</div>				
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_global_clients_pole_company" {% if (module_mt_checkout_global_clients_pole_company) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input pole">				
+					<input type="text" name="module_mt_checkout_global_clients_pole_company_text" value="{{ module_mt_checkout_global_clients_pole_company_text }}" class="form-control" placeholder="Компания">		
+				</div>		
+				<div class="mtp-row__check">
+					<label class="checkbox_label">
+				    <input type="checkbox" id="all_category" {% if module_mt_checkout_global_clients_pole_company_req %}checked{% endif %} name="module_mt_checkout_global_clients_pole_company_req"><span class="checkbox_content"></span>
+				    </label>
+				</div> 				
+            </div>										
+            </div>								
+			
+			
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Страна / регион</div>				
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_global_clients_pole_country" {% if (module_mt_checkout_global_clients_pole_country) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+					&nbsp;			
+            </div>										
+            </div>	
+
+
+						
+			{# <div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Регион</div>				
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_global_clients_pole_region" {% if (module_mt_checkout_global_clients_pole_region) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+					&nbsp;			
+            </div>										
+            </div>	 #}
+			
+			
+			
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Город</div>				
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_global_clients_pole_city" {% if (module_mt_checkout_global_clients_pole_city) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input pole">				
+					<input type="text" name="module_mt_checkout_global_clients_pole_city_text" value="{{ module_mt_checkout_global_clients_pole_city_text }}" class="form-control" placeholder="Город">		
+				</div>		
+				<div class="mtp-row__check">
+					<label class="checkbox_label">
+				    <input type="checkbox" id="all_category" {% if module_mt_checkout_global_clients_pole_city_req %}checked{% endif %} name="module_mt_checkout_global_clients_pole_city_req"><span class="checkbox_content"></span>
+				    </label>
+				</div> 				
+            </div>										
+            </div>		
+
+
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Адрес</div>				
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_global_clients_pole_adress" {% if (module_mt_checkout_global_clients_pole_adress) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input pole">				
+					<input type="text" name="module_mt_checkout_global_clients_pole_adress_text" value="{{ module_mt_checkout_global_clients_pole_adress_text }}" class="form-control" placeholder="Адрес">		
+				</div>		
+				<div class="mtp-row__check">
+					<label class="checkbox_label">
+				    <input type="checkbox" id="all_category" {% if module_mt_checkout_global_clients_pole_adress_req %}checked{% endif %} name="module_mt_checkout_global_clients_pole_adress_req"><span class="checkbox_content"></span>
+				    </label>
+				</div> 				
+            </div>										
+            </div>		
+
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Комментарий</div>				
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_global_clients_pole_comment" {% if (module_mt_checkout_global_clients_pole_comment) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input pole">				
+					<input type="text" name="module_mt_checkout_global_clients_pole_comment_text" value="{{ module_mt_checkout_global_clients_pole_comment_text }}" class="form-control" placeholder="Комментарий">		
+				</div>		
+				<div class="mtp-row__check">
+					<label class="checkbox_label">
+				    <input type="checkbox" id="all_category" {% if module_mt_checkout_global_clients_pole_comment_req %}checked{% endif %} name="module_mt_checkout_global_clients_pole_comment_req"><span class="checkbox_content"></span>
+				    </label>
+				</div> 				
+            </div>										
+            </div>		
+
+
+			<div class="mtp-space"></div>
+			<h3>Регистрация</h3>	
+
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Текст перед регистрацией</div>				
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_global_clients_before_register_text" {% if (module_mt_checkout_global_clients_before_register_text) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input pole">				
+					<input type="text" name="module_mt_checkout_global_clients_before_register_text_text" value="{{ module_mt_checkout_global_clients_before_register_text_text }}" class="form-control" placeholder="Зарегистрироваться для накопительной скидки —">
+				</div>												
+            </div>		
+            </div>		
+
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Ввести пароль</div>				
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_global_clients_register_pass" {% if (module_mt_checkout_global_clients_register_pass) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input pole">				
+					<input type="text" name="module_mt_checkout_global_clients_register_pass_text" value="{{ module_mt_checkout_global_clients_register_pass_text }}" class="form-control" placeholder="Пароль">		
+				</div>	
+				<!-- новое -->
+				<div class="mtp-row__check">
+					<label class="checkbox_label">
+				    <input type="checkbox" id="all_category" {% if module_mt_checkout_global_clients_register_pass_req %}checked{% endif %} name="module_mt_checkout_global_clients_register_pass_req"><span class="checkbox_content"></span>
+				    </label>
+				</div> 				
+            </div>										
+            </div>		
+
+
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Подтверждение пароля</div>				
+				{# <div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_global_clients_register_passconf" {% if (module_mt_checkout_global_clients_register_passconf) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div> #}
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input pole">				
+					<input type="text" name="module_mt_checkout_global_clients_register_passconf_text" value="{{ module_mt_checkout_global_clients_register_passconf_text }}" class="form-control" placeholder="Пароль ещё раз">		
+				</div>								
+            </div>										
+            </div>	
+			
+
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Подписка на новости</div>				
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_global_clients_register_news" {% if (module_mt_checkout_global_clients_register_news) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input pole">				
+					<input type="text" name="module_mt_checkout_global_clients_register_news_text" value="{{ module_mt_checkout_global_clients_register_news_text }}" class="form-control" placeholder="Подписаться на новостную рассылку">		
+				</div>								
+            </div>										
+            </div>	
+						
+
+			<div class="mtp-space"></div>
+			<h3>Подвал</h3>				
+			
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Текст внизу</div>				
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_global_clients_footer_text" {% if (module_mt_checkout_global_clients_footer_text) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">				
+					<textarea name="module_mt_checkout_global_clients_footer_text_text" id="" class="form-control" placeholder="Произвольный текст, с поддержкой HTML">{{ module_mt_checkout_global_clients_footer_text_text }}</textarea>
+				</div>								
+            </div>										
+            </div>	
+
+
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Политика конфиденциальности</div>				
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_global_clients_footer_privacy" {% if (module_mt_checkout_global_clients_footer_privacy) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">				
+					<textarea name="module_mt_checkout_global_clients_footer_privacy_text" id="" class="form-control" placeholder="отправляя данные я даю согласие на обработку персональной информации согласно политики конфиденциальности данного сайта">{{ module_mt_checkout_global_clients_footer_privacy_text }}</textarea>
+				</div>								
+            </div>										
+            </div>	
+			
+			</div>
+			<!-- Конец вкладки 3 -->		
+			
+						
+			<!-- Вкладка 4 -->
+            <div id="dostavka" class="tab-pane">	
+			            
+			
+			{# <div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Отображение всего блока</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_dostavka" {% if (module_mt_checkout_dostavka) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				&nbsp;
+				</div>									
+            </div>
+			</div>	 #}
+			
+			
+			<div class="mtp-space"></div>
+			<h3>Заголовок</h3>	
+			
+			
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Текст заголовка</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_dostavka_title" {% if (module_mt_checkout_dostavka_title) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<input type="text" name="module_mt_checkout_dostavka_title_text" value="{{ module_mt_checkout_dostavka_title_text }}" class="form-control" placeholder="Данные покупателя">
+				</div>									
+            </div>
+			</div>				
+			
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Дополнительная информация</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_dostavka_info" {% if (module_mt_checkout_dostavka_info) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<input type="text" name="module_mt_checkout_dostavka_info_text" value="{{ module_mt_checkout_dostavka_info_text }}" class="form-control" placeholder="ID статьи, которая всплывает в окне">
+				</div>									
+            </div>
+			</div>				
+			
+
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Текст вверху</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_global_dostavka_textup" {% if (module_mt_checkout_global_dostavka_textup) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<textarea name="module_mt_checkout_global_dostavka_textup_text" id="" class="form-control" placeholder="Укажите свои контактные данные для получения заказа. В зависимости от вашего выбора могут меняться условия доставки и оплаты.">{{ module_mt_checkout_global_dostavka_textup_text }}</textarea>
+				</div>									
+            </div>
+			</div>	
+
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Заголовки способов доставки</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_global_dostavka_title" {% if (module_mt_checkout_global_dostavka_title) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				</div>									
+            </div>
+			</div>	
+
+
+
+			<div class="mtp-space"></div>
+			<h3>Бесплатная доставка</h3>			
+			
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Включить уведомление о бесплатной доставке</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_dostavka_free" {% if (module_mt_checkout_dostavka_free) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+					&nbsp;								
+            </div>
+			</div>	
+
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Порог срабатывания</div>
+				<label class="control-label" for="input-porog"><span data-toggle="tooltip" title="" data-original-title="укажите сумму в текущей валюте от которой доставка будет бесплатной, например, 9000 руб."></span></label>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input pole">
+				<input type="number" name="module_mt_checkout_dostavka_free_value" value="{{ module_mt_checkout_dostavka_free_value }}" class="form-control" placeholder="например, 9000">
+				</div>									
+            </div>
+			</div>				
+			
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Текст уведомления</div>
+				<label class="control-label" for="input-price"><span data-toggle="tooltip" title="" data-original-title="{price} - это автоматически рассчитанная сумма - сколько осталось до бесплатной доставки в зависимости от товаров в корзине"></span></label>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<input type="text" name="module_mt_checkout_dostavka_free_text" value="{{ module_mt_checkout_dostavka_free_text }}" placeholder="для бесплатной доставки добавьте товаров на {price} ₽" class="form-control" placeholder="для бесплатной доставки добавьте товаров на {price} ₽">
+				</div>									
+            </div>
+			</div>					
+			
+			
+			</div>
+			<!-- Конец вкладки 4 -->			
+			
+			
+			<!-- Вкладка 5 -->
+            <div id="oplata" class="tab-pane">
+			
+			
+			{# <div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Отображение всего блока</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_oplata" {% if (module_mt_checkout_oplata) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				&nbsp;
+				</div>									
+            </div>
+			</div>	 #}
+			
+			
+			<div class="mtp-space"></div>
+			<h3>Заголовок</h3>	
+			
+			
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Текст заголовка</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_oplata_title" {% if (module_mt_checkout_oplata_title) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<input type="text" name="module_mt_checkout_oplata_title_text" value="{{ module_mt_checkout_oplata_title_text }}" class="form-control" placeholder="Данные покупателя">
+				</div>									
+            </div>
+			</div>				
+			
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Дополнительная информация</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_oplata_info" {% if (module_mt_checkout_oplata_info) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<input type="text" name="module_mt_checkout_oplata_info_text" value="{{ module_mt_checkout_oplata_info_text }}" class="form-control" placeholder="ID статьи, которая всплывает в окне">
+				</div>									
+            </div>
+			</div>				
+			
+
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Текст вверху</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_global_oplata_textup" {% if (module_mt_checkout_global_oplata_textup) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<textarea name="module_mt_checkout_global_oplata_textup_text" id="" class="form-control" placeholder="Принимаем к оплате карты Белкарт, Mastercard, Visa.">{{ module_mt_checkout_global_oplata_textup_text }}</textarea>
+				</div>									
+            </div>
+			</div>		
+
+			
+			</div>
+			<!-- Конец вкладки 5 -->			
+			
+			<!-- Вкладка 6 -->
+            <div id="itogo" class="tab-pane">
+			
+			
+			{# <div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Отображение всего блока</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_itogo" {% if (module_mt_checkout_itogo) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				&nbsp;
+				</div>									
+            </div>
+			</div>	 #}
+			
+			
+			<div class="mtp-space"></div>
+			<h3>Заголовок</h3>	
+			
+			
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Текст заголовка</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_itogo_title" {% if (module_mt_checkout_itogo_title) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<input type="text" name="module_mt_checkout_itogo_title_text" value="{{ module_mt_checkout_itogo_title_text }}" class="form-control" placeholder="Данные покупателя">
+				</div>									
+            </div>
+			</div>				
+			
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Дополнительная информация</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_itogo_info" {% if (module_mt_checkout_itogo_info) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<input type="text" name="module_mt_checkout_itogo_info_text" value="{{ module_mt_checkout_itogo_info_text }}" class="form-control" placeholder="ID статьи, которая всплывает в окне">
+				</div>									
+            </div>
+			</div>				
+			
+
+			{# <div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Текст вверху</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_global_itogo_textup" {% if (module_mt_checkout_global_itogo_textup) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<textarea name="module_mt_checkout_global_itogo_textup_text" id="" class="form-control" placeholder="Принимаем к оплате карты Белкарт, Mastercard, Visa.">{{ module_mt_checkout_global_itogo_textup_text }}</textarea>
+				</div>									
+            </div>
+			</div>	 #}
+			
+			
+			<div class="mtp-space"></div>
+			<h3>Содержание</h3>		
+
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Купон</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_itogo_cupon" {% if (module_mt_checkout_itogo_cupon) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<input type="text" name="module_mt_checkout_itogo_cupon_text" value="{{ module_mt_checkout_itogo_cupon_text }}" class="form-control" placeholder="Купон">
+				</div>									
+            </div>
+			</div>	
+
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Подарочный сертификат</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_itogo_sert" {% if (module_mt_checkout_itogo_sert) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<input type="text" name="module_mt_checkout_itogo_sert_text" value="{{ module_mt_checkout_itogo_sert_text }}" class="form-control" placeholder="Подарочный сертификат">
+				</div>									
+            </div>
+			</div>	
+
+			{# <div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Доставка</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_itogo_dostavka" {% if (module_mt_checkout_itogo_dostavka) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<input type="text" name="module_mt_checkout_itogo_dostavka_text" value="{{ module_mt_checkout_itogo_dostavka_text }}" class="form-control" placeholder="Доставка">
+				</div>									
+            </div>
+			</div> #}
+			
+			{# <div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Оплата</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_itogo_oplata" {% if (module_mt_checkout_itogo_oplata) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<input type="text" name="module_mt_checkout_itogo_oplata_text" value="{{ module_mt_checkout_itogo_oplata_text }}" class="form-control" placeholder="Оплата">
+				</div>									
+            </div>
+			</div>		 #}
+			
+			
+			<div class="mtp-space"></div>
+			<h3>Панель справа</h3>	
+
+			
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Кнопка заказа</div>				
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<input type="text" name="module_mt_checkout_itogo_confirm_button_text" value="{{ module_mt_checkout_itogo_confirm_button_text }}" class="form-control" placeholder="Отправить заказ">
+				</div>									
+            </div>
+			</div>		
+
+						
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Оформить по телефону</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_itogo_oformit" {% if (module_mt_checkout_itogo_oformit) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<input type="text" name="module_mt_checkout_itogo_oformit_text" value="{{ module_mt_checkout_itogo_oformit_text }}" class="form-control" placeholder="Оформить по телефону">
+				</div>									
+            </div>
+			</div>	
+
+			<div class="mtp-row">			
+			<div class="mtp-row_left">
+				<div class="mtp-row__title">Политика конфиденциальности</div>
+				<div class="mtp-row__circle">				
+					<div class="switch_change">
+					<label class="switch">
+						<input class="form_control" type="checkbox" name="module_mt_checkout_itogo_privacy" {% if (module_mt_checkout_itogo_privacy) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+					</label>
+					</div>				
+				</div>
+			</div>
+			<div class="mtp-row_right">			
+				<div class="mtp-row__input">
+				<textarea name="module_mt_checkout_itogo_privacy_text" id="" class="form-control" placeholder=" согласен с политикой возврата товара и правилами использования сайта">{{ module_mt_checkout_itogo_privacy_text }}</textarea>
+				</div>									
+            </div>
+			</div>		
+			
+			
+			</div>
+			<!-- Конец вкладки 6 -->				
+
+
+			
+			
+			
+			
+         </div>
+         <!-- конец белого поля: panel_section -->
+      </div>
+	  
+	  
+      
+	  
+	  <!-- начало вкладки техподдержка -->
+	  <!--<div class="tab-content panel_section">Белое поле</div> -->	  
+	  <div class="admin_panel tab-pane in fade" id="support">	  
+	  <div class="container-fluid support"> 	  
+	  {% if log %}<span class="marker free">{{ log }}</span>{% endif %}
+		<div class="row">		                        
+			<div class="col-sm-8 col-md-4 col-lg-3"><label class="control-label" for="input-data-feed-export">Введите ключ для домена</label></div>			
+		    <div class="col-sm-8 col-md-6 col-lg-4"><input type="text" name="module_mt_checkout_lic_key" placeholder="" id="lickey" value="{{ module_mt_checkout_lic_key }}" class="form-control"></div>
+			<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><input type="submit" id="button-lic" name="lic" class="btn btn-primary btn-success" value="Ввести"></div>
+		</div>		
+		<!--<div class="support-total">
+			<div class="support-total_text">Всего использовано лицензий: {{ use_domain }}</div>
+			<div class="support-total_text">Осталось еще лицензий: {{ domain_limit - use_domain }}</div>			
+		</div>	  	
+		<div class="expfooter_copyright">		
+			<a href="/" target="_blank"><div class="expfooter_copyright__update">Расширить лицензию</div></a>
+		</div>	  -->
+	  </div>	  
+	  
+      <!-- конец admin_panel -->	
+   </div>
+
+</div> 
+   
+   
+   <!-- Общая часть МОДУЛЯ -->    
+   <div class="container-fluid__footer">
+      <div class="panel panel-default">
+         <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-pencil"></i> Включить или выключить модуль</h3>
+         </div>
+         <div class="panel-body">
+               <!-- Настройка: "Статус" -->
+               <div class="form-group">
+                  <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+                  <div class="col-sm-10">
+                      <select name="module_mt_checkout_status" id="input-status" class="form-control">
+                        {% if module_mt_checkout_status %}
+                        <option value="1" selected="selected">{{ text_enabled }}</option>
+                        <option value="0">{{ text_disabled }}</option>
+                        {% else %}
+                        <option value="1">{{ text_enabled }}</option>
+                        <option value="0" selected="selected">{{ text_disabled }}</option>
+                        {% endif %}
+                      </select>
+                  </div>
+               </div>
+         </div>
+      </div>
+      <!-- Копирайт -->	
+      <div class="expfooter">
+         <div class="expfooter_copyright">
+            <!--<div class="expfooter_copyright__version">Текущая версия 1.0.0</div>-->
+            <!--<div class="expfooter_copyright__update"><a href="/">Доступно обновление</a></div>-->
+            <!--<div class="expfooter_copyright__buy"><a href="/">Купить модуль можно тут</a></div>-->
+         </div>
+      </div>   
+   </div>
+   <!-- конец общей части модуля  -->
+   
+</div>
+</div>   
+   </form>
+<!-- Сохранение вкладки header --> 
+
+<script>
+
+$(function($){
+	var storage = localStorage.getItem('nav-tabs');
+	if (storage && storage !== "#") {
+		$('.nav-tabs a[href="' + storage + '"]').tab('show');
+	}
+ 
+	$('.nav li').on('click', function() {
+		var id = $(this).find('a').attr('href');
+		localStorage.setItem('nav-tabs', id);
+	});
+});
+
+
+$(function($){
+	var storage2 = localStorage.getItem('maintabs');
+	if (storage2 && storage2 !== "#") {
+		$('.maintabs a[href="' + storage2 + '"]').tab('show');
+	}
+ 
+	$('.maintabs li').on('click', function() {
+		var id = $(this).find('a').attr('href');
+		localStorage.setItem('maintabs', id);
+	});
+});
+
+</script>
+
+
+
+
+<!-- Скрипты чекаут --> 
+<script>
+    $(function() {
+        $('input.minicolors').minicolors();
+    });
+</script>
+
+
+{{ footer }}

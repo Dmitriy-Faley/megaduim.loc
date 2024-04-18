@@ -1,0 +1,16 @@
+
+		:root {
+	
+			 --color-light: #ffffff; /* Цвет фона - надо скопировать и создать в твиге поле */
+			 --color-dark: #1f1f1f; /* Цвет шрифта */ 
+			 --color-silver-sand: #bec2c5; /* не нужно Кружочки */
+			 --color-alto: #e0e0e0; /* не нужно */	
+			 --color-primary: #80a584; /* Основной */
+			 --color-primary-hover: #547a59; /* не нужно - наведение */
+			 --color-secondary: #547c9c; /* Подсказки */ 
+			 --color-thindly: #547c9c; /* Цвет иконок */
+			 --color-scorpion: #606060; /* не нужно Служебный серый */ 
+			 --color-cararra: #d0d0ce; /* не нужно - разделительные линии */
+			 --color-green: #8bd662; /* Успешное уведомление */
+			 --color-red: #ff6b6b; /* Ошибка уведомление */
+		}

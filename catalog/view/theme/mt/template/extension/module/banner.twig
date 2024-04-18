@@ -1,0 +1,39 @@
+<section class="home">
+  <div class="home__container slider swiper home__slider">
+    <div class="swiper-wrapper">
+
+    {% for banner in banners %}
+      <div class="swiper-slide home__slide">
+        <div class="home__bg">
+        {% if banner.link %}
+          <video class="video" autoplay="autoplay" loop="" muted="">
+            <source src="{{ banner.link }}" type="video/mp4">
+          </video>
+          <video class="video_mob" autoplay="autoplay" loop="" muted="">
+            <source src="{{ banner.link_mob }}" type="video/mp4">
+          </video>
+          {% else %}
+          <img class="image" src="{{ banner.image }}" alt="{{ banner.title }}">
+          <!-- <video class="video" poster="{{ banner.image }}" autoplay="autoplay" loop="" muted="">
+          </video> -->
+          {% endif %}
+        </div>
+        <div class="home__bottom">
+          <div class="home__wrap">
+            <h1 class="section_block__title section_block__title--white">{{ banner.title }}</h1>
+            <p class="section_block__text section_block__text--12 section_block__text--white">Мы покажем тебе мир. Своими глазами.</p>
+          </div>
+          <a class="home__btn btn btn--white btn--icon_left" href="{{ banner.btn_link }}">
+            <svg class="btn__icon btn__icon--black btn__icon--left">
+              <use xlink:href="#eye"></use>
+            </svg>
+            <span class="btn__text">Перейти</span>
+          </a>
+        </div>
+      </div>
+    {% endfor %}
+
+    </div>
+  </div>
+  </div>
+</section>

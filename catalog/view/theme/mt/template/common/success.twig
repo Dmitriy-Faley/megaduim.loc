@@ -1,0 +1,33 @@
+{{ header }}
+<!-- <div id="common-success">
+
+  <div class="row">
+    {{ column_left }}
+    {% if column_left and column_right %}
+    {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+    {% set class = 'col-sm-9' %}
+    {% else %}
+    {% set class = 'col-sm-12' %}
+    {% endif %}
+    <div id="content" class="{{ class }}">{{ content_top }}
+      <h1>{{ heading_title }}</h1>
+      {{ text_message }}
+      <div class="buttons">
+        <div class="pull-right"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
+      </div>
+      {{ content_bottom }}</div>
+    {{ column_right }}</div>
+</div> -->
+
+
+<section class="login">
+  <form class="login__form">
+    <h1 class="section_block__title">{{ heading_title }}</h1>
+    <p class="section_block__text">{{ text_message }}</p>
+    <img class="loading_icon" data-src="/assets/img/loader.svg" alt="" data-lazy="" />
+    <a href="/order-history" class="btn btn--filled">{{ button_continue }}</a>
+  </form>
+</section>
+
+{{ footer }}

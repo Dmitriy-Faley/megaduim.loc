@@ -1,0 +1,41 @@
+{{ header }}
+
+
+<section class="catalog">
+    <div class="catalog__breadcrumbs breadcrumbs"><a class="breadcrumbs__link" href="/">Диоптрика</a><span
+            class="slash">/</span><a class="breadcrumbs__link is-active">Каталог</a></div>
+    <h1 class="section_block__title">Диоптрика — магазин <br class="mobile"> очков и оптики</h1>
+    <div class="catalog_search_mobile catalog_search_mobile--mobile">
+        
+        <!-- <input class="catalog_search_mobile__input" type="search" name="catalog_search" placeholder="Товар, бренд или артикул"> -->
+
+        <form action="/index.php" method="GET" class="search__form form-search" id="search-form">
+            <svg class="icon">
+                <use xlink:href="#icon_search"></use>
+            </svg>
+            <input type="hidden" name="route" id="" value="product/search">
+            <input class="catalog_search_mobile__input" autocomplete="off" type="search" name="search" id="search-input" value=""
+            data-error="Ошибка" placeholder="Товар, бренд или артикул">
+        </form>
+    </div>
+
+    <div class="catalog__content">
+        
+        {% for category in categories %}
+        <a class="catalog__category" href="{{ category.href }}">
+            <div class="catalog__category_img">
+                <picture class="image">
+                    <!-- <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/catalog_sunglasses_cover.webp" type="image/webp" />
+                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/catalog_sunglasses_cover.jpg" type="image/jpg" /> -->
+                    <img class="image" data-lazy="data-lazy" data-src="{{ category.thumb }}" alt="" />
+                </picture>
+            </div>
+            <p class="catalog__category_text">{{ category.name }}</p>
+        </a>
+        {% endfor %}
+        
+    </div>
+</section>
+
+
+{{ footer }}

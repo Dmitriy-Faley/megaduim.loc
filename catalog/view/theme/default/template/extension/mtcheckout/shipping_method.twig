@@ -1,0 +1,104 @@
+<div class="card mtcheck-delivery">
+  <div class="donut delivery"></div>
+  <div class="mtcheck-delivery__head">
+    {% if module_mt_checkout_dostavka_title %}<div class="mt_title title--md title--primary mtcheck-delivery__title">{{ module_mt_checkout_dostavka_title_text }}</div>{% endif %}
+    {% if module_mt_checkout_dostavka_info %}<button class="mtbtn-reset info-mtbtn" aria-label="Открыть модальное окно" data-modal="delivery"></button>{% endif %}
+  </div>
+  {% if module_mt_checkout_global_dostavka_textup %}<div class="text text--sm text--thindly mtcheck-delivery__description">
+    {{ module_mt_checkout_global_dostavka_textup_text }}
+  </div>
+  {% endif %}
+  <div class="mtcheck-delivery__types">
+    {% if shipping_methods %}
+    {% for shipping_method in shipping_methods %} 
+      {% if not shipping_method.error %} 
+      {% if module_mt_checkout_global_dostavka_title %}
+      <div class="mt_checkout_dostavka_title">{{ shipping_method.title }}</div>
+      {% endif %}
+      {% for quote in shipping_method.quote %} 
+        <label class="radio mtcheck-delivery__type" data-price="{{ quote.cost }}">
+        {% if quote.code == code %} 
+        {% set code = quote.code %}
+        {% set exists = true %} 
+        <input type="radio" value="{{ quote.cost }}" name="delivery-type" data-tax="{{ quote.tax_class_id }}" 
+        data-title='{{ quote.title|raw }}' data-code="{{ quote.code }}" class="visually-hidden radio__input" {% if (code == quote.code) or code == '' or (quote == shipping_method.quote|last and code == '') %} checked {% endif %}>
+        {% else %}   
+        <input type="radio" value="{{ quote.cost }}" name="delivery-type" data-tax="{{ quote.tax_class_id }}" 
+        data-title='{{ quote.title|raw }}' data-code="{{ quote.code }}" class="visually-hidden radio__input" {% if (code == quote.code) or code == '' or (quote == shipping_method.quote|last and code == '') %} checked {% endif %}>
+        {% endif %} 
+        <span class="radio__display"></span>
+        <span class="delivery radio__text">{{ quote.title|raw }}</span>
+        <span class="delivery radio__text">{{ quote.description|raw }}</span>
+        <span class="radio__text mtcheck-delivery__type-price">{{ quote.text }}</span>
+        </label>
+      {% endfor %}
+      {% endif %}
+    {% endfor %}
+    {% endif %}
+  </div>
+  {% if module_mt_checkout_dostavka_free %}<div class="message message--notice shipping_free_text" {% if free_shipping_text == '' %}style="display:none;"{% endif %} data-text="{{ module_mt_checkout_dostavka_free_text }}"></div>{% endif %}
+</div>
+<script type="text/javascript">
+$('input[name="shipping_method"]').val($('input[name="delivery-type"]:checked').data('title'));
+$('input[name="shipping_code"]').val($('input[name="delivery-type"]:checked').data('code'));
+$('input[name="shipping_cost"]').val($('input[name="delivery-type"]:checked').val());
+$('input[name="shipping_tax_class_id"]').val($('input[name="delivery-type"]:checked').data('tax'));
+let formSelector;
+
+formSelector = ".mtcheck-address__add-form";
+if (document.querySelector(formSelector) == null) {
+    formSelector = ".mtcheck-register";
+}
+const form = document.querySelector(formSelector);
+
+var products = [];
+$('.mtcheck-product').each(function(){
+if ($('.mtcheck-products').find('.checkbox__input').is(':checked')) {
+    products.push($(this).data('productid'));
+}
+});
+$('input[name=products]').val(products.join(','));
+$('input[name="payment_method"]').val($('input[name="pay-type"]:checked').data('title'));
+$('input[name="payment_code"]').val($('input[name="pay-type"]:checked').data('code'));
+
+{# $.ajax({
+    url: 'index.php?route=extension/mtcheckout/checkout/select-shipping',
+    type: 'post',
+    data: 'shipping_method='+$('input[name="shipping_method"]').val()
+    +'&shipping_code='+$('input[name="shipping_code"]').val()
+    +'&shipping_cost='+$('input[name="shipping_cost"]').val()
+    +'&shipping_tax_class_id='+$('input[name="shipping_tax_class_id"]').val(),
+    dataType: 'json',
+    beforeSend: function() {
+    },
+    success: function(html) {
+        $('.table-summary').empty();
+        $('.table-summary').append(html.html);
+        $('.mtcheck-total__sum').html(html.total);
+        if ($('.mtcheck-submit__button').is(":hidden")) {
+            var serializedData = $(formSelector).serialize();
+            $.ajax({
+                url: 'index.php?route=extension/mtcheckout/confirm',
+                type: 'post',
+                data: serializedData,
+                dataType: 'html',
+                cache: false,
+                beforeSend: function() {
+                },
+                success: function(html) {
+                    $('.mt_confirm').empty();
+                    $('.mt_confirm').append(html);
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    console.log(xhr);
+                }
+            });
+        }
+        
+        // updateSummary();
+    },
+    error: function(xhr, ajaxOptions, thrownError) {
+        console.log(xhr);
+    }
+}); #}
+</script>

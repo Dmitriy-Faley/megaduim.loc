@@ -1,0 +1,76 @@
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+ul {
+    margin: 0;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border: 0;
+    user-drag: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+}
+
+body {
+    min-height: 100vh;
+}
+
+button {
+    border: none;
+    outline: none;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+
+html,
+body {
+    scroll-behavior: smooth;
+}
+
+body {
+    position: relative;
+    font-family: var(--font-family);
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-black);
+    background: var(--bg-color);
+    min-width: 320px;
+    overflow-x: hidden;
+}
+
+a.social,
+a.social:hover {
+    transition: all .2s linear;
+}
+
+.main-wrapper {
+    overflow: hidden;
+    min-height: 100%;
+    position: relative;
+}
+
+.hidden {
+    display: none;
+}
+
+

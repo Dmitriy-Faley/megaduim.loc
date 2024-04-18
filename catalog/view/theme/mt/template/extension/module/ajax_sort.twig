@@ -1,0 +1,27 @@
+<div id="ajax-sort">
+    <label for="sort">Сортировать по: </label>
+    <select id="sort" onchange="sortProducts()">
+        <option value="default">По умолчанию</option>
+        <option value="name_asc">Название (A - Z)</option>
+        <option value="name_desc">Название (Z - A)</option>
+        <option value="price_asc">Цена (возрастание)</option>
+        <option value="price_desc">Цена (убывание)</option>
+    </select>
+</div>
+
+<script>
+    function sortProducts() {
+        var sort_order = document.getElementById('sort').value;
+        var category_id = <?php echo $category_id; ?>;
+
+        $.ajax({
+            url: 'index.php?route=extension/module/ajax_sort',
+            type: 'post',
+            data: {sort_order: sort_order, category_id: category_id},
+            dataType: 'html',
+            success: function (html) {
+                $('#content .product-list').html(html);
+            }
+        });
+    }
+</script>

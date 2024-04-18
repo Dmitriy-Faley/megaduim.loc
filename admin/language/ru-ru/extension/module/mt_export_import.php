@@ -1,0 +1,20 @@
+<?php
+$_['heading_title']  = '<i class="fa fa-cog" style="color:#DE6E67;"></i> MT Экспорт / Импорт';
+$_['text_extension'] = 'Расширения';
+$_['text_success']   = 'Настройки успешно изменены!';
+$_['text_edit']      = 'Настройки модуля';
+$_['entry_status']   = 'Статус';
+$_['text_enabled']   = 'Включено';
+$_['text_disabled']  = 'Выключено';
+$_['entry_category'] = 'Категории';
+$_['entry_manufacturer'] = 'Бренды';
+$_['entry_filter'] = 'Фильтры';
+$_['entry_attribute'] = 'Атрибуты';
+$_['entry_option'] = 'Опции';
+$_['entry_profile'] = 'Профиль';
+$_['entry_profile_save'] = 'Создать профиль';
+$_['button_profile_save'] = 'Создать профиль';
+$_['entry_child_category'] = 'Включая подкатегории';
+$_['entry_price_start'] = 'Цена от';
+$_['entry_price_end'] = 'Цена до';
+$_['entry_main_image'] = 'Только главное изображение';

@@ -1,0 +1,331 @@
+{{ header }}
+
+<section class="account">
+  <div class="account__column">
+    <div class="account__column_wrap">
+      <div class="account__breadcrumbs breadcrumbs">
+        {% for breadcrumb in breadcrumbs %}
+        <a class="breadcrumbs__link  {% if breadcrumb == breadcrumbs|last %} is-active {% endif %}"
+          href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+        {% if breadcrumb != breadcrumbs|last %}
+        <span class="slash">/</span>
+        {% endif %}
+        {% endfor %}
+      </div>
+      <h1 class="section_block__title">{{ heading_title }}</h1>
+    </div>
+    <div class="account__tabs">
+
+      <a class="account__tab is-active" href="{{ order }}">
+        <svg class="icon_main">
+          <use xlink:href="#acc_icon_1"></use>
+        </svg><span class="text text--desk">история заказов</span><span class="text text--mob">заказы</span>
+        <svg class="icon_arrow">
+          <use xlink:href="#link_arrow"></use>
+        </svg>
+      </a>
+      <a class="account__tab" href="{{ edit }}">
+        <svg class="icon_main">
+          <use xlink:href="#acc_icon_2"></use>
+        </svg><span class="text text--desk">личные данные</span><span class="text text--mob">данные</span>
+        <svg class="icon_arrow">
+          <use xlink:href="#link_arrow"></use>
+        </svg>
+      </a>
+      <a class="account__tab" href="{{ password }}">
+        <svg class="icon_main">
+          <use xlink:href="#acc_icon_3"></use>
+        </svg><span class="text text--desk">доп. информация</span><span class="text text--mob">аккаунт</span>
+        <svg class="icon_arrow">
+          <use xlink:href="#link_arrow"></use>
+        </svg>
+      </a>
+
+      <a href="/index.php?route=account/logout" class="account__btn_leave">
+        <svg class="icon_main">
+          <use xlink:href="#acc_icon_4"></use>
+        </svg><span class="text text--desk">выйти из аккаунта</span><span class="text text--mob">выход</span>
+      </a>
+    </div>
+  </div>
+  <div class="account__content">
+
+    {% if success %}
+    <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}</div>
+    {% endif %}
+
+    <h2 class="section_block__title section_block__title--small">История заказов</h2>
+    <div class="account__sort_buttons">
+      <button class="account__sort_btn button-filter active" data-filter="all"><span class="text">все</span></button>
+      <button class="account__sort_btn button-filter" data-filter="доставлено"><span class="text">доставлено</span></button>
+      <button class="account__sort_btn button-filter" data-filter="собирается"><span class="text">собирается</span></button>
+      <button class="account__sort_btn button-filter" data-filter="ожидает"><span class="text">ожидает в магазине</span></button>
+      <button class="account__sort_btn button-filter" data-filter="завершённые"><span class="text">завершённые</span></button>
+      <button class="account__sort_btn button-filter" data-filter="отменённые"><span class="text">отменённые</span></button>
+    </div>
+
+    <div class="account__cards">
+    {% for order in orders %}
+        {% if order.status == 'Доставлено' %}
+        <a class="account_card card доставлено" href="{{ order.view }}">
+          <div class="account_card__top">
+            <div class="account_card__status_btn account_card__status_btn--delivery">Доставлено</div>
+            <div class="account_card__wrap">
+              <p class="account_card__text account_card__text--big">№ {{ order.order_id }}</p>
+              <p class="account_card__text">Заказ от {{ order.date_added }} на сумму {{ order.total }} руб.</p>
+            </div>
+            <div class="account_card__wrap account_card__wrap--end">
+              <p class="account_card__text">Трек-номер: {{ order.order_id }}</p>
+              <p class="account_card__text">Ожидаемая дата доставки: 24 декабря 2022</p>
+            </div>
+          </div>
+          <div class="account_card__gallery">
+            {% for product in order.list %}
+            <div class="account_card__img">
+              <object>
+                <a href="{{ product.href }}">
+                  <picture class="image">
+                    <!-- <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/product_page_pic_1.webp" type="image/webp" />
+                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/product_page_pic_1.jpg" type="image/jpg" /> -->
+                    <img class="image" data-lazy="data-lazy" data-src="{{ product.image }}" alt="{{ product.name }}" />
+                  </picture>
+                </a>
+              </object>
+            </div>
+            {% endfor %}
+          </div>
+
+ <!--         
+{% for product in order.list %}
+  <ul>
+    <li class="name"><a href="{{ product.href }}">{{ product.name }}</a></li>
+    <img src="{{ product.image }}" alt="{{ product.name }}">
+    <li class="option">{% for option in product.option %}<br />&nbsp;<small> - {{ option.name }}: {{ option.value }}</small>{% endfor %}</li>
+    <li class="model">{{ product.model }}</li>
+    <li class="quantity">{{ product.quantity }}</li>
+    <li class="price">{{ product.price }}</li>
+    <li class="total">{{ product.total }}</li>
+    <li class="reorder">{% if product.reorder %}<a href="{{ product.reorder }}">&nbsp;</a>{% endif %}</li>
+    <li class="return"><a href="{{ product.return }}">&nbsp;</a></li>
+  </ul>
+{% endfor %}
+ -->
+        </a>
+        
+        {% elseif order.status == 'В обработке' %} 
+        <a class="account_card card собирается" href="{{ order.view }}">
+          <div class="account_card__top">
+            <div class="account_card__status_btn account_card__status_btn--packing">Собирается</div>
+            <div class="account_card__wrap">
+              <p class="account_card__text account_card__text--big">№ {{ order.order_id }}</p>
+              <p class="account_card__text">Заказ от {{ order.date_added }} на сумму {{ order.total }} руб.</p>
+            </div>
+            <div class="account_card__wrap account_card__wrap--end">
+              <p class="account_card__text">Трек-номер: {{ order.order_id }}</p>
+              <p class="account_card__text">Ожидаемая дата доставки: 24 декабря 2022</p>
+            </div>
+          </div>
+          <div class="account_card__gallery">
+            {% for product in order.list %}
+            <div class="account_card__img">
+              <object>
+                <a href="{{ product.href }}">
+                  <picture class="image">
+                    <img class="image" data-lazy="data-lazy" data-src="{{ product.image }}" alt="{{ product.name }}" />
+                  </picture>
+                </a>
+              </object>
+            </div>
+            {% endfor %}
+          </div>
+        </a>
+
+        {% elseif order.status == 'Ожидание' %} 
+        <a class="account_card card ожидает" href="{{ order.view }}">
+          <div class="account_card__top">
+            <div class="account_card__status_btn account_card__status_btn--packing">ожидает в магазине</div>
+            <div class="account_card__wrap">
+              <p class="account_card__text account_card__text--big">№ {{ order.order_id }}</p>
+              <p class="account_card__text">Заказ от {{ order.date_added }} на сумму {{ order.total }} руб.</p>
+            </div>
+            <div class="account_card__wrap account_card__wrap--end">
+              <p class="account_card__text">Трек-номер: {{ order.order_id }}</p>
+              <p class="account_card__text">Ожидаемая дата доставки: 24 декабря 2022</p>
+            </div>
+          </div>
+          <div class="account_card__gallery">
+              {% for product in order.list %}
+              <div class="account_card__img">
+                <object>
+                  <a href="{{ product.href }}">
+                    <picture class="image">
+                      <img class="image" data-lazy="data-lazy" data-src="{{ product.image }}" alt="{{ product.name }}" />
+                    </picture>
+                  </a>
+                </object>
+              </div>
+              {% endfor %}
+          </div>
+        </a>
+
+        {% elseif order.status == 'Сделка завершена' %} 
+        <a class="account_card card завершённые" href="{{ order.view }}">
+          <div class="account_card__top">
+            <div class="account_card__status_btn account_card__status_btn--packing">Завершён</div>
+            <div class="account_card__wrap">
+              <p class="account_card__text account_card__text--big">№ {{ order.order_id }}</p>
+              <p class="account_card__text">Заказ от {{ order.date_added }} на сумму {{ order.total }} руб.</p>
+            </div>
+            <div class="account_card__wrap account_card__wrap--end">
+              <p class="account_card__text">Трек-номер: {{ order.order_id }}</p>
+              <p class="account_card__text">Ожидаемая дата доставки: 24 декабря 2022</p>
+            </div>
+          </div>
+          <div class="account_card__gallery">
+            {% for product in order.list %}
+              <div class="account_card__img">
+                <object>
+                  <a href="{{ product.href }}">
+                    <picture class="image">
+                      <img class="image" data-lazy="data-lazy" data-src="{{ product.image }}" alt="{{ product.name }}" />
+                    </picture>
+                  </a>
+                </object>
+              </div>
+              {% endfor %}
+          </div>
+        </a>
+
+        {% elseif order.status == 'Отменено' %} 
+        <a class="account_card card отменённые" href="{{ order.view }}">
+          <div class="account_card__top">
+            <div class="account_card__status_btn account_card__status_btn--packing">Отменён</div>
+            <div class="account_card__wrap">
+              <p class="account_card__text account_card__text--big">№ {{ order.order_id }}</p>
+              <p class="account_card__text">Заказ от {{ order.date_added }} на сумму {{ order.total }} руб.</p>
+            </div>
+            <div class="account_card__wrap account_card__wrap--end">
+              <p class="account_card__text">Трек-номер: {{ order.order_id }}</p>
+              <p class="account_card__text">Ожидаемая дата доставки: 24 декабря 2022</p>
+            </div>
+          </div>
+          <div class="account_card__gallery">
+            {% for product in order.list %}
+              <div class="account_card__img">
+                <object>
+                  <a href="{{ product.href }}">
+                    <picture class="image">
+                      <img class="image" data-lazy="data-lazy" data-src="{{ product.image }}" alt="{{ product.name }}" />
+                    </picture>
+                  </a>
+                </object>
+              </div>
+              {% endfor %}
+          </div>
+        </a>
+        {% endif %}
+
+    {% endfor %}
+
+
+    
+    <!-- {% for order in orders %}
+      <a class="account_card" href="{{ order.view }}">
+        <div class="account_card__top">
+
+        {% if order.status == 'Ожидание' %}
+          <div class="account_card__status_btn account_card__status_btn--payment">Ожидание</div>
+          {% elseif order.status == 'В обработке' %} 
+          <div class="account_card__status_btn account_card__status_btn--packing">Собирается</div>
+          {% elseif order.status == 'Доставлено' %} 
+          <div class="account_card__status_btn account_card__status_btn--delivery">Доставлено</div>
+          {% elseif order.status == 'Сделка завершена' %} 
+          <div class="account_card__status_btn account_card__status_btn--finished">Завершён</div>
+          {% elseif order.status == 'Отменено' %}
+          <div class="account_card__status_btn account_card__status_btn--cancel">Отменён</div>
+          {% else %}
+          <div class="account_card__status_btn account_card__status_btn--cancel">{{ order.status }}</div>
+        {% endif %}
+
+          <div class="account_card__wrap">
+            <p class="account_card__text account_card__text--big">№ {{ order.order_id }}</p>
+            <p class="account_card__text">Заказ от {{ order.date_added }} на сумму {{ order.total }} руб.</p>
+          </div>
+          <div class="account_card__wrap account_card__wrap--end">
+            <p class="account_card__text">Трек-номер: {{ order.order_id }}</p>
+            <p class="account_card__text">Ожидаемая дата доставки: 24 декабря 2022</p>
+          </div>
+        </div>
+
+        <div class="account_card__gallery">
+          <div class="account_card__img">
+            <picture class="image">
+              <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/product_page_pic_1.webp"
+                type="image/webp" />
+              <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/product_page_pic_1.jpg"
+                type="image/jpg" /><img class="image" data-lazy="data-lazy"
+                data-src="/image/catalog/assets/img/product_page_pic_1.jpg" alt="" />
+            </picture>
+          </div>
+        </div>
+      </a>
+    {% endfor %} -->
+
+    </div>
+  </div>
+</section>
+
+
+
+<script>
+//Фильтр карточек на странице история заказов
+function app() {
+	let buttons = document.querySelectorAll('.button-filter');
+	const cards = document.querySelectorAll('.card');
+
+	function filter(category, items) {
+		items.forEach((item) => {
+			const isItemFiltered = !item.classList.contains(category);
+			const isShowAll = category.toLowerCase() === 'all'
+			if (isItemFiltered && !isShowAll) {
+				item.classList.add('anime');
+			} else {
+				item.classList.remove('hide');
+				item.classList.remove('anime');
+			}
+		})
+	}
+
+	buttons.forEach((button) => {
+		button.addEventListener('click', () => {
+			const currentCategory = button.dataset.filter.trim().replace(' ', '');
+			filter(currentCategory, cards);
+		})
+	})
+
+	cards.forEach((card) => {
+		card.ontransitionend = function () {
+			if (card.classList.contains('anime')) {
+				card.classList.add('hide');
+			}
+		}
+	})
+
+	// Add active class to the current button (highlight it)
+	//var header = document.getElementById("myDIV");
+	var btns = document.getElementsByClassName("button-filter");
+	for (var i = 0; i < btns.length; i++) {
+		btns[i].addEventListener("click", function () {
+			var current = document.getElementsByClassName("active");
+			current[0].className = current[0].className.replace(" active", "");
+			this.className += " active";
+		});
+	}
+}
+
+app();
+//End фильтр
+
+</script>
+
+{{ footer }}

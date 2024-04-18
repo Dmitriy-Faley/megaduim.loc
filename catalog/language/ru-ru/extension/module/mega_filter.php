@@ -1,0 +1,37 @@
+<?php
+$_['heading_title'] = 'Mega Filter';
+$_['name_price'] = 'Цена';
+$_['name_manufacturers'] = 'Производители';
+$_['name_rating'] = 'Рейтинг';
+$_['name_search'] = 'Поиск';
+$_['name_stock_status'] = 'Статус наличия';
+$_['name_location'] = 'Location';
+$_['name_length'] = 'Length';
+$_['name_width'] = 'Width';
+$_['name_height'] = 'Height';
+$_['name_weight'] = 'Weight';
+$_['name_mpn'] = 'MPN';
+$_['name_isbn'] = 'ISBN';
+$_['name_sku'] = 'SKU';
+$_['name_upc'] = 'UPC';
+$_['name_ean'] = 'EAN';
+$_['name_jan'] = 'JAN';
+$_['name_model'] = 'Модель';
+$_['name_tags'] = 'Tags';
+$_['name_vehicle'] = 'Vehicle';
+$_['name_discounts'] = 'Скидка';
+$_['text_button_apply'] = 'Подтвердить';
+$_['text_reset_all'] = 'Отменить все';
+$_['text_show_more'] = 'Показать еще (%s)';
+$_['text_show_less'] = 'Показать меньше';
+$_['text_display'] = 'Показать';
+$_['text_grid'] = 'Grid';
+$_['text_list'] = 'List';
+$_['text_loading'] = 'Загрузка...';
+$_['text_select'] = 'Выбор...';
+$_['text_go_to_top'] = 'Наверх';
+$_['text_init_filter'] = 'Инициализировать фильтр';
+$_['text_initializing'] = 'Инициализация...';
+$_['text_select'] = '---';
+$_['text_select_deselect_all'] = 'Выбрать / Отменить все';
+?>

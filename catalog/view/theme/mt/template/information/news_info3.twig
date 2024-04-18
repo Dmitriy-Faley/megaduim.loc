@@ -1,0 +1,28 @@
+{{ header }}
+
+<section class="news_card_page">
+    <div class="news_card_page__bg">
+        <img class="image desktop" data-src="/image/{{ image_inner }}" alt="" data-lazy="" />
+         <img class="image mobile" data-src="/image/{{ image_inner_adaptive }}" alt="" data-lazy="" />
+    </div>
+    <div class="news_card_page__container">
+        <div class="news_card_page__breadcrumbs breadcrumbs">
+            {% for breadcrumb in breadcrumbs %}
+                <a class="breadcrumbs__link  {% if breadcrumb == breadcrumbs|last %} is-active {% endif %}"
+                href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+                {% if breadcrumb != breadcrumbs|last %}
+                <span class="slash">/</span>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="news_card_page__content">
+            <h1 class="news_card_page__title">{{ heading_title }}</h1>
+            {{ intro }}
+            {% if description %}
+                {{ description }}
+            {% endif %} 
+        </div>
+    </div>
+</section>
+
+{{ footer }}

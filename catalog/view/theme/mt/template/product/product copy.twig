@@ -1,0 +1,1168 @@
+{{ header }}
+<div class="product__page">
+    <div class="container">
+        <div class="breadcrumbs">
+            {% for breadcrumb in breadcrumbs %}
+            <a href="{{ breadcrumb.href }}" class="breadcrumb-link">{{ breadcrumb.text }}</a>
+            {% if breadcrumb != breadcrumbs|last %}
+            <span>&nbsp;/&nbsp;</span>
+            {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="product__page-wrapper">
+            <input type="hidden" name="form_product_id" value={{ product_id }}>
+            <input type="hidden" name="form_price" value={% if special %}{{ special }}{% else %}{{ price }}{% endif %}>
+            <input type="hidden" name="form_symbol_left" value={{ symbol_left }}>
+            <input type="hidden" name="form_symbol_right" value={{ symbol_right }}>
+            <h1 class="page__title">{{ heading_title }}</h1>
+
+            <div class="product__info">
+                {% if theme_mt_product_sku_checked and sku %}
+                <div class="product__info-vendorcode">
+                    {{ theme_mt_product_sku }}:&nbsp;<span>{{ sku }}</span>
+                </div>
+                {% endif %}
+                {% if rating > 0 %}
+                <div class="product__info-rating">
+                    <span class="i-custom icon-icon-star {% if rating >= 1 %}rate{% else %}gray{% endif %}"></span>
+                    <span class="i-custom icon-icon-star {% if rating >= 2 %}rate{% else %}gray{% endif %}"></span>
+                    <span class="i-custom icon-icon-star {% if rating >= 3 %}rate{% else %}gray{% endif %}"></span>
+                    <span class="i-custom icon-icon-star {% if rating >= 4 %}rate{% else %}gray{% endif %}"></span>
+                    <span class="i-custom icon-icon-star {% if rating >= 5 %}rate{% else %}gray{% endif %}"></span>
+                </div>
+                {% endif %}
+                {% if review_status and reviews and rating > 0 %}
+                <div class="product__info-reviews-count">
+                    {{ reviews }}
+                </div>
+                {% endif %}
+                {% if theme_mt_product_wishlist_checked %}
+                <button class="product-adds add-bookmark product-like {% if in_wishlist %}added{% endif %}" onclick="{% if in_wishlist %}wishlist_remove('{{ product_id }}');{% else %}wishlist_add('{{ product_id }}');{% endif %} return false;" {% if not logged %}data-login="false"{% else %}data-login="true"{% endif %}>			
+                {{ theme_mt_product_wishlist }}
+                </button>
+                {% endif %}
+                {% if theme_mt_product_compare_checked %}
+                <button class="product-adds add-compare product-compare {% if in_compare %}added{% endif %}" onclick="{% if in_compare %}compare_remove('{{ product_id }}');{% else %}compare_add('{{ product_id }}');{% endif %}">
+                {{ theme_mt_product_compare }}
+                </button>
+                {% endif %}
+            </div>
+
+            <div class="product__block">
+
+                <div class="product__sliders">
+                    <div class="product__block-navigation">
+                        <div class="block-navslider arrow-up">
+                            <img src="/catalog/view/theme/mt/stylesheet/icons/slider-nav-arrow.svg" loading="lazy" alt="-" width="" height="">
+                        </div>
+                        <div class="swiper product__block-navslider">
+                                <div class="swiper-wrapper">
+                                {% for image in images %}
+                                <div class="swiper-slide product__slider-navitem">
+                                    <img src="{{ image.additional }}" alt="{{ heading_title }}" width="100%" height="100%" loading="lazy">
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="block-navslider arrow-down">
+                            <img src="/catalog/view/theme/mt/stylesheet/icons/slider-nav-arrow.svg" loading="lazy" alt="-" width="" height="">
+                        </div>
+                    </div>
+
+                    <div class="swiper product__block-slider">
+                        <div class="swiper-wrapper" id="lightgallery">
+                            {% for image in images %}
+                            <a href="{{ image.popup }}"
+                                class="swiper-slide product__slider-item">
+                                <img src="{{ image.thumb }}" alt="{{ heading_title }}" width="100%" height="100%">
+                                <div class="product-photo__notes">
+                                    {% if (special_check) %}
+                                    <div class="product-photo__note note-action">
+                                        {{ special_check }}% Акция!
+                                    </div>
+                                    {% endif %}
+                                    {% if (discount_check) %}
+                                    <div class="product-photo__note note-hit">
+                                        {{ discount_check }}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </a>
+                            {% endfor %}
+                        </div>
+
+                        <div class="product__slider-pagination"></div>
+                    </div>
+
+                </div>
+
+                <div class="product__block-inform">
+
+                    <div class="product__block-info" id="product">
+                        <div class="product__info-top">
+                            <div class="product__info-left">
+                                {{ content_before_price }}
+                                <div class="product-price">
+                                    {% if price %}
+                                    {% if special %}
+                                    <div class="current-price">
+                                        {% if symbol_left %}<span class="price-currency">{{ symbol_left }}</span>{% endif %}
+                                        <div class="price-cost">{{ special }}</span>
+                                        </div>
+                                        {% if symbol_right %}<span class="price-currency">{{ symbol_right }}</span>{% endif %}
+                                    </div>
+                                    <div class="old-price">{% if symbol_left %}<span>{{ symbol_left }}</span>{% endif %}{{ price }}{% if symbol_right %}<span>{{ symbol_right }}</span>{% endif %}</div>
+                                    {% else %}
+                                    <div class="current-price">
+                                        {% if symbol_left %}<span class="price-currency">{{ symbol_left }}</span>{% endif %}
+                                        <div class="price-cost">{{ price }}<span class="price-penny"></span></div>
+                                        {% if symbol_right %}<span class="price-currency">{{ symbol_right }}</span>{% endif %}
+                                        {% if tax %}
+                                        {{ text_tax }} {{ tax }}
+                                        {% endif %}
+                                    </div>
+                                    {% endif %}
+                                    {% elseif theme_mt_product_zero_text_checked %}
+                                    <div class="product-price_zero">{{ theme_mt_product_zero_text }}</div>
+                                    {% endif %}
+									
+                                </div>
+                                {% if theme_mt_product_state_checked %}
+                                <div class="product-avariables">
+                                    {% if quantity > 0 %}
+                                    <div class="product-avariables__variant in-stock">
+                                        <i class="fas fa-check"></i>
+                                        <span>{{ stock }}</span>
+                                    </div>
+                                    {% else %}
+                                    <div class="product-avariables__variant on-order">
+                                        <i class="far fa-bell"></i>
+                                        <span>{{ stock }}</span>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                {% endif %}
+                                {{ content_after_price }}
+                            </div>
+                            {% if discounts or reward %}
+                            <div class="product__info-right">
+                                <div class="product-sales">
+                                    {% if discounts %}
+                                    <div class="sale-item">
+                                        <span class="i-custom icon-icon-sale"></span>
+                                        <div class="sale__item-sales">
+                                            {% for discount in discounts %}
+                                            <span class="sale-inf">{{ discount.quantity }} или больше — <span class="sale-price">{{ discount.price }}</span></span>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    {% if reward %}
+                                    <div class="sale-item bonus">
+                                        <span class="i-custom icon-icon-sale"></span>
+                                        <div class="sale__item-sales">
+                                            <span class="sale-inf">Цена в бонусных баллах: <span
+                                                    class="sale-price">{{ reward }}</span></span>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        {% if variable %}
+                        <div class="product-variant">
+                            {% for variable_product in variable %}
+                            <a href="{{ variable_product.href }}" class="variant__in-stock {% if quantity == 0 %}noactive{% endif %}">
+                                <img src="{{ variable_product.thumb }}" alt="{{ variable_product.name }}" title="{{ variable_product.name }}" loading="lazy" width="{{ variable_width }}" height="{{ variable_height }}">
+                            </a>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+
+                        {% if options %}
+                        <div class="product-modify">
+                            {% for option in options %}
+                            {% if option.type == 'select' %}
+                            <div class="product-modify_item modify-3 {% if option.required %} required {% endif %}">
+                                <div class="modify_option">
+                                    {% if theme_mt_product_optionname_checked %}<div class="modify__textarea-name">{{ option.name }}</div>{% endif %}
+									{# проверка списка #}
+                                    <div class="custom-select">
+                                        <select name="option[{{ option.product_option_id }}]" id="input-option{{ option.product_option_id }}" placeholder="">
+                                            <option value="">{{ text_select }}</option>
+                                            {% for option_value in option.product_option_value %}
+                                            <option value="{{ option_value.product_option_value_id }}">
+                                            {{ option_value.name }}
+                                            {% if option_value.price %}
+                                                ({{ option_value.price_prefix }}{{ option_value.price }})
+                                            {% endif %} 
+                                            </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    {# ####### #}
+
+                                    <script src="/catalog/view/theme/mt/js/select.js"></script>                                    
+                                    {# <div class="product-options-line">
+                                    <select name="option[{{ option.product_option_id }}]" id="input-option{{ option.product_option_id }}" class="pretty-select" placeholder="">
+                                        <option value="">{{ text_select }}</option>
+                                        {% for option_value in option.product_option_value %}
+                                        <option value="{{ option_value.product_option_value_id }}">
+                                        {{ option_value.name }}
+                                        {% if option_value.price %}
+                                            ({{ option_value.price_prefix }}{{ option_value.price }})
+                                        {% endif %} 
+                                        </option>
+                                        {% endfor %}
+                                    </select>
+									</div> #}
+                                    {# <script>
+                                        // выпадающие списки 
+                                        new Choices('#input-option{{ option.product_option_id }}', {
+                                            searchEnabled: false,
+                                            itemSelectText: '',
+                                            classNames: {
+                                                containerOuter: 'choices custom-choices',
+                                                containerInner: 'choices__inner'
+                                            }
+                                        });
+                                    </script> #}
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if option.type == 'radio' %}
+                            <div class="product-modify_default {% if option.required %} required {% endif %}" id="input-option{{ option.product_option_id }}">
+                                {% if theme_mt_product_optionname_checked %}<div class="modify__textarea-name">{{ option.name }}</div>{% endif %}
+								<div class="product-options-line">
+                                {% for option_value in option.product_option_value %}								
+                                <label class="newcustom-radio">
+                                    {% if option_value.image %} <img src="{{ option_value.image }}" loading="lazy" alt="{{ option_value.name }} {% if option_value.price %} {{ option_value.price_prefix }} {{ option_value.price }} {% endif %}" class="img-thumbnail" /> {% endif %}
+                                    <input type="radio" name="option[{{ option.product_option_id }}]" value="{{ option_value.product_option_value_id }}">
+                                    <div class="newcustom-radio_title">
+                                        {{ option_value.name }}
+                                        {% if option_value.price %}
+                                        <span>({{ option_value.price_prefix }}{{ option_value.price }})</span>
+                                        {% endif %}
+                                    </div>
+                                </label>								
+                                {% endfor %}
+								</div>
+                            </div>
+                            {% endif %}
+                            {% if option.type == 'checkbox' %}
+							
+							<div class="product-modify_default {% if option.required %} required {% endif %}" id="input-option{{ option.product_option_id }}">
+                                {% if theme_mt_product_optionname_checked %}<div class="modify__textarea-name">{{ option.name }}</div>{% endif %}
+								<div class="product-options-line">
+                                {% for option_value in option.product_option_value %}
+                                <label class="custom-radio">
+									<input type="checkbox" name="option[{{ option.product_option_id }}][]" value="{{ option_value.product_option_value_id }}">  
+                                    {% if option_value.image %} <img src="{{ option_value.image }}" loading="lazy" alt="{{ option_value.name }} {% if option_value.price %} {{ option_value.price_prefix }} {{ option_value.price }} {% endif %}" class="img-thumbnail" /> {% endif %}									                                  
+                                    <div class="custom-radio_title">
+                                        {{ option_value.name }}
+                                        {% if option_value.price %}
+                                        <span>({{ option_value.price_prefix }}{{ option_value.price }})</span>
+                                        {% endif %}
+                                    </div>
+                                </label>
+                                {% endfor %}
+								</div>
+                            </div>
+														
+
+							
+							
+                            {% endif %}
+                            {% if option.type == 'text' %}
+                            <div class="product-modify_item modify-4 {% if option.required %} required {% endif %}">
+                                <div class="product-modify__textarea">
+                                    {% if theme_mt_product_optionname_checked %}<div class="modify__textarea-name">{{ option.name }}</div>{% endif %}
+                                    <input type="text" name="option[{{ option.product_option_id }}]" value="{{ option.value }}" placeholder="{{ option.name }}" id="input-option{{ option.product_option_id }}">
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if option.type == 'textarea' %}
+                            <div class="product-modify_item modify-4 {% if option.required %} required {% endif %}">
+                                <div class="product-modify__textarea">
+                                    {% if theme_mt_product_optionname_checked %}<div class="modify__textarea-name">{{ option.name }}</div>{% endif %}
+                                    <textarea name="option[{{ option.product_option_id }}]" cols="120" rows="3" value="{{ option.value }}" placeholder="{{ option.name }}" id="input-option{{ option.product_option_id }}">{{ option.value }}</textarea>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if option.type == 'file' %}
+                            <div class="product-modify_item modify-4 {% if option.required %} required {% endif %}">
+                                {% if theme_mt_product_optionname_checked %}<div class="modify__textarea-name">{{ option.name }}</div>{% endif %}
+                                <label class="upload-button">
+                                    <input type="file" name="option[{{ option.product_option_id }}]" id="input-option{{ option.product_option_id }}">
+                                    <span>Загрузить файл</span>
+                                </label>
+                            </div>
+                            {% endif %}
+                            {% if option.type == 'date' %}
+                            <div class="product-modify_item modify-5 {% if option.required %} required {% endif %}">
+                                {% if theme_mt_product_optionname_checked %}<div class="modify__textarea-name">{{ option.name }}</div>{% endif %}
+                                <div class="select_datetime">
+                                    <input id="datepicker" name="option[{{ option.product_option_id }}]" value="{{ option.value }}" data-date-format="YYYY-MM-DD HH:mm" id="input-option{{ option.product_option_id }}" type="text" placeholder="Дата">
+                                    <button id="button_date" class="datetime-button">
+                                        <img src="/catalog/view/theme/mt/stylesheet/icons/datetime.svg" loading="lazy" width="17" height="17">
+                                    </button>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if option.type == 'datetime' %}
+                            <div class="product-modify_item modify-5 {% if option.required %} required {% endif %}">
+                                {% if theme_mt_product_optionname_checked %}<div class="modify__textarea-name">{{ option.name }}</div>{% endif %}
+                                <div class="select_datetime">
+                                    <input id="datetimepicker" name="option[{{ option.product_option_id }}]" value="{{ option.value }}" data-date-format="YYYY-MM-DD HH:mm" id="input-option{{ option.product_option_id }}" type="text" placeholder="Дата и время">
+                                    <button id="button_datetime" class="datetime-button">
+                                        <img src="/catalog/view/theme/mt/stylesheet/icons/datetime.svg" loading="lazy" width="17" height="17">
+                                    </button>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if option.type == 'time' %}
+                            <div class="product-modify_item modify-5 {% if option.required %} required {% endif %}">
+                                {% if theme_mt_product_optionname_checked %}<div class="modify__textarea-name">{{ option.name }}</div>{% endif %}
+                                <div class="select_datetime">
+                                    <input id="timepicker" name="option[{{ option.product_option_id }}]" value="{{ option.value }}" data-date-format="YYYY-MM-DD HH:mm" id="input-option{{ option.product_option_id }}" type="text" placeholder="Время">
+                                    <button id="button_time" class="datetime-button">
+                                        <img src="/catalog/view/theme/mt/stylesheet/icons/datetime.svg" loading="lazy" width="17" height="17">
+                                    </button>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        {# //НОВОЕ
+                        {% if recurrings %}
+                        <hr>
+                        <h3>{{ text_payment_recurring }}</h3>
+                        <div class="form-group required">
+                        <select name="recurring_id" class="form-control">
+                            <option value="">{{ text_select }}</option>
+                            {% for recurring in recurrings %}
+                            <option value="{{ recurring.recurring_id }}">{{ recurring.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <div class="help-block" id="recurring-description"></div>
+                        </div>
+                        {% endif %}
+                        //!НОВОЕ #}
+
+                        {% if theme_mt_product_cart_checked %}
+                        <div class="product-add__trash">
+                            <button type="button" id="button-cart" data-loading-text="{{ text_loading }}" class="button button-big">{{ theme_mt_product_cart_text }}</button>
+                            {% if theme_mt_product_cart_quantity_checked %}
+                            <div class="count-products_box">
+                                <div class="count-products_input">
+                                    <button class="amount-minus">-</button>
+                                    <input class="number-amount" name="quantity" value="{{ minimum }}" size="2" id="input-quantity">
+                                    <button class="amount-plus">+</button>
+                                </div>
+                                <span>{{ theme_mt_product_cart_quantity }}</span>
+                            </div>
+                            {% else %}
+                            <input type="hidden" name="quantity" value="{{ minimum }}" size="2" id="input-quantity">
+                            {% endif %}
+                            <input type="hidden" name="product_id" value="{{ product_id }}" />
+                        </div>
+                        {% endif %}
+
+                        <div class="product-options">
+                            {% if theme_mt_product_fast_order_checked %}<a href="#fast_order_product" class="button button-outline fancybox">{{ theme_mt_product_fast_order_text }}</a>{% endif %}
+                            {% if theme_mt_product_question_checked %}<a href="#callback1" class="button button-outline fancybox">{{ theme_mt_product_question_text }}</a>{% endif %}
+                            {% if theme_mt_product_callback_checked %}<a href="#callback2" class="button button-outline fancybox">{{ theme_mt_product_callback_text }}</a>{% endif %}
+                        </div>
+                        {{ content_after_buttons }}
+                    </div>
+
+                    <div class="product__block-order">
+                        
+                        {% set amount_phones = 0 %}
+                        {% set has_phones = false %}
+                        {% for contact in main_contact %}
+                            {% for phone in contact.phones %}
+                            {% if phone.product and phone.status %}
+                            {% set has_phones = true %}
+                            {% set amount_phones = amount_phones + 1 %}
+                            {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                        {% if has_phones %}
+                        <div class="block-order__box order__box-left">
+                            <div class="block__order-title">Сделать заказ —</div>
+                            <div class="block__order-contacts more-text">
+                                <div class="more-text_content" data-overflow="50">
+                                    <div>
+                                    {% for contact in main_contact %}
+                                        {% for phone in contact.phones %}
+                                        {% if phone.product and phone.status %}
+                                        <div class="order__contacts-item"><a href="tel:{{ phone.number }}">{{ phone.number }}</a>{{ phone.text }}</div>
+                                        {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                    </div>
+                                </div>
+                                {% if amount_phones > 2 %}
+                                <button class="more-text_open">Развернуть контакты</button>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        
+                        {% set amount_messengers = 0 %}
+                        {% set has_messengers = false %}
+                        {% for contact in main_contact %}
+                        {% for messenger in contact.messengers %}
+                        {% if messenger.product and messenger.status %}
+                        {% set has_messengers = true %}
+                        {% set amount_messengers = amount_messengers + 1 %}
+                        {% endif %}
+                        {% endfor %}
+                        {% endfor %}
+                        {% if has_messengers %}
+                        <div class="block-order__box order__box-right">
+                            <div class="block__order-title">Напишите менеджеру</div>
+
+                            <div class="block__order-social">
+                            {% for contact in main_contact %}
+                                {% for messenger in contact.messengers %}
+                                {% if messenger.product and messenger.status %}
+                                <a href="{{ messenger.link }}" class="social {{ messenger.css_class }}">
+                                    <i class="fab {{ messenger.css_icon }}"></i>
+                                </a>
+                                {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+
+                    </div>
+
+                    {% if theme_mt_product_delivery_checked or theme_mt_product_payment_checked %}
+                    <div class="product__block-delivery">
+                        {% if theme_mt_product_delivery_checked %}
+                        <div class="block-delivery__box">
+                            <a href="#delivery-terms" class="block-delivery__title fancybox">
+                                {{ theme_mt_product_delivery_header }}
+                                <img src="/catalog/view/theme/mt/stylesheet/icons/icon-help.svg" loading="lazy" class="help-icon" alt="?" width="100%" height="100%">
+                            </a>
+                            {% if theme_mt_product_delivery_text_checked %}
+                            <div class="block-delivery__info">
+                                {{ theme_mt_product_delivery_text_area }}
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+
+                        {% if theme_mt_product_payment_checked %}
+                        <div class="block-delivery__box">
+                            <a href="#payment-terms" class="block-delivery__title fancybox">
+                                {{ theme_mt_product_payment_header }}
+                                <img src="/catalog/view/theme/mt/stylesheet/icons/icon-help.svg" loading="lazy" class="help-icon" alt="?" width="100%" height="100%">
+                            </a>
+                            {% if theme_mt_product_payment_text_checked %}
+                            <div class="block-delivery__info">
+                                {{ theme_mt_product_payment_text_area }}
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                    {{ content_after_text }}
+                </div>
+            </div>
+
+            <div class="product__specifications">
+                <div class="tabs">
+                    <div class="tabs__nav tabs-nav">
+                        <div class="tabs-nav__item is-active" data-tab-name="tab-1">Описание</div>
+                        {% if attribute_groups %}<div class="tabs-nav__item" data-tab-name="tab-2">Характеристики</div>{% endif %}
+                        {% if review_status %}<div class="tabs-nav__item" data-tab-name="tab-3">Отзывы <span
+                                class="tab-notify">{{ review_count }}</span></div>{% endif %}
+                    </div>
+                    <div class="tabs__content">
+                        <div class="tab is-active tab-1">
+                            <div class="spec-tab_content">
+                                <div class="spec__descr-left">
+                                    <div class="spec__descr-article">
+                                        <div class="descr-article more-text">
+                                            {{ content_before_desc }}
+                                            <div class="more-text_content" {% if theme_mt_product_hide_full_description_checked %}data-overflow="{{ theme_mt_product_hide_full_description_px }}"{% endif %}>
+                                                <div class="product description">
+                                                    {{ description }}
+                                                </div>
+                                            </div>
+                                            {% if theme_mt_product_hide_full_description_checked %}
+                                            <button class="more-text_open">Развернуть описание</button>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="spec__descr-otherinfo">
+                                        {{ content_after_desc }}
+                                    </div>
+
+                                    {% if tags %}
+                                    <div class="spec__descr-cats">
+                                    {% for i in 0..tags|length - 1 %}
+                                    <a href="{{ tags[i].href }}" class="descr-cat-item">
+                                        {{ tags[i].tag }}
+                                    </a>
+                                    {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="spec__descr-right">
+                                    {% if products %}
+                                    <div class="spec__descr-similar">
+                                        <div class="section-title">
+                                            Похожие товары
+                                        </div>
+                                        <div class="similar-slider-content">
+                                            <div class="swiper descr__similar-slider">
+                                                <div class="swiper-wrapper">
+                                                    {% for product in products %}
+                                                    <div class="swiper-slide product-card">
+                                                        <div class="product-base">
+                                                            <a href="{{ product.href }}" class="product-photo">
+                                                                <img src="{{ product.thumb }}" loading="lazy"
+                                                                    alt="product" class="product-img"
+                                                                    width="100%" height="100%">
+
+                                                                <div class="product-photo__options">
+
+                                                                    {% if product.rating > 0 %}
+                                                                    <div class="product-rating">
+                                                                        <span class="i-custom icon-icon-star {% if product.rating >= 1 %}rate{% else %}gray{% endif %}"></span>
+                                                                        <span class="i-custom icon-icon-star {% if product.rating >= 2 %}rate{% else %}gray{% endif %}"></span>
+                                                                        <span class="i-custom icon-icon-star {% if product.rating >= 3 %}rate{% else %}gray{% endif %}"></span>
+                                                                        <span class="i-custom icon-icon-star {% if product.rating >= 4 %}rate{% else %}gray{% endif %}"></span>
+                                                                        <span class="i-custom icon-icon-star {% if product.rating >= 5 %}rate{% else %}gray{% endif %}"></span> 
+                                                                    </div>
+                                                                    {% endif %}
+                                                                    {% if theme_mt_category_product_wishlist_checked %}
+                                                                    <button class="product-adds add-bookmark product-like {% if product.in_wishlist %}added{% endif %}" onclick="{% if product.in_wishlist %}wishlist_remove('{{ product.product_id }}');{% else %}wishlist_add('{{ product.product_id }}');{% endif %} return false;" {% if not logged %}data-login="false"{% else %}data-login="true"{% endif %}></button>
+                                                                    {% endif %}
+                                                                </div>
+                                                            </a>
+                                                            <div class="product-description">
+                                                                <div class="product-price">
+                                                                    {% if product.price %}
+                                                                    {% if product.special %}
+                                                                    <div class="current-price">
+                                                                        {% if symbol_left %}<span class="price-currency">{{ symbol_left }}</span>{% endif %}
+                                                                        <div class="price-cost">{{ product.special }}</span>
+                                                                        </div>
+                                                                        {% if symbol_right %}<span class="price-currency">{{ symbol_right }}</span>{% endif %}
+                                                                    </div>
+                                                                    <div class="old-price">{% if symbol_left %}<span>{{ symbol_left }}</span>{% endif %}{{ product.price }}{% if symbol_right %}<span>{{ symbol_right }}</span>{% endif %}</div>
+                                                                    {% else %}
+                                                                    <div class="current-price">
+                                                                        {% if symbol_left %}<span class="price-currency">{{ symbol_left }}</span>{% endif %}
+                                                                        <div class="price-cost">{{ product.price }}<span class="price-penny"></span></div>
+                                                                        {% if symbol_right %}<span class="price-currency">{{ symbol_right }}</span>{% endif %}
+                                                                    </div>
+                                                                    {% endif %}
+                                                                    {% elseif theme_mt_product_zero_text_checked %}
+                                                                    <div class="product-price_zero">{{ theme_mt_product_zero_text }}</div>
+                                                                    {% endif %}
+                                                                </div>
+                                                                <a href="{{ product.href }}" class="product-info">
+                                                                {{ product.name }}
+                                                                </a>
+                                                                {% if theme_mt_category_product_attributes_checked and product.attributes %}
+                                                                <div class="product-additional">
+                                                                    {% for attribute in product.attributes %}
+                                                                    <div>{% if theme_mt_product_attr_group_name_checked %}{{ attribute.name }}: {% endif %}<span>{{ attribute.text }}</span></div>
+                                                                    {% endfor %}
+                                                                </div>
+                                                                {% endif %}
+                                                                {% if theme_mt_category_product_stock_checked %}
+                                                                <div class="product-avariables">
+                                                                    {% if product.quantity > 0 %}
+                                                                    <div class="product-avariables__variant in-stock">
+                                                                        <i class="fas fa-check"></i>
+                                                                        <span>{{ product.stock }}</span>
+                                                                    </div>
+                                                                    {% else %}
+                                                                    <div class="product-avariables__variant on-order">
+                                                                        <i class="far fa-bell"></i>
+                                                                        <span>{{ product.stock }}</span>
+                                                                    </div>
+                                                                    {% endif %}
+                                                                </div>
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                        <button class="button" onclick="add_in_cart('{{ product.product_id }}', '{{ product.minimum }}');">
+                                                        {% if theme_mt_category_product_cart_checked and theme_mt_category_product_cart_text %}{{ theme_mt_category_product_cart_text }}{% else %}Добавить в корзину{% endif %}
+                                                        </button>
+                                                    </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+
+                                            <div class="sliders-arrows prev">
+                                                <div class="similar-slider_arrows arrow-prev">
+                                                    <svg width="14" height="11" viewBox="0 0 14 11" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M5.48209 3.01466e-07L6.57264 1.07928L2.93265 4.73116L14 4.73116L14 6.26884L2.93265 6.26884L6.57264 9.92072L5.48209 11L-1.24572e-06 5.5L5.48209 3.01466e-07Z"
+                                                            fill="#1F1F1F" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="sliders-arrows next">
+                                                <div class="similar-slider_arrows arrow-next">
+                                                    <svg width="14" height="11" viewBox="0 0 14 11" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M8.51791 11L7.42736 9.92073L11.0673 6.26884L-2.7402e-07 6.26884L-2.06805e-07 4.73116L11.0673 4.73116L7.42736 1.07928L8.51791 3.7233e-07L14 5.5L8.51791 11Z"
+                                                            fill="#1F1F1F" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+                                    </div>
+                                    {% endif %}
+
+                                    {% if attribute_groups and theme_mt_product_hide_full_attr_checked %}
+                                    <div class="spec__descr-character more-text">
+                                        <div class="more-text_content" {% if theme_mt_product_hide_full_attr_checked %}data-overflow="{{ theme_mt_product_hide_full_attr }}"{% endif %}>
+                                            {{ content_before_attr }}
+                                            <div class="descr-character-content">
+                                                {% set attr_count = 1 %}
+                                                {% for attribute_group in attribute_groups %}
+                                                {% for attribute in attribute_group.attribute %}
+                                                <div class="descr-character-item">
+                                                    {% if theme_mt_product_attr_group_name_checked %}
+                                                    <span class="character-item__name">{{ attribute.name }}:</span>
+                                                    <span class="hr"></span>
+                                                    {% endif %}
+                                                    <p>{{ attribute.text }}</p>
+                                                </div>
+                                                {% set attr_count = attr_count + 1 %}
+                                                {% endfor %}
+                                                {% endfor %}
+                                            </div>
+                                            {{ content_after_attr }}
+                                        </div>
+                                        <button class="more-text_open">Все характеристики</button>
+                                    </div>
+                                    {% endif %}
+
+
+                                    {% if manufacturer and theme_mt_product_manufacturer_description_checked %}
+									<div class="spec__descr-stamp">
+										<div class="stamp_left">
+                                        {% if theme_mt_product_manufacturer_logo_checked and manufacturer_image %}
+                                        <a href="{{ manufacturers }}" class="stamp-logo"><img src="{{ manufacturer_image }}" loading="lazy"
+                                                width="100%" height="100%"></a>
+                                        {% endif %}
+										<div class="spec_stamp_link">
+                                            {% if theme_mt_product_manufacturer_link_checked and manufacturers %}<a href="{{ manufacturers }}" class="link">{{ theme_mt_product_manufacturer_text_link }}</a>{% endif %}
+										</div>
+										</div>
+                                        
+                                        {% if manufacturer_description %}<div class="spec_stamp_desc">
+											<div class="stamp_right spec_stamp_desc">
+                                            {{ manufacturer_description }}
+											</div>											
+										{% endif %}
+                                        </div>										
+                                    </div>
+									
+						
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% if attribute_groups %}
+                        <div class="tab tab-2">
+                            <div class="chars-tab_content">
+                                {% for attribute_group in attribute_groups %}
+                                <div class="chars_card">
+                                    <div class="chars_title">{{ attribute_group.name }}</div>
+                                    <div class="chars_list">
+                                        {% for attribute in attribute_group.attribute %}
+                                        <div class="descr-character-item">
+                                            {% if theme_mt_product_attr_group_name_checked %}
+                                            <span class="character-item__name">{{ attribute.name }}:</span>
+                                            <span class="hr"></span>
+                                            {% endif %}
+                                            <p>{{ attribute.text }}</p>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if review_status %}
+                        <div class="tab tab-3">
+                            <div class="reviews_box">
+
+                                <form  id="form-review" class="review_form">
+                                    {% if review_guest %}
+                                    <div id="review"></div>
+                                    {% if theme_mt_product_review_name_checked %}
+                                    <div class="review_form-row">
+                                        <label for="name" class="input_name">Ваше имя <span>*</span></label>
+                                        <input type="text" placeholder='' id="input-name" name="name">
+                                    </div>
+                                    {% else %}
+                                    <input type="hidden" placeholder='' value="name" id="input-name" name="name">
+                                    {% endif %}
+                                    
+                                    <div class="review_form-row">
+                                        <label for="message" class="input_name">Текст отзыва
+                                            <span>*</span></label>
+                                        <textarea name="text" id="input-review" cols="30" rows="10"></textarea>
+                                    </div>
+
+                                    <div class="form_note">
+                                        Примечание: HTML разметка не поддерживается! Используйте обычный текст.
+                                    </div>
+                                    {% if theme_mt_product_review_rating_checked %}
+                                    <div class="review_form-mark">
+                                        <div class="input_name">Ваша оценка</div>
+
+                                        <div class="rw_mark-box">
+                                            <span>(плохо)</span>
+                                            <div class="mark_number">
+                                                <label class="custom-radio">
+                                                    <input type="radio" name="rating" value="1">
+                                                    <div class="custom-radio_title"></div>
+                                                </label>
+                                                <label class="custom-radio">
+                                                    <input type="radio" name="rating" value="2">
+                                                    <div class="custom-radio_title"></div>
+                                                </label>
+                                                <label class="custom-radio">
+                                                    <input type="radio" name="rating" value="3">
+                                                    <div class="custom-radio_title"></div>
+                                                </label>
+                                                <label class="custom-radio">
+                                                    <input type="radio" name="rating" value="4">
+                                                    <div class="custom-radio_title"></div>
+                                                </label>
+                                                <label class="custom-radio">
+                                                    <input type="radio" name="rating" checked="" value="5">
+                                                    <div class="custom-radio_title"></div>
+                                                </label>
+                                            </div>
+                                            <span>(хорошо)</span>
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    <input type="hidden" placeholder='' value="5" checked="" name="rating">
+                                    {% endif %}
+                                    {{ captcha }}
+                                    <button type="button" id="button-review" data-loading-text="{{ text_loading }}" class="button button-big">Опубликовать</button>
+                                    {% else %}
+                                    {{ text_login }}
+                                    {% endif %}
+                                </form>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // слайдер продукта
+        let product__slider = new Swiper('.product__block-slider', {
+            thumbs: {
+                swiper: {
+                    el: '.product__block-navslider',
+                    slidesPerView: "auto",
+                    direction: 'vertical',
+                    spaceBetween: 20,
+                    navigation: {
+                        nextEl: '.block-navslider.arrow-down',
+                        prevEl: '.block-navslider.arrow-up',
+                    },
+                }
+            },
+            slidesPerView: "auto",
+            spaceBetween: 25,
+            loop: false,
+            pagination: false,
+            autoplay: false,
+            navigation: {
+                nextEl: '.product-slider_arrows.arrow-next',
+                prevEl: '.product-slider_arrows.arrow-prev',
+            },
+            breakpoints: {
+                320: {
+                    allowTouchMove: true,
+                },
+                1024: {
+                    allowTouchMove: false,
+                },
+            },
+        });
+
+        //выбор даты и времени 
+        $('#datetimepicker').datetimepicker({
+            mask: true,
+            format: 'd.m.Y H:i',
+            lang: 'ru',
+        });
+
+        $.datetimepicker.setLocale('ru');
+
+        $('#button_datetime').click(function () {
+            $('#datetimepicker').datetimepicker('toggle');
+        });
+        //
+        $('#datepicker').datetimepicker({
+            mask: true,
+            format: 'd.m.Y',
+            lang: 'ru',
+        });
+
+        $.datetimepicker.setLocale('ru');
+
+        $('#button_date').click(function () {
+            $('#datepicker').datetimepicker('toggle');
+        });
+        //
+        $('#timepicker').datetimepicker({
+            mask: true,
+            format: 'H:i',
+            lang: 'ru',
+        });
+
+        $.datetimepicker.setLocale('ru');
+
+        $('#button_time').click(function () {
+            $('#timepicker').datetimepicker('toggle');
+        });
+
+        //галерея по клику на фото товара
+        lightGallery(document.getElementById('lightgallery'), {
+            hideBarsDelay: 99999,
+            backdropDuration: 0,
+            mode: 'lg-fade',
+            enableDrag: true,
+            closable: false,
+            appendCounterTo: '.lg',
+            addClass: 'product_gall',
+            nextHtml: '<svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="34" height="34" rx="17" fill="#EDEEE9"></rect><path d="M18.5179 22.5L17.4274 21.4207L21.0673 17.7688L10 17.7688L10 16.2312L21.0673 16.2312L17.4274 12.5793L18.5179 11.5L24 17L18.5179 22.5Z" fill="#1F1F1F"></path></svg>',
+            prevHtml: '<svg width="34" height="34" viewBox="0 0 34 34"" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="34" height="34" rx="17" fill="#EDEEE9"></rect><path d="M18.5179 22.5L17.4274 21.4207L21.0673 17.7688L10 17.7688L10 16.2312L21.0673 16.2312L17.4274 12.5793L18.5179 11.5L24 17L18.5179 22.5Z" fill="#1F1F1F"></path></svg>'
+        });
+
+        //слайдер "похожие товары"
+        let similar_slider = new Swiper('.descr__similar-slider', {
+            slidesPerView: "auto",
+            spaceBetween: 10,
+            loop: false,
+            pagination: false,
+            autoplay: false,
+            navigation: {
+                nextEl: '.similar-slider_arrows.arrow-next',
+                prevEl: '.similar-slider_arrows.arrow-prev',
+            },
+            breakpoints: {
+                1480: {
+                    spaceBetween: 10,
+                },
+            },
+        });
+    </script>
+
+<script>
+            // раскрывающийся текст 
+            let more_text = $(".more-text");
+            [].forEach.call(more_text, function (e) {
+                let more_button = $(e).find("button.more-text_open");
+                let get_content = $(e).find('.more-text_content').children();
+                let get_overflow = $(e).find('.more-text_content').attr("data-overflow");
+                let get_height = $(get_content).height();
+
+                const def_button_text = $(more_button).text();
+
+                $(get_content).css('max-height', get_overflow + 'px');
+
+                if (get_overflow >= get_height) {
+                    $(more_button).css('display', 'none')
+                    $(more_button).remove();
+                }
+
+                console.log('ovf' + get_overflow)
+                console.log('height' +  get_height)
+               
+                const fix_height = get_overflow;
+
+                $(more_button).click(function (e) {
+                    let this_content = $(e.currentTarget).parent().find('.more-text_content')
+                .children();
+                    $(this_content).parent().toggleClass('open');
+                    $(this_content).parent().hasClass('open') ? ($(this_content).css('max-height', $(
+                            this_content).prop('scrollHeight') + 'px')) & $(more_button).text(
+                            'Свернуть') :
+                        $(this_content).css('max-height', fix_height + 'px') & $(more_button).text(
+                            def_button_text)
+                })
+            });
+</script>
+
+
+<script type="text/javascript"><!--
+$('select[name=\'recurring_id\'], input[name="quantity"]').change(function(){
+	$.ajax({
+		url: 'index.php?route=product/product/getRecurringDescription',
+		type: 'post',
+		data: $('input[name=\'product_id\'], input[name=\'quantity\'], select[name=\'recurring_id\']'),
+		dataType: 'json',
+		beforeSend: function() {
+			$('#recurring-description').html('');
+		},
+		success: function(json) {
+			$('.alert-dismissible, .text-danger').remove();
+
+			if (json['success']) {
+				$('#recurring-description').html(json['success']);
+			}
+		}
+	});
+});
+//--></script> 
+<script type="text/javascript">
+$('#button-cart').on('click', function() {
+    console.log($('#product input[type=\'text\'], #product input[type=\'hidden\'], #product input[type=\'radio\']:checked, #product input[type=\'checkbox\']:checked, #product select, #product textarea, #input-quantity'));
+	$.ajax({
+		url: 'index.php?route=checkout/cart/add',
+		type: 'post',
+		data: $('#product input[type=\'text\'], #product input[type=\'hidden\'], #product input[type=\'radio\']:checked, #product input[type=\'checkbox\']:checked, #product select, #product textarea, #input-quantity'),
+		dataType: 'json',
+		beforeSend: function() {
+			//$('#button-cart').button('loading');
+		},
+		complete: function() {
+			//$('#button-cart').button('reset');
+		},
+		success: function(json) {
+			$('.alert-dismissible, .text-danger').remove();
+			$('.form-group').removeClass('has-error');
+
+			if (json['error']) {
+				if (json['error']['option']) {
+					for (i in json['error']['option']) {
+						var element = $('#input-option' + i.replace('_', '-'));
+
+						if (element.parent().hasClass('input-group')) {
+							element.parent().after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
+						} else {
+							element.after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
+						}
+					}
+				}
+
+				if (json['error']['recurring']) {
+					$('select[name=\'recurring_id\']').after('<div class="text-danger">' + json['error']['recurring'] + '</div>');
+				}
+
+				// Highlight any found errors
+				$('.text-danger').parent().addClass('has-error');
+			}
+
+			if (json['success']) {
+				if ($("#cart_added").hasClass('notify_action')) {
+                    $('#cart_added').removeClass('notify_action');
+                }
+                $(document).find('#cart_added').addClass('notify_action').css('top', 90 + 'px'); 
+                active_notify();
+			}
+		},
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+	});
+});
+function add_in_cart(product_id, quantity) {
+  var btn = this;
+  $.ajax({
+    url: 'index.php?route=checkout/cart/add',
+    type: 'post',
+    data: 'product_id=' + product_id + '&quantity=' + (typeof(quantity) != 'undefined' ? quantity : 1),
+    dataType: 'json',
+    success: function(json) {
+
+      if (json['redirect']) {
+        location = json['redirect'];
+      }
+
+      if (json['success']) {
+        if ($("#cart_added").hasClass('notify_action')) {
+            $('#cart_added').removeClass('notify_action');
+        }
+        $(document).find('#cart_added').addClass('notify_action').css('top', 90 + 'px'); 
+        active_notify();
+        $(btn).html('В корзине');
+      }
+    },
+    error: function(xhr, ajaxOptions, thrownError) {
+      alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+    }
+  });
+}
+</script> 
+
+<script type="text/javascript"><!--
+$('.date').datetimepicker({
+	language: '{{ datepicker }}',
+	pickTime: false
+});
+
+$('.datetime').datetimepicker({
+	language: '{{ datepicker }}',
+	pickDate: true,
+	pickTime: true
+});
+
+$('.time').datetimepicker({
+	language: '{{ datepicker }}',
+	pickDate: false
+});
+
+$('button[id^=\'button-upload\']').on('click', function() {
+	var node = this;
+
+	$('#form-upload').remove();
+
+	$('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>');
+
+	$('#form-upload input[name=\'file\']').trigger('click');
+
+	if (typeof timer != 'undefined') {
+    	clearInterval(timer);
+	}
+
+	timer = setInterval(function() {
+		if ($('#form-upload input[name=\'file\']').val() != '') {
+			clearInterval(timer);
+
+			$.ajax({
+				url: 'index.php?route=tool/upload',
+				type: 'post',
+				dataType: 'json',
+				data: new FormData($('#form-upload')[0]),
+				cache: false,
+				contentType: false,
+				processData: false,
+				beforeSend: function() {
+					$(node).button('loading');
+				},
+				complete: function() {
+					$(node).button('reset');
+				},
+				success: function(json) {
+					$('.text-danger').remove();
+
+					if (json['error']) {
+						$(node).parent().find('input').after('<div class="text-danger">' + json['error'] + '</div>');
+					}
+
+					if (json['success']) {
+						alert(json['success']);
+
+						$(node).parent().find('input').val(json['code']);
+					}
+				},
+				error: function(xhr, ajaxOptions, thrownError) {
+					alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+				}
+			});
+		}
+	}, 500);
+});
+//--></script> 
+<script type="text/javascript"><!--
+$('#review').delegate('.pagination a', 'click', function(e) {
+    e.preventDefault();
+
+    $('#review').fadeOut('slow');
+
+    $('#review').load(this.href);
+
+    $('#review').fadeIn('slow');
+});
+
+$('#review').load('index.php?route=mt/product/product/review&id={{ product_id }}');
+
+$('#button-review').on('click', function() {
+	$.ajax({
+		url: '/index.php?route=product/product/write&product_id={{ product_id }}',
+		type: 'post',
+		dataType: 'json',
+		data: $("#form-review").serialize(),
+		beforeSend: function() {
+		},
+		complete: function() {
+		},
+		success: function(json) {
+			$('.alert-dismissible').remove();
+
+			if (json['error']) {
+				$('#review').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
+			}
+
+			if (json['success']) {
+				$('#review').after('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + '</div>');
+
+				$('input[name=\'name\']').val('');
+				$('textarea[name=\'text\']').val('');
+				$('input[name=\'rating\']:checked').prop('checked', false);
+			}
+		}
+	});
+});
+
+
+//--></script> 
+<div class="hide">
+    <div class="terms_popup" id="delivery-terms">
+        <div class="popup-title">
+            {{ delivery_information_title }}
+        </div>
+        <div class="terms-text">
+            <article>
+                {{ delivery_information }}
+            </article>
+        </div>
+    </div>
+    <div class="terms_popup" id="payment-terms">
+        <div class="popup-title">
+            {{ payment_information_title }}
+        </div>
+        <div class="terms-text">
+            <article>
+                {{ payment_information }}
+            </article>
+        </div>
+    </div>
+</div>
+{{ footer }} 

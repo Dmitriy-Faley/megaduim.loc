@@ -1,0 +1,165 @@
+{{ header }}
+<!-- BEGIN CONTENT -->
+
+<section class="brands">
+  <div class="brands__breadcrumbs breadcrumbs">
+    {% for breadcrumb in breadcrumbs %}
+      <a class="breadcrumbs__link  {% if breadcrumb == breadcrumbs|last %} is-active {% endif %}"
+          href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+      {% if breadcrumb != breadcrumbs|last %}
+      <span class="slash">/</span>
+      {% endif %}
+    {% endfor %}
+  </div>
+  <h1 class="section_block__title">Каталог брендов</h1>
+  <!-- <div class="catalog_search_mobile">
+    <svg class="icon">
+      <use xlink:href="#icon_search"></use>
+    </svg>
+    <input class="catalog_search_mobile__input" type="search" name="catalog_search" placeholder="Искать бренд...">
+  </div> -->
+  {{ column_left }}
+
+  <div class="brands__content">
+
+  {% for key, category in categories %}
+    {% for item in category.manufacturer %}
+    
+        {#% if item.count > 0 % #}
+        <a class="brands_slide brands_slide--page" data-manafacturer-link="{{ key }}" href="{{ item.href }}">
+          <div class="brands_slide__pic">
+            <picture class="image">
+            <!--  <source data-lazy="data-lazy" data-srcset="{{ item.thumb }}" type="image/webp" /> -->
+              <img class="image" data-lazy="data-lazy" data-src="{{ item.thumb }}" alt="{{ item.name }}" title="{{ item.name }}">
+            </picture>
+
+          </div>
+          <div class="brands_slide__info">
+            <p class="brands_slide__text brands_slide__text--big">{{ item.name }}</p>
+
+            {% if item.description %}
+            <p class="brands_slide__text">{{ item.description }}</p>
+            {% endif %}
+          </div>
+        </a>
+        {#% endif %#}
+      {% endfor %}
+  {% endfor %}
+    
+  </div>
+
+  {% if pagination %}
+    <div class="catalog_inner__pagination pagination">
+        {% if pagCustom.last != pagCustom.page %}
+            <a href="{{ pagCustom.url }}" class="pagination__btn_more btn btn--grey"><span class="btn__text">Показать ещё</span></a>
+        {% endif %}
+        {{ pagination }}
+    </div>
+    {% endif %}
+</section>
+
+
+
+<!-- <div class="wrap">
+  {{ column_left }}
+  <div class="content">
+    <div class="container">
+      {{ content_top }}
+      <h1>{{ heading_title }}</h1>
+
+      {% if categories %}
+
+      <div class="filter-tags">
+        <div class="filter-tags__item">
+          <div class="filter-tags__title">{{ text_by_index }}</div>
+          <div class="filter-tags__list">
+            {% for key, category in categories %}
+            <a href="{{ manufacturers_href }}#{{ key }}" data-key="{{ key }}"
+              class="filter-tags__link js-manufacturer-link {% if loop.first %} active {% endif %}">{{ key }}</a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <div class="brands-list">
+        {% for key, category in categories %}
+        <div class="brands-list__item" data-manafacturer-link="{{ key }}">
+          <h1>{{ key }}</h1>
+          {% for item in category.manufacturer %}
+
+          <div class="111">
+            <div class="brand">
+              <div class="brand__header">
+                <div class="brand__title"><a href="{{ item.href }}">{{ item.name }}</a></div>
+                <div class="brand-all">
+                  <a href="{{ item.href }}" class="brand-all__link">
+                    <span class="hidden-sm">{{ text_all_products }}</span>
+                    <span class="brand-all__count supper">{{ item.product_total }}</span></a>
+                </div>
+              </div>
+
+              {% if item.description %}
+                <div class="brand__body">
+                    {% if item.thumb %}
+                        <div>
+                            <a href="{{ item.href }}"><img src="{{ item.thumb }}" alt="{{ item.name }}" title="{{ item.name }}" class="img-thumbnail"></a>
+
+                        </div>
+                    {% endif %}
+                    {{ item.description }}
+                </div>
+              {% endif %}
+
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% endfor %}
+      </div>
+
+      {{ pagination }}
+      {% else %}
+      <p>{{ text_empty }}</p>
+      {% endif %}
+
+    </div>
+  </div>
+</div> -->
+
+
+{{ content_bottom }}
+
+<script>
+  $(function () {
+    var $links = $('.js-manufacturer-link').on('click', function (e) {
+      e.preventDefault();
+      var $a = $(this);
+      var key = $a.attr('data-key');
+      var resetActive = $a.hasClass('active');
+      $links.removeClass('active');
+      var $brand_list = $('.brands-list__item').removeClass('hidden');
+
+      if (resetActive) {
+
+      } else {
+        $a.addClass('active');
+        $brand_list.addClass('hidden');
+        $brand_list.filter('[data-manafacturer-link="' + key + '"]').removeClass('hidden');
+
+        var $el = $('.brands-list__item[data-manafacturer-link="' + key + '"]:first');
+        if ($el.length) {
+          var scrollTo = $el.offset().top;
+          if ($('body').hasClass('home-page')) {
+            scrollTo -= $('.m-header__top').height();
+          }
+          //                 $("html, body").stop().animate({scrollTop: scrollTo }, 'fast');
+        }
+      }
+
+
+
+
+    });
+  });
+</script>
+{{ footer }}

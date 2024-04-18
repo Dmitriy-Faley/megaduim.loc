@@ -1,0 +1,239 @@
+<button class="close-filters">
+	<img src="catalog/view/theme/default/image/mt_filter/close.svg" alt="X" width="12" height="12">
+</button>
+<div class="leftside__filters">
+    {% if (min_price_product != 0 and max_price_product != 0) or manufacturers %}
+    <div class="filters__filter sidebar-block">
+        {% if min_price_product != 0 and max_price_product != 0 %}
+        <div class="filters-filter__price">
+            <div class="cat-title">Цена</div>
+
+            <div class="range_box">
+                <div class="range_box-inputs">
+                    <input type="text" id="min-price" value="0">
+                    <span>-</span>
+                    <input type="text" id="max-price" value="0">
+                </div>
+                <input id="range_box-range"></input>
+            </div>
+
+
+        </div>
+        {% endif %}
+        {% if manufacturers %}
+        <div class="filters-filter__brand">
+            <div class="cat-title_sub">Бренд</div>
+            <div class="filters-brand more-text">
+                <div class="more-text_content" data-overflow="150">
+                    <div class="inputsitems">
+                        {% for manufacturer in manufacturers %}
+                        <label class="custom-checkbox">
+                            <input type="checkbox" {% if manufacturer.checked %}checked{% endif %} name="manufacturer[]" value="{{ manufacturer.name }}">
+                            <span>{{ manufacturer.name }}</span>
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% if manufacturers|length > 3 %}
+                <button class="more-text_open">Развернуть</button>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+    {% if options|length > 0 %}
+    <div class="filters__filter sidebar-block">
+        <div class="filters-filter__others">
+            {% for option in options %}
+            {% if option.type == 'checkbox' or option.type == 'radio' %}
+            <div class="filter-others__item {% if options|first != option %}filter-close{% endif %}">
+                <div class="cat-title cat-spoiler">
+                    {{ option.name }}
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="others__item-list">
+                    {% for product_option_value in option.product_option_value %}
+                    <label class="custom-checkbox">
+                        <input type="checkbox" name="option[{{ option.option_id }}][]" {% if product_option_value.checked %}checked{% endif %} value="{{ product_option_value.option_value_id }}">
+                        <span>{{ product_option_value.name }}</span>
+                    </label>
+                    {% endfor %}
+                </div>
+            </div>
+            {% elseif option.type == 'select' %}
+            <div class="filter-others__item {% if options|first != option %}filter-close{% endif %}">
+                <div class="cat-title cat-spoiler">
+                    {{ option.name }}
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="others__item-list">
+                    <div class="filter-others_option">
+                        <select name="option[{{ option.option_id }}]" id="pretty-select_option{{ option.option_id }}" placeholder="">
+                        <option value="">Не выбрано</option>
+                            {% for product_option_value in option.product_option_value %}
+                            <option value="{{ product_option_value.option_value_id }}" {% if product_option_value.checked %}selected{% endif %}>{{ product_option_value.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <script>
+                        new Choices('#pretty-select_option{{ option.option_id }}', {
+                            searchEnabled: false,
+                            itemSelectText: '',
+                            classNames: {
+                                containerOuter: 'choices custom-choices',
+                                containerInner: 'choices__inner'
+                            }
+                        });
+                        </script>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% for attribute_group in attributes %}
+            {% for attribute in attribute_group %}
+            <div class="filter-others__item {% if attributes|first != attribute %}filter-close{% endif %}">
+                <div class="cat-title cat-spoiler">
+                    {{ attribute|first.value.name }}
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="others__item-list">
+                    {% for attr in attribute %}
+                    <label class="custom-checkbox">
+                        <input type="checkbox" name="attribute[{{ attr.value.attribute_id }}][]" {% if attr.checked %}checked{% endif %} value="{{ attr.value.text }}">
+                        <span>{{ attr.value.text }}</span>
+                    </label>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+            {% endfor %}
+        </div>
+        <a href="{{ action }}" class="clear_mt_filter {% if show_clear %}active{% endif %}">Сбросить</a>
+    </div>
+    {% endif %}
+</div>
+<script>
+        // ползунки цены
+        var $range = $("#range_box-range"),
+            $inputFrom = $("#min-price"),
+            $inputTo = $("#max-price"),
+            instance,
+            min = {{ min_price_product }},
+            max = {{ max_price_product }},
+            from = {{ min_price }},
+            to = {{ max_price }};
+
+        $range.ionRangeSlider({
+            skin: "round",
+            type: "double",
+            min: min,
+            max: max,
+            from: from,
+            to: to,
+            onStart: updateInputs,
+            onChange: updateInputs,
+            onload: function(data){
+            // тут доступны  data.fromNumber; data.toNumber;
+                $inputFrom.val(from);
+                $inputTo.val(to);
+            }
+        });
+        instance = $range.data("ionRangeSlider");
+
+        function updateInputs(data) {
+            from = data.from;
+            to = data.to;
+
+            $inputFrom.prop("value", from);
+            $inputTo.prop("value", to);
+        }
+
+        $inputFrom.on("input", function () {
+            var val = $(this).prop("value");
+
+            // validate
+            if (val < min) {
+                val = min;
+            } else if (val > to) {
+                val = to;
+            }
+
+            instance.update({
+                from: val
+            });
+        });
+
+        $inputTo.on("input", function () {
+            var val = $(this).prop("value");
+
+            // validate
+            if (val < from) {
+                val = from;
+            } else if (val > max) {
+                val = max;
+            }
+
+            instance.update({
+                to: val
+            });
+        });
+
+        var t;
+
+        $('.leftside__filters input').on('change', function(){
+            if ($(this).attr('id') != 'range_box-range') return false;
+            clearTimeout(t);
+
+            t = setTimeout(function(input) {
+                reload_url();
+            }, 1000, this);	
+        })
+
+        $('.leftside__filters input, .leftside__filters select').change(function(){
+            if ($(this).attr('id') == 'range_box-range') return false;
+            reload_url();
+        });
+
+        function reload_url() {
+            var url = '{{ action }}';
+                
+            if (url.includes('?') === false) {
+                url += '?';
+                }
+                else {
+                    url += '&';
+                }
+
+                url += 'max_price='+$('#max-price').val()+'&';
+                url += 'min_price='+$('#min-price').val()+'&';
+                
+                var params = [],
+                    checkbox = '',
+                    checkbox_values = [],
+                    checkbox_params = [];
+                $('.leftside__filters input[type=\'checkbox\']:checked').each(function(index) {
+                    if (!checkbox.includes($(this).attr('name')+'=')) {
+                        if (checkbox_values.length > 0) {
+                            checkbox += checkbox_values.join(',');
+                            checkbox_params.push(checkbox);
+                            checkbox = '';
+                            checkbox_values = [];
+                        }
+                        checkbox += $(this).attr('name')+'=';
+                    }
+                    if ($(this).val() != '')
+                        checkbox_values.push($(this).val());
+                });
+                checkbox += checkbox_values.join(',');
+                checkbox_params.push(checkbox);
+                params.push(checkbox_params.join('&'));
+                $('.leftside__filters input[type=\'radio\']:checked, .leftside__filters select').each(function(item) {
+                    if ($(this).val() != '')
+                        params.push($(this).attr('name')+'='+$(this).val());
+                });
+                url += params.join('&');
+                console.log(url);
+                window.location.href = url;
+        }
+    </script>

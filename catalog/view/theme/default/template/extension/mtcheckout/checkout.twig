@@ -1,0 +1,615 @@
+{{ header }}
+
+{% if module_mt_checkout_global_css_checked %}
+<style>
+{{ module_mt_checkout_global_css|raw }}
+</style>
+{% endif %}
+<div class="container">
+  {% if error_warning %}
+  <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+  </div>
+  {% endif %}
+  {% if error_warning_login %}
+  <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning_login }}
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+  </div>
+  {% endif %}
+  <div class="mtcheck-body">
+    <main>
+      <div class="mtcheck-display">
+        {% if module_mt_checkout_global_title_box %}
+        <div class="mtcheck-container">
+          <h1>{{ module_mt_checkout_global_title }}</h1>
+        </div>
+        {% endif %}
+        {% if min_sum_text %}
+        <div class="min_sum_text">{{ min_sum_text }}</div>
+        {% endif %}
+        {% if module_mt_checkout_top_text_box %}
+        {{ module_mt_checkout_top_text }}
+        {% endif %}
+        <div class="mtcheck-container mtcheck-display__wrapper">
+          <div class="mtcheck-display__left">
+            <div class="mtcheck-products">
+              <div class="mtcheck-products__head">
+                <label class="mt_checkbox new" id="mselect-all">
+				
+                  <input type="checkbox" class="checkbox__input" id="select-all" checked>
+                  <span class="checkbox__display"></span>
+                  <span class="checkbox__text">{% if module_mt_checkout_cart_item %}{{ module_mt_checkout_cart_item_text }}{% endif %}</span>
+				
+                </label>
+                <div class="mtcheck-products__actions">
+                  <button class="mtbtn-reset link text text--xs mtcheck-products__action" id="remove-all">{% if module_mt_checkout_cart_delete %}{{ module_mt_checkout_cart_delete_text }}{% endif %}</button>
+                  <button class="mtbtn-reset link text text--xs mtcheck-products__action" id="buy-everything">{% if module_mt_checkout_cart_click %}{{ module_mt_checkout_cart_click_text }}{% endif %}</button>
+                </div>
+                <div class="mtcheck-products__info">
+                  <span class="text text--xs text--thindly">{% if module_mt_checkout_cart_quanity %}{{ module_mt_checkout_cart_quanity_text }}{% endif %}</span>
+                  <span class="text text--xs text--thindly">{% if module_mt_checkout_cart_sum %}{{ module_mt_checkout_cart_sum_text }}{% endif %}</span>
+                </div>
+              </div>
+              <div class="card mtcheck-products__body">
+                <div class="mtcheck-products__list"></div>
+                
+                <div class="mtcheck-products__summary" {% if not module_mt_checkout_cart_tovary and not module_mt_checkout_cart_unit %}style="display:none;"{% endif %}>
+                  <div class="mt_title title--sm title--primary mtcheck-products__count"></div>
+                  <div class="mt_title title--md title--primary mtcheck-products__sum"><span>{{ currencyLeft }}</span><text class="price_sum">0</text><span>{{ currencyRight }}</span></div>
+                </div>
+              </div>
+            </div>
+            {% if not is_logged %}
+            <div id="user_block" class="card mtcheck-user" {% if min_sum_text %}style="display:none"{% endif %}>
+              <div class="mtcheck-user__head">
+                <div class="mtcheck-user__column">
+                  {% if module_mt_checkout_clients_title %}<div class="mt_title title--md title--primary mtcheck-user__title">{{ module_mt_checkout_clients_title_text }}</div>{% endif %}
+                  {% if module_mt_checkout_clients_info %}<button class="mtbtn-reset info-mtbtn" aria-label="Открыть модальное окно" data-modal="user-data"></button>{% endif %}
+                  {% if module_mt_checkout_global_clients_quick %}<button class="mtbtn-reset mtbtn--primary mtcheck-user__buy">{{ module_mt_checkout_global_clients_quick_text }}</button>{% endif %}
+                </div>
+                {% if module_mt_checkout_global_clients_register %}
+                <div class="mtcheck-user__status">
+                  <span class="text text--sm text--thindly mtcheck-user__status-current" data-tab-status="Впервые на сайте?">{{ module_mt_checkout_global_clients_register_text }}</span>
+                  <button class="mtbtn-reset link text text--sm mtcheck-user__status-change" data-tab-handler="(зарегистрироваться)">{{ module_mt_checkout_global_clients_login_text }}</button>
+                </div>
+                {% endif %}
+              </div>
+              {% if module_mt_checkout_global_clients_textup %}
+              <div class="text text--sm text--thindly mtcheck-user__description">
+                {{ module_mt_checkout_global_clients_textup_text }}
+              </div>
+              {% endif %}
+              <form class="mtcheck-register" data-tab="true">
+                <input type="hidden" name="products">
+                <input type="hidden" name="shipping_code" {% if not module_mt_checkout_dostavka %}data-required="0"{% endif %}>
+                <input type="hidden" name="shipping_method" {% if not module_mt_checkout_dostavka %}data-required="0"{% endif %}>
+                <input type="hidden" name="shipping_cost" {% if not module_mt_checkout_dostavka %}data-required="0"{% endif %}>
+                <input type="hidden" name="shipping_tax_class_id" {% if not module_mt_checkout_dostavka %}data-required="0"{% endif %}>
+                <input type="hidden" name="payment_code">
+                <input type="hidden" name="payment_method">
+                <input type="hidden" name="zone" {% if not module_mt_checkout_global_clients_pole_country %}data-required="0"{% endif %}>
+                <input type="hidden" name="zone_id" {% if not module_mt_checkout_global_clients_pole_country %}data-required="0"{% endif %}>
+                <input type="hidden" name="country" {% if not module_mt_checkout_global_clients_pole_country %}data-required="0"{% endif %}>
+                <input type="hidden" name="country_id" {% if not module_mt_checkout_global_clients_pole_country %}data-required="0"{% endif %}>
+                {% if module_mt_checkout_global_clients_pole_group %}
+                <fieldset class="mtcheck-register__type">
+                  <span class="visually-hidden">Тип покупателя</span>
+                  {% for customer_group in customer_groups %}
+                  <label class="radio">
+                    <input type="radio" name="customer_group_id" {% if customer_groups|length == 1 %}checked{% endif %} value="{{ customer_group.customer_group_id }}" class="visually-hidden radio__input">
+                    <span class="radio__display"></span>
+                    <span class="radio__text">{{ customer_group.name }}</span>
+                  </label>
+                  {% endfor %}
+                </fieldset>
+                {% endif %}
+                <fieldset class="mtcheck-register__data">
+                  <span class="visually-hidden">Данные покупателя</span>
+                  {% if module_mt_checkout_global_clients_pole_name %}<label class="input--label"><input type="text" class="input input--min" name="firstname" {% if not module_mt_checkout_global_clients_pole_name_req %}data-required="0"{% endif %} placeholder="{{ module_mt_checkout_global_clients_pole_name_text }}"></label>{% endif %}
+                  {% if module_mt_checkout_global_clients_pole_fam %}<label class="input--label"><input type="text" class="input input--min" name="lastname" {% if not module_mt_checkout_global_clients_pole_fam_req %}data-required="0"{% endif %} placeholder="{{ module_mt_checkout_global_clients_pole_fam_text }}"></label>{% endif %}
+                  {% if module_mt_checkout_global_clients_pole_otch %}<label class="input--label"><input type="text" class="input input--min" name="middlename" {% if not module_mt_checkout_global_clients_pole_otch_req %}data-required="0"{% endif %} placeholder="{{ module_mt_checkout_global_clients_pole_otch_text }}"></label>{% endif %}
+                  {% if module_mt_checkout_global_clients_pole_company %}<label class="input--label"><input type="text" class="input input--min" name="company" {% if not module_mt_checkout_global_clients_pole_company_req %}data-required="0"{% endif %} placeholder="{{ module_mt_checkout_global_clients_pole_company_text }}"></label>{% endif %}
+                  {% if module_mt_checkout_global_clients_pole_phone %}<label class="input--label"><input type="number" class="input input--min" name="telephone" {% if not module_mt_checkout_global_clients_pole_phone_req %}data-required="0"{% endif %} placeholder="{{ module_mt_checkout_global_clients_pole_phone_text }}"></label>{% endif %}
+                  {% if module_mt_checkout_global_clients_pole_email %}<label class="input--label"><input type="email" class="input input--min" name="email" {% if not module_mt_checkout_global_clients_pole_email_req %}data-required="0"{% endif %} placeholder="{{ module_mt_checkout_global_clients_pole_email_text }}"></label>{% endif %}
+                </fieldset>
+                <fieldset class="mtcheck-register__location">
+                  {% if module_mt_checkout_global_clients_pole_country %}
+                  <span class="visually-hidden">Нахождение покупателя</span>
+                  <div class="select" data-name="country">
+                    {% for country in countries %} 
+                    {% if country.country_id == country_id %} 
+                    <div class="select__display display_country">{{ country.name }}</div>
+                    {% endif %}
+                    {% endfor %}
+                    <ul class="list-reset select__items" id="country_id">
+                      <li class="select__item country_list">
+                        Страна
+                      </li>
+                      {% for country in countries %} 
+                      <li class="select__item country_list {% if country.country_id == country_id %}select__item--active{% endif %}" data-value="{{ country.country_id }}">
+                        {{ country.name }}
+                      </li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                  <div class="select" data-name="republic">
+                    {% for zone in zones %} 
+                    {% if zone.zone_id == zone_id or not zone_id %} 
+                    <div class="select__display display_zone">{{ zone.name }}</div>
+                    {% endif %}
+                    {% endfor %}
+                    <ul class="list-reset select__items" id="zone_id">
+                      <li class="select__item">
+                        Регион / Область
+                      </li>
+                      {% for zone in zones %}   
+                      <li class="select__item zone_list {% if zone.zone_id == zone_id %}select__item--active{% endif %}" data-value="{{ zone.zone_id }}">{{ zone.name }}</li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                  <script type="text/javascript">
+                  $('input[name="country_id"]').val($('.country_list.select__item--active').data('value'));
+                  $('input[name="country"]').val($('.country_list.select__item--active').text());
+                  $('input[name="zone_id"]').val($('.zone_list.select__item--active').data('value'));
+                  $('input[name="zone"]').val($('.zone_list.select__item--active').text());
+                  </script>
+                  {% endif %}
+                  {% if module_mt_checkout_global_clients_pole_city %}<label class="input--label"><input type="text" class="input input--min" name="city" {% if not module_mt_checkout_global_clients_pole_city_req %}data-required="0"{% endif %} placeholder="{{ module_mt_checkout_global_clients_pole_city_text }}"></label>{% endif %}
+                  {% if module_mt_checkout_global_clients_pole_adress %}<label class="input--label"><input type="text" class="input input--min" name="address_1" {% if not module_mt_checkout_global_clients_pole_adress_req %}data-required="0"{% endif %} placeholder="{{ module_mt_checkout_global_clients_pole_adress_text }}"></label>{% endif %}
+                  <input type="hidden" name="address_2">
+                  {% if module_mt_checkout_global_clients_pole_index %}<label class="input--label"><input type="text" class="input input--min" name="postcode" {% if not module_mt_checkout_global_clients_pole_index_req %}data-required="0"{% endif %} placeholder="{{ module_mt_checkout_global_clients_pole_index_text }}"></label>{% endif %}
+                </fieldset>
+                {% if module_mt_checkout_global_clients_pole_comment %}<textarea class="textarea mtcheck-register__comment" name="note" {% if not module_mt_checkout_global_clients_pole_comment_req %}data-required="0"{% endif %} placeholder="{{ module_mt_checkout_global_clients_pole_comment_text }}" cols="30" rows="6"></textarea>{% endif %}
+                <div class="mtcheck-register__password">
+                  {% if module_mt_checkout_global_clients_before_register_text %}<div class="text text--sm text--thindly">{{ module_mt_checkout_global_clients_before_register_text_text }}</div>{% endif %}
+                  {% if module_mt_checkout_global_clients_register_pass %}<fieldset>
+                    <span class="visually-hidden">Пароль покупателя</span>
+                    <label class="input--label"><input type="password" class="input input--min" {% if not module_mt_checkout_global_clients_register_pass_req %}data-required="0"{% endif %} name="password" placeholder="{{ module_mt_checkout_global_clients_register_pass_text }}"></label>
+                    <label class="input--label"><input type="password" class="input input--min" {% if not module_mt_checkout_global_clients_register_pass_req %}data-required="0"{% endif %} name="password-again" placeholder="{{ module_mt_checkout_global_clients_register_passconf_text }}"></label>
+                  </fieldset>
+                  {% endif %}
+                </div>
+                <div class="mtcheck-register__permits">
+                  {% if module_mt_checkout_global_clients_register_news_text %}<label class="checkbox checkbox--sm checkbox--gray">
+                    <input type="checkbox" class="visually-hidden checkbox__input" checked>
+                    <span class="checkbox__display"></span>
+                    <span class="checkbox__text">{{ module_mt_checkout_global_clients_register_news_text }}</span>
+                  </label>
+                  {% endif %}
+                  {% if module_mt_checkout_global_clients_footer_privacy_text %}<label class="checkbox checkbox--sm checkbox--gray">
+                    <input type="checkbox" class="visually-hidden checkbox__input" required checked>
+                    <span class="checkbox__display"></span>
+                    <span class="checkbox__text">{{ module_mt_checkout_global_clients_footer_privacy_text }}</span>
+                  </label>
+                  {% endif %}
+                </div>
+                {{ module_mt_checkout_global_clients_footer_text_text }}
+              </form>
+              <script type="text/javascript">
+              $('.select__item.country_list').on('click', function() {
+                $('input[name="country_id"]').val($(this).data('value'));
+                $('input[name="country"]').val($(this).text());
+                var country_id = $(this).data('value');
+                $.ajax({
+                  url: 'index.php?route=checkout/checkout/country&country_id=' + country_id,
+                  dataType: 'json',
+                  beforeSend: function() {
+                  },
+                  complete: function() {
+                  },
+                  success: function(json) {
+                    html = '';
+
+                    if (json['zone'] && json['zone'] != '') {
+                      for (i = 0; i < json['zone'].length; i++) {
+                        html += '<li class="select__item zone_list ' + (i == 0 ? 'select__item--active' : '') + '" data-value="' + json['zone'][i]['zone_id'] + '">' + json['zone'][i]['name'] + '</li>';
+                      }
+                      $('.display_zone').html(json['zone'][0]['name']);
+                    }
+
+                    $('#zone_id').html(html);
+                  },
+                  error: function(xhr, ajaxOptions, thrownError) {
+                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                  }
+                });
+              });
+              $(document).on('click', '.zone_list', function() {
+                $('.zone_list').each(function() {
+                  $(this).removeClass('select__item--active');
+                });
+                $(this).addClass('select__item--active');
+                $('.display_zone').html($(this).text());
+                $('input[name="zone_id"]').val($(this).data('value'));
+                $('input[name="zone"]').val($(this).text());
+              });
+              $('input[name="address-type"]').change(function(){
+                $('input[name="address_id"]').val($(this).val());
+              });
+              </script>
+              {{ login }}
+            </div>
+            {% elseif is_logged %}
+            {{ logged }}
+            {% endif %}
+            <div id="shipping_block" {% if min_sum_text %}style="display:none"{% endif %}>
+              {{ shipping }}
+            </div>
+            <div id="payment_block" {% if min_sum_text %}style="display:none"{% endif %}>
+              {{ payment }}
+            </div>
+            <div class="card mtcheck-confirm" {% if min_sum_text %}style="display:none"{% endif %}>
+              <div class="donut total"></div>
+              <div class="mtcheck-confirm__head">
+                {% if module_mt_checkout_itogo_title %}<div class="mt_title title--md title--primary mtcheck-confirm__title">{{ module_mt_checkout_itogo_title_text }}</div>{% endif %}
+                {% if module_mt_checkout_itogo_info %}<button class="mtbtn-reset info-mtbtn" aria-label="Открыть модальное окно" data-modal="confirm-order"></button>{% endif %}
+              </div>
+              <div class="mtcheck-confirm__row">
+                <div class="mtcheck-offers" {% if not module_mt_checkout_itogo_cupon and not module_mt_checkout_itogo_sert %}style="display:none;"{% endif %}>
+                  
+                  <form class="mtcheck-offers__coupon" {% if not module_mt_checkout_itogo_cupon %}style="display:none;"{% endif %}>
+                    <input type="text" class="input" name="coupon" placeholder="{{ module_mt_checkout_itogo_cupon_text }}">
+                    <button type="submit" class="mtbtn-reset mtbtn--primary">
+                      <span>Применить</span>
+                    </button>
+                  </form>
+                  
+                  <form class="mtcheck-offers__certificate" {% if not module_mt_checkout_itogo_sert %}style="display:none;"{% endif %}>
+                    <input type="text" class="input" name="certificate" placeholder="{{ module_mt_checkout_itogo_sert_text }}">
+                    <button type="submit" class="mtbtn-reset mtbtn--primary">
+                      <span>Применить</span>
+                    </button>
+                  </form>
+                </div>
+                <div class="mtcheck-info">
+                  <div class="mtcheck-table">
+                    {# <div class="mtcheck-table__item">
+                      <div class="text text--md text--primary mtcheck-table__item-name">
+                        Доставка 
+                        <span id="delivery-table-title"></span>
+                      </div>
+                      <span class="text text--md text--primary mtcheck-table__item-value" id="confirm-delivery-table-price">0</span>
+                    </div>
+                    <div class="mtcheck-table__item">
+                      <div class="text text--md text--primary mtcheck-table__item-name">
+                        Оплата 
+                        <span id="pay-table-title"></span>
+                      </div>
+                      <span class="text text--md text--primary mtcheck-table__item-value" id="confirm-payment-table-price">0</span>
+                    </div> #}
+                    <div class="table-summary">
+                      {% for total in totals %}
+                      <div class="mtcheck-table__item">
+                        <div class="text text--md text--primary mtcheck-table__item-name">
+                          {{ total.title|raw }}
+                        </div>
+                        <span class="text text--md text--primary mtcheck-table__item-value" id="total-table-{{ total.code }}{{ total.id }}">{{ total.text|raw }}</span>
+                      </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                  <div class="mtcheck-total">
+                    <div class="mt_title title--sm title--primary mtcheck-total__title">Итого:</div>
+                    <div class="mt_title title--md title--primary mtcheck-total__sum" id="total-table-total">{{ total_price }}</div>
+                  </div>
+                </div>
+              </div>
+			  
+			    <div class="mtcheck-submit"> 
+				
+				
+				
+					  <div class="mtcheck-submit_privacy">
+					  	{% if module_mt_checkout_itogo_privacy %}
+					  <label class="checkbox checkbox--sm checkbox--gray">
+						<input type="checkbox" class="visually-hidden checkbox__input" name="itogo_privacy" required checked>
+						<span class="checkbox__display"></span>
+						<span class="checkbox__text">
+						  {{ module_mt_checkout_itogo_privacy_text }}
+						</span>
+					  </label>
+					  {% endif %}
+					  </div>
+					  
+				
+					<div class="mtcheck-submit_buttons">				
+					
+					  {% if module_mt_checkout_itogo_oformit %}
+					  <div class="mtcheck-submit_tel"><button class="mtbtn-reset mtcheck-submit__by-phone">
+						<span class="link text text--sm">{{ module_mt_checkout_itogo_oformit_text }}</span>
+					  </button></div>
+					  {% endif %}
+					  <div class="mtcheck-submit_oformit"><button class="mtbtn-reset mtbtn--primary mtcheck-submit__button">{{ module_mt_checkout_itogo_confirm_button_text }}</button></div>					  					  
+					</div>						
+				
+				</div>
+				<div class="mt_confirm"></div>			  
+			  
+            </div>
+          </div>
+          {# <div class="mtcheck-summary">
+            <div class="mtcheck-summary__head">
+              <div class="mt_title title--primary mtcheck-summary__title">Ваш заказ</div>
+              <button class="mtbtn-reset info-mtbtn" aria-label="Открыть модальное окно" data-modal="your-order"></button>
+              <div class="mt_title title--primary mtcheck-summary__sum" id="total-total">0</div>
+            </div>
+            <div class="mtcheck-table">
+              <div class="mtcheck-table__item">
+                <div class="text text--md text--primary mtcheck-table__item-name">
+                  Доставка 
+                  <span id="delivery-title"></span>
+                </div>
+                <span class="text text--md text--primary mtcheck-table__item-value" id="confirm-delivery-price">0</span>
+              </div>
+              <div class="mtcheck-table__item">
+                <div class="text text--md text--primary mtcheck-table__item-name">
+                  Оплата 
+                  <span id="pay-title"></span>
+                </div>
+                <span class="text text--md text--primary mtcheck-table__item-value" id="confirm-payment-price"></span>
+              </div>
+              {% for total in totals %}
+              <div class="mtcheck-table__item">
+                <div class="text text--md text--primary mtcheck-table__item-name">
+                  {{ total.title }}
+                </div>
+                <span class="text text--md text--primary mtcheck-table__item-value" id="total-{{ total.code }}{{ total.id }}">0</span>
+              </div>
+              {% endfor %}
+            </div>
+            <div class="mtcheck-submit">
+              <div class="mt_confirm"></div>
+              <button class="mtbtn-reset mtcheck-submit__by-phone">
+                <span class="link text text--sm">Оформить по телефону</span>
+              </button>
+              <label class="checkbox checkbox--sm checkbox--gray">
+                <input type="checkbox" class="visually-hidden checkbox__input" required checked>
+                <span class="checkbox__display"></span>
+                <span class="checkbox__text">
+                  согласен с политикой <a href="#">возврата товара</a> и <a href="#">правилами</a> использования сайта
+                </span>
+              </label>
+            </div>
+          </div> #}
+        </div>
+      </div>
+      <input name='mtcheck-popup-title' type="hidden" value="{{ module_mt_checkout_global_quickformtitle }}">
+      <input name='mtcheck-popup-desc' type="hidden" value="{{ module_mt_checkout_global_quickformdesc }}">
+      <div class="mtcheck-popup">
+        <div class="mtcheck-popup__wrapper">
+          <div class="mtcheck-popup__close"></div>
+          <form class="mtcheck-popup__body" action="/index.php?route=extension/mtcheckout/checkout/one-click" method="post"></form>
+        </div>
+      </div>
+    </main>
+    <script src="catalog/view/javascript/mtcheckout/index.js?ver=10.861" type="text/javascript"></script>
+  </div>
+  {% if module_mt_checkout_bottom_text_box %}
+  {{ module_mt_checkout_bottom_text }}
+  {% endif %}
+</div>
+{% if not module_mt_checkout_itogo_privacy %}<input type="hidden" name="itogo_privacy" value="0">{% endif %}
+<input type="hidden" name="module_mt_checkout_cart_item_text" value="{{ module_mt_checkout_cart_item_text }}">
+<input type="hidden" name="module_mt_checkout_cart_tovary_text" value="{% if module_mt_checkout_cart_tovary %}{{ module_mt_checkout_cart_tovary_text }}{% endif %}">
+<input type="hidden" name="module_mt_checkout_cart_unit_text" value="{% if module_mt_checkout_cart_unit %}{{ module_mt_checkout_cart_unit_text }}{% endif %}">
+<script>
+{# $(document).load(function () { #}
+  $(document).on('change', '.checkbox__input', function() {
+    var products = [];
+    $('.mtcheck-product').each(function(){
+      if ($(this).find('.checkbox__input').is(':checked')) {
+        products.push($(this).data('productid'));
+      }
+    });
+    $('input[name=products]').val(products.join(','));
+  });
+
+  $(document).on('click', '.mtcheck-address__add-button', function() {
+    $('input[name="address_id"]').val('');
+  });
+
+  formSelector = ".mtcheck-address__add-form";
+  if (document.querySelector(formSelector) == null) {
+      formSelector = ".mtcheck-register";
+  }
+  
+  var products = [];
+  $('.mtcheck-product').each(function(){
+  if ($(this).find('.checkbox__input').is(':checked')) {
+      products.push($(this).data('productid'));
+  }
+  });
+  $('input[name=products]').val(products.join(','));
+  $('input[name="shipping_method"]').val($('input[name="delivery-type"]:checked').data('title'));
+  $('input[name="shipping_code"]').val($('input[name="delivery-type"]:checked').data('code'));
+  $('input[name="shipping_cost"]').val($('input[name="delivery-type"]:checked').val());
+  $('input[name="shipping_tax_class_id"]').val($('input[name="delivery-type"]:checked').data('tax'));
+  $('input[name="payment_method"]').val($('input[name="pay-type"]:checked').data('title'));
+  $('input[name="payment_code"]').val($('input[name="pay-type"]:checked').data('code'));
+
+  var serializedData = $(formSelector).serialize();
+  
+  var startUpdate = false;
+  updateSummary();
+  function updateSummary() {
+      if (!startUpdate) {
+          startUpdate = true;
+          $(".mtcheck-product__count *").prop('disabled',true);
+          $('.donut.total').show();
+          $('.donut.payment').show();
+          $('.donut.delivery').show();
+          //$("input[name='delivery-type']").attr("disabled","true");
+          //$("input[name='payment-type']").attr("disabled","true");
+          updateShipping();
+          // updatePayment();
+          // updateTotal();
+      }
+      
+  }
+
+  function updateShipping() {
+      
+      $('input[name="shipping_method"]').val($('input[name="delivery-type"]:checked').data('title'));
+      $('input[name="shipping_code"]').val($('input[name="delivery-type"]:checked').data('code'));
+      $('input[name="shipping_cost"]').val($('input[name="delivery-type"]:checked').val());
+      $('input[name="shipping_tax_class_id"]').val($('input[name="delivery-type"]:checked').data('tax'));
+      $('input[name="payment_code"]').val($('input[name="pay-type"]:checked').val());
+      $('input[name="payment_method"]').val($('input[name="pay-type"]:checked').data('title'));
+      $('input[name="zone_id"]').val($('.select__item.zone_list.select__item--active').data('value'));
+      $('input[name="zone"]').val($('.display_zone').text());
+      $('input[name="country_id"]').val($('.select__item.country_list.select__item--active').data('value'));
+      $('input[name="country"]').val($('.display_country').text());
+      var data = 'shipping_method='+$('input[name="shipping_method"]').val()
+                  +'&shipping_code='+$('input[name="shipping_code"]').val()
+                  +'&shipping_cost='+$('input[name="shipping_cost"]').val()
+                  +'&shipping_tax_class_id='+$('input[name="shipping_tax_class_id"]').val()
+                  +'&city='+$('input[name="city"]').val()
+                  +'&address_1='+$('input[name="address_1"]').val()
+                  +'&postcode='+$('input[name="postcode"]').val()
+                  +'&zone_id='+$('input[name="zone_id"]').val()
+                  +'&country_id='+$('input[name="country_id"]').val();
+      if ($('input[name="address-type"]:checked').length > 0) {
+          data = 'shipping_method='+$('input[name="shipping_method"]').val()
+                  +'&shipping_code='+$('input[name="shipping_code"]').val()
+                  +'&shipping_cost='+$('input[name="shipping_cost"]').val()
+                  +'&shipping_tax_class_id='+$('input[name="shipping_tax_class_id"]').val()
+                  +'&city='+$('input[name="address-type"]').data('city')
+                  +'&address_1='+$('input[name="address-type"]').data('address')
+                  +'&postcode='+$('input[name="address-type"]').data('postcode')
+                  +'&zone_id='+$('input[name="address-type"]').data('zone-id')
+                  +'&country_id='+$('input[name="address-type"]').data('country-id');
+      }
+      $.ajax({
+          url: 'index.php?route=extension/mtcheckout/checkout/update-shipping',
+          type: 'post',
+          data: data,
+          dataType: 'json',
+          cache: false,
+          beforeSend: function() {
+          },
+          success: function(html) {
+              console.log(html);
+              $('#shipping_block').html(html.html);
+              setTimeout(updatePayment(), 150);
+          },
+          error: function(xhr, ajaxOptions, thrownError) {
+              console.log(xhr);
+              $('.donut.total').hide();
+              $('.donut.payment').hide();
+              $('.donut.delivery').hide();
+              startUpdate = false;
+          }
+      });
+  }
+  function updatePayment() {
+      $.ajax({
+          url: 'index.php?route=extension/mtcheckout/checkout/update-payment',
+          type: 'post',
+          data: 'shipping_method='+$('input[name="shipping_method"]').val()
+              +'&shipping_code='+$('input[name="shipping_code"]').val()
+              +'&shipping_cost='+$('input[name="shipping_cost"]').val()
+              +'&shipping_tax_class_id='+$('input[name="shipping_tax_class_id"]').val()
+              +'&payment_code='+$('input[name="payment_code"]').val()
+              +'&city='+$('input[name="city"]').val()
+              +'&address_1='+$('input[name="address_1"]').val()
+              +'&postcode='+$('input[name="postcode"]').val()
+              +'&payment_method='+$('input[name="payment_method"]').val()
+              +'&zone_id='+$('input[name="zone_id"]').val()
+              +'&country_id='+$('input[name="country_id"]').val(),
+          dataType: 'json',
+          cache: false,
+          beforeSend: function() {
+          },
+          success: function(html) {
+            $('#payment_block').html(html.html);
+              setTimeout(updateTotal(), 150);
+          },
+          error: function(xhr, ajaxOptions, thrownError) {
+              console.log(xhr);
+              $('.donut.total').hide();
+              $('.donut.payment').hide();
+              $('.donut.delivery').hide();
+              startUpdate = false;
+          }
+      });
+  }
+  function updateTotal() {
+      $.ajax({
+          url: 'index.php?route=extension/mtcheckout/checkout/update-total',
+          type: 'post',
+          data: 'shipping_method='+$('input[name="shipping_method"]').val()
+              +'&shipping_code='+$('input[name="shipping_code"]').val()
+              +'&shipping_cost='+$('input[name="shipping_cost"]').val()
+              +'&shipping_tax_class_id='+$('input[name="shipping_tax_class_id"]').val(),
+          dataType: 'json',
+          cache: false,
+          beforeSend: function() {
+          },
+          success: function(html) {
+              console.log(html);
+              $('.table-summary').empty();
+              $('.table-summary').append(html.html);
+              $('.mtcheck-total__sum').html(html.total);
+              $('.shipping_free_text').html(html.free_shipping_text);
+              if (html.free_shipping_text == '') $('.shipping_free_text').hide();
+              else $('.shipping_free_text').show();
+              $('.donut.total').hide();
+              $('.donut.payment').hide();
+              $('.donut.delivery').hide();
+              startUpdate = false;
+              $(".mtcheck-product__count *").prop('disabled',false);
+          },
+          error: function(xhr, ajaxOptions, thrownError) {
+              console.log(xhr);
+              $('.donut.total').hide();
+              $('.donut.payment').hide();
+              $('.donut.delivery').hide();
+              startUpdate = false;
+              $(".mtcheck-product__count *").prop('disabled',false);
+          }
+      });
+  }
+  //const body = document.querySelector(".mtcheck-body")
+  //body.parentNode.style.maxWidth = "100vw";
+  //body.parentNode.style.width = "100%";
+  //body.parentNode.style.padding = "0";
+
+  const userCard = document.querySelector(".mtcheck-authorized-user");
+  if (userCard) {
+    const form = userCard.querySelector(".mtcheck-address__add-form");
+    const addressRadioElems = userCard.querySelectorAll("[name=address-type]");
+
+    const checkedOff = () => {
+      addressRadioElems.forEach((elem) => {
+        elem.checked = false;
+      });
+    };
+
+    const render = () => {
+      addressRadioElems.forEach((elem) => {
+        const parent = elem.parentNode;
+        if (elem.checked) parent.classList.add("outlined");
+        else parent.classList.remove("outlined");
+      });
+    };
+
+    userCard.addEventListener("click", (e) => {
+      if (e.target.closest(".mtcheck-address__item")) {
+        form.classList.add("visually-hidden");
+        render();
+      }
+      if (e.target.closest(".mtcheck-address__add-button")) {
+        form.classList.remove("visually-hidden");
+        checkedOff();
+        render();
+      }
+    });
+
+    render();
+  }
+{# }); #}
+</script>
+<style>
+.mtcheck-product__image img {max-width: {{ image_width }}px;}
+</style>
+{{ footer }}

@@ -1,0 +1,37 @@
+{{ header }}
+
+<section class="faq">
+    <div class="faq__breadcrumbs breadcrumbs">
+        {% for breadcrumb in breadcrumbs %}
+        <a class="breadcrumbs__link  {% if breadcrumb == breadcrumbs|last %} is-active {% endif %}"
+            href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+        {% if breadcrumb != breadcrumbs|last %}
+        <span class="slash">/</span>
+        {% endif %}
+        {% endfor %}
+    </div>
+    <h1 class="section_block__title">Вопросы и ответы</h1>
+    <div class="faq__content">
+
+    {% if faqs %}
+        {% for faq in faqs %}
+        <div class="faq_dropdown" data-dropdown-block="">
+            <div class="faq_dropdown__top" data-dropdown-block-btn>
+                <h3 class="faq_dropdown__title">{{ faq.title }}</h3>
+                <svg class="icon">
+                    <use xlink:href="#link_arrow"></use>
+                </svg>
+            </div>
+            <div class="faq_dropdown__info">
+                {{ faq.description }}
+            </div>
+        </div>
+        {% endfor %}
+
+        {% endif %}
+
+    </div>
+</section>
+
+
+{{ footer }}

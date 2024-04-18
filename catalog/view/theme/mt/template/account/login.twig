@@ -1,0 +1,80 @@
+{{ header }}
+
+<section class="login">
+  {% if success %}
+    <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}</div>
+  {% endif %}
+  {% if error_warning %}
+    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}</div>
+  {% endif %}
+
+  <form class="login__form" action="{{ action }}" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="form" value=" Форма - Авторизация">
+    <div class="login__wrap"><img class="loader" data-src="/assets/img/loader.svg" alt="" data-lazy="" />
+      <h1 class="section_block__title">Авторизация</h1>
+      <div class="login__inputs">
+        <div class="input_wrapper input_wrapper--outlined" data-input-wrapper="">
+          <input class="input_wrapper__input" id="input-email" type="email" name="email" value="{{ email }}" required
+            autocomplete="off">
+          <label class="input_wrapper__label">Email</label>
+          <div class="input_wrapper__tooltip" data-input-tooltip=""></div>
+        </div>
+        <div class="input_wrapper input_wrapper--outlined" data-input-wrapper="">
+          <input class="input_wrapper__input" type="password" name="password" value="{{ password }}" id="input-password"
+            required autocomplete="off">
+          <label class="input_wrapper__label">Пароль</label>
+          <div class="input_wrapper__tooltip" data-input-tooltip=""></div>
+        </div>
+        <!-- <a class="footer_table__form_btn btn btn--filled" href="/account"><span class="btn__text">войти</span></a> -->
+        <input type="submit" value="{{ button_login }}" class="footer_table__form_btn btn btn--filled" />
+      </div>
+      <p class="login__text"><a class="link" href="{{ register }}">Зарегистрируйтесь</a>, если вы у нас впервые</p>
+    </div>
+  </form>
+  <p class="login__text login__text--bottom"><a class="link" href="{{ forgotten }}">Забыли пароль?</a></p>
+</section>
+
+<!-- 
+<div id="account-login" class="container">
+
+
+  <div class="row">
+    <div id="content" class="{{ class }}">{{ content_top }}
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="well">
+            <h2>{{ text_new_customer }}</h2>
+            <p><strong>{{ text_register }}</strong></p>
+            <p>{{ text_register_account }}</p>
+            <a href="{{ register }}" class="btn btn-primary">{{ button_continue }}</a>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="well">
+            <h2>{{ text_returning_customer }}</h2>
+            <p><strong>{{ text_i_am_returning_customer }}</strong></p>
+            <form action="{{ action }}" method="post" enctype="multipart/form-data">
+              <div class="form-group">
+                <label class="control-label" for="input-email">{{ entry_email }}</label>
+                <input type="text" name="email" value="{{ email }}" placeholder="{{ entry_email }}" id="input-email"
+                  class="form-control" />
+              </div>
+              <div class="form-group">
+                <label class="control-label" for="input-password">{{ entry_password }}</label>
+                <input type="password" name="password" value="{{ password }}" placeholder="{{ entry_password }}"
+                  id="input-password" class="form-control" />
+                <a href="{{ forgotten }}">{{ text_forgotten }}</a></div>
+              <input type="submit" value="{{ button_login }}" class="btn btn-primary" />
+              {% if redirect %}
+              <input type="hidden" name="redirect" value="{{ redirect }}" />
+              {% endif %}
+            </form>
+          </div>
+        </div>
+      </div>
+      {{ content_bottom }}</div>
+    {{ column_right }}</div>
+</div> -->
+
+
+{{ footer }}

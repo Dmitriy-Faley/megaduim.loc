@@ -1,0 +1,18 @@
+<div class="leftside__categories">
+  {% if parent_category %}
+  <div class="leftside__categories-name">
+      <a href="{{ parent_category_href }}" class="cat-back">
+          <img src="/catalog/view/theme/mt/stylesheet/icons/cat-back.svg" loading="lazy" class="cat-back_icon">
+      </a>
+      <a href="{{ parent_category_href }}" class="cat-title cat-current">{{ parent_category.name }}</a>
+  </div>
+  {% endif %}
+
+  {% if categories|length > 0 %}
+  <div class="leftside__categories-block sidebar-block">
+      <ul class="leftside__categories-list">
+          {{ categories_main }}
+      </ul>
+  </div>
+  {% endif %}
+</div>

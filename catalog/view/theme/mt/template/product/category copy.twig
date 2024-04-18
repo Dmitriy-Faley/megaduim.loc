@@ -1,0 +1,892 @@
+{{ header }}
+
+<section class="catalog_inner">
+    <div class="catalog__breadcrumbs breadcrumbs">
+        {% for breadcrumb in breadcrumbs %}
+        <a class="breadcrumbs__link  {% if breadcrumb == breadcrumbs|last %} is-active {% endif %}"
+            href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+        {% if breadcrumb != breadcrumbs|last %}
+        <span class="slash">/</span>
+        {% endif %}
+        {% endfor %}
+    </div>
+    <h1 class="section_block__title">{{ heading_title }}</h1>
+
+    {% if theme_mt_category_subcategory and top_categories|length > 0 %}
+    <div class="catalog_inner__categories">
+        {% for category in top_categories %}
+        <button class="catalog_inner__cat_btn">{{ category.name }}</button>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="catalog_inner__buttons">
+        <button class="catalog_inner__filter_btn news__sort_btn btn btn--filled btn--icon_right"
+            data-filter-btn=""><span class="btn__text">фильтрация</span>
+            <svg class="btn__initial btn__icon btn__icon--white btn__icon--right">
+                <use xlink:href="#icon_filter"></use>
+            </svg>
+            <svg class="btn__clicked btn__icon btn__icon--black btn__icon--left">
+                <use xlink:href="#icon_cross"></use>
+            </svg>
+        </button>
+        <button class="news__sort_btn btn btn--grey btn--icon_right" data-sort-btn="">
+            <span class="btn__text">сначала дорогие</span>
+            <svg class="btn__icon btn__icon--black btn__icon--right">
+                <use xlink:href="#icon_sort"></use>
+            </svg>
+        </button>
+
+        <!-- {% if sorts|length > 0 and products|length > 0 %}
+        <div class="products-head_sorting">
+            <div class="head_sorting-list">
+                {% for s in sorts %}
+                {% if (s.code == sort) %}
+                <a href="{{ s.href }}"
+                    class="news__sort_btn btn btn--grey btn--icon_right head_sorting-variant current-sort {% if order == 'ASC' %}sort_1{% else %}sort_2{% endif %}">
+                    <span class="btn__text">{{ s.text }}</span>
+                    <span class="sort-arr btn__icon btn__icon--black btn__icon--right">
+                        <svg class="btn__icon btn__icon--black btn__icon--right">
+                            <use xlink:href="#icon_sort"></use>
+                        </svg>
+                    </span>
+                </a>
+                {% else %}
+                <a href="{{ s.href }}" class="head_sorting-variant">
+                    <span>{{ s.text }}</span>
+                </a>
+                {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="head_sorting-filterbut">
+                <img src="/catalog/view/theme/mt/stylesheet/icons/filter-button.svg"
+                    class="filter-button" width="20" height="20" alt="|">
+            </div>
+
+        </div>
+        {% endif %} -->
+
+    </div>
+    <div class="catalog_inner__content">
+        <div class="catalog_filters">
+            <div class="catalog_filters_aside">
+                <div class="catalog_filters_aside__top">
+                    <svg class="icon">
+                        <use xlink:href="#arrow_back"></use>
+                    </svg>
+                    <p class="catalog_filters__title catalog_filters__title--nopad">Бренд</p>
+                    <button class="catalog_filters_aside__reset_btn">Сбросить всё</button>
+                </div>
+                <div class="catalog_filters_aside__content">
+                    <div class="catalog_filters_aside_range" data-range-block="">
+                        <p class="catalog_filters_aside_range__caption">Длина заушника (в мм)</p>
+                        <div class="catalog_filters_aside_range__inputs">
+                            <div class="input_wrapper input_wrapper--outlined">
+                                <input class="input_wrapper__input input_wrapper__input--left" type="text"
+                                    name="parametr" data-input-left="">
+                            </div>
+                            <div class="input_wrapper input_wrapper--outlined">
+                                <input class="input_wrapper__input input_wrapper__input--right" type="text"
+                                    name="parametr" data-input-right="">
+                            </div>
+                        </div>
+                        <div class="catalog_filters_aside_range__slider" data-range-slider=""></div>
+                    </div>
+                    <div class="catalog_filters_aside_range" data-range-block="">
+                        <p class="catalog_filters_aside_range__caption">Диаметр линзы (в мм)</p>
+                        <div class="catalog_filters_aside_range__inputs">
+                            <div class="input_wrapper input_wrapper--outlined">
+                                <input class="input_wrapper__input input_wrapper__input--left" type="text"
+                                    name="parametr" data-input-left="">
+                            </div>
+                            <div class="input_wrapper input_wrapper--outlined">
+                                <input class="input_wrapper__input input_wrapper__input--right" type="text"
+                                    name="parametr" data-input-right="">
+                            </div>
+                        </div>
+                        <div class="catalog_filters_aside_range__slider" data-range-slider=""></div>
+                    </div>
+                    <div class="catalog_filters_aside_range" data-range-block="">
+                        <p class="catalog_filters_aside_range__caption">Ширина переносицы (в мм)</p>
+                        <div class="catalog_filters_aside_range__inputs">
+                            <div class="input_wrapper input_wrapper--outlined">
+                                <input class="input_wrapper__input input_wrapper__input--left" type="text"
+                                    name="parametr" data-input-left="">
+                            </div>
+                            <div class="input_wrapper input_wrapper--outlined">
+                                <input class="input_wrapper__input input_wrapper__input--right" type="text"
+                                    name="parametr" data-input-right="">
+                            </div>
+                        </div>
+                        <div class="catalog_filters_aside_range__slider" data-range-slider=""></div>
+                    </div>
+                </div>
+                <button class="catalog_filters__bottom_btn catalog_filters__bottom_btn--aside btn btn--filled"><span
+                        class="btn__text">применить</span></button>
+            </div>
+            <div class="catalog_filters__block">
+                <button class="catalog_filters__close" data-filters-close="">
+                    <svg class="icon">
+                        <use xlink:href="#icon_cross"></use>
+                    </svg>
+                </button>
+                <p class="catalog_filters__title">Фильтрация</p>
+                <div class="catalog_filters__wrap">
+                    <div class="catalog_filters__buttons">
+                        <button class="catalog_filters__main_btn">
+                            <div class="text">бренд</div>
+                            <svg class="icon">
+                                <use xlink:href="#link_arrow"></use>
+                            </svg>
+                        </button>
+                        <button class="catalog_filters__main_btn">
+                            <div class="text">страна</div>
+                            <svg class="icon">
+                                <use xlink:href="#link_arrow"></use>
+                            </svg>
+                        </button>
+                        <button class="catalog_filters__main_btn">
+                            <div class="text">пол</div>
+                            <svg class="icon">
+                                <use xlink:href="#link_arrow"></use>
+                            </svg>
+                        </button>
+                        <button class="catalog_filters__main_btn">
+                            <div class="text">возраст</div>
+                            <svg class="icon">
+                                <use xlink:href="#link_arrow"></use>
+                            </svg>
+                        </button>
+                        <button class="catalog_filters__main_btn">
+                            <div class="text">форма оправы</div>
+                            <svg class="icon">
+                                <use xlink:href="#link_arrow"></use>
+                            </svg>
+                        </button>
+                        <button class="catalog_filters__main_btn">
+                            <div class="text">цвет оправы</div>
+                            <svg class="icon">
+                                <use xlink:href="#link_arrow"></use>
+                            </svg>
+                        </button>
+                        <button class="catalog_filters__main_btn">
+                            <div class="text">материал оправы</div>
+                            <svg class="icon">
+                                <use xlink:href="#link_arrow"></use>
+                            </svg>
+                        </button>
+                        <button class="catalog_filters__main_btn">
+                            <div class="text">конструкция оправы</div>
+                            <svg class="icon">
+                                <use xlink:href="#link_arrow"></use>
+                            </svg>
+                        </button>
+                        <button class="catalog_filters__main_btn">
+                            <div class="text">размер</div>
+                            <svg class="icon">
+                                <use xlink:href="#link_arrow"></use>
+                            </svg>
+                        </button>
+                        <button class="catalog_filters__main_btn">
+                            <div class="text">тип тонировки линз</div>
+                            <svg class="icon">
+                                <use xlink:href="#link_arrow"></use>
+                            </svg>
+                        </button>
+                        <button class="catalog_filters__main_btn">
+                            <div class="text">материал линз</div>
+                            <svg class="icon">
+                                <use xlink:href="#link_arrow"></use>
+                            </svg>
+                        </button>
+                        <button class="catalog_filters__main_btn">
+                            <div class="text">цвет линз</div>
+                            <svg class="icon">
+                                <use xlink:href="#link_arrow"></use>
+                            </svg>
+                        </button>
+                        <button class="catalog_filters__main_btn">
+                            <div class="text">уф-защита линз</div>
+                            <svg class="icon">
+                                <use xlink:href="#link_arrow"></use>
+                            </svg>
+                        </button>
+                        <button class="catalog_filters__main_btn">
+                            <div class="text">наличие футляра</div>
+                            <svg class="icon">
+                                <use xlink:href="#link_arrow"></use>
+                            </svg>
+                        </button>
+                        <button class="catalog_filters__main_btn">
+                            <div class="text">наличие салфетки</div>
+                            <svg class="icon">
+                                <use xlink:href="#link_arrow"></use>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="catalog_filters_sort">
+                        <label class="catalog_filters_sort__label">
+                            <input class="radio" type="radio" name="product_sort" value="" hidden="">
+                            <div class="catalog_filters_sort__radio">
+                                <svg class="icon">
+                                    <use xlink:href="#checkmark"></use>
+                                </svg>
+                            </div>
+                            <p class="catalog_filters_sort__text">Новинка</p>
+                        </label>
+                        <label class="catalog_filters_sort__label">
+                            <input class="radio" type="radio" name="product_sort" value="" hidden="">
+                            <div class="catalog_filters_sort__radio">
+                                <svg class="icon">
+                                    <use xlink:href="#checkmark"></use>
+                                </svg>
+                            </div>
+                            <p class="catalog_filters_sort__text">Акция</p>
+                        </label>
+                        <label class="catalog_filters_sort__label">
+                            <input class="radio" type="radio" name="product_sort" value="" hidden="">
+                            <div class="catalog_filters_sort__radio">
+                                <svg class="icon">
+                                    <use xlink:href="#checkmark"></use>
+                                </svg>
+                            </div>
+                            <p class="catalog_filters_sort__text">Хит</p>
+                        </label>
+                    </div>
+                </div>
+                <div class="catalog_filters__bottom" data-filters-close="">
+                    <button class="catalog_filters__bottom_btn btn btn--filled"><span
+                            class="btn__text">применить</span></button>
+                </div>
+            </div>
+        </div>
+        <div class="catalog_inner__content_cards">
+            {% for product in products %}
+            <a class="hits_slide" data-linked-modal="modal_card">
+                <div class="hits_slide__pic">
+                    <div class="hits_slide__pic_wrap" data-hover-images="">
+                        <img class="image" data-lazy="data-lazy" data-src="{{ product.thumb }}"
+                            alt="{{ product.name }}" />
+                    </div>
+                    <img class="loader" data-src="/image/catalog/assets/img/loader.svg" alt="" data-lazy="" />
+                    <div class="hits_slide__hover_btn btn btn--filled">Быстрый просмотр</div>
+
+                    <!-- <object>
+                        {% if theme_mt_product_fast_order_checked %}<a href="#fast_order_product" class="button button-outline fancybox">{{ theme_mt_product_fast_order_text }}</a>{% endif %}
+                    </object> -->
+
+                    <button class="hits_slide__btn hits_slide__btn--mob"><img class="image image__empty"
+                            data-src="/image/catalog/assets/img/icon_fav_empty.svg" alt="" data-lazy="" /><img
+                            class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg" alt=""
+                            data-lazy="" />
+                    </button>
+                </div>
+                <a href="{{ product.href }}" class="hits_slide_mobile btn btn--filled">
+                        Подробнее
+                </a> 
+                <div class="hits_slide__info">
+                    <div class="hits_slide__left">
+                        <p class="hits_slide__text hits_slide__text--big">{{ product.name }}</p>
+                        <p class="hits_slide__text">{{ product.model }}</p>
+                        <p class="hits_slide__text">{{ product.price }} RUB</p>
+                    </div>
+                    <div class="hits_slide__right">
+
+                        {% if theme_mt_category_product_cart_checked %}
+                        <button class="hits_slide__btn add-to-cart" id="add-to-cart"
+                            onclick="add_in_cart('{{ product.product_id }}');">
+                            {% if theme_mt_category_product_cart_text %}
+                            <img class="image image__empty" data-src="/image/catalog/assets/img/icon_cart_empty.svg"
+                                alt="" data-lazy="" />
+                            <img class="image image__active" data-src="/image/catalog/assets/img/icon_cart_active.svg"
+                                alt="" data-lazy="" />
+                            {% else %}
+                            {{ theme_mt_category_product_cart_text }}
+                            {% endif %}
+                        </button>
+                        {% endif %}
+
+                        <!-- {% if theme_mt_category_product_cart_checked %}
+                        <button class="button button-large add-to-cart" id="add-to-cart"
+                            onclick="add_in_cart('{{ product.product_id }}');">
+                            {% if theme_mt_category_product_cart_text %}{{ theme_mt_category_product_cart_text }}{% else %}Добавить
+                            в корзину{% endif %}
+                        </button>
+                        {% endif %} -->
+
+                        <!-- <button class="hits_slide__btn">
+                            <img class="image image__empty" data-src="/image/catalog/assets/img/icon_cart_empty.svg" alt="" data-lazy="" />
+                            <img class="image image__active" data-src="/image/catalog/assets/img/icon_cart_active.svg" alt="" data-lazy="" />
+                        </button> -->
+
+                        {% if theme_mt_category_product_wishlist_checked %}
+                        <button class="hits_slide__btn {% if product.in_wishlist %} added{% endif %}"
+                            onclick="{% if product.in_wishlist %}wishlist_remove('{{ product.product_id }}');{% else %}wishlist_add('{{ product.product_id }}');{% endif %} return false;"
+                            {% if not logged %}data-login="false" {% else %}data-login="true" {% endif %}>
+                            <img class="image image__empty" data-src="/image/catalog/assets/img/icon_fav_empty.svg"
+                                alt="" data-lazy="" />
+                            <img class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg"
+                                alt="" data-lazy="" />
+                        </button>
+                        {% endif %}
+
+                        <!-- <button class="hits_slide__btn">
+                            <img class="image image__empty" data-src="/image/catalog/assets/img/icon_fav_empty.svg" alt="" data-lazy="" />
+                            <img class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg" alt="" data-lazy="" />
+                        </button> -->
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+            <a class="hits_slide" data-linked-modal="modal_card">
+                <div class="hits_slide__pic">
+                    <div class="hits_slide__pic_wrap" data-hover-images="">
+                        <img class="image" data-lazy="data-lazy" data-src="/image/catalog/assets/img/hits_pic_1.jpg"
+                            alt="" />
+                        <img class="image" data-lazy="data-lazy" data-src="/image/catalog/assets/img/hits_pic_2.jpg"
+                            alt="" />
+                        <img class="image" data-lazy="data-lazy" data-src="/image/catalog/assets/img/hits_pic_3.jpg"
+                            alt="" />
+                    </div>
+                    <img class="loader" data-src="/image/catalog/assets/img/loader.svg" alt="" data-lazy="" />
+                    <div class="hits_slide__hover_btn btn btn--filled">Быстрый просмотр</div>
+                    <button class="hits_slide__btn hits_slide__btn--mob"><img class="image image__empty"
+                            data-src="/image/catalog/assets/img/icon_fav_empty.svg" alt="" data-lazy="" /><img
+                            class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg" alt=""
+                            data-lazy="" />
+                    </button>
+                </div>
+                
+                <a href="{{ product.href }}" class="hits_slide_mobile btn btn--filled">
+                        Подробнее
+                </a> 
+                <div class="hits_slide__info">
+                    <div class="hits_slide__left">
+                        <p class="hits_slide__text hits_slide__text--big">Prada</p>
+                        <p class="hits_slide__text">Sound Net WC6</p>
+                        <p class="hits_slide__text">15 900 RUB</p>
+                    </div>
+                    <div class="hits_slide__right">
+                        <button class="hits_slide__btn"><img class="image image__empty"
+                                data-src="/image/catalog/assets/img/icon_cart_empty.svg" alt="" data-lazy="" /><img
+                                class="image image__active" data-src="/image/catalog/assets/img/icon_cart_active.svg"
+                                alt="" data-lazy="" />
+                        </button>
+                        <button class="hits_slide__btn"><img class="image image__empty"
+                                data-src="/image/catalog/assets/img/icon_fav_empty.svg" alt="" data-lazy="" /><img
+                                class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg"
+                                alt="" data-lazy="" />
+                        </button>
+                    </div>
+                </div>
+            </a><a class="hits_slide" data-linked-modal="modal_card">
+                <div class="hits_slide__pic">
+                    <div class="hits_slide__pic_wrap" data-hover-images=""><img class="image" data-lazy="data-lazy"
+                            data-src="/image/catalog/assets/img/hits_pic_3.jpg" alt="" /><img class="image"
+                            data-lazy="data-lazy" data-src="/image/catalog/assets/img/hits_pic_3.jpg" alt="" /><img
+                            class="image" data-lazy="data-lazy" data-src="/image/catalog/assets/img/hits_pic_3.jpg"
+                            alt="" /></div><img class="loader" data-src="/image/catalog/assets/img/loader.svg" alt=""
+                        data-lazy="" />
+                    <div class="hits_slide__hover_btn btn btn--filled">Быстрый просмотр</div>
+                    <button class="hits_slide__btn hits_slide__btn--mob"><img class="image image__empty"
+                            data-src="/image/catalog/assets/img/icon_fav_empty.svg" alt="" data-lazy="" /><img
+                            class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg" alt=""
+                            data-lazy="" />
+                    </button>
+                </div>
+                <div class="hits_slide__info">
+                    <div class="hits_slide__left">
+                        <p class="hits_slide__text hits_slide__text--big">Prada</p>
+                        <p class="hits_slide__text">Hue BRC10</p>
+                        <p class="hits_slide__text">45 000 RUB</p>
+                    </div>
+                    <div class="hits_slide__right">
+                        <button class="hits_slide__btn"><img class="image image__empty"
+                                data-src="/image/catalog/assets/img/icon_cart_empty.svg" alt="" data-lazy="" /><img
+                                class="image image__active" data-src="/image/catalog/assets/img/icon_cart_active.svg"
+                                alt="" data-lazy="" />
+                        </button>
+                        <button class="hits_slide__btn"><img class="image image__empty"
+                                data-src="/image/catalog/assets/img/icon_fav_empty.svg" alt="" data-lazy="" /><img
+                                class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg"
+                                alt="" data-lazy="" />
+                        </button>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="catalog_inner__pagination pagination">
+        <button class="pagination__btn_more btn btn--grey"><span class="btn__text">Показать ещё</span></button>
+        {{ pagination }}
+        <!-- <div class="pagination__wrap">
+            <button class="pagination__num is-active">1</button>
+            <button class="pagination__num">2</button>
+            <button class="pagination__num">3</button>
+            <button class="pagination__num">...</button>
+            <button class="pagination__num">12</button>
+        </div> -->
+    </div>
+    <div class="catalog_inner__also">
+        <h2 class="section_block__title section_block__title--small">Также ищут</h2>
+        <div class="catalog_inner__also_wrap">
+            <button class="catalog_inner__cat_btn">Мужские (359)</button>
+            <button class="catalog_inner__cat_btn">Женские (614)</button>
+        </div>
+    </div>
+</section>
+
+<section class="catalog_inner_additional">
+    <p class="catalog_inner_additional__text">Предлагаем в каталоге официального магазина выбрать солнцезащитные очки
+        Chopard или оправу для зрения точно по размеру, параметрам и форме и купить с доставкой по Москве на бесплатную
+        примерку (до 4-х моделей), в любой город России – до 2-х пар.</p>
+    <p class="catalog_inner_additional__text">Chopard - это люксовое элитное направление в оптике, все изделия
+        производят в Италии на итальянской фабрике De Rigo. В наличии представлены женские и мужские модели очков Шопард
+        в которых используются декоративные элементы украшений из основной линейки продукции модного бренда. Линзы
+        выполнены из оптического материала CR39 и имеют наивысшие показатели по защите глаз от вредных солнечных лучей
+        UV UF, в некоторых используется прочный поликарбонат, подходит для винтовых оправ на леске.</p>
+    <p class="catalog_inner_additional__text">Есть и классические оправы (с покрытием из 23-х каратного золота),
+        декорированные стразами Swarovski – очень удобно сидят на лице за счет флексов и продуманного дизайна, и
+        сочетают в себе изысканность ювелирной мысли основателя Луи-Уиллиса Шопарда.</p>
+    <div class="catalog_inner_additional__faq">
+        <div class="faq_dropdown" data-dropdown-block="">
+            <div class="faq_dropdown__top" data-dropdown-block-btn>
+                <h3 class="faq_dropdown__title">Какие бывают очки для зрения?</h3>
+                <svg class="icon">
+                    <use xlink:href="#link_arrow"></use>
+                </svg>
+            </div>
+            <div class="faq_dropdown__info">
+                <p class="faq_dropdown__text">Дальтонизм — это отклонение от цветовосприятия, невозможность отличить
+                    некоторые цвета и оттенки в областях желто-зеленых и пурпурных цветов, встречается у 8 процентов
+                    белых мужчин и 0,5 процентов белых женщин, это связано с отсутствием в колбочках сетчатки глаза
+                    фоточувствительного пигмента, это генетическое заболевание и в настоящее время неизлечимо. Наиболее
+                    частым случаем является неразличение красного цвета.</p>
+            </div>
+        </div>
+        <div class="faq_dropdown" data-dropdown-block="">
+            <div class="faq_dropdown__top" data-dropdown-block-btn>
+                <h3 class="faq_dropdown__title">Разные диоптрии на глазах — как правильно подобрать очки?</h3>
+                <svg class="icon">
+                    <use xlink:href="#link_arrow"></use>
+                </svg>
+            </div>
+            <div class="faq_dropdown__info">
+                <p class="faq_dropdown__text">Дальтонизм — это отклонение от цветовосприятия, невозможность отличить
+                    некоторые цвета и оттенки в областях желто-зеленых и пурпурных цветов, встречается у 8 процентов
+                    белых мужчин и 0,5 процентов белых женщин, это связано с отсутствием в колбочках сетчатки глаза
+                    фоточувствительного пигмента, это генетическое заболевание и в настоящее время неизлечимо. Наиболее
+                    частым случаем является неразличение красного цвета.</p>
+            </div>
+        </div>
+        <div class="faq_dropdown" data-dropdown-block="">
+            <div class="faq_dropdown__top" data-dropdown-block-btn>
+                <h3 class="faq_dropdown__title">Что такое Дальтонизм?</h3>
+                <svg class="icon">
+                    <use xlink:href="#link_arrow"></use>
+                </svg>
+            </div>
+            <div class="faq_dropdown__info">
+                <p class="faq_dropdown__text">Дальтонизм — это отклонение от цветовосприятия, невозможность отличить
+                    некоторые цвета и оттенки в областях желто-зеленых и пурпурных цветов, встречается у 8 процентов
+                    белых мужчин и 0,5 процентов белых женщин, это связано с отсутствием в колбочках сетчатки глаза
+                    фоточувствительного пигмента, это генетическое заболевание и в настоящее время неизлечимо. Наиболее
+                    частым случаем является неразличение красного цвета.</p>
+            </div>
+        </div>
+        <div class="faq_dropdown" data-dropdown-block="">
+            <div class="faq_dropdown__top" data-dropdown-block-btn>
+                <h3 class="faq_dropdown__title">Как узнать размер очков для себя?</h3>
+                <svg class="icon">
+                    <use xlink:href="#link_arrow"></use>
+                </svg>
+            </div>
+            <div class="faq_dropdown__info">
+                <p class="faq_dropdown__text">Дальтонизм — это отклонение от цветовосприятия, невозможность отличить
+                    некоторые цвета и оттенки в областях желто-зеленых и пурпурных цветов, встречается у 8 процентов
+                    белых мужчин и 0,5 процентов белых женщин, это связано с отсутствием в колбочках сетчатки глаза
+                    фоточувствительного пигмента, это генетическое заболевание и в настоящее время неизлечимо. Наиболее
+                    частым случаем является неразличение красного цвета.</p>
+            </div>
+        </div>
+        <div class="faq_dropdown" data-dropdown-block="">
+            <div class="faq_dropdown__top" data-dropdown-block-btn>
+                <h3 class="faq_dropdown__title">Почему вредно подбирать очки для зрения в домашних условиях?</h3>
+                <svg class="icon">
+                    <use xlink:href="#link_arrow"></use>
+                </svg>
+            </div>
+            <div class="faq_dropdown__info">
+                <p class="faq_dropdown__text">Дальтонизм — это отклонение от цветовосприятия, невозможность отличить
+                    некоторые цвета и оттенки в областях желто-зеленых и пурпурных цветов, встречается у 8 процентов
+                    белых мужчин и 0,5 процентов белых женщин, это связано с отсутствием в колбочках сетчатки глаза
+                    фоточувствительного пигмента, это генетическое заболевание и в настоящее время неизлечимо. Наиболее
+                    частым случаем является неразличение красного цвета.</p>
+            </div>
+        </div>
+        <div class="faq_dropdown" data-dropdown-block="">
+            <div class="faq_dropdown__top" data-dropdown-block-btn>
+                <h3 class="faq_dropdown__title">Стекло или пластик — какие линзы для очков лучше?</h3>
+                <svg class="icon">
+                    <use xlink:href="#link_arrow"></use>
+                </svg>
+            </div>
+            <div class="faq_dropdown__info">
+                <p class="faq_dropdown__text">Дальтонизм — это отклонение от цветовосприятия, невозможность отличить
+                    некоторые цвета и оттенки в областях желто-зеленых и пурпурных цветов, встречается у 8 процентов
+                    белых мужчин и 0,5 процентов белых женщин, это связано с отсутствием в колбочках сетчатки глаза
+                    фоточувствительного пигмента, это генетическое заболевание и в настоящее время неизлечимо. Наиболее
+                    частым случаем является неразличение красного цвета.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="news_section blog">
+    <div class="news_section__top">
+        <h2 class="section_block__title section_block__title--small">Новости</h2><a
+            class="news_section__btn btn btn--grey btn--icon_right" href="/news"><span class="btn__text">перейти в
+                новости</span>
+            <svg class="btn__icon btn__icon--black btn__icon--right">
+                <use xlink:href="#link_arrow"></use>
+            </svg></a>
+    </div>
+    <div class="news_section__content">
+        <a class="news_section_card" href="/news_card">
+            <div class="news_section_card__img">
+                <picture class="image">
+                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/news_pic_1.webp" type="image/webp" />
+                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/news_pic_1.jpg" type="image/jpg" /><img
+                        class="image" data-lazy="data-lazy" data-src="/image/catalog/assets/img/news_pic_1.jpg" alt="" />
+                </picture>
+            </div>
+            <p class="news_section_card__text">Вы их искали: прямые черные брюки, как у Кайи Гербер</p>
+            <p class="news_section_card__date">8 марта, 2023</p>
+        </a>
+        <a class="news_section_card" href="/news_card">
+            <div class="news_section_card__img">
+                <picture class="image">
+                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/news_pic_1.webp" type="image/webp" />
+                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/news_pic_1.jpg" type="image/jpg" /><img
+                        class="image" data-lazy="data-lazy" data-src="/image/catalog/assets/img/news_pic_1.jpg" alt="" />
+                </picture>
+            </div>
+            <p class="news_section_card__text">Вы их искали: прямые черные брюки, как у Кайи Гербер</p>
+            <p class="news_section_card__date">8 марта, 2023</p>
+        </a>
+        <a class="news_section_card" href="/news_card">
+            <div class="news_section_card__img">
+                <picture class="image">
+                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/news_pic_1.webp" type="image/webp" />
+                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/news_pic_1.jpg" type="image/jpg" /><img
+                        class="image" data-lazy="data-lazy" data-src="/image/catalog/assets/img/news_pic_1.jpg" alt="" />
+                </picture>
+            </div>
+            <p class="news_section_card__text">Вы их искали: прямые черные брюки, как у Кайи Гербер</p>
+            <p class="news_section_card__date">8 марта, 2023</p>
+        </a>
+        <a class="news_section_card" href="/news_card">
+            <div class="news_section_card__img">
+                <picture class="image">
+                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/news_pic_1.webp" type="image/webp" />
+                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/news_pic_1.jpg" type="image/jpg" /><img
+                        class="image" data-lazy="data-lazy" data-src="/image/catalog/assets/img/news_pic_1.jpg" alt="" />
+                </picture>
+            </div>
+            <p class="news_section_card__text">Вы их искали: прямые черные брюки, как у Кайи Гербер</p>
+            <p class="news_section_card__date">8 марта, 2023</p>
+        </a>
+    </div>
+</section>
+
+
+<div class="category__page catalog">
+    <div class="container">
+        <div class="breadcrumbs">
+            {% for breadcrumb in breadcrumbs %}
+            <a href="{{ breadcrumb.href }}" class="breadcrumb-link">{{ breadcrumb.text }}</a>
+            {% if breadcrumb != breadcrumbs|last %}
+            <span>&nbsp;/&nbsp;</span>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <div class="category__page-wrapper">
+            <h1 class="page__title">{{ heading_title }}</h1>
+            {% if description %}
+            <div class="page__info">
+                <p>
+                    {{ description }}
+                </p>
+            </div>
+            {% endif %}
+
+            {% if theme_mt_category_subcategory and top_categories|length > 0 %}
+            <div class="subcategory">
+                {% for category in top_categories %}
+                <a href="{{ category.href }}" class="subcategory__item">
+                    {% if theme_mt_category_subcategory_images and category.image %}
+                    <div class="subcategory__item-box">
+                        <div class="subcategory__item-image">
+                            <img src="{{ category.image }}" width="100%" height="100%" alt="{{ category.name }}">
+                        </div>
+                    </div>
+                    {% endif %}
+                    <span>{{ category.name }}</span>
+                </a>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="category__content">
+                {% if column_left %}
+                <div class="category__content-leftside popup">
+                    {{ column_left }}
+                </div>
+                {% endif %}
+
+                <div class="category__content-products">
+
+                    <div class="category__products-head">
+                        {% if theme_mt_category_brands and manufacturers|length > 0 %}
+                        <div class="products-head_brands">
+                            <span>Бренды</span>
+                            <div class="head_brands-list">
+                                {% for manufacturer in manufacturers %}
+                                <a href="{{ manufacturer.href }}" class="head_brands-item">{{ manufacturer.name }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if sorts|length > 0 and products|length > 0 %}
+                        <div class="products-head_sorting">
+
+                            <div class="head_sorting-list">
+                                <span class="sortby">Сортировать по:</span>
+                                {% for s in sorts %}
+                                {% if (s.code == sort) %}
+                                <a href="{{ s.href }}"
+                                    class="head_sorting-variant current-sort {% if order == 'ASC' %}sort_1{% else %}sort_2{% endif %}">
+                                    <span>{{ s.text }}</span>
+                                    <span class="sort-arr"><img
+                                            src="/catalog/view/theme/mt/stylesheet/icons/sort-arr.svg" width="8"
+                                            height="10" alt="↓"></span>
+                                </a>
+                                {% else %}
+                                <a href="{{ s.href }}" class="head_sorting-variant">
+                                    <span>{{ s.text }}</span>
+                                </a>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+
+                            <div class="head_sorting-filterbut">
+                                <img src="/catalog/view/theme/mt/stylesheet/icons/filter-button.svg"
+                                    class="filter-button" width="20" height="20" alt="|">
+                            </div>
+
+                        </div>
+                        {% endif %}
+
+
+                    </div>
+
+                    <div class="category__products-list">
+                        {% for product in products %}
+                        <div class="product-card">
+                            <div class="product-base">
+                                <a href="{{ product.href }}" class="product-photo" title="{{ product.name }}">
+
+                                    <img src="{{ product.thumb }}" alt="{{ product.name }}" class="product-img"
+                                        width="100%" height="100%" loading="lazy">
+                                    {% if product.new or product.special_check or product.discount %}
+                                    <div class="product-photo__notes">
+                                        {% if product.special_check %}
+                                        <div class="product-photo__note note-action">
+                                            {{ product.special_check }}% Акция!
+                                        </div>
+                                        {% endif %}
+                                        {% if product.new %}
+                                        <div class="product-photo__note note-new">
+                                            Новинка
+                                        </div>
+                                        {% endif %}
+                                        {% if product.discount %}
+                                        <div class="product-photo__note note-hit">
+                                            {{ product.discount }}
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                    {% endif %}
+
+                                    <div class="product-photo__options">
+                                        {% if product.rating > 0 %}
+                                        <div class="product-rating">
+                                            <span
+                                                class="i-custom icon-icon-star {% if product.rating >= 1 %}rate{% else %}gray{% endif %}"></span>
+                                            <span
+                                                class="i-custom icon-icon-star {% if product.rating >= 2 %}rate{% else %}gray{% endif %}"></span>
+                                            <span
+                                                class="i-custom icon-icon-star {% if product.rating >= 3 %}rate{% else %}gray{% endif %}"></span>
+                                            <span
+                                                class="i-custom icon-icon-star {% if product.rating >= 4 %}rate{% else %}gray{% endif %}"></span>
+                                            <span
+                                                class="i-custom icon-icon-star {% if product.rating >= 5 %}rate{% else %}gray{% endif %}"></span>
+                                        </div>
+                                        {% endif %}
+                                        {% if theme_mt_category_product_wishlist_checked %}
+                                        <button
+                                            class="product-adds add-bookmark product-like {% if product.in_wishlist %}added{% endif %}"
+                                            onclick="{% if product.in_wishlist %}wishlist_remove('{{ product.product_id }}');{% else %}wishlist_add('{{ product.product_id }}');{% endif %} return false;"
+                                            {% if not logged %}data-login="false" {% else %}data-login="true"
+                                            {% endif %}>
+                                        </button>
+                                        {% endif %}
+                                    </div>
+                                </a>
+                                <div class="product-description">
+                                    {{ product.model }}
+                                    <div class="product-price">
+                                        {% if product.price %}
+                                        {% if product.special %}
+                                        <div class="current-price">
+                                            {% if symbol_left %}<span
+                                                class="price-currency">{{ symbol_left }}</span>{% endif %}
+                                            <div class="price-cost">{{ product.special }}</span>
+                                            </div>
+                                            {% if symbol_right %}<span
+                                                class="price-currency">{{ symbol_right }}</span>{% endif %}
+                                        </div>
+                                        <div class="old-price">
+                                            {% if symbol_left %}<span>{{ symbol_left }}</span>{% endif %}{{ product.price }}{% if symbol_right %}<span>{{ symbol_right }}</span>{% endif %}
+                                        </div>
+                                        {% else %}
+                                        <div class="current-price">
+                                            {% if symbol_left %}<span
+                                                class="price-currency">{{ symbol_left }}</span>{% endif %}
+                                            <div class="price-cost">{{ product.price }}<span class="price-penny"></span>
+                                            </div>
+                                            {% if symbol_right %}<span
+                                                class="price-currency">{{ symbol_right }}</span>{% endif %}
+                                        </div>
+                                        {% endif %}
+                                        {% elseif theme_mt_product_zero_text_checked %}
+                                        <div class="product-price_zero">{{ theme_mt_product_zero_text }}</div>
+                                        {% endif %}
+                                    </div>
+                                    <a href="{{ product.href }}" class="product-info">
+                                        {{ product.name }}
+                                    </a>
+                                    {% if (theme_mt_category_product_attributes_checked and product.attributes|length > 0) or (product.description and theme_mt_category_product_description_checked) %}
+                                    <div class="product-additional">
+                                        {% if product.description and theme_mt_category_product_description_checked %}
+                                        {% if (theme_mt_category_product_attributes_priority_checked and product.attributes|length == 0) or not theme_mt_category_product_attributes_priority_checked %}
+                                        <div class="product-cat-description">{{ product.description }}</span></div>
+                                        {% endif %}
+                                        {% endif %}
+                                        {% if theme_mt_category_product_attributes_checked and ((not theme_mt_category_product_attributes_priority_checked and product.description == '') or theme_mt_category_product_attributes_priority_checked) %}
+                                        {% for attribute in product.attributes %}
+                                        <div>{{ attribute.name }}: <span>{{ attribute.text }}</span></div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+
+
+                            <div class="product-foot">
+                                {% if theme_mt_category_product_quanity_checked %}
+                                <div class="count-products_box">
+                                    <div class="count-products_input">
+                                        <button class="amount-minus">-</button>
+                                        <input class="number-amount" name="quantity" value="1" size="2"
+                                            id="input-quantity{{ product.product_id }}">
+                                        <button class="amount-plus">+</button>
+                                    </div>
+                                    <span></span>
+                                </div>
+                                {% endif %}
+
+                                {% if theme_mt_category_product_stock_checked %}
+                                <div class="product-avariables">
+                                    {% if product.quantity > 0 %}
+                                    <div class="product-avariables__variant in-stock">
+                                        <i class="fas fa-check"></i>
+                                        <span>{{ product.stock }}</span>
+                                    </div>
+                                    {% else %}
+                                    <div class="product-avariables__variant on-order">
+                                        <i class="far fa-bell"></i>
+                                        <span>{{ product.stock }}</span>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                {% endif %}
+
+                                {% if theme_mt_category_product_cart_checked %}
+                                <button class="button button-large add-to-cart" id="add-to-cart"
+                                    onclick="add_in_cart('{{ product.product_id }}');">
+                                    {% if theme_mt_category_product_cart_text %}{{ theme_mt_category_product_cart_text }}{% else %}Добавить
+                                    в корзину{% endif %}
+                                </button>
+                                {% endif %}
+                            </div>
+
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    {{ pagination }}
+
+                    {% if description_bottom %}
+                    <div class="page__other-info">
+                        {{ description_bottom }}
+                    </div>
+                    {% endif %}
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    function add_in_cart(product_id) {
+        var btn = this;
+        var quantity = $('#input-quantity' + product_id).val();
+        $.ajax({
+            url: 'index.php?route=checkout/cart/add',
+            type: 'post',
+            data: 'product_id=' + product_id + '&quantity=' + (typeof (quantity) != 'undefined' ? quantity : 1),
+            dataType: 'json',
+            success: function (json) {
+
+                if (json['redirect']) {
+                    location = json['redirect'];
+                }
+
+                if (json['success']) {
+                    if ($("#cart_added").hasClass('notify_action')) {
+                        $('#cart_added').removeClass('notify_action');
+                    }
+                    $(document).find('#cart_added').addClass('notify_action').css('top', 90 + 'px');
+                    active_notify();
+                    $(btn).html('В корзине');
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    }
+</script>
+
+
+
+
+{{ footer }}

@@ -1,0 +1,115 @@
+{{ header }}
+
+
+
+<section class="rules service_page">
+  <div class="rules__breadcrumbs breadcrumbs">
+    {% for breadcrumb in breadcrumbs %}
+      <a class="breadcrumbs__link  {% if breadcrumb == breadcrumbs|last %} is-active {% endif %}"
+          href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+      {% if breadcrumb != breadcrumbs|last %}
+      <span class="slash">/</span>
+      {% endif %}
+    {% endfor %}
+  </div>
+  <div class="rules__content">
+    {{ description }} 
+  </div> 
+
+  <div class="service_page_form">
+    <h2 class="service_page_form__title">Заказать очки или проконсультироваться</h2>
+    <p class="service_page_form__text">Если вы обратитесь в наш центр, наши врачи проведут ультразвуковую диагностика
+      глаз с помощью нового аппарата LASIK, которая позволит определить состояние ваших глаз, выявить возможные аномалии
+      рефракции. </p>
+    <form class="service_page_form__form ajax_form" action="javascript();" data-form-id="service_page_form"> 
+      <input type="hidden" name="form" value="Заказать очки или проконсультироваться (страница услуги)">
+      <div class="input_wrapper input_wrapper--outlined" data-input-wrapper="">
+        <input class="input_wrapper__input" type="text" name="name" required autocomplete="off">
+        <label class="input_wrapper__label">Ваше имя</label>
+        <div class="input_wrapper__tooltip" data-input-tooltip=""></div> 
+      </div>
+      <div class="input_wrapper input_wrapper--outlined" data-input-wrapper="">
+        <input class="input_wrapper__input" type="tel" name="phone" required autocomplete="off">
+        <label class="input_wrapper__label">Номер телефона</label>
+        <div class="input_wrapper__tooltip" data-input-tooltip=""></div>
+      </div>
+      <div class="input_wrapper input_wrapper--textarea" data-input-wrapper="">
+        <textarea class="input_wrapper__textarea" name="comment" placeholder="Комментарий"></textarea>
+      </div>
+      <button class="footer_table__form_btn btn btn--white"><span class="btn__text">оставить ЗАЯВКУ</span></button>
+    </form>
+    <div class="service_page_form__img">
+      <picture class="image">
+        <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/asian_girl.webp" type="image/webp" />
+        <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/asian_girl.png" type="image/png" /><img class="image"
+          data-lazy="data-lazy" data-src="/image/catalog/assets/img/asian_girl.png" alt="" />
+      </picture>
+    </div>
+  </div>
+</section>
+
+
+{{ footer }}
+
+
+
+<script type="text/javascript">
+
+      function formValidate() {
+        $('#visionСheck').validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 4,
+                },
+                phone: {
+                    required: true,
+                    minlength: 11,
+                }
+            },
+            messages: {
+                name: {
+                    required: "Поле не заполнено",
+                    minlength: "Минимальное количество символов: 3"
+                },
+                phone: {
+                    required: "Поле не заполнено",
+                    minlength: "Минимальное количество символов: 11"
+                }
+            },
+            errorPlacement: function(error, element) {
+                error.appendTo( element.parent(".input_wrapper").next("p") );
+            }
+        });
+      };
+      formValidate();
+      jQuery("#visionСheck").submit(function() {
+        let form = jQuery(this);
+        let name = jQuery(this).find('input[name="name"]');
+        let phone = jQuery(this).find('input[name="phone"]');
+       
+        if($('.input_wrapper__input').hasClass('error')) {
+            phone.parent().addClass('not-valid');
+            name.parent().addClass('not-valid');
+          } else {
+            $('.modal_page-form').css('display', 'none');
+            $('.modal_page-success').css('display', 'block');
+            jQuery.ajax({
+              type: "POST",
+              url: "index.php?route=mail/sendemail/send_form",
+              data: form.serialize(),
+              dataType: 'json',
+              success: function(json) {
+                if(json['error']){
+                  message.html(json['error']);
+                }
+                if(json['success']){
+                  phone.parent().removeClass('not-valid');
+                  name.parent().removeClass('not-valid');
+                }
+            }
+            });
+          return false;
+          }
+      });
+      </script>

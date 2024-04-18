@@ -1,0 +1,390 @@
+{{ header }}
+
+<style>
+  .hits-bottom .hits__tabs {
+    display: none;
+  }
+  .hits-bottom .hits__btn_more {
+    display: none;
+  }
+</style>
+<section class="cart">
+  <div class="cart__breadcrumbs breadcrumbs">
+    {% for breadcrumb in breadcrumbs %}
+    <a class="breadcrumbs__link  {% if breadcrumb == breadcrumbs|last %} is-active {% endif %}"
+      href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+    {% if breadcrumb != breadcrumbs|last %}
+    <span class="slash">/</span>
+    {% endif %}
+    {% endfor %}
+  </div>
+
+  {% if attention %}
+  <div class="alert alert-info"><i class="fa fa-info-circle"></i> {{ attention }}
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+  </div>
+  {% endif %}
+
+  <h1 class="section_block__title">{{ heading_title }}</h1>
+
+  <div class="cart__content">
+  <!--form action="{{ action }}" method="post" enctype="multipart/form-data"-->
+    <div>
+      <div class="cart__left">
+        <div class="cart__left_top">
+          <label class="catalog_filters_sort__label checked-all catalog_filters_sort__label--margin">
+            <input class="checkbox" type="checkbox" name="product_cart" value="" hidden="" checked>
+            <div class="catalog_filters_sort__checkbox catalog_filters_sort__checkbox--grey">
+              <svg class="icon icon--grey">
+                <use xlink:href="#checkmark"></use>
+              </svg>
+            </div>
+            <p class="catalog_filters_sort__text">Выбрать всё</p>
+          </label>
+          <button class="cart__left_btn del-all cart__left_btn--red">Удалить выбранные</button>
+          <p class="cart__left_text cart__left_text--margin_auto">
+          <text class="cart_total__textCount">
+            {{ product_total }}
+          </text>
+          товара(ов)</p>
+        </div>
+        <div class="cart__left_content">
+
+          {% for product in products %}
+          <div class="cart_card" data-product-price="{{ product.normal }}" data-special="{{ product.special }}">
+            <label class="catalog_filters_sort__label catalog_filters_sort__label--cart_card">
+              <input class="checkbox" type="checkbox" name="product_cart" value="" hidden="" checked>
+              <div class="catalog_filters_sort__checkbox">
+                <svg class="icon">
+                  <use xlink:href="#checkmark"></use>
+                </svg>
+              </div>
+            </label>
+            <div class="cart_card__pic">
+
+              {% if product.thumb %}
+              <picture class="image">
+                <img class="image" data-lazy="data-lazy" data-src="{{ product.thumb }}" alt="" />
+              </picture>
+              {% endif %}
+
+              <button class="hits_slide__btn hits_slide__btn--mob"><img class="image image__empty"
+                  data-src="/image/catalog/assets/img/icon_fav_empty.svg" alt="" data-lazy="" /><img
+                  class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg" alt=""
+                  data-lazy="" />
+              </button>
+            </div>
+            <div class="cart_card__wrap">
+              <button class="cart_card__delete_mob">
+                <svg class="icon">
+                  <use xlink:href="#icon_cross"></use>
+                </svg>
+              </button>
+              <div class="cart_card__column">
+                <p class="cart__left_text cart__left_text--big">{{ product.name }}</p>
+                <p class="cart__left_text">{{ product.model }}</p>
+                <p class="cart__left_text">арт. {{ product.sku }}</p>
+
+                {% if product.option %}
+                  {% for option in product.option %} <br />
+                 <!-- <p class="cart__left_text">{{ option.value }}</p>-->
+                  {% endfor %}
+                {% endif %}
+
+
+                <div class="cart_card__column_line">
+                  <!-- <button class="cart__left_btn cart__left_btn--blue">В избранное</button> -->
+                  <!-- <button class="cart__left_btn cart__left_btn--red">Удалить</button> -->
+                  <button type="button" class="cart__left_btn cart__left_btn--blue {% if product.in_wishlist %} yes{% endif %}"
+                  onclick="{% if product.in_wishlist %}wishlist_remove('{{ product.product_id }}');{% else %}wishlist_add('{{ product.product_id }}');{% endif %}location.reload();"{% if not logged %}data-login="false" {% else %}data-login="true" {% endif %}
+                  >{% if product.in_wishlist %}<span style="color: #0fb60b;">В избранном</span>{% else %}<span>В избранное</span>{% endif %}</button>
+
+
+                  <button type="button" class="cart__left_btn cart__left_btn--red" onclick="cart.remove('{{ product.cart_id }}');">Удалить</button>
+                </div>
+              </div>
+              <div class="cart_card__prices">
+                
+
+
+                {% if product.special %}
+                  <div class="cart_card__prices mobile">
+                      <p class="cart_total__price mobile">
+                      <text class="sale_price">{{ product.specialCount }}</text>
+                       руб</p>
+                      <p class="cart_total__price old mobile">
+                      <text class="product_priceOld">{{ product.normalCount }}</text>
+                       руб</p>
+                  </div>
+								{% else %}
+									<p class="cart_total__price"> 
+                    <text class="product_price">
+                      {{ product.total }}
+                    </text>
+                    руб.
+                  </p>
+								{% endif %}
+                
+              </div>
+              <div class="cart_card__amount">
+
+                <button class="cart_card__amount_icon cart_card__amount_icon--left minus header_basket"  data-id="{{ product.cart_id }}">
+                  <svg class="icon">
+                    <use xlink:href="#minus"></use>
+                  </svg>
+                </button>
+                 <input class="quantity cart_card__amount_number" type="text" size="3" min="1" min-le step="1" value="{{ product.quantity }}" disabled>
+                <button class="cart_card__amount_icon cart_card__amount_icon--right plus header_basket" data-id="{{ product.cart_id }}">
+                  <svg class="icon">
+                    <use xlink:href="#plus"></use>
+                  </svg>
+                </button>
+                
+                
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+
+          <script type="text/javascript">
+                  $(document).on('click', '.plus.header_basket', function(){
+                        fetch("/index.php?route=mt/common/header/increment&id=" + $(this).data('id'));
+                  });
+                  $(document).on('click', '.minus.header_basket', function(){
+                        fetch("/index.php?route=mt/common/header/decrement&id=" + $(this).data('id'));
+                  });
+                </script>
+        </div>
+      </div>
+    </div>
+
+    <div class="cart_total">
+      <div class="cart_total__top">
+        <p class="cart_total__title">Ваша корзина</p>
+      </div>
+      <div class="cart_total__list">
+        <div class="cart_total__line">
+          <p class="cart_total__text">Товары
+            (<text class="cart_total__textCount">{{ product_total }}</text>)
+           </p>
+          <div class="cart_total__custom-price">
+              <p class="cart_total__price">
+                <text class="cart_total__priceAll">{{ totals[0].text }}</text>
+                руб.
+              </p>
+          </div>
+        </div>
+        <div class="cart_total__line">
+          <p class="cart_total__text">Скидка</p>
+          <p class="cart_total__price">
+            <text class="cart_total__priceSale">{{ totals[0].sale }}</text>
+           руб</p>
+        </div>
+        <div class="cart_total__line">
+          <p class="cart_total__text">Общая стоимость</p>
+          <div class="cart_total__custom-price">
+              <p class="cart_total__price">
+                <text class="cart_total__priceLast">{{ totals[0].totalSale }}</text>
+                руб.
+              </p>
+        </div>
+        </div><a class="cart_total__btn btn btn--filled" href="/checkout">
+          <div class="btn__wrap"> <span class="btn__text">перейти к оформлению</span></div>
+        </a>
+        <p class="cart_total__text cart_total__text--small">«Общая стоимость» указана без учёта <br class="desktop">
+          возможной стоимости доставки</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+        
+{% if checkAccesoryCount %}
+<section class="hits">
+    <div class="hits__top">
+        <h2 class="section_block__title section_block__title--small">Дополнительные аксессуары</h2>
+        <div class="hits__nav slider__buttons">
+              <button class="slider__button slider__button--prev hits_1__nav_btn--prev">
+                <svg class="icon">
+                  <use xlink:href="#link_arrow"></use>
+                </svg>
+              </button>
+              <button class="slider__button slider__button--next hits_1__nav_btn--next">
+                <svg class="icon">
+                  <use xlink:href="#link_arrow"></use>
+                </svg>
+              </button>
+            </div>
+    </div>
+    <div class="hits__slider_1 slider swiper">
+        <div class="swiper-wrapper">
+        {% for product_accessory in products_accessory %}
+          {% if product_accessory.attrblock %}
+            {% for attrblockitem in product_accessory.attrblock %}
+                {% if attrblockitem.attribute_group_id == 33 %}
+                      <div class="hits_slide swiper-slide">
+                          <div class="hits_slide__pic" data-linked-modal="modal_card">
+                              <div class="hits_slide__pic_wrap" data-hover-images="">
+                                  {% for img in product_accessory.imgDop %}
+                                      <img class="image" data-lazy data-src="{{ img.thumb }}" alt="{{ heading_title }}">
+                                  {% endfor %}
+                              </div>
+                              <img class="loader" data-src="/image/catalog/assets/img/loader.svg" alt="" data-lazy="" />
+                              <div class="hits_slide__hover_btn btn btn--filled">Быстрый просмотр</div>
+                              <button class="hits_slide__btn hits_slide__btn--mob"><img class="image image__empty"
+                                      data-src="/image/catalog/assets/img/icon_fav_empty.svg" alt="" data-lazy="" /><img
+                                      class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg" alt=""
+                                      data-lazy="" />
+                              </button>
+                          </div>
+                          <a href="{{ product_accessory.href }}" class="hits_slide_mobile btn btn--filled">
+                              Подробнее
+                          </a> 
+                          <div class="hits_slide__info">
+                              <div class="hits_slide__left" data-linked-modal="modal_card">
+                                  <p class="hits_slide__text hits_slide__text-name hits_slide__text--big">{{ product_accessory.name }}</p>
+                                  <p class="hits_slide__text">
+                                      {{ product_accessory.model }}
+                                  </p>            
+                                  {% if product_accessory.stock == 'В наличии' %}
+                                      <div class="hits_slide__stock" data-color="green">В наличии</div> 
+                                      {% elseif product_accessory.stock == 'Нет в наличии' %} 
+                                      <div class="hits_slide__stock" data-color="red">Нет в наличии</div> 
+                                      {% elseif product_accessory.stock == 'Ожидание 2-3 дня' %} 
+                                      <div class="hits_slide__stock" data-color="blue">Ожидание 2-3 дня</div> 
+                                      {% elseif product_accessory.stock == 'Предзаказ' %}
+                                      <div class="hits_slide__stock" data-color="blue">Предзаказ</div> 
+                                  {% endif %}
+
+
+                                  <div style="display: none;">
+                                  {% if product_accessory.attrblock %}
+                                      {% for attrblockitem in product_accessory.attrblock %}
+                                          {% if attrblockitem.attribute_group_id == 7 %}
+                                          <div class="attrs__size">
+                                              <span class="attr__size-name">{{ attrblockitem.name }}</span>
+                                              {% for attributeitem in attrblockitem.attribute %}
+                                                  {% if attributeitem.attribute_id == 16 %}
+                                                  <div class="attr__size-category shir">
+                                                      <p class="attr__size-name">{{ attributeitem.name }}</p>
+                                                      <p class="attr__size-cal">{{ attributeitem.text }}</p>
+                                                  </div>
+                                                  {% endif %}
+                                                  {% if attributeitem.attribute_id == 13 %}
+                                                  <div class="attr__size-category leng">
+                                                      <p class="attr__size-name">{{ attributeitem.name }}</p>
+                                                      <p class="attr__size-cal">{{ attributeitem.text }}</p>
+                                                  </div>
+                                                  {% endif %}
+                                                  {% if attributeitem.attribute_id == 14 %}
+                                                  <div class="attr__size-category heig-lin">
+                                                      <p class="attr__size-name">{{ attributeitem.name }}</p>
+                                                      <p class="attr__size-cal">{{ attributeitem.text }}</p>
+                                                  </div>
+                                                  {% endif %}
+                                                  {% if attributeitem.attribute_id == 12 %}
+                                                  <div class="attr__size-category shir-lin">
+                                                      <p class="attr__size-name">{{ attributeitem.name }}</p>
+                                                      <p class="attr__size-cal">{{ attributeitem.text }}</p>
+                                                  </div>
+                                                  {% endif %}
+                                                  {% if attributeitem.attribute_id == 15 %}
+                                                  <div class="attr__size-category most-len">
+                                                      <p class="attr__size-name">{{ attributeitem.name }}</p>
+                                                      <p class="attr__size-cal">{{ attributeitem.text }}</p>
+                                                  </div>
+                                                  {% endif %}
+                                              {% endfor %}
+                                          </div>
+                                          {% elseif attrblockitem.attribute_group_id == 8 %} 
+                                          <div class="attrs__char">
+                                              <span class="attr__char-name">{{ attrblockitem.name }}</span>
+                                              {% for attributeitem in attrblockitem.attribute %}
+                                              <div class="attr__char-category">
+                                                  <p class="attr__char-name">{{ attributeitem.name }}</p>
+                                                  <p class="attr__char-cal">{{ attributeitem.text }}</p>
+                                              </div>
+                                              {% endfor %}
+                                          </div>
+                                          {% endif %}
+                                      {% endfor %}
+                                  {% endif %}
+                                  </div>
+
+                                  <div class="hits_slide_option" style="display: none;">
+                                      {% if product_accessory.attrblock %}
+                                          {% for attrblockitem in product_accessory.attrblock %}
+                                              {% if attrblockitem.attribute_group_id == 29 %}
+                                                  {% for attributeitem in attrblockitem.attribute %}
+                                                  <div class="hits_slide_option_param">
+                                                      <span>{{ attributeitem.name }}</span>
+                                                      <a href="{{ product_accessory.hrefPiece }}{{ attributeitem.text }}"></a>
+                                                  </div>
+                                                  {% endfor %}
+                                              {% endif %}
+                                          {% endfor %} 
+                                      {% endif %}   
+                                  </div>
+
+
+                                  <a class="hits_slide__href" href="{{ product_accessory.href }}"></a>
+                                  <p class="hits_slide__descr" style="display: none;">{{ product_accessory.description }}</p>
+                                  <div class="hits_slide__price">
+                                      {% if product_accessory.special %}
+                                          <p class="hits_slide__text normal"> <text>{{ product_accessory.special }}</text> RUB</p>
+                                          <p class="hits_slide__text old"><text>{{ product_accessory.price }}</text> RUB</p>
+                                      {% else %}
+                                          <p class="hits_slide__text normal"> <text>{{ product_accessory.price }}</text> RUB</p>
+                                      {% endif %}
+                                  </div>
+                              </div>
+                              <div class="hits_slide__right">
+
+                                  <!-- {% if theme_mt_category_product_cart_checked %}
+                                  <button class="button add-to-cart"
+                                      onclick="add_in_cart('{{ product.product_id }}', '{{ product.minimum }}');">{{ theme_mt_category_product_cart_text }}</button>
+                                  {% endif %} -->
+
+                                  {% if product_accessory.stock == 'В наличии' %}
+                                      <button class="hits_slide__btn add-to-cart {% if product_accessory.in_cart %} added{% endif %}" id="add-to-cart"
+                                              onclick="add_in_cart('{{ product_accessory.product_id }}', '{{ product_accessory.minimum }}'); return false;">
+                                              <img class="image image__empty" data-src="/image/catalog/assets/img/icon_cart_empty.svg"
+                                                  alt="" data-lazy="" />
+                                              <img class="image image__active" data-src="/image/catalog/assets/img/icon_cart_active.svg"
+                                                  alt="" data-lazy="" />
+                                          </button>
+                                  {% endif %}
+
+                                  {% if logged %}
+                                  <button class="hits_slide__btn add-wish {% if product_accessory.in_wishlist %} added{% endif %}"
+                                      onclick="{% if product_accessory.in_wishlist %}wishlist_remove('{{ product_accessory.product_id }}');{% else %}wishlist_add('{{ product_accessory.product_id }}');{% endif %} return false;"
+                                      {% if not logged %}data-login="false" {% else %}data-login="true" {% endif %}>
+                                      <img class="image image__empty" data-src="/image/catalog/assets/img/icon_fav_empty.svg"
+                                          alt="" data-lazy="" />
+                                      <img class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg"
+                                          alt="" data-lazy="" />
+                                  </button>
+                                  {% else %} 
+                                  <button class="hits_slide__btn showNoLogin" data-linked-modal="modal_wishlistErr">
+                                      <img class="image image__empty" data-src="/image/catalog/assets/img/icon_fav_empty.svg" alt="" data-lazy="" />
+                                      <img class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg" alt="" data-lazy="" />
+                                  </button>
+                                  {% endif %}
+                              </div>
+                          </div>
+                      </div>
+                {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+                  
+
+<div class="hits-bottom hits--last">
+  {{ content_top }}
+</div>
+
+{{ footer }}

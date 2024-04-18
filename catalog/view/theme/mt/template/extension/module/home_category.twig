@@ -1,0 +1,89 @@
+<h3>{{ heading_title }}</h3>
+<hr>
+  <div class="swiper-container swiper-featured">
+    <div class="swiper-wrapper">
+     {% for product in products %}
+      <div class="swiper-slide product-layout">
+        <div class="product-thumb transition">
+          <div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a></div>
+          <div class="caption">
+            <p class="product-title"><a href="{{ product.href }}">{{ product.name }}</a></p>
+            {#<p>{{ product.description }}</p>#}
+            {% if product.rating %}
+            <div class="rating">
+                {% for i in 1..5 %}
+              {% if product.rating < i %}
+              <span class="fa fa-stack"><i class="fas fa-star"></i></span>
+              {% else %}
+              <span class="fa fa-stack"><i class="fas orang-star fa-star"></i><i class="fas fa-star"></i></i></span>
+              {% endif %}
+              {% endfor %}
+            </div>
+            {% endif %}
+            {% if product.price %}
+            <p class="price">
+              {% if not product.special %}
+              {{ product.price }}
+              {% else %}
+                <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
+              {% endif %}
+              {% if product.tax %}
+              <span class="price-tax">{{ text_tax }} {{ product.tax }}</span>
+              {% endif %}
+            </p>
+            {% endif %}
+          </div>
+          {#<div class="button-group">#}
+            {#<button type="button" onclick="cart.add('{{ product.product_id }}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ button_cart }}</span></button>#}
+            {#<button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');"><i class="fa fa-heart"></i></button>#}
+            {#<button type="button" data-toggle="tooltip" title="{{ button_compare }}" onclick="compare.add('{{ product.product_id }}');"><i class="fa fa-exchange"></i></button>#}
+          {#</div>#}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+    <!-- Add Arrows -->
+    <div class="swiper-button-next"><i class="fal fa-chevron-right"></i></div>
+    <div class="swiper-button-prev"><i class="fal fa-chevron-left"></i></div>
+  </div>
+
+<!-- Initialize Swiper -->
+<script>
+
+    $( document ).ready(function() {
+        var swiper = new Swiper('.swiper-featured', {
+            slidesPerView: 6,
+            spaceBetween: 30,
+            slidesPerGroup: 6,
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            loopFillGroupWithBlank: true,
+            breakpoints: {
+                1024: {
+                    slidesPerView: 4,
+                    slidesPerGroup: 4,
+                    spaceBetween: 40,
+
+                },
+                768: {
+                    slidesPerView: 3,
+                    slidesPerGroup: 3,
+                    spaceBetween: 30,
+                },
+                640: {
+                    slidesPerView: 2,
+                    slidesPerGroup: 2,
+                    spaceBetween: 20,
+                },
+                320: {
+                    slidesPerView: 1,
+                    slidesPerGroup: 1,
+                    spaceBetween: 10,
+                }
+            }
+
+        });
+    });
+</script>

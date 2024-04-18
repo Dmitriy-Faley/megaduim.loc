@@ -1,0 +1,142 @@
+{{ header }}
+
+<section class="contacts">
+  <div class="contacts__container">
+    <div class="contacts__breadcrumbs breadcrumbs">
+      {% for breadcrumb in breadcrumbs %}
+      <a class="breadcrumbs__link  {% if breadcrumb == breadcrumbs|last %} is-active {% endif %}"
+        href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+      {% if breadcrumb != breadcrumbs|last %}
+      <span class="slash">/</span>
+      {% endif %}
+      {% endfor %}
+    </div>
+    <h1 class="section_block__title">Контакты</h1>
+    <div class="contacts_slider swiper">
+      <div class="swiper-wrapper">
+        <div class="contacts_slider__slide swiper-slide">
+          <picture class="image">
+            <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/contacts_pic_3.webp" type="image/webp" />
+            <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/contacts_pic_3.jpg" type="image/jpg" /><img
+              class="image" data-lazy="data-lazy" data-src="/image/catalog/assets/img/contacts_pic_3.jpg" alt="" />
+          </picture>
+        </div>
+        <div class="contacts_slider__slide swiper-slide">
+          <picture class="image">
+            <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/contacts_pic_2.webp" type="image/webp" />
+            <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/contacts_pic_2.jpg" type="image/jpg" /><img
+              class="image" data-lazy="data-lazy" data-src="/image/catalog/assets/img/contacts_pic_2.jpg" alt="" />
+          </picture>
+        </div>
+        <div class="contacts_slider__slide swiper-slide">
+          <picture class="image">
+            <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/contacts_pic_1.webp" type="image/webp" />
+            <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/contacts_pic_1.jpg" type="image/jpg" /><img
+              class="image" data-lazy="data-lazy" data-src="/image/catalog/assets/img/contacts_pic_1.jpg" alt="" />
+          </picture>
+        </div>
+      </div>
+    </div>
+    <div class="contacts__links">
+      <a class="contacts_link" href="" target="_blank">
+        <p class="contacts_link__title">Москва, ул. Островная 2, оф. 303
+          <svg class="icon">
+            <use xlink:href="#contacts_arrow"></use>
+          </svg>
+        </p>
+        <p class="contacts_link__text">Без выходных, 11:00–20:00</p>
+      </a>
+
+      <a class="contacts_link" href="tel:8 (901) 930–08–08">
+        <p class="contacts_link__title">8 (901) 930–08–08
+          <svg class="icon">
+            <use xlink:href="#contacts_arrow"></use>
+          </svg>
+        </p>
+        <p class="contacts_link__text">Звонок или сообщение в WhatsApp</p>
+      </a>
+
+      {% if main_contact.email_checked %}
+      <a class="modal_menu__link" href="mailto:{{ main_contact.email }}">{{ main_contact.email }}
+        <svg class="icon">
+          <use xlink:href="#link_arrow"></use>
+        </svg>
+      </a>
+      {% endif %}
+      
+      <a class="contacts_link" href="mailto:dioptrikashop@yandex.ru">
+        <p class="contacts_link__title">dioptrikashop@yandex.ru
+          <svg class="icon">
+            <use xlink:href="#contacts_arrow"></use>
+          </svg>
+        </p>
+        <p class="contacts_link__text">По всем вопросам</p>
+      </a>
+      <a class="contacts_link" href="" target="_blank">
+        <p class="contacts_link__title">Instagram
+          <svg class="icon">
+            <use xlink:href="#contacts_arrow"></use>
+          </svg>
+        </p>
+        <p class="contacts_link__text">@dioptrika_eyewear</p>
+      </a>
+      <a class="contacts_link" href="" target="_blank">
+        <p class="contacts_link__title">Telegram
+          <svg class="icon">
+            <use xlink:href="#contacts_arrow"></use>
+          </svg>
+        </p>
+        <p class="contacts_link__text">@dioptrika_eyewear</p>
+      </a><a class="contacts_link" href="" target="_blank">
+        <p class="contacts_link__title">ВКонтакте
+          <svg class="icon">
+            <use xlink:href="#contacts_arrow"></use>
+          </svg>
+        </p>
+        <p class="contacts_link__text">@dioptrika_eyewear</p>
+      </a></div>
+    <div class="contacts__location"><a class="contacts_location_link" href="https://go.2gis.com/92h0pn" target="_blank">
+        <svg class="icon">
+          <use xlink:href="#icon_gis"></use>
+        </svg>
+        <div class="text">2GIS</div>
+      </a><a class="contacts_location_link" href="https://yandex.ru/maps/-/CCU8b4QpXA" target="_blank">
+        <svg class="icon">
+          <use xlink:href="#icon_yandex"></use>
+        </svg>
+        <div class="text">Yandex.Maps</div>
+      </a><a class="contacts_location_link" href="https://goo.gl/maps/Y3YzXCSxivJAfq8F9" target="_blank">
+        <svg class="icon">
+          <use xlink:href="#icon_geo"></use>
+        </svg>
+        <div class="text">Google Maps</div>
+      </a></div>
+  </div>
+  <div class="contacts__gallery">
+    <div class="contacts__gallery_wrap">
+      <div class="contacts__gallery_pic">
+        <picture class="image">
+          <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/contacts_pic_1.webp" type="image/webp" />
+          <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/contacts_pic_1.jpg" type="image/jpg" /><img
+            class="image" data-lazy="data-lazy" data-src="/image/catalog/assets/img/contacts_pic_1.jpg" alt="" />
+        </picture>
+      </div>
+      <div class="contacts__gallery_pic">
+        <picture class="image">
+          <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/contacts_pic_2.webp" type="image/webp" />
+          <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/contacts_pic_2.jpg" type="image/jpg" /><img
+            class="image" data-lazy="data-lazy" data-src="/image/catalog/assets/img/contacts_pic_2.jpg" alt="" />
+        </picture>
+      </div>
+    </div>
+    <div class="contacts__gallery_pic">
+      <picture class="image">
+        <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/contacts_pic_3.webp" type="image/webp" />
+        <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/contacts_pic_3.jpg" type="image/jpg" /><img class="image"
+          data-lazy="data-lazy" data-src="/image/catalog/assets/img/contacts_pic_3.jpg" alt="" />
+      </picture>
+    </div>
+  </div>
+</section>
+
+{{ footer }}

@@ -1,0 +1,2856 @@
+{{ header }}{{ column_left }}
+<div id="content" class="mt_exp">
+<div class="page-header">
+   <div class="container-fluid">
+      <div class="pull-right">
+         <button type="submit" form="form-theme" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+         <button onclick="$('form #apply').attr('value', '1'); $('#' + $('form').attr('id')).submit();" data-toggle="tooltip" title="" class="btn btn-success" data-original-title="Применить"><i class="fa fa-check"></i></button>
+		 <button onclick="$('form #apply').attr('value', '1'); $('#' + $('form').attr('id')).submit();" data-toggle="tooltip" title="" class="btn btn-success" data-original-title="Сбросить кэш"><i class="fa fa-folder-o"></i></button>
+			<a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
+      </div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+         {% for breadcrumb in breadcrumbs %}
+         <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+         {% endfor %}
+      </ul>
+      <ul class="maintabs">
+         <li class="header_links__item active"><a id="export-tab" href="#export" data-toggle="tab">Настройки</a></li>
+         <li class="header_links__item"><a id="support-tab" href="#support" data-toggle="tab">Техподдержка</a></li>
+      </ul>
+   </div>
+</div>
+<!-- Настройки -->   
+<div class="container-fluid">
+	<form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-theme" class="form-horizontal">
+		<input type="hidden" name="apply" id="apply" value="0">
+		<div class="b_admin_panel">
+			<div class="tab-content">
+				<div class="admin_panel tab-pane active in fade" id="export">
+					<div class="panel_navigation flex">
+						<ul class="nav nav-tabs">
+							<li class="nav_item active"><a class="title" href="#nav1" data-toggle="tab">Общие</a></li>
+							<li class="nav_item"><a class="title" href="#nav2" data-toggle="tab">Шапка</a></li>
+							<li class="nav_item"><a class="title" href="#nav3" data-toggle="tab">Подвал</a></li>
+							<li class="nav_item"><a class="title" href="#nav4" data-toggle="tab">Категории</a></li>
+							<li class="nav_item"><a class="title" href="#nav5" data-toggle="tab">Товары</a></li>
+							<li class="nav_item"><a class="title" href="#nav6" data-toggle="tab">Контакты</a></li>
+							<li class="nav_item"><a class="title" href="#nav7" data-toggle="tab">Цвета</a></li>
+						</ul>
+					</div>
+					<div class="tab-content panel_section">
+						<!-- начало белого поля внутри --> 		 
+						<!-- Вкладка 1 -->
+						<div id="nav1" class="tab-pane active">
+							<fieldset>
+								<legend>
+									<h3>{{ text_general }}</h3>
+								</legend>
+								<!-- Директория темы -->
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="{{ help_directory }}">{{ entry_directory }}</span></label>				
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input pole">
+											<select name="theme_mt_directory" id="input-directory" class="form-control">
+												{% for directory in directories %}
+												{% if directory == theme_mt_directory %}
+												<option value="{{ directory }}" selected="selected">{{ directory }}</option>
+												{% else %}
+												<option value="{{ directory }}">{{ directory }}</option>
+												{% endif %}
+												{% endfor %}
+											</select>
+										</div>
+									</div>
+								</div>
+								<!-- Статус -->
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-status" class="mtp-row__title control-label">{{ entry_status }}</label>				
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input pole">
+											<select name="theme_mt_status" id="input-status" class="form-control">
+												{% if theme_mt_status %}
+												<option value="1" selected="selected">{{ text_enabled }}</option>
+												<option value="0">{{ text_disabled }}</option>
+												{% else %}
+												<option value="1">{{ text_enabled }}</option>
+												<option value="0" selected="selected">{{ text_disabled }}</option>
+												{% endif %}
+											</select>
+										</div>
+									</div>
+								</div>
+							</fieldset>
+							
+							<fieldset>
+							<div class="{% if not activate %}nofree{% endif %}">
+							<legend><h3>HTML код</h3></legend>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label class="mtp-row__title control-label"><span data-toggle="tooltip" title="Добавление своего HTML-кода сразу после начала <head> - максимально высоко к началу загрузки (рекомендуется для счетчиков и самых важных скриптов)">После &lt;head&gt;</span></label>										
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" name="theme_mt_text_html_head_top_checked" {% if theme_mt_text_html_head_top_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input">				
+											<textarea name="theme_mt_text_html_head_top" id="" class="form-control" placeholder="Произвольный текст, с поддержкой HTML">{{ theme_mt_text_html_head_top }}</textarea>
+										</div>
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label class="mtp-row__title control-label"><span data-toggle="tooltip" title="Добавление своего HTML-кода сразу перед окончанием шапки сайта </head> - после отработки основных скриптов (рекомендуется для обычных скриптов)">Перед &lt;/head&gt;</span></label>							
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" name="theme_mt_text_html_head_end_checked" {% if theme_mt_text_html_head_end_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input">				
+											<textarea name="theme_mt_text_html_head_end" id="" class="form-control" placeholder="Произвольный текст, с поддержкой HTML">{{ theme_mt_text_html_head_end }}</textarea>
+										</div>
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label class="mtp-row__title control-label"><span data-toggle="tooltip" title="Добавление своего HTML-кода перед </body> - в самом низу сайта (рекомендуется для самых неважных скриптов вроде всплывающих окон, квизов и т.п.)">Перед &lt;/body&gt;</span></label>									
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" name="theme_mt_text_html_body_end_checked" {% if theme_mt_text_html_body_end_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input">				
+											<textarea name="theme_mt_text_html_body_end" id="" class="form-control" placeholder="Произвольный текст, с поддержкой HTML">{{ theme_mt_text_html_body_end }}</textarea>
+										</div>
+									</div>
+								</div>
+							
+							</div>
+							</fieldset>
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							<fieldset>	
+							<div class="{% if not activate %}nofree{% endif %}">
+							<!--{{ text_image }}							-->
+							<legend><h3>Изображения в категории</h3></legend>
+								<input type="hidden" name="theme_mt_image_compare_width" value="{{ theme_mt_image_compare_width }}">
+								<input type="hidden" name="theme_mt_image_compare_height" value="{{ theme_mt_image_compare_height }}">
+								<input type="hidden" name="theme_mt_image_wishlist_width" value="{{ theme_mt_image_wishlist_width }}">
+								<input type="hidden" name="theme_mt_image_wishlist_height" value="{{ theme_mt_image_wishlist_height }}">
+							
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-image-product-width" class="mtp-row__title control-label"><span data-toggle="tooltip" title="{{ entry_image_product }}">Размер изображения в списке товаров</span></label>				
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input pole">
+											<input type="text" name="theme_mt_image_product_width" value="{{ theme_mt_image_product_width }}" id="input-image-product-width" class="form-control" placeholder="px">
+										</div>
+										<div class="mtp-row__input pole">
+											<input type="text" name="theme_mt_image_product_height" value="{{ theme_mt_image_product_height }}"  class="form-control" placeholder="px">
+										</div>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_image_product_checked_pole" {% if (theme_mt_image_product_checked_pole) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+										{% if error_image_product %}
+										<div class="text-danger">{{ error_image_product }}</div>
+										{% endif %}
+									</div>
+								</div>
+																
+								
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-image-category-width" class="mtp-row__title control-label"><span data-toggle="tooltip" title="{{ entry_image_category }}">Размер изображения в списке категорий</span></label>				
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input pole">
+											<input type="text" name="theme_mt_image_category_width" value="{{ theme_mt_image_category_width }}" id="input-image-category-width" class="form-control" placeholder="px">
+										</div>
+										<div class="mtp-row__input pole">
+											<input type="text" name="theme_mt_image_category_height" value="{{ theme_mt_image_category_height }}" class="form-control" placeholder="px">
+										</div>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_image_category_checked_pole" {% if (theme_mt_image_category_checked_pole) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+										{% if error_image_category %}
+										<div class="text-danger">{{ error_image_category }}</div>
+										{% endif %}
+									</div>
+								</div>
+								
+								
+								</div>
+								</fieldset>	
+								
+								
+								
+								<fieldset>									
+								<div class="{% if not activate %}nofree{% endif %}">
+								<legend><h3>Изображения в товаре</h3></legend>
+								
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-image-thumb-width" class="mtp-row__title control-label"><span data-toggle="tooltip" title="{{ entry_image_thumb }}">Размер большого изображения товара</span></label>				
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input pole">
+											<input type="text" name="theme_mt_image_thumb_width" value="{{ theme_mt_image_thumb_width }}" id="input-image-thumb-width" class="form-control" placeholder="px">
+										</div>
+										<div class="mtp-row__input pole">
+											<input type="text" name="theme_mt_image_thumb_height" value="{{ theme_mt_image_thumb_height }}" class="form-control" placeholder="px">
+										</div>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_image_thumb_checked_pole" {% if (theme_mt_image_thumb_checked_pole) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+										{% if error_image_thumb %}
+										<div class="text-danger">{{ error_image_thumb }}</div>
+										{% endif %}
+									</div>
+								</div>
+								
+								
+								
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-image-additional-width" class="mtp-row__title control-label"><span data-toggle="tooltip" title="{{ entry_image_additional }}">Размер дополнительных изображений товара</span></label>				
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input pole">
+											<input type="text" name="theme_mt_image_additional_width" value="{{ theme_mt_image_additional_width }}" id="input-image-additional-width" class="form-control" placeholder="px">
+										</div>
+										<div class="mtp-row__input pole">
+											<input type="text" name="theme_mt_image_additional_height" value="{{ theme_mt_image_additional_height }}" class="form-control" placeholder="px">
+										</div>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_image_additional_checked_pole" {% if (theme_mt_image_additional_checked_pole) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+										{% if error_image_additional %}
+										<div class="text-danger">{{ error_image_additional }}</div>
+										{% endif %}
+									</div>
+								</div>								
+								
+								
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-image-popup-width" class="mtp-row__title control-label"><span data-toggle="tooltip" title="{{ entry_image_popup }}">Размер всплывающего изображения товара</span></label>				
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input pole">
+											<input type="text" name="theme_mt_image_popup_width" value="{{ theme_mt_image_popup_width }}" id="input-image-popup-width" class="form-control" placeholder="px">
+										</div>
+										<div class="mtp-row__input pole">
+											<input type="text" name="theme_mt_image_popup_height" value="{{ theme_mt_image_popup_height }}"  class="form-control" placeholder="px">
+										</div>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_image_popup_checked_pole" {% if (theme_mt_image_popup_checked_pole) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+										{% if error_image_popup %}
+										<div class="text-danger">{{ error_image_popup }}</div>
+										{% endif %}
+									</div>
+								</div>
+								
+								
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-image-cart" class="mtp-row__title control-label"><span data-toggle="tooltip" title="{{ entry_image_cart }}">Размер изображений товаров в корзине</span></label>				
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input pole">
+											<input type="text" name="theme_mt_image_cart_width" value="{{ theme_mt_image_cart_width }}" id="input-image-cart" class="form-control" placeholder="px">
+										</div>
+										<div class="mtp-row__input pole">
+											<input type="text" name="theme_mt_image_cart_height" value="{{ theme_mt_image_cart_height }}" class="form-control" placeholder="px">
+										</div>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_image_cart_checked_pole" {% if (theme_mt_image_cart_checked_pole) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+										{% if error_image_cart %}
+										<div class="text-danger">{{ error_image_cart }}</div>
+										{% endif %}
+									</div>
+								</div>
+								
+
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-image-cart" class="mtp-row__title control-label"><span data-toggle="tooltip" title="{{ entry_image_cart }}">Размер изображений похожих товаров</span></label>				
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input pole">
+											<input type="text" name="theme_mt_image_related_width" value="{{ theme_mt_image_related_width }}" id="input-image-cart" class="form-control" placeholder="px">
+										</div>
+										<div class="mtp-row__input pole">
+											<input type="text" name="theme_mt_image_related_height" value="{{ theme_mt_image_related_height }}" class="form-control" placeholder="px">
+										</div>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_image_related_checked_pole" {% if (theme_mt_image_related_checked_pole) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+										{% if error_image_cart %}
+										<div class="text-danger">{{ error_image_cart }}</div>
+										{% endif %}
+									</div>
+								</div>
+							
+								
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-image-location" class="mtp-row__title control-label"><span data-toggle="tooltip" title="{{ entry_image_location }}">Логотипы брендов</span></label>				
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input pole">
+											<input type="text" name="theme_mt_image_location_width" value="{{ theme_mt_image_location_width }}" id="input-image-location" class="form-control" placeholder="px">
+										</div>
+										<div class="mtp-row__input pole">
+											<input type="text" name="theme_mt_image_location_height" value="{{ theme_mt_image_location_height }}" class="form-control" placeholder="px">
+										</div>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_image_location_checked_pole" {% if (theme_mt_image_location_checked_pole) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+										{% if error_image_location %}
+										<div class="text-danger">{{ error_image_location }}</div>
+										{% endif %}
+									</div>
+								</div>
+								
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-image-cart" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Если у опции есть изображение, то можно указать его размер обрезки в карточке товара">Размер изображений в опциях</span></label>				
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input pole">
+											<input type="text" name="theme_mt_image_option_width" value="{{ theme_mt_image_option_width }}" id="input-image-cart" class="form-control" placeholder="px">
+										</div>
+										<div class="mtp-row__input pole">
+											<input type="text" name="theme_mt_image_option_height" value="{{ theme_mt_image_option_height }}" class="form-control" placeholder="px">
+										</div>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_image_option_checked_pole" {% if (theme_mt_image_option_checked_pole) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+										{% if error_image_cart %}
+										<div class="text-danger">{{ error_image_cart }}</div>
+										{% endif %}
+									</div>
+								</div>		
+
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-image-cart" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Максимальная высота изображения в мобильном разрешении, физически не меняет размер картинки, просто ограничивает визуально">Максимальная высота изображения товара в смартфоне</span></label>				
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input pole">
+											<input type="text" name="theme_mt_image_moblie_height" value="{{ theme_mt_image_moblie_height }}" class="form-control" placeholder="px">
+										</div>										
+									</div>
+								</div>									
+												
+								
+							</div>	
+							</fieldset>
+							
+							
+							
+							
+						</div>
+						<!-- Конец вкладки 1 -->		
+						<!-- Вкладка 2 - Шапка -->
+						<div id="nav2" class="tab-pane">
+							<fieldset>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<div class="mtp-row__title">Текст под логотипом</div>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_text_after_logo_checked" {% if (theme_mt_text_after_logo_checked) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input">
+											<input type="text" name="theme_mt_text_after_logo" value="{{ theme_mt_text_after_logo }}" class="form-control" placeholder="Интернет магазин натуральных товаров из Алтая">
+										</div>
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<div class="mtp-row__title">Поиск</div>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_text_search_checked" {% if (theme_mt_text_search_checked) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input">
+											<input type="text" name="theme_mt_text_search" value="{{ theme_mt_text_search }}" class="form-control" placeholder="Поиск по товарам">
+										</div>
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<div class="mtp-row__title">Аккаунт</div>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_text_account_checked" {% if (theme_mt_text_account_checked) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input">
+											<input type="text" name="theme_mt_text_account" value="{{ theme_mt_text_account }}" class="form-control" placeholder="Мой аккаунт">
+										</div>
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<div class="mtp-row__title">Корзина</div>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_text_basked_checked" {% if (theme_mt_text_basked_checked) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input">
+											<input type="text" name="theme_mt_text_basked" value="{{ theme_mt_text_basked }}" class="form-control" placeholder="Корзина">
+										</div>
+									</div>
+								</div>
+							</fieldset>
+							<fieldset>
+								<legend>
+									<h3>Контакты</h3>
+								</legend>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<div class="mtp-row__title">Текст над контактами</div>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_text_before_contact_checked" {% if (theme_mt_text_before_contact_checked) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input">
+											<input type="text" name="theme_mt_text_before_contact" value="{{ theme_mt_text_before_contact }}" class="form-control" placeholder="Бесплатный звонок по РФ —">
+										</div>
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<div class="mtp-row__title">Текст под контактами</div>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_text_after_contact_checked" {% if (theme_mt_text_after_contact_checked) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input">
+											<input type="text" name="theme_mt_text_after_contact" value="{{ theme_mt_text_after_contact }}" class="form-control" placeholder="Текст под контактами">
+										</div>
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<div class="mtp-row__title">Вывести телефон</div>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_text_header_phone_checked" {% if (theme_mt_text_header_phone_checked) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">							
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<div class="mtp-row__title">Вывести емейл</div>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_text_header_email_checked" {% if (theme_mt_text_header_email_checked) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">													
+									</div>
+								</div>
+							</fieldset>
+						</div>
+						<!-- Конец вкладки 2 -->				
+						<!-- Вкладка 3 Подвал -->
+						<div id="nav3" class="tab-pane">
+							<fieldset>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<div class="mtp-row__title">Копирайт</div>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_footer_copy_checked" {% if (theme_mt_footer_copy_checked) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input">
+											<input type="text" name="theme_mt_footer_copy" value="{{ theme_mt_footer_copy }}" class="form-control" placeholder="2007-<year> © ЧТУП Венталл">
+										</div>
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<div class="mtp-row__title">Под копирайтом</div>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_footer_copy_after_checked" {% if (theme_mt_footer_copy_after_checked) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input">				
+											<textarea name="theme_mt_footer_copy_after" id="" class="form-control" placeholder="Произвольный текст, с поддержкой HTML">{{ theme_mt_footer_copy_after }}</textarea>
+										</div>
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<div class="mtp-row__title">Мелкий текст</div>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_footer_small_text_checked" {% if (theme_mt_footer_small_text_checked) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input">				
+											<textarea name="theme_mt_footer_small_text" id="" class="form-control" placeholder="Произвольный текст, с поддержкой HTML">{{ theme_mt_footer_small_text }}</textarea>
+										</div>
+									</div>
+								</div>
+								
+								
+								<div class="{% if not activate %}nofree{% endif %}">
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<div class="mtp-row__title">Платежные системы</div>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_footer_payment_checked" {% if (theme_mt_footer_payment_checked) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">														
+									</div>
+								</div>
+								<div class="table-responsive">
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<td class="text-center name">Изображение</td>
+												<td class="text-center name">Ссылка</td>
+												<td class="text-center name">В новом окне</td>
+												<td class="text-center name">Nofollow</td>
+												<td class="text-center name">Статус</td>
+												<td class="text-center name">Сортировка</td>
+												<td class="text-center name">Действие</td>
+											</tr>
+										</thead>
+										<tbody id="tbody-footer-payments">
+											{% set footer_counter = 0 %}
+											{% for payment in theme_mt_footer_payments %}
+											<tr class="payment-row">
+												<td class="text-center">
+													<a href="" id="thumb-footer-payment-{{ footer_counter }}" data-toggle="image" class="img-thumbnail">
+													<img src="/image/{{ payment.icon }}" width="100" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
+													<input type="hidden" name="theme_mt_footer_payments[{{ footer_counter }}][icon]" value="{{ payment.icon }}" id="input-footer-payment-{{ footer_counter }}" />
+												</td>
+												<td class="text-left maxi">
+													<input type="text" name="theme_mt_footer_payments[{{ footer_counter }}][link]" value="{{ payment.link }}" class="form-control" />
+												</td>
+												<td class="text-center">
+													<div class="switch_change">
+														<label class="switch">
+														<input class="form_control" type="checkbox" value="1" name="theme_mt_footer_payments[{{ footer_counter }}][newtab]" {% if (theme_mt_footer_payments[footer_counter].newtab) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+														</label>
+													</div>
+												</td>
+												<td class="text-center">
+													<div class="switch_change">
+														<label class="switch">
+														<input class="form_control" type="checkbox" value="1" name="theme_mt_footer_payments[{{ footer_counter }}][nofollow]" {% if (theme_mt_footer_payments[footer_counter].nofollow) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+														</label>
+													</div>
+												</td>
+												<td class="text-center">
+													<div class="switch_change">
+														<label class="switch">
+														<input class="form_control" type="checkbox" value="1" name="theme_mt_footer_payments[{{ footer_counter }}][status]" {% if (theme_mt_footer_payments[footer_counter].status) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+														</label>
+													</div>
+												</td>
+												<td class="text-left mini">
+													<input type="number" name="theme_mt_footer_payments[{{ footer_counter }}][sort_order]" value="{{ payment.sort_order }}" class="form-control" />
+												</td>
+												<td class="text-center">
+													<a href="#" onclick="return false;" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger js-remove-row"><i class="fa fa-minus-circle"></i></a>
+												</td>
+											</tr>
+											{% set footer_counter = footer_counter + 1 %}
+											{% endfor %}
+										</tbody>
+										<tfoot>
+											<tr>
+												<td colspan="6"></td>
+												<td class="text-center"><button type="button" onclick="addFooterPaymentRow();" data-toggle="tooltip" title="{{ button_add }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>
+											</tr>
+										</tfoot>
+									</table>
+									<script type="text/javascript">
+									var last_payment_index = {{ theme_mt_footer_payments|length }}
+									function addFooterPaymentRow() {
+										$('#tbody-footer-payments').append(`<tr class="payment-row">
+												<td class="text-center">
+													<a href="" id="thumb-footer-payment-`+last_payment_index+`" data-toggle="image" class="img-thumbnail">
+													<img src="{{ payment.thumb }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
+													<input type="hidden" name="theme_mt_footer_payments[`+last_payment_index+`][icon]" value="{{ payment.icon }}" id="input-footer-payment-`+last_payment_index+`" />
+												</td>
+												<td class="text-left maxi">
+													<input type="text" name="theme_mt_footer_payments[`+last_payment_index+`][link]" value="{{ payment.link }}" class="form-control" />
+												</td>
+												<td class="text-center">
+													<div class="switch_change">
+														<label class="switch">
+														<input class="form_control" type="checkbox" value="1" name="theme_mt_footer_payments[`+last_payment_index+`][newtab]"><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+														</label>
+													</div>
+												</td>
+												<td class="text-center">
+													<div class="switch_change">
+														<label class="switch">
+														<input class="form_control" type="checkbox" value="1" name="theme_mt_footer_payments[`+last_payment_index+`][nofollow]"><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+														</label>
+													</div>
+												</td>
+												<td class="text-center">
+													<div class="switch_change">
+														<label class="switch">
+														<input class="form_control" type="checkbox" value="1" name="theme_mt_footer_payments[`+last_payment_index+`][status]"><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+														</label>
+													</div>
+												</td>
+												<td class="text-left mini">
+													<input type="number" name="theme_mt_footer_payments[`+last_payment_index+`][sort_order]" value="{{ payment.sort_order }}" class="form-control" />
+												</td>
+												<td class="text-center">
+													<a href="#" onclick="return false;" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger js-remove-row"><i class="fa fa-minus-circle"></i></a>
+												</td>
+											</tr>`);
+										last_payment_index++;
+									}
+									$(document).on('click', '.js-remove-row', function() {
+										$(this).closest('.payment-row').remove();
+									});
+									</script>
+								</div>
+								</div>
+								
+								
+								
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<div class="mtp-row__title">Информеры</div>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_footer_informer_checked" {% if (theme_mt_footer_informer_checked) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input">				
+											<textarea name="theme_mt_footer_informer" id="" class="form-control" placeholder="Произвольный текст, с поддержкой HTML">{{ theme_mt_footer_informer }}</textarea>
+										</div>
+									</div>
+								</div>
+							</fieldset>
+							<fieldset>
+								<legend>
+									<h3>Контакты</h3>
+								</legend>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label class="control-label" for="input-catalog-limit">Вывести весь блок контакты</label>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_footer_show_contacts_checked" {% if (theme_mt_footer_show_contacts_checked) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">	
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<div class="mtp-row__title">Текст над контактами</div>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_footer_text_before_contacts_checked" {% if (theme_mt_footer_text_before_contacts_checked) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input">
+											<input type="text" name="theme_mt_footer_text_before_contacts" value="{{ theme_mt_footer_text_before_contacts }}" class="form-control" placeholder="Бесплатный звонок по РФ —">
+										</div>
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<div class="mtp-row__title">Текст под контактами</div>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_footer_text_after_contacts_checked" {% if (theme_mt_footer_text_after_contacts_checked) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input">
+											<textarea name="theme_mt_footer_text_after_contacts"class="form-control" placeholder="Текст под контактами">{{ theme_mt_footer_text_after_contacts }}</textarea>
+										</div>
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<div class="mtp-row__title">Вывести телефон</div>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_footer_show_phone_checked" {% if (theme_mt_footer_show_phone_checked) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">							
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label class="control-label" for="input-catalog-limit">Вывести емейл</label>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_footer_show_email_checked" {% if (theme_mt_footer_show_email_checked) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">	
+									</div>
+								</div>
+								
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label class="control-label" for="input-catalog-limit">Вывести копирайт</label>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_footer_show_copy_checked" {% if (theme_mt_footer_show_copy_checked) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">	
+									</div>
+								</div>								
+							</fieldset>
+						</div>
+						<!-- Конец вкладки 3 -->		
+						<!-- Вкладка 4 -->
+						<div id="nav4" class="tab-pane">
+							<fieldset>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Вывод подкатегорий">Подкатегории</span></label>				
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_category_subcategory" {% if (theme_mt_category_subcategory) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">				
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Включение и выключение картинок в выводимых подкатегориях">Изображения в подкатегориях</span></label>				
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_category_subcategory_images" {% if (theme_mt_category_subcategory_images) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">				
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Если есть родительская категория, можно показать ее отдельно">Родительская категория</span></label>				
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_category_parent" {% if (theme_mt_category_parent) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">				
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Вывод списка брендов в категорию">Бренды</span></label>				
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_category_brands" {% if (theme_mt_category_brands) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">													
+									</div>
+								</div>
+							</fieldset>
+							
+												
+							
+							<!--<fieldset>
+							<legend>
+								<h3>Фильтр</h3>
+							</legend>
+							<div class="mtp-row">
+								<div class="mtp-row_left">
+									<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Весь блок фильтров">Весь фильтр</span></label>				
+									<div class="mtp-row__circle">
+										<div class="switch_change">
+											<label class="switch">
+											<input class="form_control" type="checkbox" value="1" name="theme_mt_category_filters" {% if (theme_mt_category_filters) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+											</label>
+										</div>
+									</div>
+								</div>
+								<div class="mtp-row_right">													
+								</div>
+							</div>
+							<div class="mtp-row">
+								<div class="mtp-row_left">
+									<label for="input-directory" class="mtp-row__title control-label">Фильтр по цене</label>				
+									<div class="mtp-row__circle">
+										<div class="switch_change">
+											<label class="switch">
+											<input class="form_control" type="checkbox" value="1" name="theme_mt_category_filters_price" {% if (theme_mt_category_filters_price) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+											</label>
+										</div>
+									</div>
+								</div>
+								<div class="mtp-row_right">													
+								</div>
+							</div>
+							<div class="mtp-row">
+								<div class="mtp-row_left">
+									<label for="input-directory" class="mtp-row__title control-label">Фильтр по производителям</label>				
+									<div class="mtp-row__circle">
+										<div class="switch_change">
+											<label class="switch">
+											<input class="form_control" type="checkbox" value="1" name="theme_mt_category_filters_manufacturer" {% if (theme_mt_category_filters_manufacturer) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+											</label>
+										</div>
+									</div>
+								</div>
+								<div class="mtp-row_right">													
+								</div>
+							</div>
+							<div class="mtp-row">
+								<div class="mtp-row_left">
+									<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Фильтры по умолчанию, которые есть в Opencart (раздел фильтры)">Отдельные фильтры</span></label>				
+									<div class="mtp-row__circle">
+										<div class="switch_change">
+											<label class="switch">
+											<input class="form_control" type="checkbox" value="1" name="theme_mt_category_filters_default" {% if (theme_mt_category_filters_default) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+											</label>
+										</div>
+									</div>
+								</div>
+								<div class="mtp-row_right">													
+								</div>
+							</div>
+							
+							-->
+							
+							<fieldset>
+							<div class="{% if not activate %}nofree{% endif %}">
+								<legend>
+									<h3>Сортировка</h3>
+								</legend>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label">Сортировать по цене</label>				
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_category_sort_price_checked" {% if (theme_mt_category_sort_price_checked) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input pole">
+											<input type="text" name="theme_mt_category_sort_price_title" value="{{ theme_mt_category_sort_price_title }}" class="form-control" placeholder="Цене">
+										</div>
+										<select name="theme_mt_category_sort_price" class="form-control">
+											<option value="DESC" {% if theme_mt_category_sort_price == 'DESC' %}selected{% endif %}>По убыванию цены</option>
+											<option value="ASC" {% if theme_mt_category_sort_price == 'ASC' %}selected{% endif %}>По возрастанию цены</option>
+										</select>
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label">Сортировать по популярности</label>				
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_category_sort_popular_checked" {% if (theme_mt_category_sort_popular_checked) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input pole">
+											<input type="text" name="theme_mt_category_sort_popular_title" value="{{ theme_mt_category_sort_popular_title }}" class="form-control" placeholder="Популярности">
+										</div>
+										<select name="theme_mt_category_sort_popular" class="form-control">
+											<option value="DESC" {% if theme_mt_category_sort_popular == 'DESC' %}selected{% endif %}>По убыванию значения</option>
+											<option value="ASC" {% if theme_mt_category_sort_popular == 'ASC' %}selected{% endif %}>По возрастанию значения</option>
+										</select>
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label">Сортировать по скидке</label>				
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_category_sort_special_checked" {% if (theme_mt_category_sort_special_checked) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input pole">
+											<input type="text" name="theme_mt_category_sort_special_title" value="{{ theme_mt_category_sort_special_title }}" class="form-control" placeholder="Скидке">
+										</div>
+										<select name="theme_mt_category_sort_special" class="form-control">
+											<option value="ASC" {% if theme_mt_category_sort_special == 'ASC' %}selected{% endif %}>Сначала маленькие скидки</option>
+											<option value="DESC" {% if theme_mt_category_sort_special == 'DESC' %}selected{% endif %}>Сначала большие скидки</option>
+										</select>
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label">Сортировать по названию</label>				
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_category_sort_name_checked" {% if (theme_mt_category_sort_name_checked) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input pole">
+											<input type="text" name="theme_mt_category_sort_name_title" value="{{ theme_mt_category_sort_name_title }}" class="form-control" placeholder="Названию">
+										</div>
+										<select name="theme_mt_category_sort_name" class="form-control">
+											<option value="DESC" {% if theme_mt_category_sort_name == 'DESC' %}selected{% endif %}>От последних букв алфавита к первым</option>
+											<option value="ASC" {% if theme_mt_category_sort_name == 'ASC' %}selected{% endif %}>От первых букв алфавита к последним</option>
+										</select>
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label">Сортировать по дате обновления</label>				
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_category_sort_date_checked" {% if (theme_mt_category_sort_date_checked) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input pole">
+											<input type="text" name="theme_mt_category_sort_date_title" value="{{ theme_mt_category_sort_date_title }}" class="form-control" placeholder="Обновлению">
+										</div>
+										<select name="theme_mt_category_sort_date" class="form-control">
+											<option value="ASC" {% if theme_mt_category_sort_date == 'ASC' %}selected{% endif %}>Сначала ранние</option>
+											<option value="DESC" {% if theme_mt_category_sort_date == 'DESC' %}selected{% endif %}>Сначала поздние</option>
+										</select>
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">				
+										<label for="input-directory" class="mtp-row__title control-label">Сортировка по умолчанию</label>				
+									</div>
+									<div class="mtp-row_right">
+										<select name="theme_mt_category_sort_default" class="form-control">
+											<option value="p.price" {% if theme_mt_category_sort_default == 'p.price' %}selected{% endif %}>Цене</option>
+											<option value="rating" {% if theme_mt_category_sort_default == 'rating' %}selected{% endif %}>Популярности</option>
+											<option value="p.special" {% if theme_mt_category_sort_default == 'p.special' %}selected{% endif %}>Скидке</option>
+											<option value="pd.name" {% if theme_mt_category_sort_default == 'pd.name' %}selected{% endif %}>Названию</option>
+											<option value="p.date_added" {% if theme_mt_category_sort_default == 'p.date_added' %}selected{% endif %}>Обновлению</option>
+										</select>
+									</div>
+								</div>
+								
+							</div>			
+							</fieldset>
+							
+							<fieldset>
+								<legend>
+									<h3>Товары в категориях</h3>
+								</legend>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label class="control-label" for="input-catalog-limit"><span data-toggle="tooltip" title="{{ help_product_limit }}">{{ entry_product_limit }}</span></label>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_product_limit_checked" {% if theme_mt_product_limit_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row_input">
+											<input type="text" name="theme_mt_product_limit" value="{{ theme_mt_product_limit }}" placeholder="{{ entry_product_limit }}" id="input-catalog-limit" class="form-control" />
+											{% if error_product_limit %}
+											<div class="text-danger">{{ error_product_limit }}</div>
+											{% endif %}
+										</div>
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label">Вывод описания</label>				
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_category_product_description_checked" {% if (theme_mt_category_product_description_checked) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<label class="control-label" for="input-description-limit"><span data-toggle="tooltip" title="Сколько строк выводить в описании товара в категории">Количество строк в описании товара</span></label>
+										<div class="mtp-row_input space pole">
+											<input type="text" name="theme_mt_category_product_description_length" value="{{ theme_mt_category_product_description_length }}" placeholder="{{ entry_product_description_length }}" id="input-description-limit" class="form-control" />
+											{% if error_product_description_length %}
+											<div class="text-danger">{{ error_product_description_length }}</div>
+											{% endif %}			  
+										</div>
+									</div>
+								</div>
+								
+								<div class="{% if not activate %}nofree{% endif %}">
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label">Вывод характеристик</label>				
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_category_product_attributes_checked" {% if (theme_mt_category_product_attributes_checked) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<label class="control-label" for="input-description-limit"><span data-toggle="tooltip" title="Сколько показывать характеристик под названием товара">Количество характеристик</span></label>
+										<div class="mtp-row_input space pole">
+											<input type="text" name="theme_mt_category_product_attributes_length" value="{{ theme_mt_category_product_attributes_length }}" placeholder="2" id="" class="form-control" />
+										</div>
+									</div>
+								</div>
+								
+								
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Если в товаре есть и описание, и характеристики, то выводятся только характеристики, а описание выводится лишь когда нет характерстик в товаре">Приоритет характеристик</span></label>				
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_category_product_attributes_priority_checked" {% if (theme_mt_category_product_attributes_priority_checked) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">									            													  				
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Выбор количества товаров для корзины из категории">Выбор количества товаров</span></label>				
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_category_product_quanity_checked" {% if (theme_mt_category_product_quanity_checked) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">										
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Слова из поля keywords показываются в виде тегов в категории">Вывод ключевых фраз</span></label>				
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_category_product_keywords_checked" {% if (theme_mt_category_product_keywords_checked) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input pole">
+											<input type="text" name="theme_mt_category_product_keywords_text" value="{{ theme_mt_category_product_keywords_text }}" class="form-control" placeholder="Текст перед фразами">
+										</div>
+									</div>
+								</div>
+								</div>
+								
+								
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label class="control-label" for="input-catalog-limit"><span data-toggle="tooltip" title="Вывод иконки добавления в избранное">Добавить в избранное</span></label>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_category_product_wishlist_checked" {% if theme_mt_category_product_wishlist_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">									            										  
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label class="control-label" for="input-catalog-limit"><span data-toggle="tooltip" title="Текст статуса на складе: в наличии, под заказ и т.п.">Статус на складе</span></label>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_category_product_stock_checked" {% if theme_mt_category_product_stock_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">									            										  
+									</div>
+								</div>
+								
+								<div class="{% if not activate %}nofree{% endif %}">
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label class="control-label" for="input-catalog-limit"><span data-toggle="tooltip" title="Выводить стикер на акции (от старой цены)">Стикер "Акции"</span></label>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_category_product_sticker_special" {% if theme_mt_category_product_sticker_special %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">										
+									</div>
+								</div>
+								</div>								
+								
+								<div class="{% if not activate %}nofree{% endif %}">
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label class="control-label" for="input-catalog-limit"><span data-toggle="tooltip" title="Выводить стикер на скидки (от количества товаров)">Стикер "Скидки"</span></label>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_category_product_sticker_discount" {% if theme_mt_category_product_sticker_discount %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">										
+									</div>
+								</div>
+								</div>								
+								
+								<div class="{% if not activate %}nofree{% endif %}">
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label class="control-label" for="input-catalog-limit"><span data-toggle="tooltip" title="Текст кнопки добавления в корзину в категориях">Текст корзины</span></label>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_category_product_cart_checked" {% if theme_mt_category_product_cart_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row_input">
+											<input type="text" name="theme_mt_category_product_cart_text" value="{{ theme_mt_category_product_cart_text }}" placeholder="В корзину" id="input-catalog-limit" class="form-control" />                
+										</div>
+									</div>
+								</div>
+								</div>
+								
+							</fieldset>
+							
+							
+							<fieldset>
+							<div class="{% if not activate %}nofree{% endif %}">
+							<legend>
+								<h3>Количество товаров в строке</h3>
+							</legend>
+							
+							<div class="mtp-row">
+								<div class="mtp-row_left">
+									<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Количество товаров в строке в мобильном разрешении">Для мобильных</span></label>				
+										<div class="mtp-row__circle">	
+											<input type="text" name="theme_mt_category_product_mobile" value="{{ theme_mt_category_product_mobile }}" class="form-control" placeholder="2">
+										</div>	
+								</div>
+								<div class="mtp-row_right">
+									<span class="text_small">до 600px</span>
+								</div>
+							</div>
+							<div class="mtp-row">
+								<div class="mtp-row_left">
+									<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Количество товаров в строке в планшетном разрешении">Для планшетов</span></label>				
+									<div class="mtp-row__circle">	
+										<input type="text" name="theme_mt_category_product_note" value="{{ theme_mt_category_product_note }}" class="form-control" placeholder="4">
+									</div>	
+								</div>
+								<div class="mtp-row_right">
+									<span class="text_small">от 600px до 1024px</span>										
+								</div>
+							</div>
+							
+							<div class="mtp-row">
+								<div class="mtp-row_left">
+									<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Количество товаров в строке в нетбучном разрешении">Для нетбуков</span></label>				
+									<div class="mtp-row__circle">	
+										<input type="text" name="theme_mt_category_product_netbook" value="{{ theme_mt_category_product_netbook }}" class="form-control" placeholder="3">
+									</div>	
+								</div>
+								<div class="mtp-row_right">
+									<span class="text_small">от 1024px до 1280px</span>										
+								</div>
+							</div>							
+							
+							<div class="mtp-row">
+								<div class="mtp-row_left">
+									<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Количество товаров в строке в десктопном разрешении">Для десктопов</span></label>				
+									<div class="mtp-row__circle">	
+										<input type="text" name="theme_mt_category_product_desktop" value="{{ theme_mt_category_product_desktop }}" class="form-control" placeholder="3">
+									</div>	
+								</div>
+								<div class="mtp-row_right">
+									<span class="text_small">от 1280px до 1480px</span>																				
+								</div>
+							</div>								
+							
+							<div class="mtp-row">
+								<div class="mtp-row_left">
+									<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Количество товаров в строке в большом разрешении">Для больших экранов</span></label>				
+									<div class="mtp-row__circle">	
+										<input type="text" name="theme_mt_category_product_full" value="{{ theme_mt_category_product_full }}" class="form-control" placeholder="4">
+									</div>	
+								</div>
+								<div class="mtp-row_right">
+									<span class="text_small">от 1480px</span>																														
+								</div>
+							</div>
+							
+							</div>
+							</fieldset>
+							
+							
+							
+						</div>
+						<!-- Конец вкладки 4 -->			
+						<!-- Вкладка 5 -->
+						<div id="nav5" class="tab-pane">
+							<fieldset>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Включение / выключение артикулов в товарах">Артикулы</span></label>				
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_product_sku_checked" {% if theme_mt_product_sku_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row_input">
+											<input type="text" name="theme_mt_product_sku" value="{{ theme_mt_product_sku }}" placeholder="Артикулы:" id="input-catalog-limit" class="form-control" />                
+										</div>
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Включение / выключение возможности добавления в избранное">Добавить в избранное</span></label>				
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_product_wishlist_checked" {% if theme_mt_product_wishlist_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row_input">
+											<input type="text" name="theme_mt_product_wishlist" value="{{ theme_mt_product_wishlist }}" placeholder="В избранное" id="input-catalog-limit" class="form-control" />                
+										</div>
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Включение / выключение возможности добавления в сравнение">Добавить в сравнение</span></label>				
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_product_compare_checked" {% if theme_mt_product_compare_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row_input">
+											<input type="text" name="theme_mt_product_compare" value="{{ theme_mt_product_compare }}" placeholder="В сравнение" id="input-catalog-limit" class="form-control" />                
+										</div>
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Нулевой текст">Нулевой текст</span></label>				
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_product_zero_text_checked" {% if theme_mt_product_zero_text_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row_input">
+											<input type="text" name="theme_mt_product_zero_text" value="{{ theme_mt_product_zero_text }}" placeholder="Нулевой текст" id="input-catalog-limit" class="form-control" />                
+										</div>
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label class="control-label" for="input-catalog-limit"><span data-toggle="tooltip" title="Текст статуса на складе: в наличии, под заказ и т.п.">Статус на складе</span></label>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_product_state_checked" {% if theme_mt_product_state_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">									            										  
+									</div>
+								</div>
+								
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label class="control-label" for="input-catalog-limit"><span data-toggle="tooltip" title="Вывод названия опций перед значениями">Названия опций</span></label>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_product_optionname_checked" {% if theme_mt_product_optionname_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">									            										  
+									</div>
+								</div>
+								
+							</fieldset>
+							<fieldset>
+								<legend>
+									<h3>Описание</h3>
+								</legend>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Сворачивать длинные описания">Свернуть описание</span></label>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_product_hide_full_description_checked" {% if theme_mt_product_hide_full_description_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row_input">
+											<input type="text" name="theme_mt_product_hide_full_description_px" value="{{ theme_mt_product_hide_full_description_px }}" placeholder="Отображать px" id="input-catalog-limit" class="form-control" />                
+										</div>
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Можно вывести характеристики не только во вкладке характеристик, но и в общем описании товара">Характеристики в описании</span></label>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_product_hide_full_attr_checked" {% if theme_mt_product_hide_full_attr_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row_input">
+											<input type="text" name="theme_mt_product_hide_full_attr" value="{{ theme_mt_product_hide_full_attr }}" placeholder="Отображать px" id="input-catalog-limit" class="form-control" />                
+										</div>
+									</div>
+								</div>
+							</fieldset>
+							<fieldset>
+								<legend>
+									<h3>Характеристики</h3>
+								</legend>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Отображать названия групп характеристик">Группы характеристик</span></label>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_product_attr_group_name_checked" {% if theme_mt_product_attr_group_name_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">								
+									</div>
+								</div>
+							</fieldset>
+							<fieldset>
+								<legend>
+									<h3>Отзывы</h3>
+								</legend>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label">Имя</label>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_product_review_name_checked" {% if theme_mt_product_review_name_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">								
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label">Дата отзыва</label>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_product_review_date_checked" {% if theme_mt_product_review_date_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">								
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label">Максимальная оценка</label>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_product_review_rating_checked" {% if theme_mt_product_review_rating_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">								
+									</div>
+								</div>
+							</fieldset>
+							<fieldset>
+								<legend>
+									<h3>Кнопки</h3>
+								</legend>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label class="control-label" for="input-catalog-limit"><span data-toggle="tooltip" title="Текст кнопки добавления в корзину в товарах">Добавить в корзину</span></label>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_product_cart_checked" {% if theme_mt_product_cart_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row_input">
+											<input type="text" name="theme_mt_product_cart_text" value="{{ theme_mt_product_cart_text }}" placeholder="В корзину" id="input-catalog-limit" class="form-control" />                
+										</div>
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label class="control-label" for="input-catalog-limit"><span data-toggle="tooltip" title="Блок выбор количества единиц товаров к добавлению">Единицы</span></label>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_product_cart_quantity_checked" {% if theme_mt_product_cart_quantity_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row_input">
+											<input type="text" name="theme_mt_product_cart_quantity" value="{{ theme_mt_product_cart_quantity }}" placeholder="ед." id="input-catalog-limit" class="form-control" />                
+										</div>
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label class="control-label" for="input-catalog-limit">Быстрый заказ</label>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_product_fast_order_checked" {% if theme_mt_product_fast_order_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row_input">
+											<input type="text" name="theme_mt_product_fast_order_text" value="{{ theme_mt_product_fast_order_text }}" placeholder="Купить в 1 клик" id="input-catalog-limit" class="form-control" />                
+										</div>
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label class="control-label" for="input-catalog-limit">Консультация</label>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_product_question_checked" {% if theme_mt_product_question_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row_input">
+											<input type="text" name="theme_mt_product_question_text" value="{{ theme_mt_product_question_text }}" placeholder="Нужна консультация" id="input-catalog-limit" class="form-control" />                
+										</div>
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label class="control-label" for="input-catalog-limit">Обратный звонок</label>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_product_callback_checked" {% if theme_mt_product_callback_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row_input">
+											<input type="text" name="theme_mt_product_callback_text" value="{{ theme_mt_product_callback_text }}" placeholder="Обратный звонок" id="input-catalog-limit" class="form-control" />                
+										</div>
+									</div>
+								</div>
+							</fieldset>
+							
+							<fieldset>
+							<div class="{% if not activate %}nofree{% endif %}">
+								<legend>
+									<h3>Доставка и оплата</h3>
+								</legend>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label class="control-label" for="input-catalog-limit"><span data-toggle="tooltip" title="Если включено, то в товаре выводится информация о доставке">Инфо о доставке</span></label>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_product_delivery_checked" {% if theme_mt_product_delivery_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row_input pole" style="margin-right: 10px;">										
+											<input type="text" name="theme_mt_product_delivery_header" value="{{ theme_mt_product_delivery_header }}" placeholder="Заголовок" id="input-catalog-limit" class="form-control" />                
+										</div>
+										<div class="mtp-row_input mini">										
+											<input type="text" name="theme_mt_product_delivery_id" value="{{ theme_mt_product_delivery_id }}" placeholder="ID" id="input-catalog-limit" class="form-control" />                
+										</div>
+									</div>
+								</div>
+								
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<div class="mtp-row__title">Текст в доставку</div>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_product_delivery_text_checked" {% if (theme_mt_footer_small_text_checked) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input">				
+											<textarea name="theme_mt_product_delivery_text_area" id="" class="form-control" placeholder="Произвольный текст, с поддержкой HTML"><span>Бесплатно — Минск</span><span>По Беларуси — стоимость доставки 20 руб., при заказе от 300 руб. - бесплатно</span></textarea>
+										</div>
+									</div>		
+									</div>	
+									
+									
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label class="control-label" for="input-catalog-limit"><span data-toggle="tooltip" title="Если включено, то в товаре выводится информация об оплате">Инфо об оплате</span></label>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_product_payment_checked" {% if theme_mt_product_payment_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row_input pole" style="margin-right: 10px;">										
+											<input type="text" name="theme_mt_product_payment_header" value="{{ theme_mt_product_payment_header }}" placeholder="Заголовок" id="input-catalog-limit" class="form-control" />                
+										</div>
+										<div class="mtp-row_input mini">										
+											<input type="text" name="theme_mt_product_payment_id" value="{{ theme_mt_product_payment_id }}" placeholder="ID" id="input-catalog-limit" class="form-control" />                
+										</div>
+									</div>
+								</div>
+								
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<div class="mtp-row__title">Текст в оплату</div>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_product_payment_text_checked" {% if (theme_mt_product_payment_text_checked) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row__input">				
+											<textarea name="theme_mt_product_payment_text_area" id="" class="form-control" placeholder="Произвольный текст, с поддержкой HTML">{{ theme_mt_product_payment_text_area }}</textarea>
+										</div>
+									</div>										
+
+
+									
+							
+							</div>	
+							</fieldset>
+							<fieldset>
+								<legend>
+									<h3>Бренды</h3>
+								</legend>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label class="control-label" for="input-catalog-limit"><span data-toggle="tooltip" title="Если в товаре указан Бренд, то выводится его описание (указать количество абзацев), логотип, ссылку и т.п.">Вывод бренда в товаре</span></label>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_product_manufacturer_description_checked" {% if theme_mt_product_manufacturer_description_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row_input">
+											<input type="text" name="theme_mt_product_manufacturer_description_limit" value="{{ theme_mt_product_manufacturer_description_limit }}" placeholder="Строк в описании в десктопе (в мобиле будет автоматически на 2 строки меньше)" id="input-catalog-limit" class="form-control" />                
+										</div>
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label class="control-label" for="input-catalog-limit">Логотип производителя</label>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_product_manufacturer_logo_checked" {% if theme_mt_product_manufacturer_logo_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">									            										  				
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label class="control-label" for="input-catalog-limit">Ссылка на страницу производителя</label>
+										<div class="mtp-row__circle">
+											<div class="switch_change">
+												<label class="switch">
+												<input class="form_control" type="checkbox" value="1" name="theme_mt_product_manufacturer_link_checked" {% if theme_mt_product_manufacturer_link_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row_input">
+											<input type="text" name="theme_mt_product_manufacturer_text_link" value="{{ theme_mt_product_manufacturer_text_link }}" placeholder="{count_products} товаров {brand_name} в каталоге" id="input-catalog-limit" class="form-control" />                
+										</div>
+									</div>
+								</div>
+							</fieldset>
+						</div>
+						<!-- Конец вкладки 5 -->			
+						<!-- Вкладка 6 - Контакты -->
+						<div id="nav6" class="tab-pane">
+							<div class="main-contact-block">
+								{% set contact_index = 0 %}
+								{% for contact in theme_mt_contacts %}
+								<div class="contact-block">
+									<fieldset>
+										<legend>
+											<h3>Телефоны</h3>
+										</legend>
+										<div class="mtp-row">
+											<div class="mtp-row_left">
+												<label class="control-label" for="input-catalog-limit">Включить / Выключить отдел</label>
+												<div class="mtp-row__circle">
+													<div class="switch_change">
+														<label class="switch">
+														<input class="form_control" type="checkbox" value="1" name="theme_mt_contacts[{{ contact_index }}][status]" {% if contact.status %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+														</label>
+													</div>
+												</div>
+											</div>
+											<div class="mtp-row_right">
+												<div class="mtp-row__input mini">
+													<input type="text" name="theme_mt_contacts[{{ contact_index }}][sort_order]" value="{{ contact.sort_order }}" placeholder="Сортировка" id="input-catalog-limit" class="form-control" />                
+												</div>
+											</div>
+										</div>
+										<div class="mtp-row">
+											<div class="mtp-row_left">
+												<label class="control-label" for="input-catalog-limit"><span data-toggle="tooltip" title="Контакты из основного отдела показываются сразу во всплывающем блоке, а не основных - в этом же блоке, но внизу под спойлером">Это основной отдел</span></label>
+												<div class="mtp-row__circle">
+													<div class="switch_change">
+														<label class="switch">
+														<input class="form_control" type="checkbox" value="1" name="theme_mt_contacts[{{ contact_index }}][main]" {% if contact.main %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+														</label>
+													</div>
+												</div>
+											</div>
+											<div class="mtp-row_right">
+												<div class="mtp-row__input mini">
+													<input type="text" name="theme_mt_contacts[{{ contact_index }}][name]" value="{{ contact.name }}" placeholder="Название отдела" id="input-catalog-limit" class="form-control" />                              
+												</div>
+												<a href="javascript:void(0)" onclick="deleteContacts(this);" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger js-remove-row"><i class="fa fa-minus-circle"></i></a>
+											</div>
+										</div>
+										<div class="mtp-row">
+											<div class="mtp-row_left">
+												<label class="control-label" for="input-catalog-limit">Текст над телефонами</label>
+												<div class="mtp-row__circle">
+													<div class="switch_change">
+														<label class="switch">
+														<input class="form_control" type="checkbox" value="1" name="theme_mt_contacts[{{ contact_index }}][text_before_mobile_checked]" {% if contact.text_before_mobile_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+														</label>
+													</div>
+												</div>
+											</div>
+											<div class="mtp-row_right">
+												<div class="mtp-row__input">
+													<input type="text" name="theme_mt_contacts[{{ contact_index }}][text_before_mobile]" value="{{ contact.text_before_mobile }}" placeholder="Над номером телефона" id="input-catalog-limit" class="form-control" />                
+												</div>
+											</div>
+										</div>
+										<div class="table-responsive">
+											<table class="table table-hover">
+												<thead>
+													<tr>
+														<td class="text-left name">Номер телефона</td>
+														<td class="text-center name">Описание</td>
+														<td class="text-center name">В шапке</td>
+														<td class="text-center name">В подвале</td>
+														<td class="text-center name">В товаре</td>
+														<td class="text-center name">Статус</td>
+														<td class="text-center name">Сортировка</td>
+														<td class="text-center name">Действие</td>
+													</tr>
+												</thead>
+												<tbody class="contact-phones">
+													{% set contact_phone_index = 0 %}
+													{% set contact_parent_phone_index = contact_index %}
+													{% for phone in contact.phones %}
+													<tr class="phone-block">
+														<td class="text-left phones">
+															<input type="text" name="theme_mt_contacts[{{ contact_parent_phone_index }}][phones][{{ contact_phone_index }}][number]" value="{{ phone.number }}" placeholder="номер" id="input-catalog-limit" class="form-control" />                
+														</td>
+														<td class="text-left maxi">
+															<input type="text" name="theme_mt_contacts[{{ contact_parent_phone_index }}][phones][{{ contact_phone_index }}][text]" value="{{ phone.text }}" placeholder="пояснение рядом с телефоном" id="input-catalog-limit" class="form-control" />                
+														</td>
+														<td class="text-center">
+															<div class="switch_change">
+																<label class="switch">
+																<input class="form_control" type="checkbox" value="1" name="theme_mt_contacts[{{ contact_parent_phone_index }}][phones][{{ contact_phone_index }}][header]" {% if (phone.header) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+																</label>
+															</div>
+														</td>
+														<td class="text-center">
+															<div class="switch_change">
+																<label class="switch">
+																<input class="form_control" type="checkbox" value="1" name="theme_mt_contacts[{{ contact_parent_phone_index }}][phones][{{ contact_phone_index }}][footer]" {% if (phone.footer) %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+																</label>
+															</div>
+														</td>
+														<td class="text-center">
+															<div class="switch_change">
+																<label class="switch">
+																<input class="form_control" type="checkbox" value="1" name="theme_mt_contacts[{{ contact_parent_phone_index }}][phones][{{ contact_phone_index }}][product]" {% if phone.product %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+																</label>
+															</div>
+														</td>
+														<td class="text-center">
+															<div class="switch_change">
+																<label class="switch">
+																<input class="form_control" type="checkbox" value="1" name="theme_mt_contacts[{{ contact_parent_phone_index }}][phones][{{ contact_phone_index }}][status]" {% if phone.status %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+																</label>
+															</div>
+														</td>
+														<td class="text-left mini">
+															<input type="text" name="theme_mt_contacts[{{ contact_parent_phone_index }}][phones][{{ contact_phone_index }}][sort_order]" value="{{ phone.sort_order }}" class="form-control" />
+														</td>
+														<td class="text-center">
+															<a href="javascript:void(0)" onclick="deleteContact(this);" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger js-remove-row"><i class="fa fa-minus-circle"></i></a>
+														</td>
+													</tr>
+													{% set contact_phone_index = contact_phone_index + 1 %}
+													{% endfor %}
+												</tbody>
+												<tfoot>
+													<tr>
+														<td colspan="7"></td>
+														<td class="text-center"><button type="button" onclick="addContactPhone(this);" data-phone-index="{{ contact_phone_index }}" data-contact-index="{{ contact_index }}" data-toggle="tooltip" title="{{ button_add }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>
+													</tr>
+												</tfoot>
+											</table>
+										</div>
+										<div class="mtp-row">
+											<div class="mtp-row_left">
+												<label class="control-label" for="input-catalog-limit">Текст под телефонами</label>
+												<div class="mtp-row__circle">
+													<div class="switch_change">
+														<label class="switch">
+														<input class="form_control" type="checkbox" value="1" name="theme_mt_contacts[{{ contact_parent_phone_index }}][text_after_mobile_checked]" {% if contact.text_after_mobile_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+														</label>
+													</div>
+												</div>
+											</div>
+											<div class="mtp-row_right">
+												<div class="mtp-row__input">
+													<input type="text" name="theme_mt_contacts[{{ contact_parent_phone_index }}][text_after_mobile]" value="{{ contact.text_after_mobile }}" placeholder="Под номером телефона" id="input-catalog-limit" class="form-control" />                
+												</div>
+											</div>
+										</div>
+									</fieldset>
+									<fieldset>
+										<legend>
+											<h3>Мессенджеры и соцсети</h3>
+										</legend>
+										<div class="table-responsive">
+											<table class="table table-hover">
+												<thead>
+													<tr>
+														<td class="text-left name">CSS класс</td>
+														<td class="text-left name">CSS иконка</td>
+														<td class="text-left name">Ссылка на мессенджер</td>
+														<td class="text-center name">В окне</td>
+														<td class="text-center name">В подвале</td>
+														<td class="text-center name">В товаре</td>
+														<td class="text-center name">Статус</td>
+														<td class="text-center name">Сортировка</td>
+														<td class="text-center name">Действие</td>
+													</tr>
+												</thead>
+												<tbody class="contact-messengers">
+													{% set contact_messenger_index = 0 %}
+													{% set contact_parent_messenger_index = contact_index %}
+													{% for messenger in contact.messengers %}
+													<tr class="messenger-block">
+														<td class="text-left phones">
+															<input type="text" name="theme_mt_contacts[{{ contact_parent_messenger_index }}][messengers][{{ contact_messenger_index }}][css_class]" value="{{ messenger.css_class }}" placeholder="soc-vb" id="input-catalog-limit" class="form-control" />                
+														</td>
+														<td class="text-left phones">
+															<input type="text" name="theme_mt_contacts[{{ contact_parent_messenger_index }}][messengers][{{ contact_messenger_index }}][css_icon]" value="{{ messenger.css_icon }}" placeholder="fontawesome" id="input-catalog-limit" class="form-control" />                
+														</td>
+														<td class="text-left maxi">
+															<input type="text" name="theme_mt_contacts[{{ contact_parent_messenger_index }}][messengers][{{ contact_messenger_index }}][link]" value="{{ messenger.link }}" placeholder="https://" id="input-catalog-limit" class="form-control" />                
+														</td>
+														<td class="text-center">
+															<div class="switch_change">
+																<label class="switch">
+																<input class="form_control" type="checkbox" value="1" name="theme_mt_contacts[{{ contact_parent_messenger_index }}][messengers][{{ contact_messenger_index }}][window]" {% if messenger.window %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+																</label>
+															</div>
+														</td>
+														<td class="text-center">
+															<div class="switch_change">
+																<label class="switch">
+																<input class="form_control" type="checkbox" value="1" name="theme_mt_contacts[{{ contact_parent_messenger_index }}][messengers][{{ contact_messenger_index }}][footer]" {% if messenger.footer %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+																</label>
+															</div>
+														</td>
+														<td class="text-center">
+															<div class="switch_change">
+																<label class="switch">
+																<input class="form_control" type="checkbox" value="1" name="theme_mt_contacts[{{ contact_parent_messenger_index }}][messengers][{{ contact_messenger_index }}][product]" {% if messenger.product %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+																</label>
+															</div>
+														</td>
+														<td class="text-center">
+															<div class="switch_change">
+																<label class="switch">
+																<input class="form_control" type="checkbox" value="1" name="theme_mt_contacts[{{ contact_parent_messenger_index }}][messengers][{{ contact_messenger_index }}][status]" {% if messenger.status %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+																</label>
+															</div>
+														</td>
+														<td class="text-left mini">
+															<input type="text" name="theme_mt_contacts[{{ contact_parent_messenger_index }}][messengers][{{ contact_messenger_index }}][sort_order]" value="{{ messenger.sort_order }}" class="form-control" />
+														</td>
+														<td class="text-center">
+															<a href="javascript:void(0)" onclick="deleteMessenger(this);" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger js-remove-row"><i class="fa fa-minus-circle"></i></a>
+														</td>
+													</tr>
+													{% set contact_messenger_index = contact_messenger_index + 1 %}
+													{% endfor %}
+												</tbody>
+												<tfoot>
+													<tr>
+														<td colspan="8"></td>
+														<td class="text-center"><button type="button" onclick="addMessenger(this);" data-messenger-index="{{ contact_messenger_index }}" data-contact-index="{{ contact_index }}" data-toggle="tooltip" title="{{ button_add }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>
+													</tr>
+												</tfoot>
+											</table>
+										</div>
+									</fieldset>
+									<fieldset>
+										<legend>
+											<h3>Емейл</h3>
+										</legend>
+										<div class="mtp-row">
+											<div class="mtp-row_left">
+												<label class="control-label" for="input-catalog-limit">Электронная почта</label>
+												<div class="mtp-row__circle">
+													<div class="switch_change">
+														<label class="switch">
+														<input class="form_control" type="checkbox" value="1" name="theme_mt_contacts[{{ contact_parent_phone_index }}][email_checked]" {% if contact.email_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+														</label>
+													</div>
+												</div>
+											</div>
+											<div class="mtp-row_right">
+												<div class="mtp-row__input">
+													<input type="text" name="theme_mt_contacts[{{ contact_parent_phone_index }}][email]" value="{{ contact.email }}" placeholder="info@" id="input-catalog-limit" class="form-control" />                
+												</div>
+											</div>
+										</div>
+									</fieldset>
+									<hr>
+								</div>
+								{% set contact_index = contact_index + 1 %}
+								{% endfor %}
+							</div>
+							<button type="button" onclick="addContacts();" data-toggle="tooltip" title="{{ button_add }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button>
+							<span class="button_info">Создать новый отдел</span>	
+							<script type="text/javascript">
+							var contacts_index = {{ theme_mt_contacts|length }};
+							function addContacts() {
+								$('.main-contact-block').append(`<div class="contact-block">
+									<fieldset>
+										<legend>
+											<h3>Телефоны</h3>
+										</legend>
+										<div class="mtp-row">
+											<div class="mtp-row_left">
+												<label class="control-label" for="input-catalog-limit">Включить / Выключить отдел</label>
+												<div class="mtp-row__circle">
+													<div class="switch_change">
+														<label class="switch">
+														<input class="form_control" type="checkbox" value="1" name="theme_mt_contacts[`+contacts_index+`][status]" ><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+														</label>
+													</div>
+												</div>
+											</div>
+											<div class="mtp-row_right">
+												<div class="mtp-row__input mini">
+													<input type="text" name="theme_mt_contacts[`+contacts_index+`][sort_order]" value="" placeholder="Сортировка" id="input-catalog-limit" class="form-control" />                
+												</div>
+											</div>
+										</div>
+										<div class="mtp-row">
+											<div class="mtp-row_left">
+												<label class="control-label" for="input-catalog-limit"><span data-toggle="tooltip" title="Контакты из основного отдела показываются сразу во всплывающем блоке, а не основных - в этом же блоке, но внизу под спойлером">Это основной отдел</span></label>
+												<div class="mtp-row__circle">
+													<div class="switch_change">
+														<label class="switch">
+														<input class="form_control" type="checkbox" value="1" name="theme_mt_contacts[`+contacts_index+`][main]" ><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+														</label>
+													</div>
+												</div>
+											</div>
+											<div class="mtp-row_right">
+												<div class="mtp-row__input mini">
+													<input type="text" name="theme_mt_contacts[`+contacts_index+`][name]" value="" placeholder="Название отдела" id="input-catalog-limit" class="form-control" />                              
+												</div>
+												<a href="javascript:void(0)" onclick="deleteContacts(this);" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger js-remove-row"><i class="fa fa-minus-circle"></i></a>
+											</div>
+										</div>
+										<div class="mtp-row">
+											<div class="mtp-row_left">
+												<label class="control-label" for="input-catalog-limit">Текст над телефонами</label>
+												<div class="mtp-row__circle">
+													<div class="switch_change">
+														<label class="switch">
+														<input class="form_control" type="checkbox" value="1" name="theme_mt_contacts[`+contacts_index+`][text_before_mobile_checked]"><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+														</label>
+													</div>
+												</div>
+											</div>
+											<div class="mtp-row_right">
+												<div class="mtp-row__input">
+													<input type="text" name="theme_mt_contacts[`+contacts_index+`][text_before_mobile]" value="" placeholder="Над номером телефона" id="input-catalog-limit" class="form-control" />                
+												</div>
+											</div>
+										</div>
+										<div class="table-responsive">
+											<table class="table table-hover">
+												<thead>
+													<tr>
+														<td class="text-center name">Номер телефона</td>
+														<td class="text-center name">Описание</td>
+														<td class="text-center name">В шапке</td>
+														<td class="text-center name">В подвале</td>
+														<td class="text-center name">В товаре</td>
+														<td class="text-center name">Статус</td>
+														<td class="text-center name">Сортировка</td>
+														<td class="text-center name">Действие</td>
+													</tr>
+												</thead>
+												<tbody class="contact-phones">
+												</tbody>
+												<tfoot>
+													<tr>
+														<td colspan="7"></td>
+														<td class="text-center"><button type="button" onclick="addContactPhone(this);" data-contact-index="`+contacts_index+`" data-toggle="tooltip" title="{{ button_add }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>
+													</tr>
+												</tfoot>
+											</table>
+										</div>
+										<div class="mtp-row">
+											<div class="mtp-row_left">
+												<label class="control-label" for="input-catalog-limit">Текст под телефонами</label>
+												<div class="mtp-row__circle">
+													<div class="switch_change">
+														<label class="switch">
+														<input class="form_control" type="checkbox" value="1" name="theme_mt_contacts[`+contacts_index+`][text_after_mobile_checked]"><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+														</label>
+													</div>
+												</div>
+											</div>
+											<div class="mtp-row_right">
+												<div class="mtp-row__input">
+													<input type="text" name="theme_mt_contacts[`+contacts_index+`][text_after_mobile]" value="" placeholder="Под номером телефона" id="input-catalog-limit" class="form-control" />                
+												</div>
+											</div>
+										</div>
+									</fieldset>
+									<fieldset>
+										<legend>
+											<h3>Мессенджеры и соцсети</h3>
+										</legend>
+										<div class="table-responsive">
+											<table class="table table-hover">
+												<thead>
+													<tr>
+														<td class="text-center name">CSS класс</td>
+														<td class="text-center name">CSS иконка</td>
+														<td class="text-center name">Ссылка на мессенджер</td>
+														<td class="text-center name">В окне</td>
+														<td class="text-center name">В подвале</td>
+														<td class="text-center name">В товаре</td>
+														<td class="text-center name">Статус</td>
+														<td class="text-center name">Сортировка</td>
+														<td class="text-center name">Действие</td>
+													</tr>
+												</thead>
+												<tbody class="contact-messengers">
+												</tbody>
+												<tfoot>
+													<tr>
+														<td colspan="8"></td>
+														<td class="text-center"><button type="button" onclick="addMessenger(this);" data-contact-index="`+contacts_index+`" data-toggle="tooltip" title="{{ button_add }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>
+													</tr>
+												</tfoot>
+											</table>
+										</div>
+									</fieldset>
+									<fieldset>
+										<legend>
+											<h3>Емейл</h3>
+										</legend>
+										<div class="mtp-row">
+											<div class="mtp-row_left">
+												<label class="control-label" for="input-catalog-limit">Электронная почта</label>
+												<div class="mtp-row__circle">
+													<div class="switch_change">
+														<label class="switch">
+														<input class="form_control" type="checkbox" value="1" name="theme_mt_contacts[`+contacts_index+`][email_checked]"><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+														</label>
+													</div>
+												</div>
+											</div>
+											<div class="mtp-row_right">
+												<div class="mtp-row__input">
+													<input type="text" name="theme_mt_contacts[`+contacts_index+`][email]" value="" placeholder="info@" id="input-catalog-limit" class="form-control" />                
+												</div>
+											</div>
+										</div>
+									</fieldset>
+									<hr>
+								</div>`);
+								contacts_index++;
+							}
+							function deleteContacts(e) {
+								if (confirm('Удалить отдел?'))
+									$(e).closest('.contact-block').remove();
+							}
+							function deleteContact(e) {
+								$(e).closest('.phone-block').remove();
+							}
+							function deleteMessenger(e) {
+								$(e).closest('.messenger-block').remove();
+							}
+							function addContactPhone(e) {
+								var contacts_parent_index = $(e).data('contact-index');
+								contacts_phone_index = $(e).data('phone-index') + 1;
+								$(e).closest('.table-responsive').find('.contact-phones').append(`<tr class="phone-block">
+														<td class="text-left">
+															<input type="text" name="theme_mt_contacts[`+contacts_parent_index+`][phones][`+contacts_phone_index+`][number]" value="" placeholder="номер" id="input-catalog-limit" class="form-control" />                
+														</td>
+														<td class="text-left maxi">
+															<input type="text" name="theme_mt_contacts[`+contacts_parent_index+`][phones][`+contacts_phone_index+`][text]" value="" placeholder="пояснение рядом с телефоном" id="input-catalog-limit" class="form-control" />                
+														</td>
+														<td class="text-center">
+															<div class="switch_change">
+																<label class="switch">
+																<input class="form_control" type="checkbox" value="1" name="theme_mt_contacts[`+contacts_parent_index+`][phones][`+contacts_phone_index+`][header]"><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+																</label>
+															</div>
+														</td>
+														<td class="text-center">
+															<div class="switch_change">
+																<label class="switch">
+																<input class="form_control" type="checkbox" value="1" name="theme_mt_contacts[`+contacts_parent_index+`][phones][`+contacts_phone_index+`][footer]"><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+																</label>
+															</div>
+														</td>
+														<td class="text-center">
+															<div class="switch_change">
+																<label class="switch">
+																<input class="form_control" type="checkbox" value="1" name="theme_mt_contacts[`+contacts_parent_index+`][phones][`+contacts_phone_index+`][product]"><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+																</label>
+															</div>
+														</td>
+														<td class="text-center">
+															<div class="switch_change">
+																<label class="switch">
+																<input class="form_control" type="checkbox" value="1" name="theme_mt_contacts[`+contacts_parent_index+`][phones][`+contacts_phone_index+`][status]"><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+																</label>
+															</div>
+														</td>
+														<td class="text-left mini">
+															<input type="text" name="theme_mt_contacts[`+contacts_parent_index+`][phones][`+contacts_phone_index+`][sort_order]" value="" class="form-control" />
+														</td>
+														<td class="text-center">
+															<a href="javascript:void(0)" onclick="deleteContact(this);" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger js-remove-row"><i class="fa fa-minus-circle"></i></a>
+														</td>
+													</tr>`);
+								$(e).data('phone-index', $(e).data('phone-index') + 1);
+							}
+							function addMessenger(e) {
+								var contacts_parent_index = $(e).data('contact-index');
+								contacts_messenger_index = $(e).data('messenger-index') + 1;
+								$(e).closest('.table-responsive').find('.contact-messengers').append(`<tr class="messenger-block">
+														<td class="text-left">
+															<input type="text" name="theme_mt_contacts[`+contacts_parent_index+`][messengers][`+contacts_messenger_index+`][css_class]" value="" placeholder="soc-vb" id="input-catalog-limit" class="form-control" />                
+														</td>
+														<td class="text-left">
+															<input type="text" name="theme_mt_contacts[`+contacts_parent_index+`][messengers][`+contacts_messenger_index+`][css_icon]" value="" placeholder="fontawesome" id="input-catalog-limit" class="form-control" />                
+														</td>
+														<td class="text-left maxi">
+															<input type="text" name="theme_mt_contacts[`+contacts_parent_index+`][messengers][`+contacts_messenger_index+`][link]" value="" placeholder="https://" id="input-catalog-limit" class="form-control" />                
+														</td>
+														<td class="text-center">
+															<div class="switch_change">
+																<label class="switch">
+																<input class="form_control" type="checkbox" value="1" name="theme_mt_contacts[`+contacts_parent_index+`][messengers][`+contacts_messenger_index+`][window]"><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+																</label>
+															</div>
+														</td>
+														<td class="text-center">
+															<div class="switch_change">
+																<label class="switch">
+																<input class="form_control" type="checkbox" value="1" name="theme_mt_contacts[`+contacts_parent_index+`][messengers][`+contacts_messenger_index+`][footer]"><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+																</label>
+															</div>
+														</td>
+														<td class="text-center">
+															<div class="switch_change">
+																<label class="switch">
+																<input class="form_control" type="checkbox" value="1" name="theme_mt_contacts[`+contacts_parent_index+`][messengers][`+contacts_messenger_index+`][product]"><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+																</label>
+															</div>
+														</td>
+														<td class="text-center">
+															<div class="switch_change">
+																<label class="switch">
+																<input class="form_control" type="checkbox" value="1" name="theme_mt_contacts[`+contacts_parent_index+`][messengers][`+contacts_messenger_index+`][status]"><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+																</label>
+															</div>
+														</td>
+														<td class="text-left mini">
+															<input type="text" name="theme_mt_contacts[`+contacts_parent_index+`][messengers][`+contacts_messenger_index+`][sort_order]" value="" class="form-control" />
+														</td>
+														<td class="text-center">
+															<a href="javascript:void(0)" onclick="deleteMessenger(this);" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger js-remove-row"><i class="fa fa-minus-circle"></i></a>
+														</td>
+													</tr>`);
+								$(e).data('messenger-index', $(e).data('messenger-index') + 1);
+							}
+							</script>
+						</div>
+						<!-- Конец вкладки 6 -->		
+						<!-- Вкладка 7 - Цвета -->
+						<div id="nav7" class="tab-pane">
+						
+							<fieldset>
+								<legend>
+									<h3>Цветовые схемы</h3>						
+										
+									<div class="moytop-colors">
+										{% for color in theme_color %}
+										<input type="submit" value="" name="{{ color.css }}" class="moytop-color {{ color.css }}"></input>
+										{% endfor %}												
+								   </div>		
+						
+								</legend>
+						</fieldset>
+						
+						
+						
+							<fieldset class="{% if not activate %}nofree{% endif %}">
+								<legend>
+									<h3>Шапка</h3>
+								</legend>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Градиент для фона шапки (если нужна однотонная, то первый и второй цвет можно сделать одинаковым)">Шапка в десктопе</span></label>
+										<div class="mtp-row_input mini">									
+											<input type="text" name="theme_mt_header_gradient_background" value="{{ theme_mt_header_gradient_background }}" placeholder="0" class="form-control" />
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row_input">									
+											<input type="text" name="theme_mt_header_gradient_color1" value="{{ theme_mt_header_gradient_color1 }}" placeholder="#764BA2" class="form-control minicolors" />
+										</div>
+										<div class="mtp-row_input space">									
+											<input type="text" name="theme_mt_header_gradient_color2" value="{{ theme_mt_header_gradient_color2 }}" placeholder="#764BA2" class="form-control minicolors" />
+										</div>
+										<span class="text_small space">var(--header-desktop-bg)</span>															
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Градиент для фона шапки в мобильном режиме (если нужна однотонная, то первый и второй цвет можно сделать одинаковым)">Шапка в мобиле</span></label>
+										<div class="mtp-row_input mini">									
+											<input type="text" name="theme_mt_header_gradient_background_mobile" value="{{ theme_mt_header_gradient_background_mobile }}" placeholder="0" class="form-control" />
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row_input">									
+											<input type="text" name="theme_mt_header_gradient_mobile_color1" value="{{ theme_mt_header_gradient_mobile_color1 }}" placeholder="#764BA2" class="form-control minicolors" />
+										</div>
+										<div class="mtp-row_input space">									
+											<input type="text" name="theme_mt_header_gradient_mobile_color2" value="{{ theme_mt_header_gradient_mobile_color2 }}" placeholder="#764BA2" class="form-control minicolors" />
+										</div>
+										<span class="text_small space">var(--header-mobile-bg)</span>															
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Градиент для центрального меню (если нужна однотонная, то первый и второй цвет можно сделать одинаковым)">Центральное меню</span></label>
+										<div class="mtp-row_input mini">									
+											<input type="text" name="theme_mt_header_gradient_central_menu" value="{{ theme_mt_header_gradient_central_menu }}" placeholder="0" class="form-control" />
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row_input">									
+											<input type="text" name="theme_mt_header_gradient_central_menu_color1" value="{{ theme_mt_header_gradient_central_menu_color1 }}" placeholder="#764BA2" class="form-control minicolors" />
+										</div>
+										<div class="mtp-row_input space">									
+											<input type="text" name="theme_mt_header_gradient_central_menu_color2" value="{{ theme_mt_header_gradient_central_menu_color2 }}" placeholder="#764BA2" class="form-control minicolors" />
+										</div>
+										<span class="text_small space">var(--header-menu-bg)</span>															
+									</div>
+								</div>
+								
+								
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Цвет текста в центральном меню">Текст центральное меню</span></label>										
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row_input">									
+											<input type="text" name="theme_mt_header_text_central_menu_color" value="{{ theme_mt_header_text_central_menu_color }}" placeholder="#edeee9" class="form-control minicolors" />
+										</div>										
+										<span class="text_small space">var(--header-menu-text)</span>															
+									</div>
+								</div>									
+								
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Цвет остального текста в шапке">Текст в шапке</span></label>										
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row_input">									
+											<input type="text" name="theme_mt_header_text_color" value="{{ theme_mt_header_text_color }}" placeholder="#edeee9" class="form-control minicolors" />
+										</div>										
+										<span class="text_small space">var(--header-text)</span>															
+									</div>
+								</div>		
+								
+								{#<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Прозрачность поисковой строки">Поисковая строка</span></label>
+										<div class="mtp-row_input">									
+											<input type="text" name="theme_mt_header_search_transparent" value="{{ theme_mt_header_search_transparent }}" placeholder="0-1" class="form-control" />
+										</div>
+									</div>
+									<div class="mtp-row_right">	
+										<span class="text_small">var(--search-field-color)</span>															
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Прозрачность поисковой строки при наведении">Поисковая строка при наведении</span></label>
+										<div class="mtp-row_input">									
+											<input type="text" name="theme_mt_header_search_transparent_hover" value="{{ theme_mt_header_search_transparent_hover }}" placeholder="0-1" class="form-control" />
+										</div>
+									</div>
+									<div class="mtp-row_right">	
+										<span class="text_small">var(--search-field-color_hover)</span>															
+									</div>
+								</div>#}
+	
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Размер шрифта телефонов в шапке">Размер телефона в шапке</span></label>
+										<div class="mtp-row_input mini">									
+											<input type="text" name="theme_mt_header_phones" value="{{ theme_mt_header_phones }}" placeholder="27px" class="form-control" />
+										</div>
+									</div>
+									<div class="mtp-row_right">	
+										<span class="text_small">var(--header-phones)</span>															
+									</div>
+								</div>
+								
+								
+							</fieldset>
+							
+							<fieldset class="{% if not activate %}nofree{% endif %}">
+							<legend>
+									<h3>Подвал</h3>
+								</legend>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Градиент для фона подвала (если нужна однотонная заливка, то первый и второй цвет можно сделать одинаковым)">Фон подвала</span></label>
+										<div class="mtp-row_input mini">									
+											<input type="text" name="theme_mt_footer_gradient" value="{{ theme_mt_footer_gradient }}" placeholder="0" class="form-control" />
+										</div>
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row_input">									
+											<input type="text" name="theme_mt_footer_gradient_color1" value="{{ theme_mt_footer_gradient_color1 }}" placeholder="#55595c" class="form-control minicolors" />
+										</div>
+										<div class="mtp-row_input space">									
+											<input type="text" name="theme_mt_footer_gradient_color2" value="{{ theme_mt_footer_gradient_color2 }}" placeholder="#55595c" class="form-control minicolors" />
+										</div>
+										<span class="text_small space">var(--footer-color)</span>															
+									</div>
+								</div>
+								
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Цвет текста в подвале">Текст подвала</span></label>										
+									</div>
+									<div class="mtp-row_right">
+										<div class="mtp-row_input">									
+											<input type="text" name="theme_mt_footer_text_color" value="{{ theme_mt_footer_text_color }}" placeholder="#edeee9" class="form-control minicolors" />
+										</div>										
+										<span class="text_small space">var(--footer-text)</span>															
+									</div>
+								</div>	
+								
+							</fieldset>
+							
+							<fieldset class="{% if not activate %}nofree{% endif %}">
+								<legend>
+									<h3>Основные цвета</h3>
+								</legend>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Ссылки в интерфейсе, кнопки, якоря и т.п.">Основной цвет</span></label>								
+										<div class="mtp-row__circle">									
+											<input type="text" name="theme_mt_main_color" value="{{ theme_mt_main_color }}" placeholder="#7F9D87" class="form-control minicolors" />
+										</div>
+									</div>
+									<div class="mtp-row_right">			
+										<span class="text_small">var(--main-color)</span>					
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Кол-во в корзине, звездочки отзывов, подчеркивания вкладок и т.п.">Дополнительный цвет</span></label>												
+										<div class="mtp-row__circle">									
+											<input type="text" name="theme_mt_second_color" value="{{ theme_mt_second_color }}" placeholder="#FF6569" class="form-control minicolors" />
+										</div>
+									</div>
+									<div class="mtp-row_right">	
+										<span class="text_small">var(--second-color)</span>								
+									</div>
+								</div>
+								
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Текст в дополнительных элементах">Дополнительный текст</span></label>								
+										<div class="mtp-row__circle">									
+											<input type="text" name="theme_mt_text_white" value="{{ theme_mt_text_white }}" placeholder="#FFFFFF" class="form-control minicolors" />
+										</div>
+									</div>
+									<div class="mtp-row_right">			
+										<span class="text_small">var(--text-white)</span>					
+									</div>
+								</div>								
+								
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Фон всего сайта">Фон сайта</span></label>	 											
+										<div class="mtp-row__circle">									
+											<input type="text" name="theme_mt_bg_color" value="{{ theme_mt_bg_color }}" placeholder="#F8F8F8" class="form-control minicolors" />
+										</div>
+									</div>
+									<div class="mtp-row_right">		
+										<span class="text_small">var(--bg-color)</span>
+									</div>
+								</div>
+							</fieldset>
+							<fieldset class="{% if not activate %}nofree{% endif %}">
+								<legend><h3>Разные элементы</h3></legend>
+								
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Основной текст сайта: в описании, заголовках и т.п.">Основной текст</span></label>								
+										<div class="mtp-row__circle">									
+											<input type="text" name="theme_mt_text_1f" value="{{ theme_mt_text_1f }}" placeholder="#1F1F1F" class="form-control minicolors" />
+										</div>
+									</div>
+									<div class="mtp-row_right">			
+										<span class="text_small">var(--text-1f)</span>					
+									</div>
+								</div>
+								
+								
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Фон подложки списка подкатегорий в категориях">Фон подкатегорий</span></label>								
+										<div class="mtp-row__circle">									
+											<input type="text" name="theme_mt_subcategory_background" value="{{ theme_mt_subcategory_background }}" placeholder="#edeee9" class="form-control minicolors" />
+										</div>
+									</div>
+									<div class="mtp-row_right">			
+										<span class="text_small">var(--subcategory-background)</span>					
+									</div>
+								</div>
+								
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Радиус закругления фона для подкатегорий">Закругление фона подкатегорий</span></label>								
+										<div class="mtp-row_input mini">									
+											<input type="text" name="theme_mt_subcategory_radius" value="{{ theme_mt_subcategory_radius }}" placeholder="50px" class="form-control" />
+										</div>
+									</div>
+									<div class="mtp-row_right">			
+										<span class="text_small">var(--subcategory-radius)</span>					
+									</div>
+								</div>									
+								
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Радиус закругления изображений для подкатегорий">Закругление картинок подкатегорий</span></label>								
+										<div class="mtp-row_input mini">									
+											<input type="text" name="theme_mt_subcategory_radius2" value="{{ theme_mt_subcategory_radius2 }}" placeholder="50%" class="form-control" />
+										</div>
+									</div>
+									<div class="mtp-row_right">			
+										<span class="text_small">var(--subcategory-radius2)</span>					
+									</div>
+								</div>		
+
+
+							<div class="mtp-row">
+								<div class="mtp-row_left">
+									<label class="mtp-row__title control-label"><span data-toggle="tooltip" title="Как показывать текст и картинки в одной строке или переносить">Перенос картинок и текста в подкатегориях</span></label>									
+									<div class="mtp-row__circle">
+										<div class="switch_change">
+											<label class="switch">
+											<input class="form_control" type="checkbox" name="theme_mt_subcategory_wrap" {% if theme_mt_subcategory_wrap %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+											</label>
+										</div>
+									</div>
+								</div>
+								<div class="mtp-row_right">
+									<span class="text_small">var(--subcategory-wrap)</span>					
+								</div>
+							</div>									
+								
+
+	
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Цена в товаре">Цена</span></label>								
+										<div class="mtp-row__circle">									
+											<input type="text" name="theme_mt_text_price" value="{{ theme_mt_text_price }}" placeholder="#3F3F3F" class="form-control minicolors" />
+										</div>
+									</div>
+									<div class="mtp-row_right">			
+										<span class="text_small">var(--text-price)</span>					
+									</div>
+								</div>
+								
+								{#<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Зачеркнутые цены, текст в корзине и т.п.">Зачеркнутая цена</span></label>								
+										<div class="mtp-row__circle">									
+											<input type="text" name="theme_mt_text_gray2" value="{{ theme_mt_text_gray2 }}" placeholder="#BEC2C5" class="form-control minicolors" />
+										</div>
+									</div>
+									<div class="mtp-row_right">			
+										<span class="text_small">var(--text-gray-2)</span>					
+									</div>
+								</div>
+								#}
+								
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Путь хлебных крошек, артикул, избранных и т.п.">Хлебные крошки</span></label>								
+										<div class="mtp-row__circle">									
+											<input type="text" name="theme_mt_ultimate_gray" value="{{ theme_mt_ultimate_gray }}" placeholder="#949597" class="form-control minicolors" />
+										</div>
+									</div>
+									<div class="mtp-row_right">			
+										<span class="text_small">var(--ultimate-gray)</span>					
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Опции, скидки, характеристики в категории и т.п.">Служебный текст</span></label>								
+										<div class="mtp-row__circle">									
+											<input type="text" name="theme_mt_text_black" value="{{ theme_mt_text_black }}" placeholder="#55595C" class="form-control minicolors" />
+										</div>
+									</div>
+									<div class="mtp-row_right">			
+										<span class="text_small">var(--text-black)</span>					
+									</div>
+								</div>
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Цвет ссылок, телефонов в контактах, кнопки обратная связь и т.п.">Ссылки</span></label>								
+										<div class="mtp-row__circle">									
+											<input type="text" name="theme_mt_text_blue" value="{{ theme_mt_text_blue }}" placeholder="#5A95C4" class="form-control minicolors" />
+										</div>
+									</div>
+									<div class="mtp-row_right">			
+										<span class="text_small">var(--text-blue)</span>					
+									</div>
+								</div>
+								
+								{#
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Ссылки на развернуть">Ссылки развернуть</span></label>								
+										<div class="mtp-row__circle">									
+											<input type="text" name="theme_mt_text_blue_show" value="{{ theme_mt_text_blue_show }}" placeholder="#80A584" class="form-control minicolors" />
+										</div>
+									</div>
+									<div class="mtp-row_right">			
+										<span class="text_small">var(--text-blue_show)</span>					
+									</div>
+								</div>#}
+								
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="А также основные кнопки в карточке товара">Кнопка в корзину</span></label>								
+										<div class="mtp-row__circle">									
+											<input type="text" name="theme_mt_button_cart" value="{{ theme_mt_button_cart }}" placeholder="#7F9D87" class="form-control minicolors" />
+										</div>
+									</div>
+									<div class="mtp-row_right">			
+										<span class="text_small">var(--button-cart)</span>					
+									</div>
+								</div>	
+								
+								<div class="mtp-row">
+									<div class="mtp-row_left">
+										<label for="input-directory" class="mtp-row__title control-label"><span data-toggle="tooltip" title="Фон тегов и категорий">Цвет фона тегов и категорий</span></label>								
+										<div class="mtp-row__circle">									
+											<input type="text" name="theme_mt_tags_color" value="{{ theme_mt_tags_color }}" placeholder="#EDEEE9" class="form-control minicolors" />
+										</div>
+									</div>
+									<div class="mtp-row_right">			
+										<span class="text_small">var(--tags-color)</span>					
+									</div>
+								</div>								
+								
+							<div class="mtp-row">
+								<div class="mtp-row_left">
+									<label class="mtp-row__title control-label"><span data-toggle="tooltip" title="CSS код для семейства шрифтов">Семейство шрифтов</span></label>									
+	
+								</div>
+								<div class="mtp-row_right">
+									<div class="mtp-row__input">				
+										<textarea name="theme_mt_font_family" id="" class="form-control" placeholder="CSS код для семейства шрифтов">{{ theme_mt_font_family }}</textarea>
+									</div>
+								</div>
+							</div>								
+								
+
+
+								
+
+								
+							</fieldset>
+							
+							<fieldset class="{% if not activate %}nofree{% endif %}">
+							<legend><h3>CSS код</h3></legend>							
+							<div class="mtp-row">
+								<div class="mtp-row_left">
+									<label class="mtp-row__title control-label"><span data-toggle="tooltip" title="CSS код будет грузиться в отдельном файле на всех страницах сайта">CSS код</span></label>									
+									<div class="mtp-row__circle">
+										<div class="switch_change">
+											<label class="switch">
+											<input class="form_control" type="checkbox" name="theme_mt_css_code_checked" {% if theme_mt_css_code_checked %}checked="checked"{% endif %}><span class="switch_label"><span class="switch_decor"><span class="decor_circle"></span></span></span>
+											</label>
+										</div>
+									</div>
+								</div>
+								<div class="mtp-row_right">
+									<div class="mtp-row__input">				
+										<textarea name="theme_mt_css_code" id="" class="form-control" placeholder="Произвольный CSS код">{{ theme_mt_css_code }}</textarea>
+									</div>
+								</div>
+							</div>	
+							
+							<fieldset>
+							
+						</div>
+						<!-- Конец вкладки 6 -->				
+					</div>
+					<!-- конец белого поля внутри -->		 
+				</div>
+				<!-- конец центральных вкладок -->
+				<!-- начало верхней вкладки техподдержка -->	  
+				<div class="admin_panel tab-pane in fade" id="support">
+					<div class="container-fluid support">
+						{% if log %}<span class="marker free">{{ log }}</span>{% endif %}
+						<div class="row">
+							<div class="col-sm-8 col-md-4 col-lg-3"><label class="control-label" for="input-data-feed-export">Введите ключ для домена</label></div>
+							<div class="col-sm-8 col-md-6 col-lg-4"><input type="text" name="theme_mt_lic_key" placeholder="" id="lickey" value="{{ theme_mt_lic_key }}" class="form-control"></div>
+							<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><input type="submit" id="button-lic" name="lic" class="btn btn-primary btn-success" value="Ввести"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- tabcontent -->      
+		</div>
+	</form>
+   <!-- конец admin_panel -->	
+</div>
+<!-- container fluid -->      
+<!-- обычный опенкарт -->
+<div class="container-fluid">
+   {% if error_warning %}
+   <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+   </div>
+   {% endif %}
+</div>
+<!-- container fluid -->      <!-- конец обычного опенкарта --> 
+<!-- Сохранение вкладки header --> 
+<script>
+   $(function($){
+   	var storage = localStorage.getItem('nav-tabs');
+   	if (storage && storage !== "#") {
+   		$('.nav-tabs a[href="' + storage + '"]').tab('show');
+   	}
+    
+   	$('.nav li').on('click', function() {
+   		var id = $(this).find('a').attr('href');
+   		localStorage.setItem('nav-tabs', id);
+   	});
+   });
+   
+   
+   $(function($){
+   	var storage2 = localStorage.getItem('maintabs');
+   	if (storage2 && storage2 !== "#") {
+   		$('.maintabs a[href="' + storage2 + '"]').tab('show');
+   	}
+    
+   	$('.maintabs li').on('click', function() {
+   		var id = $(this).find('a').attr('href');
+   		localStorage.setItem('maintabs', id);
+   	});
+   });
+   
+</script>
+<!-- Скрипты чекаут --> 
+<script>
+   $(function() {
+       $('input.minicolors').minicolors();
+   });
+</script>
+{{ footer }}

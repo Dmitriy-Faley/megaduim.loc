@@ -1,0 +1,57 @@
+
+				:root {
+					
+					--header-desktop-bg: linear-gradient(90deg, #f7f7f7 0%, #f7f7f7 100%);
+					--header-mobile-bg: linear-gradient(90deg, #d9dfe5 0%, #d9dfe5 100%);
+					--header-menu-bg: linear-gradient(90deg, #d9dfe5 0%, #d9dfe5 100%);
+					--header-menu-text: #000000;
+					--header-text: #000000;				
+					
+					--footer-color: linear-gradient(180deg, #919aa3 0%, #626b75 100%);
+					--footer-text: #ffffff;
+					--footer-text-bottom: #ffffff11;
+					
+					--main-color: #80a584;
+					--second-color: #8eab0d;
+					--bg-color: #f7f7f7;
+					
+					--search-field-color: #00000011;	
+					--search-field-color_hover: #00000022;		
+					
+					--text-white: #ffffff;
+					--text-1f: #1f1f1f;
+					--text-price: #626b75;															
+					--ultimate-gray: #949597;
+					--text-black: #000000;
+					--text-blue: #8eab0d;					
+					--button-cart: #8eab0d;
+					--tags-color: #FFFFFF;
+						
+					--lines-color: rgba(0, 0, 0, 0.1);					
+					--font-family: 'Montserrat', system,-apple-system,BlinkMacSystemFont,'Segoe UI','Segoe WP',Roboto,Ubuntu,Oxygen,Cantarell,'Fira Sans','Helvetica Neue',Helvetica,'Lucida Grande','Droid Sans',Tahoma,'Microsoft Sans Serif',sans-serif;
+					--font-body-size: 15px;
+
+					--max-product-width: 480px;
+					--max-product-height: 640px;
+					--heigth-image-product-mobile: 290px;					
+					--product-description-rows: 3;
+					--product-additional-width: 80px;
+					--product-additional-height: 100px;
+					--category-img-width: 36px;		
+					--subcategory__item_width: 36px;		
+					--subcategory-background: #ffffff;		
+					--subcategory-radius: 50px;					
+					--subcategory-radius2: 50%;
+					--subcategory-wrap: nowrap;					
+					--header-phones: 32px;					
+					
+					--category-product-mobile: 2;
+					--category-product-note: 4;
+					--category-product-netbook: 3;
+					--category-product-desktop: 3;
+					--category-product-full: 4;
+					
+					--limit_stamp: 6;
+				}		
+
+			

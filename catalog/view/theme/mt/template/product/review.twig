@@ -1,0 +1,40 @@
+{% if reviews %}
+<div class="reviews_items">
+{% for review in reviews %}
+<div class="reviews_items-item">
+    <div class="review_item-title">
+        <div class="review_item-author">
+            {% if theme_mt_product_review_name_checked %}<span>{{ review.author }}</span>{% if theme_mt_product_review_date_checked %},&nbsp;{% endif %}{% endif %}
+            {% if theme_mt_product_review_date_checked %}<span class="review_item-date">{{ review.date_added }}</span>{% endif %}
+        </div>
+        {% if theme_mt_product_review_rating_checked %}
+        <div class="review_item-rating">
+            <div class="review_item-rating-box">
+                
+                
+                    <span class="i-custom icon-icon-star {% if review.rating >= 1 %}rate{% else %}gray{% endif %}"></span>
+                    <span class="i-custom icon-icon-star {% if review.rating >= 2 %}rate{% else %}gray{% endif %}"></span>
+                    <span class="i-custom icon-icon-star {% if review.rating >= 3 %}rate{% else %}gray{% endif %}"></span>
+                    <span class="i-custom icon-icon-star {% if review.rating >= 4 %}rate{% else %}gray{% endif %}"></span>
+                    <span class="i-custom icon-icon-star {% if review.rating >= 5 %}rate{% else %}gray{% endif %}"></span>
+                
+            </div>
+
+            <div class="review_item-count">
+                (<span>{{ review.rating }}</span>&nbsp;из&nbsp;<span>5</span>)
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    <div class="rating_item-text">
+        <p>{{ review.text }}</p>
+    </div>
+</div>
+{% endfor %}
+</div>
+<div class="row">
+  <div class="col-sm-6 text-left">{{ pagination }}</div>
+</div>
+{% else %}
+<p>{{ text_no_reviews }}</p>
+{% endif %}

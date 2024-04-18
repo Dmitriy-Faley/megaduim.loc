@@ -1,0 +1,224 @@
+{{ header }}
+
+<section class="favorites">
+  <div class="favorites__breadcrumbs breadcrumbs">
+    {% for breadcrumb in breadcrumbs %}
+    <a class="breadcrumbs__link  {% if breadcrumb == breadcrumbs|last %} is-active {% endif %}"
+      href="/order-history">{{ breadcrumb.text }}</a>
+    {% if breadcrumb != breadcrumbs|last %}
+    <span class="slash">/</span>
+    {% endif %}
+    {% endfor %}
+  </div>
+  <h1 class="section_block__title">{{ heading_title }}</h1>
+  <div class="favorites__content">
+    <div class="favorites__main">
+      <!--<div class="favorites__top">
+        <p class="section_block__title section_block__title--small">Все товары</p>
+        <div class="select favorites__select" data-dropdown="" data-dropdown-name="sorting"
+          data-dropdown-placeholder="Сначала новые" data-dropdown-readonly="true"
+          data-dropdown-options="[{&quot;key&quot;:&quot;сначала новые&quot;,&quot;value&quot;:&quot;сначала новые&quot;},{&quot;key&quot;:&quot;сначала старые&quot;,&quot;value&quot;:&quot;сначала старые&quot;},{&quot;key&quot;:&quot;по убыванию цены&quot;,&quot;value&quot;:&quot;по убыванию цены&quot;},{&quot;key&quot;:&quot;по возрастанию цены&quot;,&quot;value&quot;:&quot;по возрастанию цены&quot;}]">
+        </div>
+      </div>-->
+        {% for s in sorts %}
+            {% if (s.code == sort) %}
+           <!-- <a href="{{ s.href }}"
+                class="news__sort_btn btn btn--grey btn--icon_right head_sorting-variant current-sort {% if order == 'ASC' %} sort_1{% else %} sort_2{% endif %}">
+                <span class="btn__text">
+                    {% if order == 'ASC' %} сначала дорогие{% else %} сначала дешевые{% endif %}
+                </span>
+                <svg class="btn__icon btn__icon--black btn__icon--right">
+                    <use xlink:href="#icon_sort"></use>
+                </svg>
+            </a>-->
+            {% endif %}
+        {% endfor %}
+      <div class="favorites__cards">
+
+            {% for product in products %}
+            <div class="hits_slide swiper-slide">
+                <div class="hits_slide__pic" data-linked-modal="modal_card">
+                    <div class="hits_slide__pic_wrap" data-hover-images="">
+                        <img class="image" data-lazy data-src="{{ product.thumb }}" alt="{{ heading_title }}">
+                        {% for img in product.imgDop %}
+                            <img class="image" data-lazy data-src="{{ img.thumb }}" alt="{{ heading_title }}">
+                        {% endfor %}
+                    </div>
+                    <img class="loader" data-src="/image/catalog/assets/img/loader.svg" alt="" data-lazy="" />
+                    <div class="hits_slide__hover_btn btn btn--filled">Быстрый просмотр</div>
+                    <button class="hits_slide__btn hits_slide__btn--mob"><img class="image image__empty"
+                            data-src="/image/catalog/assets/img/icon_fav_empty.svg" alt="" data-lazy="" /><img
+                            class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg" alt=""
+                            data-lazy="" />
+                    </button>
+                </div>
+                <a href="{{ product.href }}" class="hits_slide_mobile btn btn--filled">
+                    Подробнее
+                </a> 
+                <div class="hits_slide__info">
+                    <div class="hits_slide__left" data-linked-modal="modal_card">
+                        <p class="hits_slide__text hits_slide__text-name hits_slide__text--big">{{ product.name }}</p>
+                        <p class="hits_slide__text">
+                            {{ product.model }}
+                        </p>            
+                        {% if product.stock == 'В наличии' %}
+                            <div class="hits_slide__stock" data-color="green">В наличии</div> 
+                            {% elseif product.stock == 'Нет в наличии' %} 
+                            <div class="hits_slide__stock" data-color="red">Нет в наличии</div> 
+                            {% elseif product.stock == 'Ожидание 2-3 дня' %} 
+                            <div class="hits_slide__stock" data-color="blue">Ожидание 2-3 дня</div> 
+                            {% elseif product.stock == 'Предзаказ' %}
+                            <div class="hits_slide__stock" data-color="blue">Предзаказ</div> 
+                        {% endif %}
+
+
+                        <div style="display: none;">
+                        {% if product.attrblock %}
+                            {% for attrblockitem in product.attrblock %}
+                                {% if attrblockitem.attribute_group_id == 7 %}
+                                <div class="attrs__size">
+                                    <span class="attr__size-name">{{ attrblockitem.name }}</span>
+                                    {% for attributeitem in attrblockitem.attribute %}
+                                        {% if attributeitem.attribute_id == 16 %}
+                                        <div class="attr__size-category shir">
+                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
+                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
+                                        </div>
+                                        {% endif %}
+                                        {% if attributeitem.attribute_id == 13 %}
+                                        <div class="attr__size-category leng">
+                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
+                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
+                                        </div>
+                                        {% endif %}
+                                        {% if attributeitem.attribute_id == 14 %}
+                                        <div class="attr__size-category heig-lin">
+                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
+                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
+                                        </div>
+                                        {% endif %}
+                                        {% if attributeitem.attribute_id == 12 %}
+                                        <div class="attr__size-category shir-lin">
+                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
+                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
+                                        </div>
+                                        {% endif %}
+                                        {% if attributeitem.attribute_id == 15 %}
+                                        <div class="attr__size-category most-len">
+                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
+                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
+                                        </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                {% elseif attrblockitem.attribute_group_id == 8 %} 
+                                <div class="attrs__char">
+                                    <span class="attr__char-name">{{ attrblockitem.name }}</span>
+                                    {% for attributeitem in attrblockitem.attribute %}
+                                    <div class="attr__char-category">
+                                        <p class="attr__char-name">{{ attributeitem.name }}</p>
+                                        <p class="attr__char-cal">{{ attributeitem.text }}</p>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                        </div>
+
+                        <div class="hits_slide_option" style="display: none;">
+  
+                            {% if product.attrblock %}
+                                {% for attrblockitem in product.attrblock %}
+                                    {% if attrblockitem.attribute_group_id == 29 %}
+                                        {% for attributeitem in attrblockitem.attribute %}
+                                        <div class="hits_slide_option_param">
+                                            <span>{{ attributeitem.name }}</span>
+                                            <a href="{{ attributeitem.hrefPiece }}{{ attributeitem.text }}"></a>
+                                        </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %} 
+                            {% endif %}   
+                        </div>
+
+
+                        <a class="hits_slide__href" href="{{ product.href }}"></a>
+                        <p class="hits_slide__descr" style="display: none;">{{ product.description }}</p>
+                        <div class="hits_slide__price">
+                            {% if product.special %}
+                                <p class="hits_slide__text normal"> <text>{{ product.special }}</text> RUB</p>
+                                <p class="hits_slide__text old"><text>{{ product.price }}</text> RUB</p>
+                            {% else %}
+                                <p class="hits_slide__text normal"> <text>{{ product.price }}</text> RUB</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="hits_slide__right">
+                        {% if product.stock == 'В наличии' %}
+                            <button class="hits_slide__btn add-to-cart {% if product.in_cart %} added{% endif %}" id="add-to-cart"
+                                    onclick="add_in_cart('{{ product.product_id }}', '{{ product.minimum }}'); return false;">
+                                    <img class="image image__empty" data-src="/image/catalog/assets/img/icon_cart_empty.svg"
+                                        alt="" data-lazy="" />
+                                    <img class="image image__active" data-src="/image/catalog/assets/img/icon_cart_active.svg"
+                                        alt="" data-lazy="" />
+                                </button>
+                        {% endif %}
+                        <button class="hits_slide__btn add-wish {% if product.in_wishlist %} added{% endif %}"
+                            onclick="{% if product.in_wishlist %}wishlist_remove('{{ product.product_id }}');{% else %}wishlist_add('{{ product.product_id }}');{% endif %} return false;"
+                            {% if not logged %}data-login="false" {% else %}data-login="true" {% endif %}>
+                            <img class="image image__empty" data-src="/image/catalog/assets/img/icon_fav_empty.svg"
+                                alt="" data-lazy="" />
+                            <img class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg"
+                                alt="" data-lazy="" />
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+ 
+      </div>
+        {% if pagination %}
+        <div class="catalog_inner__pagination pagination">
+            {% if pagCustom.last != pagCustom.page %}
+                <a href="{{ pagCustom.url }}" class="pagination__btn_more btn btn--grey"><span class="btn__text">Показать ещё</span></a>
+            {% endif %}
+            {{ pagination }} 
+        </div>
+        {% endif %}
+
+    </div>
+  </div>
+</section>
+    <script type="text/javascript">
+    function add_in_cart(product_id, quantity) {
+        var btn = this;
+        $.ajax({
+        url: 'index.php?route=checkout/cart/add',
+        type: 'post',
+        data: 'product_id=' + product_id + '&quantity=' + (typeof(quantity) != 'undefined' ? quantity : 1),
+        dataType: 'json',
+        success: function(json) {
+
+            if (json['redirect']) {
+            location = json['redirect'];
+            }
+
+            if (json['success']) {
+            if ($("#cart_added").hasClass('notify_action')) {
+                $('#cart_added').removeClass('notify_action');
+            }
+            $(document).find('#cart_added').addClass('notify_action').css('top', 90 + 'px'); 
+            active_notify();
+            $(btn).html('В корзине');
+            }
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+        });
+    }
+    </script>
+
+
+{{ footer }}

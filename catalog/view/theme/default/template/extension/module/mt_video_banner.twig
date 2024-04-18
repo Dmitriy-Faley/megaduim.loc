@@ -1,0 +1,23 @@
+
+{% if items %}
+	<div class="mt-module mtvideo">	
+		
+        {% for item in items %}
+			<div class="mtvideo-item">			
+				<div class="mtvideo__img">		
+					<div class="mtvideo_one">		
+						<img src="{{ item.icon }}" loading="lazy" class="mtvideo__img-video" alt="{{ item.title }}" title="{{ item.title }}" width="100%" height="100%">
+						<div class="mtvideo__img__time">{{ item.time }}</div>						
+						<div class="mtvideo__img__play">
+						<a href="{{ item.link }}" class="fancybox">
+						<img width="100%" height="100%" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjIiIGhlaWdodD0iMjUiIHZpZXdCb3g9IjAgMCAyMiAyNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE3LjA4NjEgOC44MzEyMkw3LjAzNTQ5IDIuOTQzNzNDNC41MTQyMSAxLjQ2NjggMy4yNTM1NyAwLjcyODMzMyAyLjI0MTYzIDEuMDUyOUMxLjkyMzIzIDEuMTU1MDMgMS42Mjk5NCAxLjMyMzEzIDEuMzgwODkgMS41NDYyNEMwLjU4OTM0NyAyLjI1NTM1IDAuNTg5MzQ3IDMuNzE2MzUgMC41ODkzNDcgNi42MzgzN0wwLjU4OTM0OCAxOC40MTMzQzAuNTg5MzQ4IDIxLjMzNTQgMC41ODkzNDcgMjIuNzk2NCAxLjM4MDg5IDIzLjUwNTVDMS42Mjk5NCAyMy43Mjg2IDEuOTIzMjMgMjMuODk2NyAyLjI0MTYzIDIzLjk5ODhDMy4yNTM1NyAyNC4zMjM0IDQuNTE0MjEgMjMuNTg0OSA3LjAzNTQ5IDIyLjEwOEwxNy4wODYxIDE2LjIyMDVDMTkuNTYgMTQuNzcxMyAyMC43OTY5IDE0LjA0NjcgMjEuMDE0MyAxMy4wMTc1QzIxLjA4MjggMTIuNjkzMyAyMS4wODI4IDEyLjM1ODQgMjEuMDE0MyAxMi4wMzQyQzIwLjc5NjkgMTEuMDA1IDE5LjU1OTkgMTAuMjgwNCAxNy4wODYxIDguODMxMjJaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K" loading="lazy" alt="Воспроизвести" draggable="false" data-v-e4caeaf8="">
+						</a>
+						</div>
+					</div>
+					<div class="mtvideo__img__title">{{ item.title }}</div>
+				</div>					
+			</div>		
+		{% endfor %}
+		
+	</div>
+{% endif %}

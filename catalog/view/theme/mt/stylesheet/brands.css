@@ -1,0 +1,33 @@
+.brands-list {
+	margin: 20px 0px 0px 10px;	
+}
+
+.filter-tags__link {
+  display: inline-block;
+  vertical-align: top;
+  height: 30px;
+  border-radius: 15px;
+  background-color: var(--subcategory-background);
+  margin-right: 5px;
+  margin-bottom: 10px;
+  white-space: nowrap;
+  line-height: 30px;
+  text-align: center;
+  padding: 0 15px;
+  font-size: 13px;
+  color: #252525;
+}
+
+
+
+.brands-list__item {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0px 40px 10px 0px;
+}
+
+
+.brand {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

@@ -1,0 +1,448 @@
+{{ header }}
+
+
+<section class="news promotions">
+    <div class="news__breadcrumbs breadcrumbs">
+        {% for breadcrumb in breadcrumbs %}
+        <a class="breadcrumbs__link  {% if breadcrumb == breadcrumbs|last %} is-active {% endif %}"
+            href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+        {% if breadcrumb != breadcrumbs|last %}
+        <span class="slash">/</span>
+        {% endif %}
+        {% endfor %}
+    </div>
+    <h1 class="section_block__title">Акции и промо</h1>
+    <div class="news__buttons">
+        <button class="news__sort_btn btn btn--grey btn--icon_right" data-sort-btn=""><span class="btn__text">сначала
+                новые</span>
+            <svg class="btn__icon btn__icon--black btn__icon--right">
+                <use xlink:href="#icon_sort"></use>
+            </svg>
+        </button>
+    </div>
+    <div class="news__content">
+        <a class="news_card" href="/promotions_card_page">
+            <div class="news_card__img"> <img class="image" data-src="/image/catalog//assets/img/cover_pic.svg" alt="" data-lazy="" />
+            </div>
+            <p class="news_card__date">7 апреля, 2023</p>
+            <p class="news_card__title">Приводите друзей и получайте бонусы за их первую покупку в мобильном приложении
+            </p>
+            <p class="news_card__text">Отправьте вашу ссылку на установку мобильного приложения другу, который еще не
+                является пользователем мобильного.</p>
+        </a>
+        <a class="news_card" href="/promotions_card_page">
+            <div class="news_card__img"> <img class="image" data-src="/image/catalog//assets/img/cover_pic.svg" alt="" data-lazy="" />
+            </div>
+            <p class="news_card__date">7 апреля, 2023</p>
+            <p class="news_card__title">Приводите друзей и получайте бонусы за их первую покупку в мобильном</p>
+            <p class="news_card__text">Отправьте вашу ссылку на установку мобильного приложения другу, который еще не
+                является пользователем мобильного.</p>
+        </a>
+        <a class="news_card" href="/promotions_card_page">
+            <div class="news_card__img"> <img class="image" data-src="/image/catalog//assets/img/cover_pic.svg" alt="" data-lazy="" />
+            </div>
+            <p class="news_card__date">7 апреля, 2023</p>
+            <p class="news_card__title">Приводите друзей и получайте бонусы</p>
+            <p class="news_card__text">Отправьте вашу ссылку на установку мобильного приложения другу, который еще не
+                является пользователем мобильного.</p>
+        </a><a class="news_card" href="/promotions_card_page">
+            <div class="news_card__img"> <img class="image" data-src="/image/catalog//assets/img/cover_pic.svg" alt="" data-lazy="" />
+            </div>
+            <p class="news_card__date">7 апреля, 2023</p>
+            <p class="news_card__title">Приводите друзей и получайте бонусы</p>
+            <p class="news_card__text">Отправьте вашу ссылку на установку</p>
+        </a><a class="news_card" href="/promotions_card_page">
+            <div class="news_card__img"> <img class="image" data-src="/image/catalog//assets/img/cover_pic.svg" alt="" data-lazy="" />
+            </div>
+            <p class="news_card__date">7 апреля, 2023</p>
+            <p class="news_card__title">Приводите друзей и получайте бонусы за их первую покупку в мобильном приложении
+            </p>
+            <p class="news_card__text">Отправьте вашу ссылку на установку мобильного приложения другу, который еще не
+                является пользователем мобильного.</p>
+        </a><a class="news_card" href="/promotions_card_page">
+            <div class="news_card__img"> <img class="image" data-src="/image/catalog//assets/img/cover_pic.svg" alt="" data-lazy="" />
+            </div>
+            <p class="news_card__date">7 апреля, 2023</p>
+            <p class="news_card__title">Приводите друзей и получайте бонусы за их первую покупку в мобильном</p>
+            <p class="news_card__text">Отправьте вашу ссылку на установку мобильного приложения другу, который еще не
+                является пользователем мобильного.</p>
+        </a><a class="news_card" href="/promotions_card_page">
+            <div class="news_card__img"> <img class="image" data-src="/image/catalog//assets/img/cover_pic.svg" alt="" data-lazy="" />
+            </div>
+            <p class="news_card__date">7 апреля, 2023</p>
+            <p class="news_card__title">Приводите друзей и получайте бонусы</p>
+            <p class="news_card__text">Отправьте вашу ссылку на установку мобильного приложения другу, который еще не
+                является пользователем мобильного.</p>
+        </a><a class="news_card" href="/promotions_card_page">
+            <div class="news_card__img"> <img class="image" data-src="/image/catalog//assets/img/cover_pic.svg" alt="" data-lazy="" />
+            </div>
+            <p class="news_card__date">7 апреля, 2023</p>
+            <p class="news_card__title">Приводите друзей и получайте бонусы</p>
+            <p class="news_card__text">Отправьте вашу ссылку на установку</p>
+        </a><a class="news_card" href="/promotions_card_page">
+            <div class="news_card__img"> <img class="image" data-src="/image/catalog//assets/img/cover_pic.svg" alt="" data-lazy="" />
+            </div>
+            <p class="news_card__date">7 апреля, 2023</p>
+            <p class="news_card__title">Приводите друзей и получайте бонусы за их первую покупку в мобильном приложении
+            </p>
+            <p class="news_card__text">Отправьте вашу ссылку на установку мобильного приложения другу, который еще не
+                является пользователем мобильного.</p>
+        </a><a class="news_card" href="/promotions_card_page">
+            <div class="news_card__img"> <img class="image" data-src="/image/catalog//assets/img/cover_pic.svg" alt="" data-lazy="" />
+            </div>
+            <p class="news_card__date">7 апреля, 2023</p>
+            <p class="news_card__title">Приводите друзей и получайте бонусы за их первую покупку в мобильном</p>
+            <p class="news_card__text">Отправьте вашу ссылку на установку мобильного приложения другу, который еще не
+                является пользователем мобильного.</p>
+        </a><a class="news_card" href="/promotions_card_page">
+            <div class="news_card__img"> <img class="image" data-src="/image/catalog//assets/img/cover_pic.svg" alt="" data-lazy="" />
+            </div>
+            <p class="news_card__date">7 апреля, 2023</p>
+            <p class="news_card__title">Приводите друзей и получайте бонусы</p>
+            <p class="news_card__text">Отправьте вашу ссылку на установку мобильного приложения другу, который еще не
+                является пользователем мобильного.</p>
+        </a><a class="news_card" href="/promotions_card_page">
+            <div class="news_card__img"> <img class="image" data-src="/image/catalog//assets/img/cover_pic.svg" alt="" data-lazy="" />
+            </div>
+            <p class="news_card__date">7 апреля, 2023</p>
+            <p class="news_card__title">Приводите друзей и получайте бонусы</p>
+            <p class="news_card__text">Отправьте вашу ссылку на установку</p>
+        </a>
+    </div>
+    <div class="news__pagination pagination">
+        <button class="pagination__btn_more btn btn--grey"><span class="btn__text">Показать ещё</span></button>
+        <div class="pagination__wrap">
+            <button class="pagination__num is-active">1</button>
+            <button class="pagination__num">2</button>
+            <button class="pagination__num">3</button>
+            <button class="pagination__num">...</button>
+            <button class="pagination__num">12</button>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+<!-- 
+<section class="category__page sales">
+    <div class="container">
+        <div class="breadcrumbs">
+            {% for breadcrumb in breadcrumbs %}
+            <a href="{{ breadcrumb.href }}" class="breadcrumb-link">{{ breadcrumb.text }}</a>
+            {% if breadcrumb != breadcrumbs|last %}
+            <span>&nbsp;/&nbsp;</span>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <div class="category__page-wrapper">
+            <h1 class="page__title">{{ heading_title }}</h1>
+            {% if description %}
+            <div class="page__info">
+                <p>
+                    {{ description }}
+                </p>
+            </div>
+            {% endif %}
+
+            {% if theme_mt_category_subcategory and top_categories|length > 0 %}
+            <div class="subcategory">
+                {% for category in top_categories %}
+                <a href="{{ category.href }}" class="subcategory__item">
+                    <div class="subcategory__item-box">
+                        <div class="subcategory__item-image">
+                            {% if theme_mt_category_subcategory_images and category.image %}
+                            <img src="{{ category.image }}" width="38px" height="38px">
+                            {% endif %}
+                        </div>
+                    </div>
+                    <span>{{ category.name }}</span>
+                </a>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="category__content">
+
+                {% if column_left %}
+                <div class="category__content-leftside popup">
+                    {{ column_left }}
+                </div>
+                {% endif %}
+
+                <div class="category__content-products">
+
+                    <div class="category__products-head">
+                        {% if theme_mt_category_brands and manufacturers|length > 0 %}
+                        <div class="products-head_brands">
+                            <span>Бренды</span>
+                            <div class="head_brands-list">
+                                {% for manufacturer in manufacturers %}
+                                <a href="{{ manufacturer.href }}" class="head_brands-item">{{ manufacturer.name }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if sorts|length > 0 %}
+                        <div class="products-head_sorting">
+
+                            <div class="head_sorting-list">
+                                <span class="sortby">Сортировать по:</span>
+                                {% for s in sorts %}
+                                {% if (s.code == sort) %}
+                                <a href="{{ s.href }}"
+                                    class="head_sorting-variant current-sort {% if order == 'ASC' %}sort_1{% else %}sort_2{% endif %}">
+                                    <span>{{ s.text }}</span>
+                                    <span class="sort-arr"><img
+                                            src="/catalog/view/theme/mt/stylesheet/icons/sort-arr.svg"></span>
+                                </a>
+                                {% else %}
+                                <a href="{{ s.href }}" class="head_sorting-variant">
+                                    <span>{{ s.text }}</span>
+                                </a>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+
+                            <div class="head_sorting-filterbut">
+                                <img src="/catalog/view/theme/mt/stylesheet/icons/filter-button.svg"
+                                    class="filter-button">
+                            </div>
+
+                        </div>
+                        {% endif %}
+
+
+                    </div>
+
+                    <div class="category__products-list">
+                        {% for product in products %}
+                        <div class="product-card">
+                            <div class="product-base">
+                                <a href="{{ product.href }}" class="product-photo" title="{{ product.name }}">
+
+                                    <img src="{{ product.thumb }}" alt="{{ product.name }}" class="product-img"
+                                        width="100%" height="100%">
+                                    {% if product.new or product.special_check or product.discount %}
+                                    <div class="product-photo__notes">
+                                        {% if product.special_check %}
+                                        <div class="product-photo__note note-action">
+                                            {{ product.special_check }}% Акция!
+                                        </div>
+                                        {% endif %}
+                                        {% if product.new %}
+                                        <div class="product-photo__note note-new">
+                                            Новинка
+                                        </div>
+                                        {% endif %}
+                                        {% if product.discount %}
+                                        <div class="product-photo__note note-hit">
+                                            {{ product.discount }}
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                    {% endif %}
+
+                                    <div class="product-photo__options">
+                                        {% if product.rating > 0 %}
+                                        <div class="product-rating">
+                                            <span
+                                                class="i-custom icon-icon-star {% if product.rating >= 1 %}rate{% else %}gray{% endif %}"></span>
+                                            <span
+                                                class="i-custom icon-icon-star {% if product.rating >= 2 %}rate{% else %}gray{% endif %}"></span>
+                                            <span
+                                                class="i-custom icon-icon-star {% if product.rating >= 3 %}rate{% else %}gray{% endif %}"></span>
+                                            <span
+                                                class="i-custom icon-icon-star {% if product.rating >= 4 %}rate{% else %}gray{% endif %}"></span>
+                                            <span
+                                                class="i-custom icon-icon-star {% if product.rating >= 5 %}rate{% else %}gray{% endif %}"></span>
+                                        </div>
+                                        {% endif %}
+                                        {% if theme_mt_category_product_wishlist_checked %}
+                                        <button
+                                            class="product-adds add-bookmark product-like {% if product.in_wishlist %}added{% endif %}"
+                                            onclick="{% if product.in_wishlist %}wishlist.remove('{{ product.product_id }}');{% else %}wishlist.add('{{ product.product_id }}');{% endif %} return false;"
+                                            {% if not logged %}data-login="false" {% else %}data-login="true"
+                                            {% endif %}></button>
+                                        {% endif %}
+                                    </div>
+                                </a>
+                                <div class="product-description">
+                                    <div class="product-price">
+                                        {% if product.special %}
+                                        <div class="current-price">
+                                            {% if symbol_left %}<span
+                                                class="price-currency">{{ symbol_left }}</span>{% endif %}
+                                            <div class="price-cost">{{ product.special }}</span>
+                                            </div>
+                                            {% if symbol_right %}<span
+                                                class="price-currency">{{ symbol_right }}</span>{% endif %}
+                                        </div>
+                                        <div class="old-price">
+                                            {% if symbol_left %}<span>{{ symbol_left }}</span>{% endif %}{{ product.price }}{% if symbol_right %}<span>{{ symbol_right }}</span>{% endif %}
+                                        </div>
+                                        {% else %}
+                                        <div class="current-price">
+                                            {% if symbol_left %}<span
+                                                class="price-currency">{{ symbol_left }}</span>{% endif %}
+                                            <div class="price-cost">{{ product.price }}<span class="price-penny"></span>
+                                            </div>
+                                            {% if symbol_right %}<span
+                                                class="price-currency">{{ symbol_right }}</span>{% endif %}
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                    <a href="{{ product.href }}" class="product-info">
+                                        {{ product.name }}
+                                    </a>
+                                    {% if (theme_mt_category_product_attributes_checked and product.attributes|length > 0) or (product.description and theme_mt_category_product_description_checked) %}
+                                    <div class="product-additional">
+                                        {% if product.description and theme_mt_category_product_description_checked %}
+                                        {% if (theme_mt_category_product_attributes_priority_checked and product.attributes|length == 0) or not theme_mt_category_product_attributes_priority_checked %}
+                                        <div class="product-cat-description">{{ product.description }}</span></div>
+                                        {% endif %}
+                                        {% endif %}
+                                        {% if theme_mt_category_product_attributes_checked and ((not theme_mt_category_product_attributes_priority_checked and product.description == '') or theme_mt_category_product_attributes_priority_checked) %}
+                                        {% for attribute in product.attributes %}
+                                        <div>{{ attribute.name }}: <span>{{ attribute.text }}</span></div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="product-foot">
+                                {% if theme_mt_category_product_stock_checked %}
+                                <div class="product-avariables">
+                                    {% if product.quantity > 0 %}
+                                    <div class="product-avariables__variant in-stock">
+                                        <i class="fas fa-check"></i>
+                                        <span>{{ product.stock }}</span>
+                                    </div>
+                                    {% else %}
+                                    <div class="product-avariables__variant on-order">
+                                        <i class="far fa-bell"></i>
+                                        <span>{{ product.stock }}</span>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                {% endif %}
+
+                                {% if theme_mt_category_product_cart_checked %}
+                                <button class="button button-large" id="add-to-cart"
+                                    onclick="add_in_cart('{{ product.product_id }}', '{{ product.minimum }}');">
+                                    {% if theme_mt_category_product_cart_text %}{{ theme_mt_category_product_cart_text }}{% else %}Добавить
+                                    в корзину{% endif %}
+                                </button>
+                                {% endif %}
+                            </div>
+
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    {{ pagination }}
+
+                    {% if description_bottom %}
+                    <div class="page__other-info">
+                        {{ description_bottom }}
+                    </div>
+                    {% endif %}
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+ -->
+
+
+
+
+<!-- 
+<script type="text/javascript">
+    function add_in_cart(product_id, quantity) {
+        var btn = this;
+        $.ajax({
+            url: 'index.php?route=checkout/cart/add',
+            type: 'post',
+            data: 'product_id=' + product_id + '&quantity=' + (typeof (quantity) != 'undefined' ? quantity : 1),
+            dataType: 'json',
+            success: function (json) {
+
+                if (json['redirect']) {
+                    location = json['redirect'];
+                }
+
+                if (json['success']) {
+                    if ($("#cart_added").hasClass('notify_action')) {
+                        $('#cart_added').removeClass('notify_action');
+                    }
+                    $(document).find('#cart_added').addClass('notify_action').css('top', 90 + 'px');
+                    active_notify();
+                    $(btn).html('В корзине');
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    }
+</script>
+ -->
+
+<!-- <script type="text/javascript">
+    $('#button-search').bind('click', function () {
+        url = 'index.php?route=product/search';
+
+        var search = $('#content input[name=\'search\']').prop('value');
+
+        if (search) {
+            url += '&search=' + encodeURIComponent(search);
+        }
+
+        var category_id = $('#content select[name=\'category_id\']').prop('value');
+
+        if (category_id > 0) {
+            url += '&category_id=' + encodeURIComponent(category_id);
+        }
+
+        var sub_category = $('#content input[name=\'sub_category\']:checked').prop('value');
+
+        if (sub_category) {
+            url += '&sub_category=true';
+        }
+
+        var filter_description = $('#content input[name=\'description\']:checked').prop('value');
+
+        if (filter_description) {
+            url += '&description=true';
+        }
+
+        location = url;
+    });
+
+    $('#content input[name=\'search\']').bind('keydown', function (e) {
+        if (e.keyCode == 13) {
+            $('#button-search').trigger('click');
+        }
+    });
+
+    $('select[name=\'category_id\']').on('change', function () {
+        if (this.value == '0') {
+            $('input[name=\'sub_category\']').prop('disabled', true);
+        } else {
+            $('input[name=\'sub_category\']').prop('disabled', false);
+        }
+    });
+
+    $('select[name=\'category_id\']').trigger('change');
+</script> -->
+
+{{ footer }}

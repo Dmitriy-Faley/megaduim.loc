@@ -1,0 +1,107 @@
+{{ header }}
+
+<section class="about">
+  <div class="section_block section_block--center">
+    <h1 class="section_block__title">Добро пожаловать <br> в сеть салонов <br class="mobile"> оптики «Диоптрика»</h1>
+    <p class="section_block__text">Поможем вам увидеть мир. Своими глазами.</p>
+  </div>
+  <div class="about__main_pic">
+    <video class="video" poster="/image/catalog/assets/img/about_main_pic.jpg" autoplay="" loop="" muted=""></video>
+  </div>
+  <p class="section_block__text section_block__text--center">Мы знаем, как сделать так, чтобы вы в полной мере
+    любовались окружающим миром. Поможем лучше видеть тем, у кого проблемы со зрением, и предоставим огромный выбор
+    солнцезащитных очков для тех, кто стремится к ярким образам. За качеством и индивидуальным подходом приглашаем всех
+    в салоны оптики «Диоптрика».</p>
+  <div class="about__table">
+    <div class="about__table_cell">
+      <p class="about__table_text">Подбор очков и <br class="desktop"> средств контактной <br class="desktop"> коррекции
+      </p>
+    </div>
+    <div class="about__table_cell">
+      <p class="about__table_text">Изготовление медицинских <br class="desktop"> и солнцезащитных очков с линзами любой
+        <br class="desktop"> сложности</p>
+    </div>
+    <div class="about__table_cell">
+      <p class="about__table_text">Оправы и солнцезащитные <br class="desktop"> очки для взрослых и детей</p>
+    </div>
+    <div class="about__table_cell">
+      <p class="about__table_text">Аксессуары для <br class="desktop"> очков и контактных <br class="desktop"> линз</p>
+    </div>
+    <div class="about__table_cell">
+      <p class="about__table_text">Изготовление очков для <br class="desktop"> детей разного возраста</p>
+    </div>
+  </div>
+  <div class="about__gallery">
+    <div class="about__gallery_wrap">
+      <div class="about__gallery_pic">
+        <picture class="image">
+          <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/about_pic_1.webp" type="image/webp" />
+          <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/about_pic_1.jpg" type="image/jpg" /><img class="image"
+            data-lazy="data-lazy" data-src="/image/catalog/assets/img/about_pic_1.jpg" alt="" />
+        </picture>
+      </div>
+      <div class="about__gallery_pic">
+        <picture class="image">
+          <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/about_pic_2.webp" type="image/webp" />
+          <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/about_pic_2.jpg" type="image/jpg" /><img class="image"
+            data-lazy="data-lazy" data-src="/image/catalog/assets/img/about_pic_2.jpg" alt="" />
+        </picture>
+      </div>
+    </div>
+    <div class="about__gallery_wrap">
+      <div class="about__gallery_pic">
+        <picture class="image">
+          <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/about_pic_3.webp" type="image/webp" />
+          <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/about_pic_3.jpg" type="image/jpg" /><img class="image"
+            data-lazy="data-lazy" data-src="/image/catalog/assets/img/about_pic_3.jpg" alt="" />
+        </picture>
+      </div>
+      <div class="about__gallery_pic">
+        <picture class="image">
+          <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/about_pic_4.webp" type="image/webp" />
+          <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/about_pic_4.jpg" type="image/jpg" /><img class="image"
+            data-lazy="data-lazy" data-src="/image/catalog/assets/img/about_pic_4.jpg" alt="" />
+        </picture>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="news_section blog">
+    <div class="news_section__top">
+        <h2 class="section_block__title section_block__title--small">Новости</h2><a
+            class="news_section__btn btn btn--grey btn--icon_right" href="/news"><span class="btn__text">перейти в
+                новости</span>
+            <svg class="btn__icon btn__icon--black btn__icon--right">
+                <use xlink:href="#link_arrow"></use>
+            </svg></a>
+    </div>
+    <div class="news_section__content">
+        {% for result in news %}
+        <a class="news_section_card" href="{{ result.href }}">
+            <div class="news_section_card__img desktop">
+                <picture class="image">
+                    <source data-lazy="data-lazy" data-srcset="{{ result.thumb }}"
+                        type="image/webp" />
+                    <source data-lazy="data-lazy" data-srcset="{{ result.thumb }}"
+                        type="image/jpg" /><img class="image" data-lazy="data-lazy"
+                        data-src="{{ result.thumb }}" alt="" />
+                </picture>
+            </div>
+            <div class="news_section_card__img mobile">
+                <picture class="image">
+                    <source data-lazy="data-lazy" data-srcset="{{ result.thumb_adaptive }}"
+                        type="image/webp" />
+                    <source data-lazy="data-lazy" data-srcset="{{ result.thumb_adaptive }}"
+                        type="image/jpg" /><img class="image" data-lazy="data-lazy"
+                        data-src="{{ result.thumb_adaptive }}" alt="" />
+                </picture>
+            </div>
+            <p class="news_section_card__date">{{ result.date }}</p>
+            <p class="news_card__title">{{ result.name }}</p>
+            <p class="news_section_card__text">{{ result.intro }}</p>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+{{ footer }}

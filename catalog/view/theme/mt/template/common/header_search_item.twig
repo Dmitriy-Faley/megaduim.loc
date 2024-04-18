@@ -1,0 +1,17 @@
+<a href="{{ href }}" class="search_vars-item">
+   <div class="search_vars-item-top">
+         <div class="search_vars-item-img">
+            <img src="/image/{{ image }}" width="100%"
+               height="100%">
+         </div>
+         <div class="search_vars-item-title">{{ name }}</div>
+   </div>
+   <div class="search_vars-item-info">
+         {% if special != 0 %}
+         <div class="search-item-price"><span>{{ symbol_left }}</span>{{ special }}<span>{{ symbol_right }}</span></div>
+         <div class="search-item-oldprice"><span>{{ symbol_left }}</span>{{ price }}<span>{{ symbol_right }}</span></div>
+         {% else %}
+         <div class="search-item-price"><span>{{ symbol_left }}</span>{{ price }}<span>{{ symbol_right }}</span></div>
+         {% endif %}
+   </div>
+</a>

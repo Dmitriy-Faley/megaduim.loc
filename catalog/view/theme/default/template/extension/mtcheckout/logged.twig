@@ -1,0 +1,265 @@
+<div id="user_block" class="card mtcheck-user mtcheck-authorized-user " {% if min_sum_text %}style="display:none"{% endif %}>
+  <div class="mtcheck-user__head">
+    <div class="mtcheck-user__column">
+      {% if module_mt_checkout_clients_title %}<div class="title title--md title--primary mtcheck-user__title">{{ module_mt_checkout_clients_title_text }}</div>{% endif %}
+      {% if module_mt_checkout_clients_info %}<button class="mtbtn-reset info-mtbtn" aria-label="Открыть модальное окно" data-modal="user-data"></button>{% endif %}
+    </div>
+    <div class="mtcheck-user__status">
+      <span
+        class="text text--sm text--thindly mtcheck-user__status-current"
+        data-tab-status="name"
+        >Вы вошли как <b>{{ email }}</b></span
+      >
+      <a href="/index.php?route=account/logout"
+        class="mtbtn-reset link text text--sm mtcheck-user__status-change"
+        data-tab-handler="logout"
+      >
+        (выход)
+      </a>
+    </div>
+  </div>
+  <div class="text text--sm text--thindly mtcheck-user__description">
+    Выберите нужные реквизиты получателя из вашего профиля
+  </div>
+  <div class="mtcheck-address">
+    {% for address in addresses %}
+      <div class="mtcheck-address__item">
+        <label class="radio">
+          <input
+            type="radio"
+            name="address-type"
+            value="{{ address.address_id }}"
+            data-zone-id="{{ address.zone_id }}"
+            data-country-id="{{ address.country_id }}"
+            data-zone="{{ address.zone }}"
+            data-city="{{ address.city }}"
+            data-address="{{ address.address_1 }}"
+            data-postcode="{{ address.postcode }}"
+            data-country="{{ address.country }}"
+            class="visually-hidden radio__input"
+            {% if address == addresses|last%}checked{% endif %}
+          />
+          <span class="radio__display"></span>
+          <div class="radio__text">
+            <div class="text--bold mtcheck-address__full-address">
+              {% if address.country %}{{ address.country }},{% endif %} {% if address.zone %}{{ address.zone }},{% endif %} {% if address.city %}{{ address.city }},{% endif %} {% if address.address_1 %}{{ address.address_1 }}{% endif %}{% if address.postcode %}, индекс {{ address.postcode }}{% endif %}
+            </div>
+            <div class="mtcheck-address__full-name">{{ address.firstname }} {{ address.lastname }}</div>
+            {# <div class="mtcheck-address__email">{{ email }}</div> #}
+            {# <div class="mtcheck-address__phone">{{ address.phone }}</div> #}
+            {# <div class="mtcheck-address__comment">
+              Комментарий: второй подъезд, второй этаж
+            </div> #}
+          </div>
+        </label>
+      </div>
+    {% endfor %}
+    <script type="text/javascript">
+    $('input[name="address-type"]').change(function(){
+      $('input[name="address_type"]').val($(this).val());
+      $('input[name="city"]').val($(this).data('city'));
+      $('input[name="republic"]').val($(this).data('zone'));
+    });
+    </script>
+    <div class="mtcheck-address__add-address">
+      <button class="mtbtn-reset link text text--sm mtcheck-address__add-button" data-tab-handler="add">
+        Добавить новый адрес
+      </button>
+	  <button class="mtbtn-reset link text text--sm mtcheck-address__edit-button" onclick="editaddr()">
+        Редактировать адреса
+      </button>	
+      <form
+        action="/index.php?route=extension/mtcheckout/confirm"
+        method="post"
+        class="mtcheck-register mtcheck-address__add-form {% if addresses|length > 0 %}visually-hidden{% endif %}"
+        data-tab="true"
+      >
+        <input type="hidden" name="address_id" data-required="0" value="{{ addresses|last.address_id }}">
+        <input type="hidden" name="products">
+        <input type="hidden" name="shipping_code">
+        <input type="hidden" name="shipping_method">
+        <input type="hidden" name="shipping_cost">
+        <input type="hidden" name="shipping_tax_class_id">
+        <input type="hidden" name="payment_code">
+        <input type="hidden" name="payment_method">
+        <input type="hidden" name="zone" {% if countries|length > 0 %}data-required="0"{% endif %}>
+        <input type="hidden" name="zone_id" {% if countries|length > 0 %}data-required="0"{% endif %}>
+        <input type="hidden" name="country" {% if countries|length > 0 %}data-required="0"{% endif %}>
+        <input type="hidden" name="country_id" {% if countries|length > 0 %}data-required="0"{% endif %}>
+        <fieldset class="mtcheck-register__data">
+          <span class="visually-hidden">Данные покупателя</span>
+          <label class="input--label"
+            ><input
+              type="text"
+              class="input input--min"
+              name="firstname"
+              placeholder="Имя"
+              {% if countries|length > 0 %}data-required="0"{% endif %}
+          /></label>
+          <label class="input--label"
+            ><input
+              type="text"
+              class="input input--min"
+              name="lastname"
+              placeholder="Фамилия"
+              {% if countries|length > 0 %}data-required="0"{% endif %}
+          /></label>
+          <label class="input--label"
+            ><input
+              type="text"
+              class="input input--min"
+              name="middlename"
+              placeholder="Отчество"
+              {% if countries|length > 0 %}data-required="0"{% endif %}
+          /></label>
+          <label class="input--label"
+            ><input
+              type="text"
+              class="input input--min"
+              name="company"
+              placeholder="Компания"
+              {% if countries|length > 0 %}data-required="0"{% endif %}
+          /></label>
+          {# <label class="input--label"
+            ><input
+              type="number"
+              class="input input--min"
+              name="telephone"
+              placeholder="Телефон"
+              {% if countries|length > 0 %}data-required="0"{% endif %}
+          /></label> #}
+          <label class="input--label"
+            ><input
+              type="email"
+              class="input input--min"
+              name="email"
+              placeholder="Емейл"
+              {% if countries|length > 0 %}data-required="0"{% endif %}
+          /></label>
+          <label class="input--label"
+            ><input
+              type="text"
+              class="input input--min"
+              name="postcode"
+              placeholder="Индекс"
+              {% if countries|length > 0 %}data-required="0"{% endif %}
+          /></label>
+        </fieldset>
+        <fieldset class="mtcheck-register__location">
+          <span class="visually-hidden">Нахождение покупателя</span>
+          <div class="select" data-name="country">
+            {% for country in countries %} 
+                    {% if country.country_id == country_id %} 
+                    <div class="select__display display_country">{{ country.name }}</div>
+                    {% endif %}
+                    {% endfor %}
+            <ul class="list-reset select__items" id="country_id">
+              {% for country in countries %}
+              <li class="select__item country_list {% if country.country_id == country_id %}select__item--active{% endif %}" data-value="{{ country.country_id }}">
+                {{ country.name }}
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="select" data-name="republic">
+             {% for zone in zones %} 
+                    {% if zone.zone_id == zone_id %} 
+                    <div class="select__display display_zone">{{ zone.name }}</div>
+                    {% endif %}
+                    {% endfor %}
+            <ul class="list-reset select__items" id="zone_id">
+              {% for zone in zones %}   
+              <li class="select__item zone_list {% if zone.zone_id == zone_id %}select__item--active{% endif %}" data-value="{{ zone.zone_id }}">{{ zone.name }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          <script type="text/javascript">
+          {# $('input[name="country_id"]').val($('.country_list.select__item--active').data('value'));
+          $('input[name="country"]').val($('.country_list.select__item--active').text());
+          $('input[name="zone_id"]').val($('.zone_list.select__item--active').data('value'));
+          $('input[name="zone"]').val($('.zone_list.select__item--active').text()); #}
+          </script>
+          <label class="input--label"
+            ><input type="text" class="input" name="city" placeholder="Город" {% if countries|length > 0 %}data-required="0"{% endif %}
+          /></label>
+          <label class="input--label"
+            ><input
+              type="text"
+              class="input"
+              name="address_1"
+              placeholder="Адрес"
+              {% if countries|length > 0 %}data-required="0"{% endif %}
+          /></label>
+          <script type="text/javascript">
+          $('.select__item.country_list').on('click', function() {
+          $('input[name="country_id"]').val($(this).data('value'));
+          $('input[name="country"]').val($(this).text());
+          var country_id = $(this).data('value');
+          $.ajax({
+            url: 'index.php?route=checkout/checkout/country&country_id=' + country_id,
+            dataType: 'json',
+            beforeSend: function() {
+            },
+            complete: function() {
+            },
+            success: function(json) {
+              html = '';
+
+              if (json['zone'] && json['zone'] != '') {
+                for (i = 0; i < json['zone'].length; i++) {
+                  html += '<li class="select__item zone_list ' + (i == 0 ? 'select__item--active' : '') + '" data-value="' + json['zone'][i]['zone_id'] + '">' + json['zone'][i]['name'] + '</li>';
+                }
+                $('.display_zone').html(json['zone'][0]['name']);
+              }
+
+              $('#zone_id').html(html);
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+              alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+          });
+        });
+        $(document).on('click', '.zone_list', function() {
+          $('.zone_list').each(function() {
+            $(this).removeClass('select__item--active');
+          });
+          $(this).addClass('select__item--active');
+          $('.display_zone').html($(this).text());
+          $('input[name="zone_id"]').val($(this).data('value'));
+          $('input[name="zone"]').val($(this).text());
+        });
+        $('input[name="address-type"]').change(function(){
+          $('input[name="address_id"]').val($(this).val());
+        });
+		  
+		  	function editaddr() {
+          window.open("/index.php?route=account/address");
+        }	
+        </script>
+        </fieldset>
+        {# <textarea
+          class="textarea mtcheck-register__comment"
+          name="note"
+          placeholder="Комментарий к заказу, пожелания, уточнения и т.п."
+          cols="30"
+          {% if countries|length > 0 %}data-required="0"{% endif %}
+          rows="6"
+        ></textarea> #}
+        <input type="hidden" name="note" data-required="0">
+      </form>
+    </div>
+  </div>
+  <textarea
+    class="textarea mtcheck-register__comment"
+    id="note_checkout"
+    placeholder="Комментарий к заказу, пожелания, уточнения и т.п."
+    cols="30"
+    {% if countries|length > 0 %}data-required="0"{% endif %}
+    rows="6"
+  ></textarea>
+  <script type="text/javascript">
+  $("#note_checkout").keyup(function(){
+    $('input[name="note"]').val($("#note_checkout").val());
+  });
+  </script>
+</div>

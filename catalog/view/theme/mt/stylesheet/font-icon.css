@@ -1,0 +1,59 @@
+@font-face {
+    font-family: "custom"; 
+    font-display: swap;    
+    src: url('fonts/custom.woff2?12321') format('woff2'), url('fonts/custom.woff?8981') format('woff');      
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  .i-custom, .product-adds:before, .product-like:before {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: "custom" !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+  
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+.icon-icon-star:before {
+    content: "\e900";
+  }      
+
+  .icon-mobile-search:before {
+    content: "\e901";
+  }
+  .icon-icon-trash:before {
+    content: "\e902";
+  }
+  .icon-icon-info:before {
+    content: "\e903";
+  }
+  .icon-icon-acc:before {
+    content: "\e904";
+  }
+  .icon-burger:before {
+    content: "\e905";
+  }
+  
+  .icon-icon-search:before {
+    content: "\e906";
+  }  
+ 
+  .product-adds.add-bookmark.product-like::before {
+	content: "\e90d";
+	transition: all .2s linear;
+}
+.product-adds.add-compare.product-compare::before {
+  content: "\e90c";
+  transition: all .2s linear;
+}
+
+.icon-icon-sale:before {
+  content: "\e908";
+}

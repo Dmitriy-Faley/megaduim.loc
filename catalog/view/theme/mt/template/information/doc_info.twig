@@ -1,0 +1,30 @@
+{{ header }}
+
+<section class="documents">
+    <div class="documents__breadcrumbs breadcrumbs">
+        {% for breadcrumb in breadcrumbs %}
+        <a class="breadcrumbs__link  {% if breadcrumb == breadcrumbs|last %} is-active {% endif %}"
+            href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+        {% if breadcrumb != breadcrumbs|last %}
+        <span class="slash">/</span>
+        {% endif %}
+        {% endfor %}
+    </div>
+    <h1 class="section_block__title">Документы</h1>
+
+    <div class="documents__content">
+        {% if docs %}
+            {% for doc in docs %}
+            <a class="documents__btn" target="_blank" href="storage/download/{{ doc.file }}">
+                <span class="text">{{ doc.title }}</span>
+                <svg class="icon">
+                    <use xlink:href="#download"></use>
+                </svg>
+            </a>
+            {% endfor %}
+        {% endif %}
+    </div>
+</section>
+
+ 
+{{ footer }}

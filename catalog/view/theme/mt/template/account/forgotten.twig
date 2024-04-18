@@ -1,0 +1,67 @@
+{{ header }}
+<!-- <div id="account-forgotten" class="container">
+  <div class="row">
+    <div id="content" class="{{ class }}">{{ content_top }}
+      <h1>{{ heading_title }}</h1>
+      <p>{{ text_email }}</p>
+      <form action="{{ action }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+        <fieldset>
+          <legend>{{ text_your_email }}</legend>
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-email">{{ entry_email }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="email" value="{{ email }}" placeholder="{{ entry_email }}" id="input-email"
+                class="form-control" />
+            </div>
+          </div>
+        </fieldset>
+        <div class="buttons clearfix">
+          <div class="pull-left"><a href="{{ back }}" class="btn btn-default">{{ button_back }}</a></div>
+          <div class="pull-right">
+            <input type="submit" value="{{ button_continue }}" class="btn btn-primary" />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div> -->
+
+
+<section class="login">
+  <form class="login__form">
+    <input type="hidden" name="form" value=" Форма - Восстановление пароля">
+    <div class="login__wrap"><img class="loader" data-src="/assets/img/loader.svg" alt="" data-lazy="" />
+      <h1 class="section_block__title">Восстановление пароля</h1>
+      <p class="section_block__text">Укажите email, который вы использовали при регистрации. <br class="desktop"> Мы
+        вышлем вам пароль для входа.</p>
+      <div class="login__inputs">
+        <div class="input_wrapper input_wrapper--outlined" data-input-wrapper="">
+          <input class="input_wrapper__input" type="text" name="email" value="{{ email }}" required autocomplete="on">
+          <label class="input_wrapper__label">Email</label>
+          <div class="input_wrapper__tooltip" data-input-tooltip=""></div>
+        </div>
+        <!-- <div class="input_wrapper input_wrapper--outlined" data-input-wrapper="">
+          <input class="input_wrapper__input" type="password" name="password" required autocomplete="off">
+          <label class="input_wrapper__label">Пароль</label>
+          <div class="input_wrapper__tooltip" data-input-tooltip=""></div>
+        </div> -->
+        <!-- <button class="footer_table__form_btn btn btn--filled is-disabled">
+          <span class="btn__text">Выслать пароль</span>
+        </button> -->
+        <input type="submit" value="выслать пароль " class="footer_table__form_btn btn btn--filled" />
+      </div>
+      <p class="login__text">
+        <a class="link" href="{{ login }}">Войти</a> или
+        <a class="link" href="{{ register }}">зарегистрироваться</a>
+      </p>
+    </div>
+  </form>
+  {% if error_warning %}
+  <div class="login__bottom">
+    <p class="login__text">{{ error_warning }}</p>
+  </div>
+  {% endif %}
+</section>
+
+
+{{ footer }}

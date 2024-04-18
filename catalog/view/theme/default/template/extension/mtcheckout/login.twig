@@ -1,0 +1,12 @@
+<form class="mtcheck-login" method="post" action="{{ login }}" data-tab>
+  <fieldset class="mtcheck-login__data">
+    <span class="visually-hidden">Данные покупателя для авторизации</span>
+    <input type="email" class="input" name="email" placeholder="Email" required>
+    <input type="password" class="input" name="password" placeholder="Пароль" required>
+    <input type="submit" class="mtbtn-reset mtbtn--primary" value="Войти">
+  </fieldset>
+  <span class="text text--sm mtcheck-login__forgot">
+    Забыл пароль? 
+    <a class="mtbtn-reset link" href="{{ forgotten }}" id="password-reset">(восстановить)</a>
+  </span>
+</form>
