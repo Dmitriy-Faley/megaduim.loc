@@ -12,11 +12,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>{{ title }}</title>
-  <link rel="apple-touch-icon" sizes="180x180" href="/image/catalog/assets/favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/image/catalog/assets/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/image/catalog/assets/favicon/favicon-16x16.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/image/catalog/assets/favicon/favicon.ico">
-  <link rel="manifest" href="/image/catalog/assets/favicon/site.webmanifest">
+  <link rel="preload" href="fonts/OpenSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/OpenSans-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts//OpenSans-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/Circe-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/Circe-ExtraBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/Circe-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/Gilroy-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/Gilroy-Semibold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/ArialMT.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/Arial-BoldMT.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="catalog/view/theme/mt/css/vendor.css">
+  <link rel="stylesheet" href="catalog/view/theme/mt/css/main.css">
+  <script defer src="catalog/view/theme/mt/js/main.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
+
   <link rel="mask-icon" href="/image/catalog/assets/favicon/safari-pinned-tab.svg" color="#000000">
   <link rel="shortcut icon" href="/image/catalog/assets/favicon/favicon.ico">
   <meta name="msapplication-TileColor" content="#ffffff">
@@ -41,1485 +56,188 @@
   {% endif %}
 
 
-  {#<script src="catalog/view/javascript/jquery/jquery-2.1.1.min.js" type="text/javascript"></script>
-	<script src="catalog/view/theme/mt/js/jquery-3.6.0.min.js" type="text/javascript"></script>
-	#}
-
-  <link href="catalog/view/theme/mt/js/jquery-3.6.0.min.js" rel="preload" as="script">
-  <script src="catalog/view/theme/mt/js/jquery-3.6.0.min.js"></script>
-  <script
-  src="https://code.jquery.com/jquery-1.12.4.min.js"
-  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
-  crossorigin="anonymous"></script>
-
-  <!-- <link href="catalog/view/theme/mt/stylesheet/swiper-bundle.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-  <script src="catalog/view/theme/mt/js/swiper-bundle.min.js" type="text/javascript"></script> -->
-
-  <!-- Style Dioprik -->
-  <!-- <link rel="stylesheet" href="catalog/view/theme/mt/stylesheet/fancybox.css"> -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@latest/pace-theme-default.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
-  <!-- <script src="https://api-maps.yandex.ru/2.1/?apikey=db005e19-7b11-4207-82e1-2dc1681aff36&amp;lang=ru_RU"
-    type="text/javascript"></script> -->
-  <link href="catalog/view/theme/mt/css/main.css" rel="stylesheet">
-  <!-- End -->
-
-
-  <!-- bootstrap от Opencart 3 -->
-  <!-- <link href="catalog/view/javascript/bootstrap/css/bootstrap3.css?ver=3" type="text/css" rel="stylesheet" media="none" onload="if(media!='all')media='all'" /> -->
-  <script src="catalog/view/javascript/bootstrap/js/bootstrap.min.js?ver=3" type="text/javascript"></script>
-
-  <!-- <link rel="stylesheet" href="catalog/view/theme/mt/stylesheet/{{ colors_file }}" type="text/css"> -->
-  <!-- <link rel="stylesheet" href="catalog/view/theme/mt/stylesheet/start.css" type="text/css"> -->
-  <!-- <link rel="stylesheet" href="catalog/view/theme/mt/stylesheet/front-slider.css" type="text/css">
-  <link rel="stylesheet" href="catalog/view/theme/mt/stylesheet/font-icon.css" type="text/css"> -->
-
-
-  {% for style in styles %}
-  <link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}" />
-  {% endfor %}
-  {% for script in scripts %}
-  <script src="{{ script }}" type="text/javascript"></script>
-  {% endfor %}
-  <script src="catalog/view/javascript/common.js" type="text/javascript"></script>
-  {% for link in links %}
-  <link href="{{ link.href }}" rel="{{ link.rel }}" />
-  {% endfor %}
-  {% for analytic in analytics %}
-  {{ analytic }}
-  {% endfor %}
-  {% if theme_mt_css_code_checked %}
-  <style>
-    {
-        {
-        theme_mt_css_code
-      }
-    }
-  </style>
-  {% endif %}
-  {% if theme_mt_text_html_head_end_checked %}{{ theme_mt_text_html_head_end }}{% endif %}
-
-
 </head>
 
-<body class="moytop_tema">
- 
-  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="0" height="0"
-    style="position:absolute">
-
-    <symbol id="acc_icon_1" viewBox="0 0 20 20">
-      <path d="M5 9.166l10 .002v1.666l-10-.001V9.166zM5 12.5h4.444v1.667H4.999V12.5z" />
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M6.666.833V2.5h6.667V.833h1.666V2.5h3.334v16.666H1.666V2.5h3.333V.833h1.667zM3.333 4.166v1.667h13.333V4.166H3.333zM16.666 7.5H3.333v10h13.333v-10z" />
-    </symbol>
-
-    <symbol id="acc_icon_2" viewBox="0 0 20 20">
-      <path d="M8.334 10a1.667 1.667 0 1 1 3.333 0 1.667 1.667 0 0 1-3.333 0z" />
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M.834 2.5h6.919l2.5 1.667h8.914V17.5H.834v-15zm1.667 1.667v11.666h3.333v-.09l.02-.09C6.26 13.809 8.004 12.5 10 12.5c1.997 0 3.739 1.308 4.147 3.154l.02.088v.091H17.5v-10H9.748l-2.5-1.666H2.501zm9.97 11.666c-.295-.925-1.254-1.666-2.47-1.666-1.217 0-2.176.74-2.471 1.666h4.942z" />
-    </symbol>
-
-    <symbol id="acc_icon_3" viewBox="0 0 20 20">
-      <g clip-path="url(#a)" fill-rule="evenodd" clip-rule="evenodd">
-        <path
-          d="M5.834 10a4.167 4.167 0 1 1 8.333 0 4.167 4.167 0 0 1-8.333 0zm4.167-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z" />
-        <path
-          d="M7.733.833h4.535l.682 2.046 1.93-.964 3.207 3.206-.965 1.93 2.046.682v4.534l-2.047.682.965 1.93-3.207 3.206-1.929-.965-.682 2.046H7.733l-.682-2.046-1.928.964-3.207-3.206.965-1.929-2.047-.682V7.732l2.047-.682-.965-1.929 3.207-3.206 1.928.964.682-2.046zM8.935 2.5l-.91 2.73-2.573-1.287L3.944 5.45l1.287 2.574-2.73.91v2.132l2.73.91-1.287 2.573 1.508 1.508 2.573-1.287.91 2.73h2.132l.91-2.73 2.573 1.287 1.508-1.508-1.287-2.573 2.73-.91V8.934l-2.73-.91L16.06 5.45l-1.51-1.507-2.574 1.286-.91-2.73H8.935z" />
-      </g>
-      <defs>
-        <clipPath id="a">
-          <path d="M0 0h20v20H0z" />
-        </clipPath>
-      </defs>
-    </symbol>
-
-    <symbol id="acc_icon_4" viewBox="0 0 20 20">
-      <path d="M18.334 1.667H9.167v1.667h7.5v13.333h-7.5v1.667h9.167V1.667z" />
-      <path
-        d="M5.834 5.488L1.322 10l4.512 4.512 1.179-1.178-2.498-2.498 9.653-.003V9.167L4.51 9.17l2.503-2.503-1.179-1.179z" />
-    </symbol>
-
-    <symbol id="arrow_back" viewBox="0 0 20 20">
-      <path d="M12.5 3.822l-6.178 6.179 6.178 6.178 1.178-1.178-5-5 5-5L12.5 3.822z" />
-    </symbol>
-
-    <symbol id="arrow_short" viewBox="0 0 5 8">
-      <path d="M4.94 4l-4-4L0 .94 3.054 4 0 7.06.94 8l4-4z" />
-    </symbol>
-
-    <symbol id="cart" viewBox="0 0 20 21">
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M7.09 2.5h5.82v4.364h4.363V18.5H2.727V6.864h4.364V2.5zm0 5.818V10.5h1.455V8.318h2.91V10.5h1.454V8.318h2.91v8.728H4.181V8.318H7.09zm4.365-1.454h-2.91v-2.91h2.91v2.91z" />
-    </symbol>
-
-    <symbol id="checkmark" viewBox="0 0 8 6">
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M3.581 5.45l3.833-3.837A.749.749 0 0 0 7.398.555a.733.733 0 0 0-1.057 0l-3.296 3.3-1.388-1.39a.733.733 0 0 0-1.057 0c-.3.285-.3.759 0 1.058L2.508 5.45a.75.75 0 0 0 .537.22.75.75 0 0 0 .536-.22z" />
-    </symbol>
-
-    <symbol id="contacts_arrow" viewBox="0 0 20 20">
-      <path d="M8.334 7.45L10.878 10l-2.544 2.55.783.783L12.451 10 9.117 6.667l-.783.783z" />
-    </symbol>
-
-    <symbol id="delivery_icon_1" viewBox="0 0 20 20">
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M.833 2.5H12.5v3.333h3.295l3.372 3.854v6.146h-1.81a2.501 2.501 0 0 1-4.715 0H6.941a2.501 2.501 0 0 1-4.715 0H.833V2.5zM2.5 11.667v1.95a2.501 2.501 0 0 1 4.441.55h3.892v-2.5H2.5zM10.833 10H2.5V4.167h8.333V10zm1.667 1.667v2.5h.142a2.501 2.501 0 0 1 4.716 0h.142v-2.5h-5zM17.226 10H12.5V7.5h2.538l2.188 2.5zm-1.393 5a.833.833 0 1 0-1.666 0 .833.833 0 0 0 1.666 0zm-11.25-.833a.833.833 0 1 0 0 1.666.833.833 0 0 0 0-1.666z" />
-    </symbol>
-
-    <symbol id="delivery_icon_2" viewBox="0 0 20 20">
-      <g clip-path="url(#a)">
-        <path fill-rule="evenodd" clip-rule="evenodd"
-          d="M.833 10.003a9.167 9.167 0 1 1 18.334 0 9.167 9.167 0 0 1-18.334 0zm2.204-2.794a7.533 7.533 0 0 0-.381 4.325c.808.424 1.657.78 2.539 1.06a17.402 17.402 0 0 1-.12-4.207A11.932 11.932 0 0 1 3.036 7.21zm.8-1.481c.468.352.967.664 1.493.933.257-1.248.658-2.375 1.176-3.297a7.535 7.535 0 0 0-2.67 2.364zm5.96-3.223l.002.014c-.54.084-1.176.542-1.764 1.53-.493.83-.895 1.947-1.133 3.257A10.27 10.27 0 0 0 10 7.78a10.233 10.233 0 0 0 3.096-.475c-.238-1.31-.64-2.427-1.133-3.257-.587-.988-1.223-1.446-1.763-1.53l.002-.014a7.638 7.638 0 0 0-.406 0zm3.696.859c.519.922.92 2.05 1.177 3.297a10.229 10.229 0 0 0 1.494-.933 7.535 7.535 0 0 0-2.67-2.364zm3.47 3.845c-.642.461-1.324.855-2.038 1.178a17.384 17.384 0 0 1-.12 4.207 15.747 15.747 0 0 0 2.538-1.06 7.532 7.532 0 0 0-.38-4.325zm-.47 6.55c-.684.273-1.384.502-2.097.687a10.55 10.55 0 0 1-.902 2.195 7.535 7.535 0 0 0 3-2.883zm-6.257 3.74l-.003-.017c.445-.081.955-.414 1.456-1.105.302-.417.581-.94.82-1.552a17.63 17.63 0 0 1-5.019 0 7.04 7.04 0 0 0 .82 1.552c.501.691 1.012 1.024 1.457 1.105l-.003.017a7.733 7.733 0 0 0 .472 0zm-3.73-.858a10.552 10.552 0 0 1-.903-2.195 17.363 17.363 0 0 1-2.096-.687 7.536 7.536 0 0 0 2.999 2.882zm.464-3.594c.98.19 1.993.29 3.03.29 1.02 0 2.034-.097 3.028-.29.195-.93.304-1.959.304-3.044 0-.345-.01-.685-.032-1.018a11.898 11.898 0 0 1-3.302.462 11.91 11.91 0 0 1-3.3-.462c-.021.333-.033.673-.033 1.018 0 1.085.11 2.114.304 3.044z" />
-      </g>
-      <defs>
-        <clipPath id="a">
-          <path d="M0 0h20v20H0z" />
-        </clipPath>
-      </defs>
-    </symbol>
-
-    <symbol id="delivery_icon_3" viewBox="0 0 20 20">
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M4.516 1.664h10.968l4.285 7.5H17.5v9.167h-1.667V9.164H12.5v9.167h-10V9.164H.23l4.286-7.5zM3.103 7.497h13.794l-2.38-4.166H5.483l-2.38 4.166zm7.73 1.667H4.167v4.167h6.666V9.164zm0 5.833H4.167v1.667h6.666v-1.667z" />
-    </symbol>
-
-    <symbol id="download" viewBox="0 0 20 20">
-      <path d="M18.333 18.333H1.666V9.167h1.667v7.5h13.333v-7.5h1.667v9.166z" />
-      <path d="M10 14.512L5.486 10l1.179-1.179 2.5 2.5V1.667h1.667v9.654l2.5-2.5L14.51 10 10 14.512z" />
-    </symbol>
-
-    <symbol id="edit" viewBox="0 0 20 20">
-      <g clip-path="url(#a)">
-        <path fill-rule="evenodd" clip-rule="evenodd"
-          d="M15.833.488l3.679 3.679-15 14.999H.834v-3.678l15-15zm-2.916 5.274L2.5 16.18v1.32h1.32L14.238 7.083l-1.321-1.32zm2.5.143l-1.322-1.321 1.738-1.739 1.322 1.322-1.738 1.738z" />
-        <path d="M19.166 19.167h-10V17.5h10v1.667z" />
-      </g>
-      <defs>
-        <clipPath id="a">
-          <path d="M0 0h20v20H0z" />
-        </clipPath>
-      </defs>
-    </symbol>
-
-    <symbol id="error" viewBox="0 0 20 20">
-      <g clip-path="url(#a)">
-        <path d="M10.833 4.999v6.666H9.166V5h1.667zm-1.667 8.333h1.675v1.667H9.166v-1.667z" />
-        <path fill-rule="evenodd" clip-rule="evenodd"
-          d="M.833 9.999a9.167 9.167 0 1 1 18.333 0 9.167 9.167 0 0 1-18.333 0zM10 2.499a7.5 7.5 0 1 0 0 15 7.5 7.5 0 0 0 0-15z" />
-      </g>
-      <defs>
-        <clipPath id="a">
-          <rect width="20" height="20" rx="2" />
-        </clipPath>
-      </defs>
-    </symbol>
-
-    <symbol id="eye" viewBox="0 0 20 20">
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M6.546 10c0-1.877 1.584-3.333 3.453-3.333 1.87 0 3.454 1.456 3.454 3.333 0 1.877-1.584 3.333-3.454 3.333S6.546 11.877 6.546 10zM10 8.333c-1.023 0-1.786.783-1.786 1.667s.763 1.667 1.786 1.667c1.024 0 1.787-.783 1.787-1.667S11.023 8.333 10 8.333z" />
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M.875 9.74C2.104 6.005 5.741 3.332 10 3.332c4.26 0 7.896 2.673 9.125 6.406l.086.261-.086.26c-1.229 3.733-4.866 6.407-9.125 6.407-4.26 0-7.896-2.674-9.125-6.407L.79 10l.086-.26zM2.55 10c1.078 2.895 3.991 5 7.45 5s6.372-2.105 7.45-5C16.372 7.105 13.46 5 10 5s-6.372 2.105-7.45 5z" />
-    </symbol>
-
-    <symbol id="heart" viewBox="0 0 21 21">
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M10.494 3.596c-1.95-1.704-4.834-2.052-7.073-.139-2.422 2.07-2.774 5.555-.859 8.02.87 1.119 2.742 2.924 4.344 4.408a160.021 160.021 0 0 0 2.975 2.684l.064.056v.001l.55-.627-.55.627.55.48.548-.48-.549-.627.549.628.065-.058.183-.16a152.015 152.015 0 0 0 2.792-2.524c1.602-1.484 3.474-3.289 4.343-4.408 1.909-2.455 1.611-5.968-.867-8.027-2.264-1.882-5.117-1.558-7.065.146zm0 13.292a161.017 161.017 0 0 1-2.456-2.226c-1.625-1.506-3.39-3.217-4.16-4.207-1.363-1.755-1.127-4.233.626-5.73C6.182 3.29 8.44 3.658 9.86 5.32l.633.74.634-.74c1.414-1.653 3.643-2.02 5.366-.588 1.768 1.47 1.987 3.959.616 5.723-.77.99-2.534 2.701-4.16 4.207a158.673 158.673 0 0 1-2.456 2.226z" />
-    </symbol>
-
-    <symbol id="heart_red" viewBox="0 0 15 14">
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M7.496 2.167C6.13.974 4.112.73 2.545 2.069.849 3.518.603 5.958 1.944 7.683c.608.783 1.919 2.047 3.04 3.086a112.057 112.057 0 0 0 2.083 1.879l.044.039.385-.438-.384.439.384.335.384-.335-.384-.44.384.44.045-.04.129-.113.465-.413c.39-.348.92-.827 1.489-1.353 1.121-1.039 2.432-2.303 3.04-3.086 1.336-1.718 1.128-4.177-.607-5.619C10.856.747 8.86.974 7.496 2.167z" />
-    </symbol>
-
-    <symbol id="icon_cross" viewBox="0 0 20 20">
-      <path d="M5 3.82l5 5 5-5L16.179 5l-5 5 5 5L15 16.177l-5-5-5 5L3.822 15l5-5-5-5L5 3.82z" />
-    </symbol>
-
-    <symbol id="icon_filter" viewBox="0 0 21 20">
-      <path d="M2 4.167h16v1.667H2V4.167zm3 5.001h10v1.667H5V9.168zm2 5h6v1.667H7v-1.667z" />
-    </symbol>
-
-    <symbol id="icon_geo" viewBox="0 0 25 24">
-      <path
-        d="M12.6 4A5.596 5.596 0 0 0 7 9.6C7 13.8 12.6 20 12.6 20s5.6-6.2 5.6-10.4c0-3.096-2.504-5.6-5.6-5.6zm0 7.6a2 2 0 1 1 .001-4.001A2 2 0 0 1 12.6 11.6z" />
-    </symbol>
-
-    <symbol id="icon_gis" viewBox="0 0 25 24">
-      <path
-        d="M20 12a7.16 7.16 0 0 0-.382-2.333c-.085 2.482-2.8 4.56-4.285 5.833h3.882c.403-1.167.785-2.29.785-3.5zm-2.715-5.452C16.118 5.615 14.633 5 13 5c-3.86 0-7 3.16-7 7s3.14 7 7 7c1.782 0 3.415-.849 4.667-1.951h-5.049V15.5c3.076-2.652 5.049-4.285 5.049-5.833 0-.658-.467-1.549-1.549-1.549-.848 0-1.548.785-1.548 2.715h-1.952c-.424-2.46 1.06-4.475 3.585-4.475.382 0 .721.127 1.082.19z" />
-    </symbol>
-
-    <symbol id="icon_menu" viewBox="0 0 20 20">
-      <path d="M1.667 4.167h16.666v1.666H1.667V4.167zm0 5h16.666v1.666H1.667V9.167zm0 5h16.666v1.666H1.667v-1.666z" />
-    </symbol>
-
-    <symbol id="icon_okay" viewBox="0 0 120 120">
-      <path d="M107.071 30L45 92.073 12.929 60 20 52.93l25 25 55-55 7.071 7.07z" />
-    </symbol>
-
-    <symbol id="icon_phone" viewBox="0 0 20 20">
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M2 2h4.96l.92 4.603-1.943 1.943a8.017 8.017 0 0 0 5.517 5.517l1.943-1.943 4.603.92V18h-4.364C7.21 18 2 12.79 2 6.364V2zm1.455 1.455v2.909c0 5.623 4.558 10.181 10.181 10.181h2.91v-2.312l-2.67-.534-1.97 1.97-.393-.09A9.467 9.467 0 0 1 4.42 8.487l-.09-.392 1.97-1.97-.534-2.67H3.455z" />
-    </symbol>
-
-    <symbol id="icon_play" viewBox="0 0 20 20">
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M3.333 1.636L17.47 10 3.333 18.37V1.636zM5 4.558v10.888L14.197 10 5 4.558z" />
-    </symbol>
-
-    <symbol id="icon_search" viewBox="0 0 20 20">
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M2 8.425a6.424 6.424 0 1 1 11.444 4.01L18 16.99 16.99 18l-4.555-4.556A6.425 6.425 0 0 1 2 8.424zm6.425-4.997a4.997 4.997 0 1 0 0 9.993 4.997 4.997 0 0 0 0-9.993z" />
-    </symbol>
-
-    <symbol id="icon_send" viewBox="0 0 20 20">
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M8.508 11.492L1.403 9.124 1.357 7.56 18.024.893l1.083 1.083-6.667 16.667-1.564-.046-2.368-7.105zm-4.42-3.23L8.941 9.88l5.932-5.932L4.088 8.262zm11.963-3.135l-5.931 5.932 1.618 4.853 4.314-10.785z" />
-    </symbol>
-
-    <symbol id="icon_sort" viewBox="0 0 20 20">
-      <path d="M1.667 4.167h16.666v1.666H1.667V4.167zm0 5H13v1.666H1.666V9.167zm0 5H8v1.666H1.667v-1.666z" />
-    </symbol>
-
-    <symbol id="icon_yandex" viewBox="0 0 24 24">
-      <g clip-path="url(#a)">
-        <path
-          d="M10.881 18.995v-1.41c0-1.913-.222-2.86-.99-4.51L6.157 5h2.585l3.17 6.907c.929 2.013 1.332 3.06 1.332 5.376v1.712h-2.362zm1.514-7.229l2.948-6.765h2.484l-2.989 6.765h-2.443z" />
-      </g>
-      <defs>
-        <clipPath id="a">
-          <path transform="translate(5 5)" d="M0 0h14v14H0z" />
-        </clipPath>
-      </defs>
-    </symbol>
-
-    <symbol id="link_arrow" viewBox="0 0 20 20">
-      <path d="M7.5 3.821L13.678 10 7.5 16.178 6.321 15l5-5-5-5L7.5 3.821z" />
-    </symbol>
-
-    <symbol id="logoCircle" viewBox="0 0 10 7">
-      <path
-        d="M5.204 5.95c.026.058.086.087.18.087h.048v.08H4.273a.506.506 0 0 1-.133-.013c-.027-.008-.046-.03-.056-.067a.577.577 0 0 1-.02-.052l-.045-.147a47.849 47.849 0 0 0-.278-.931H1.72l-.094.326c-.095.323-.21.557-.352.7-.142.144-.295.215-.462.215A.71.71 0 0 1 .565 6.1a.92.92 0 0 1-.435-.334.596.596 0 0 1-.1-.247c.228.01.378-.085.446-.286l1.69-4.77H3.34L5.204 5.95zM1.986 4.021h1.48l-.729-2.515-.75 2.515zm7.308 1.853c0 .042.018.066.052.074a.593.593 0 0 0 .123.012h.045v.077h-1.12c-.056 0-.087-.018-.092-.054a.806.806 0 0 1-.006-.109v-.302h-.023a1.537 1.537 0 0 1-.454.423c-.17.1-.392.151-.667.151-.441 0-.777-.13-1.007-.388-.228-.259-.344-.608-.349-1.048-.005-.295-.01-.537-.011-.727a27.565 27.565 0 0 1-.005-.458v-.462c0-.108.005-.228.011-.357.008-.13.031-.25.07-.361a.714.714 0 0 1 .174-.283.453.453 0 0 1 .332-.117c.213 0 .386.07.52.21a.99.99 0 0 1 .25.52h-.031a.187.187 0 0 0-.136.05.347.347 0 0 0-.084.175 1.94 1.94 0 0 0-.046.33 6.71 6.71 0 0 0-.016.517v.784c0 .233.05.412.152.536.102.124.267.186.495.186a.712.712 0 0 0 .577-.252c.14-.169.208-.385.208-.649v-.225c0-.088 0-.175-.003-.26a6.54 6.54 0 0 1-.003-.252 34.7 34.7 0 0 0-.005-.587 2.45 2.45 0 0 1 .046-.524.847.847 0 0 1 .175-.38c.084-.099.21-.148.377-.148.215 0 .387.07.518.21.133.14.217.313.253.52h-.031a.244.244 0 0 0-.141.039c-.038.026-.07.088-.09.186-.024.099-.04.241-.046.427a18.82 18.82 0 0 0-.012.77v1.746zM7.747 1.277a.706.706 0 0 1-.207-.046l-.193-.078a3.539 3.539 0 0 0-.199-.074.696.696 0 0 0-.224-.035.79.79 0 0 0-.253.047 1.54 1.54 0 0 0-.311.155c.06-.295.156-.493.285-.594a.706.706 0 0 1 .446-.151c.097 0 .197.011.302.035.103.023.208.049.316.077.107.029.211.055.315.078.105.023.205.035.301.035.295 0 .484-.088.564-.264a1.01 1.01 0 0 1-.11.384.772.772 0 0 1-.224.256.916.916 0 0 1-.313.14c-.117.029-.24.043-.366.043h-.065a.33.33 0 0 1-.064-.008z" />
-    </symbol>
-
-    <symbol id="minus" viewBox="0 0 20 20">
-      <path d="M3.333 9.168h13.334v1.667H3.333V9.168z" />
-    </symbol>
-
-    <symbol id="order" viewBox="0 0 20 20">
-      <path d="M5.833 9.165H10v1.667H5.833V9.165zm0 3.334h8.334v1.666H5.833V12.5z" />
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M7.155.832h5.69l1.322 1.322v.345H17.5v16.666h-15V2.5h3.333v-.345L7.155.832zM5.833 4.165H4.167V17.5h11.666V4.165h-1.666v1.667H5.833V4.165zM12.5 2.844l-.345-.345h-4.31l-.345.345v1.321h5V2.844z" />
-    </symbol>
-
-    <symbol id="plus" viewBox="0 0 20 20">
-      <path d="M10.833 3.332v5.833h5.834v1.667h-5.834v5.833H9.167v-5.833H3.333V9.165h5.834V3.332h1.666z" />
-    </symbol>
-
-    <symbol id="tab_1" viewBox="0 0 20 20">
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M6.925 11.85a3.075 3.075 0 1 1 6.15 0 3.075 3.075 0 0 1-6.15 0zM10 10.312a1.538 1.538 0 1 0 0 3.075 1.538 1.538 0 0 0 0-3.075z" />
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M10 2l8.771 7.456-.995 1.171-.857-.728V18H3.08V9.899l-.857.728-.995-1.171L10 2zM4.619 8.592v7.87H15.38v-7.87L10 4.018 4.619 8.592z" />
-    </symbol>
-
-    <symbol id="tab_2" viewBox="0 0 20 20">
-      <g clip-path="url(#a)">
-        <path fill-rule="evenodd" clip-rule="evenodd"
-          d="M10.597 2a6.424 6.424 0 1 0 4.01 11.444L19.163 18l1.01-1.01-4.557-4.555A6.424 6.424 0 0 0 10.596 2zM5.6 8.425a4.997 4.997 0 1 1 9.993 0 4.997 4.997 0 0 1-9.993 0zM-.172 6.319h2.13V4.773h-2.13V6.32zm0 3.268h3.22v1.55h-3.22v-1.55zm6.441 6.368H-.172V14.38h6.441v1.576z" />
-      </g>
-      <defs>
-        <clipPath id="a">
-          <path d="M0 0h20v20H0z" />
-        </clipPath>
-      </defs>
-    </symbol>
-
-    <symbol id="tab_3" viewBox="0 0 20 20">
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M7.09 2h5.819v4.364h4.364V18H2.727V6.364h4.364V2zm0 5.818V10h1.455V7.818h2.91V10h1.454V7.818h2.91v8.728H4.181V7.818H7.09zm4.364-1.454H8.545v-2.91h2.91v2.91z" />
-    </symbol>
-
-    <symbol id="tab_4" viewBox="0 0 20 20">
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M9.994 3.097c-1.95-1.704-4.834-2.052-7.073-.139-2.422 2.07-2.774 5.555-.859 8.02.87 1.119 2.742 2.924 4.344 4.408A160.021 160.021 0 0 0 9.38 18.07l.064.056v.001l.55-.627-.55.627.55.48.548-.48-.549-.627.549.628.065-.058a106.19 106.19 0 0 0 .847-.75c.557-.497 1.316-1.182 2.128-1.934 1.602-1.484 3.474-3.289 4.343-4.408 1.909-2.455 1.611-5.968-.867-8.027-2.264-1.882-5.117-1.558-7.065.146zm0 13.292a165.357 165.357 0 0 1-2.456-2.226c-1.625-1.505-3.39-3.217-4.16-4.207-1.363-1.755-1.127-4.233.626-5.73C5.682 2.79 7.94 3.16 9.36 4.82l.633.74.634-.74c1.414-1.653 3.643-2.02 5.366-.589 1.768 1.47 1.987 3.96.616 5.724-.77.99-2.534 2.702-4.16 4.207a158.673 158.673 0 0 1-2.456 2.226z" />
-    </symbol>
-
-    <symbol id="tab_5" viewBox="0 0 20 20">
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M5.833 5a4.167 4.167 0 1 1 8.334 0 4.167 4.167 0 0 1-8.334 0zM10 2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM1.667 18.333a8.333 8.333 0 1 1 16.666 0v.834H1.667v-.834zm1.718-.833h13.23a6.668 6.668 0 0 0-13.23 0z" />
-    </symbol>
-
-    <symbol id="tag" viewBox="0 0 107 50">
-      <path
-        d="M106.387 16.924s-5.209 1.65-6.283 5.003c-1.075 3.35 2.97 5.32 2.97 5.32s-5.648-.239-9.058 2.652c-3.403 2.884-1.145 5.983-1.145 5.983s-4.938-1.589-9.502.586c-4.554 2.172-3.863 5.781-3.863 5.781s-3.954-2.444-9.061-.962c-5.104 1.481-5.765 5.263-5.765 5.263s-2.896-3.022-8.227-2.208c-5.33.814-7.192 4.563-7.192 4.563s-1.76-3.413-7.073-3.303c-5.317.11-8.361 3.622-8.361 3.622s-.417-3.65-5.416-4.364c-5.002-.715-9.243 2.276-9.243 2.276s1.233-3.632-2.875-5.37c-4.118-1.74-9.437.172-9.437.172s3.272-3.086 1.247-5.963c-2.026-2.88-7.49-2.9-7.49-2.9s5.209-1.65 6.283-5.003c1.075-3.35-2.97-5.32-2.97-5.32s5.648.24 9.059-2.651c3.402-2.884 1.145-5.984 1.145-5.984s4.937 1.59 9.5-.586c4.555-2.172 3.864-5.78 3.864-5.78s3.954 2.443 9.061.961C41.659 7.231 42.32 3.45 42.32 3.45s2.896 3.023 8.227 2.209c5.327-.814 7.193-4.563 7.193-4.563s1.759 3.412 7.072 3.302c5.318-.11 8.361-3.623 8.361-3.623s.417 3.651 5.416 4.364c5.002.715 9.243-2.275 9.243-2.275s-1.233 3.632 2.875 5.37c4.118 1.74 9.437-.173 9.437-.173s-3.272 3.087-1.247 5.963c2.026 2.88 7.49 2.9 7.49 2.9z" />
-    </symbol>
-
-    <symbol id="upload" viewBox="0 0 20 20">
-      <path d="M10 8.822l2.845 2.845-1.178 1.179-.834-.834v3.822H9.167v-3.822l-.834.834-1.178-1.179L10 8.822z" />
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M2.5.834h9.512L17.5 6.322v12.845h-15V.834zm1.667 1.667v15h11.666v-10h-5v-5H4.167zM12.5 3.679l2.155 2.155H12.5V3.679z" />
-    </symbol>
-
-  </svg>
-
-  <div class="preloader" data-scroll="" data-scroll-call="initCounter" data-counter-start="">
-    <div class="preloader__wrap">
-      <div class="preloader__num" data-counter="" data-start="0" data-end="100" data-difference="1"
-        data-time-delay="3000" data-add-text="%">0 </div>
-    </div>
-  </div>
-
-  <div class="modals">
-    <div class="modal__overlay" id="commonModalOverlay"></div>
-    <div class="modal_menu modal" data-modal="modal_menu">
-      <div class="modal_menu__bg">
-        <picture class="image">
-          <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/menu_lady.webp" type="image/webp" />
-          <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/menu_lady.png" type="image/png" /><img
-            class="image" data-lazy="data-lazy" data-src="/image/catalog/assets/img/menu_lady.png" alt="" />
-        </picture>
-      </div>
-      <div class="modal_menu__top">
-        <button class="modal_close modal_menu__close" data-modal-close>
-          <svg class="icon">
-            <use xlink:href="#icon_cross"></use>
-          </svg>
-        </button>
-        <div class="modal_menu__links"> <a class="modal_menu__link" href="/appointment">Запись на приём</a><a
-            class="modal_menu__link" href="/returncall">Обратный звонок</a><a class="modal_menu__link"
-            href="tel:8 (901) 930–08–08">8 (901) 930–08–08</a></div>
-      </div>
-      <div class="modal_menu__content" data-simplebar=""> <a class="modal_menu__logo" href="/"><img class="image"
-            data-src="/image/catalog/assets/img/menu_logo.svg" alt="" data-lazy="" /></a>
-        <p class="modal_menu__text">Мы знаем, как сделать так, чтобы вы в полной мере любовались окружающим миром. <br
-            class="desktop"> Поможем лучше видеть тем, у кого проблемы со зрением, и предоставим огромный выбор <br
-            class="desktop"> солнцезащитных очков для тех, кто стремится к ярким образам.</p>
-        <div class="modal_menu__table">
-          <div class="modal_menu__cell">
-            <p class="modal_menu__caption">Каталог</p>
-              {% for categoryq in categoriesq %}
-                <a class="modal_menu__link" href="{{ categoryq.href }}">{{ categoryq.name }}
-                <svg class="icon">
-                  <use xlink:href="#link_arrow"></use>
-                </svg>
-                </a>
-              {% endfor %}
-              <a class="modal_menu__link" href="/brands">Бренды
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg></a>
-          </div>
-          <div class="modal_menu__cell">
-            <p class="modal_menu__caption">Услуги</p>
-            <a class="modal_menu__link" href="/podbor-solncezaschitnyh-ochkov">Подбор солнцезащитных очков
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg>
-            </a>
-            <a class="modal_menu__link" href="/proverka-svoih-ochkov">Проверка очков
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg>
-            </a>
-            <a class="modal_menu__link" href="/izgotovlenie-medicinskih-ochkov">Изготовление медицинских очков
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg>
-            </a>
-            <a class="modal_menu__link" href="/remont-ochkov">Ремонт очков
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg>
-            </a>
-            <a class="modal_menu__link" href="/podbor-kontaktnyh-linz">Подбор контактных линз
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg>
-            </a>
-            <a class="modal_menu__link" href="/individualnyj-servis">Индивидуальный сервис
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg>
-            </a>
-          </div>
-          <div class="modal_menu__cell modal_menu__cell--grid1">
-            <p class="modal_menu__caption">Диоптрика</p><a class="modal_menu__link" href="/about">О компании
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg></a><a class="modal_menu__link" href="/documents">Документы
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg></a><a class="modal_menu__link" href="/news">Новости
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg></a><a class="modal_menu__link" href="/blog">Блог
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg></a><a class="modal_menu__link" href="/pravila-magazina">Правила магазина
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg></a><a class="modal_menu__link" href="/contacts">Контакты
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg></a>
-          </div>
-          <div class="modal_menu__cell modal_menu__cell--grid2">
-            <p class="modal_menu__caption">Покупателям</p>
-            <a class="modal_menu__link" href="/delivery_payment">Доставка
-              и оплата
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg>
-            </a>
-            <a class="modal_menu__link" href="/promotions">Акции и промо
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg>
-            </a>
-            <a class="modal_menu__link" href="/faq">Ответы на вопросы
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg>
-            </a>
-            <a class="modal_menu__link" href="{% if logged %}{{ order }}{% else %}{{ login }}{% endif %}">
-              {% if logged %}{{ text_account }}{% else %} Войти {% endif %}
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg>
-            </a>
-            {% if logged %}
-            <a class="modal_menu__link" href="{{ wishlist }}">Избранное
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg>
-            </a>
-            {% else %}
-            <a class="modal_menu__link" data-linked-modal="modal_wishlistErr">Избранное
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg>
-            </a>
-            {% endif %}
-            <a class="modal_menu__link" href="/cart">Корзина
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg>
-            </a>
-          </div>
-          <div class="modal_menu__cell modal_menu__cell--grid3">
-            <p class="modal_menu__caption">Контакты</p><a class="modal_menu__link" href="tel:8 (901) 930–08–08">8 (901)
-              930–08–08
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg></a><a class="modal_menu__link" href="mailto:dioptrikashop@yandex.ru">dioptrikashop@yandex.ru
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg></a><a class="modal_menu__link" href="https://yandex.ru/maps/-/CCU8y8XUDB" target="_blank">Москва,
-              Островная 2, оф. 303
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg></a><a class="modal_menu__link" href="https://wa.me/79019300808" target="_blank">WhatsApp
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg></a><a class="modal_menu__link" href="/returncall">Обратный звонок
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg></a><a class="modal_menu__link" href="/contacts">Все контакты
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg></a>
-          </div>
-          <div class="modal_menu__cell modal_menu__cell--mob">
-            <p class="modal_menu__caption">Связаться</p><a class="modal_menu__link" href="/appointment">Запись на приём
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg></a><a class="modal_menu__link" href="/returncall">Обратный звонок
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg></a><a class="modal_menu__link" href="tel:8 (800) 500-53-29">8 (800) 500-53-29
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg></a><a class="modal_menu__link" href="" target="_blank">Instagram
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg></a><a class="modal_menu__link" href="" target="_blank">Telegram
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg></a><a class="modal_menu__link" href="" target="_blank">ВКонтакте
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg></a><a class="modal_menu__link" href="" target="_blank">Facebook
-              <svg class="icon">
-                <use xlink:href="#link_arrow"></use>
-              </svg></a>
-          </div>
-        </div>
-      </div>
-      <div class="modal_menu__bottom">
-        <div class="modal_menu__links"> <a class="modal_menu__link" href="" target="_blank">Instagram</a><a
-            class="modal_menu__link" href="" target="_blank">Telegram</a><a class="modal_menu__link" href=""
-            target="_blank">ВКонтакте</a><a class="modal_menu__link" href="" target="_blank">Facebook</a></div>
-      </div>
-    </div>
-    <div class="modal_try_on modal_form modal" data-modal="modal_try_on">
-      <button class="modal_close modal_form__close" data-modal-close="">
-        <svg class="icon">
-          <use xlink:href="#icon_cross"></use>
-        </svg>
-      </button>
-      <h3 class="modal_try_on__title">Как примерить очки?</h3>
-      <p class="modal_try_on__text">Понравились очки и хотите примерить? <br class="mobile"> Есть три способа.</p>
-      <ol class="modal_try_on__list">
-        <li class="modal_try_on__item">В наших салонах оптики вы можете примерить любую модель очков из представленных в
-          наличии на сайте. Адреса наших магазинов смотрите <a class="link" href="/contacts">на странице контактов</a>.
-        </li>
-        <li class="modal_try_on__item">Просто заказать очки с доставкой по Москве и МО на примерку. Наш курьер привезет
-          вам до 4 выбранных моделей. Это бесплатно, при условии покупки любой подошедшей модели.</li>
-        <li class="modal_try_on__item">У вас есть любые старые очки, в которых вам было комфортно? Можно померить их
-          размер и уже хорошо ориентироваться при заказе. Самые важные параметры, это: ширина линзы и ширина по лицу. На
-          каждой странице очков есть такая таблица, где указаны эти размеры.</li>
-      </ol>
-    </div>
-    <div class="modal_card modal_form modal" data-modal="modal_card">
-      <button class="modal_close modal_form__close" data-modal-close="">
-        <svg class="icon">
-          <use xlink:href="#icon_cross"></use>
-        </svg>
-      </button><a class="modal_card__btn btn btn--filled" href="{{product.href}}"><span class="btn__text">смотреть
-          подробнее</span></a>
-      <div class="modal_card__content" data-simplebar="">
-        <div class="modal_card__slider">
-          <div class="modal_card__slider_wrap" data-hover-images="">
-          <img class="image" data-lazy data-src="/image/catalog/assets/img/product_page_pic_1.jpg" alt=""><img class="image" data-lazy
-              data-src="/image/catalog/assets/img/hits_pic_2.jpg" alt=""><img class="image" data-lazy
-              data-src="/image/catalog/assets/img/hits_pic_1.jpg" alt=""></div>
-        </div>
-        <div class="modal_card__info">
-          <div class="product_page_info__block"><span
-              class="product_page_info__text product_page_info__text-stock product_page_info__text--small">В наличии</span>
-            <p class="product_page_info__title">Prada Palette 01</p>
-
-            <div class="product_page_info__line"> <span class="product_page_info__price normal"><text>17 900</text>
-                руб</span><span class="product_page_info__price old"><text>24 000</text> руб</span></div>
-            <p class="product_page_info__text">Очки солнцезащитные от премиум-бренда выполнены из пластика. Особенности:
-              нерегулируемые носовые упоры, фотохромные линзы, высокая степень светозащиты, в комплекте футляр.</p>
-            <div class="product_page_info__buttons">
-              <button class="product_page_info__btn product_page_info__btn-cart btn btn--filled btn--icon_right"><span
-                  class="btn__text">добавить в
-                  корзину</span>
-                <svg class="btn__icon btn__icon--white btn__icon--right">
-                  <use xlink:href="#cart"></use>
-                </svg>
-              </button>
-              {% if logged %}
-              <button class="product_page_info__btn showNoLogin add-modalWish product_page_info__btn-wish btn btn--grey btn--icon_right" {% if not logged %}data-login="false" {% else %}data-login="true" {% endif %}><span
-                  class="btn__text">избранное</span>
-                <!--<svg class="btn__icon btn__icon--black btn__icon--right">
-                  <use xlink:href="#heart"></use>
-                </svg>-->
-                <img class="image image__empty" data-src="/image/catalog/assets/img/icon_fav_empty.svg" alt="" data-lazy="" />
-                <img class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg" alt="" data-lazy="" />
-              </button>
-              {% else %} 
-              <button class="product_page_info__btn showNoLogin btn btn--grey btn--icon_right"  data-linked-modal="modal_wishlistErr">
-                <span class="btn__text">избранное</span>
-                <!--<svg class="btn__icon btn__icon--black btn__icon--right">
-                  <use xlink:href="#heart"></use>
-                </svg>-->
-                <img class="image image__empty" data-src="/image/catalog/assets/img/icon_fav_empty.svg" alt="" data-lazy="" />
-                <img class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg" alt="" data-lazy="" />
-              </button>
-              {% endif %}
-            </div>
-          </div>
-          <div class="product_page_info__block product_page_info__block--scroll product_page_info__block_option">
-            <p class="product_page_info__caption">Выберите цвет</p>
-            <div class="product_page_info__colors">
-             <!-- <label class="product_page_info__colors_btn">
-                <input class="radio" type="radio" name="color" value="" hidden="">
-                <p class="text">чёрный</p>
-              </label>
-              <label class="product_page_info__colors_btn">
-                <input class="radio" type="radio" name="color" value="" hidden="">
-                <p class="text">красный</p>
-              </label>
-              <label class="product_page_info__colors_btn">
-                <input class="radio" type="radio" name="color" value="" hidden="">
-                <p class="text">белый</p>
-              </label>
-              <label class="product_page_info__colors_btn">
-                <input class="radio" type="radio" name="color" value="" hidden="">
-                <p class="text">оранжевый</p>
-              </label>-->
-            </div>
-          </div>
-          <div class="product_page_info__block modalSize product_page_info__block--scroll">
-            <div class="product_page_info_dropdown is-active">
-              <div class="product_page_info_dropdown__top">
-                <p class="product_page_info__caption">Размер</p>
-              </div>
-              <div class="product_page_info_dropdown__content">
-                <div class="product_page_size_block p-width">
-                  <div class="product_page_size_block__pic"><img class="image"
-                      data-src="/image/catalog/assets/img/glasses_size_1.svg" alt="" data-lazy="" />
-                  </div>
-                  <p class="product_page_size_block__text">Ширина:</p>
-                  <p class="product_page_size_block__text"><text>142</text> мм</p>
-                </div>
-                <div class="product_page_size_block p-length">
-                  <div class="product_page_size_block__pic"><img class="image"
-                      data-src="/image/catalog/assets/img/glasses_size_2.svg" alt="" data-lazy="" />
-                  </div>
-                  <p class="product_page_size_block__text">Длина дужки:</p>
-                  <p class="product_page_size_block__text"><text>140</text> мм</p>
-                </div>
-                <div class="product_page_size_block p-height">
-                  <div class="product_page_size_block__pic"><img class="image"
-                      data-src="/image/catalog/assets/img/glasses_size_3.svg" alt="" data-lazy="" />
-                  </div>
-                  <p class="product_page_size_block__text">Высота линзы:</p>
-                  <p class="product_page_size_block__text"><text>54</text> мм</p>
-                </div>
-                <div class="product_page_size_block p-widthLince">
-                  <div class="product_page_size_block__pic"><img class="image"
-                      data-src="/image/catalog/assets/img/glasses_size_4.svg" alt="" data-lazy="" />
-                  </div>
-                  <p class="product_page_size_block__text">Ширина линзы:</p>
-                  <p class="product_page_size_block__text"><text>65</text> мм</p>
-                </div>
-                <div class="product_page_size_block p-bridge">
-                  <div class="product_page_size_block__pic"><img class="image"
-                      data-src="/image/catalog/assets/img/glasses_size_5.svg" alt="" data-lazy="" />
-                  </div>
-                  <p class="product_page_size_block__text">Длина моста:</p>
-                  <p class="product_page_size_block__text"><text>9</text> мм</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="product_page_info__block modalChar product_page_info__block--scroll">
-            <div class="product_page_info_dropdown is-active">
-              <div class="product_page_info_dropdown__top">
-                <p class="product_page_info__caption">Характеристики</p>
-              </div>
-              <div class="product_page_info_dropdown__content">
-                <div class="product_page_characteristics_block">
-                  <p class="product_page_characteristics_block__text">УФ-защита</p>
-                  <p class="product_page_characteristics_block__text">100%</p>
-                </div>
-                <div class="product_page_characteristics_block">
-                  <p class="product_page_characteristics_block__text">Цвет заушника</p>
-                  <p class="product_page_characteristics_block__text">Красный</p>
-                </div>
-                <div class="product_page_characteristics_block">
-                  <p class="product_page_characteristics_block__text">Материал солнцезащитных линз</p>
-                  <p class="product_page_characteristics_block__text">Пластик</p>
-                </div>
-                <div class="product_page_characteristics_block">
-                  <p class="product_page_characteristics_block__text">Тип окраски линз</p>
-                  <p class="product_page_characteristics_block__text">Однотонная</p>
-                </div>
-                <div class="product_page_characteristics_block">
-                  <p class="product_page_characteristics_block__text">Возраст</p>
-                  <p class="product_page_characteristics_block__text link">Взрослый</p>
-                </div>
-                <div class="product_page_characteristics_block">
-                  <p class="product_page_characteristics_block__text">Страна производства</p>
-                  <p class="product_page_characteristics_block__text link">Италия</p>
-                </div>
-                <div class="product_page_characteristics_block">
-                  <p class="product_page_characteristics_block__text">Бренд</p>
-                  <p class="product_page_characteristics_block__text link">Prada</p>
-                </div>
-                <div class="product_page_characteristics_block">
-                  <p class="product_page_characteristics_block__text">Пол</p>
-                  <p class="product_page_characteristics_block__text link">Для мужчин</p>
-                </div>
-                <div class="product_page_characteristics_block">
-                  <p class="product_page_characteristics_block__text">Форма оправы</p>
-                  <p class="product_page_characteristics_block__text link">Трапеция</p>
-                </div>
-                <div class="product_page_characteristics_block">
-                  <p class="product_page_characteristics_block__text">Материал оправы</p>
-                  <p class="product_page_characteristics_block__text link">Пластик</p>
-                </div>
-                <div class="product_page_characteristics_block">
-                  <p class="product_page_characteristics_block__text">Цвет оправы</p>
-                  <p class="product_page_characteristics_block__text link">Красный</p>
-                </div>
-                <div class="product_page_characteristics_block">
-                  <p class="product_page_characteristics_block__text">Наличие футляра</p>
-                  <p class="product_page_characteristics_block__text">Есть</p>
-                </div>
-                <div class="product_page_characteristics_block">
-                  <p class="product_page_characteristics_block__text">Наличие салфетки</p>
-                  <p class="product_page_characteristics_block__text">Есть</p>
-                </div>
-                <div class="product_page_characteristics_block">
-                  <p class="product_page_characteristics_block__text">Цвет солнцезащитных линз</p>
-                  <p class="product_page_characteristics_block__text">Красный</p>
-                </div>
-                <div class="product_page_characteristics_block">
-                  <p class="product_page_characteristics_block__text">Номер модели</p>
-                  <p class="product_page_characteristics_block__text">0AX4115SU 807 887</p>
-                </div>
-                <div class="product_page_characteristics_block">
-                  <p class="product_page_characteristics_block__text">Конструкция оправы</p>
-                  <p class="product_page_characteristics_block__text link">Ободковая</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="product_page_info__block product_page_info__block--scroll">
-            <div class="product_page_info_dropdown is-active">
-              <div class="product_page_info_dropdown__top">
-                <p class="product_page_info__caption">Гарантия</p>
-              </div>
-              <div class="product_page_info_dropdown__content product_page_info_dropdown__content--38">
-                <p class="product_page_characteristics_block__text">Гарантия на все очки и на данную модель
-                  распространяется на все очки и линзы, как изготовленные в нашей компании, так и от сторонних
-                  брендов, в том числе и на продукцию заводов «Оптикс» и «Гелиос».</p>
-              </div>
-            </div>
-          </div>
-          <div class="product_page_info__block product_page_info__block--scroll">
-            <div class="product_page_info_dropdown is-active">
-              <div class="product_page_info_dropdown__top">
-                <p class="product_page_info__caption">Оплата и доставка</p>
-              </div>
-              <div class="product_page_info_dropdown__content">
-                <div class="product_page_delivery">
-                  <div class="product_page_delivery__block">
-                    <div class="product_page_delivery__info">
-                      <p class="product_page_delivery__text product_page_delivery__text--bold">Доставка курьером по
-                        Москве</p>
-                      <p class="product_page_delivery__text">При заказе до 3000 руб. — 350 руб, при заказе от 3000 руб.
-                        — бесплатно.</p>
-                      <p class="product_page_delivery__text">Оплата картой, наличными или по QR-коду.</p>
-                    </div>
-                  </div>
-                  <div class="product_page_delivery__block">
-                    <div class="product_page_delivery__info">
-                      <p class="product_page_delivery__text product_page_delivery__text--bold">Доставка по России (СДЭК
-                        или Почта России)</p>
-                      <p class="product_page_delivery__text">Доставка рассчитывается менеджером после оформления заказа.
-                      </p>
-                      <p class="product_page_delivery__text">Оплата онлайн на сайте.</p>
-                    </div>
-                  </div>
-                  <div class="product_page_delivery__block">
-                    <div class="product_page_delivery__info">
-                      <p class="product_page_delivery__text product_page_delivery__text--bold">Самовывоз</p>
-                      <p class="product_page_delivery__text">Оплата картой, наличными или по QR-коду.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal_delete_account modal_form modal" data-modal="modal_delete_account">
-      <button class="modal_close modal_form__close" data-modal-close="">
-        <svg class="icon">
-          <use xlink:href="#icon_cross"></use>
-        </svg>
-      </button>
-      <h3 class="modal_form__title">Удаление аккаунта</h3>
-      <p class="modal_form__text">Вы уверены, что хотите удалить аккаунт? Вы сможете восстановить доступ в течение 30
-        дней.</p>
-      <div class="modal_form__buttons">
-        <button class="modal_form__btn btn btn--grey" data-modal-close=""><span class="btn__text">отмена</span></button>
-        <button class="modal_form__btn btn btn--red"><span class="btn__text">удалить аккаунт</span></button>
-      </div>
-    </div>
-    <div class="modal_checkout_moscow modal_form modal" data-modal="modal_checkout_moscow">
-      <button class="modal_close modal_form__close" data-modal-close="">
-        <svg class="icon">
-          <use xlink:href="#icon_cross"></use>
-        </svg>
-      </button>
-      <div class="modal_checkout_moscow__mob_wrap">
-        <p class="modal_checkout_moscow__title_mob">Доставка по Москве <br> и в пределах МКАД</p>
-      </div>
-      <div class="modal_checkout_moscow__map" id="modalMap"></div>
-      <div class="modal_checkout_moscow__info">
-        <p class="section_block__title section_block__title--mob section_block__title--small">Доставка по Москве <br> и
-          в пределах МКАД</p>
-        <div class="modal_checkout_moscow__content">
-          <div class="modal_checkout_moscow__line modal_checkout_moscow__line--flex">
-            <div class="modal_checkout_moscow__input modal_checkout_moscow__input--292">
-              <p class="modal_checkout_moscow__input_caption">Адрес доставки</p>
-              <div class="input_wrapper input_wrapper--outlined" data-input-wrapper="">
-                <svg class="icon icon_left">
-                  <use xlink:href="#icon_search"></use>
-                </svg>
-                <input class="input_wrapper__input input_wrapper__input--icon_left" type="search" name="checkout_search"
-                  placeholder="Улица..." required autocomplete="off">
-              </div>
-            </div>
-            <div class="modal_checkout_moscow__input modal_checkout_moscow__input--small">
-              <div class="input_wrapper input_wrapper--outlined" data-input-wrapper="">
-                <input class="input_wrapper__input" type="text" name="apartment" required autocomplete="off">
-                <label class="input_wrapper__label">Квартира </label>
-                <div class="input_wrapper__tooltip" data-input-tooltip=""></div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="modal_checkout_moscow__line modal_checkout_moscow__line--mob100 modal_checkout_moscow__input--292">
-            <p class="modal_checkout_moscow__input_caption">Дата доставки</p>
-            <div class="input_wrapper input_wrapper--outlined" data-input-wrapper="">
-              <input class="input_wrapper__input" type="date" name="date" placeholder="Выбрать дату" required
-                autocomplete="off">
-            </div>
-          </div>
-          <div class="modal_checkout_moscow__line">
-            <p class="modal_checkout_moscow__input_caption">Дополнительная информация </p>
-            <div class="input_wrapper input_wrapper--textarea_grey" data-input-wrapper="">
-              <textarea class="input_wrapper__textarea" name="comment"
-                placeholder="Комментарий курьеру (подъезд, этаж, как пройти)"></textarea>
-            </div>
-          </div>
-          <div class="modal_checkout_moscow__line">
-            <p class="modal_checkout_moscow__input_caption">Нужен ли подъём на этаж?</p>
-            <div class="modal_checkout_moscow__line_wrap">
-              <label class="modal_checkout_moscow_radio">
-                <input class="radio" type="radio" name="go_to_floor" value="yes" hidden="">
-                <div class="modal_checkout_moscow_radio__block">
-                  <div class="modal_checkout_moscow_radio__radio"></div><span
-                    class="modal_checkout_moscow_radio__text">Нужен</span>
-                </div>
-              </label>
-              <label class="modal_checkout_moscow_radio">
-                <input class="radio" type="radio" name="go_to_floor" value="no" hidden="">
-                <div class="modal_checkout_moscow_radio__block">
-                  <div class="modal_checkout_moscow_radio__radio"></div><span
-                    class="modal_checkout_moscow_radio__text">Не нужен</span>
-                </div>
-              </label>
-            </div>
-          </div>
-          <div class="modal_checkout_moscow__price">
-            <p class="section_block__title">500 руб</p>
-            <p class="modal_checkout_moscow__price_text">Стоимость доставки</p>
-          </div>
-          <div class="modal_checkout_moscow__buttons">
-            <button class="modal_checkout_moscow__btn btn btn--filled" data-modal-close=""><span
-                class="btn__text">сохранить</span></button><a class="modal_checkout_moscow__btn btn btn--grey"
-              href="/delivery_payment" target="_blank"><span class="btn__text">условия доставки</span></a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal_checkout_self modal_checkout_moscow modal_form modal" data-modal="modal_checkout_self">
-      <button class="modal_close modal_form__close" data-modal-close="">
-        <svg class="icon">
-          <use xlink:href="#icon_cross"></use>
-        </svg>
-      </button>
-      <div class="modal_checkout_moscow__mob_wrap">
-        <p class="modal_checkout_moscow__title_mob">Самовывоз</p>
-        <p class="modal_checkout_moscow__text_mob">Самовывоз доступен только <br class="mobile"> на территории Москвы.
-        </p>
-      </div>
-      <div class="modal_checkout_moscow__map" id="modalMap"></div>
-      <div class="modal_checkout_moscow__info">
-        <p class="section_block__title section_block__title--mob section_block__title--small">Самовывоз</p>
-        <p class="section_block__text section_block__title--mob">Самовывоз доступен только на территории Москвы.</p>
-        <div class="modal_checkout_moscow__content">
-          <div class="modal_checkout_moscow__line">
-            <p class="modal_checkout_moscow__input_caption">Поиск</p>
-            <div class="input_wrapper input_wrapper--outlined" data-input-wrapper="">
-              <svg class="icon icon_left">
-                <use xlink:href="#icon_search"></use>
-              </svg>
-              <input class="input_wrapper__input input_wrapper__input--icon_left" type="search" name="checkout_search"
-                placeholder="Поиск пункта по улице" required autocomplete="off">
-            </div>
-          </div>
-          <div class="modal_checkout_moscow__line">
-            <p class="modal_checkout_moscow__input_caption">Выбрать точку</p>
-            <div class="modal_checkout_moscow__radio_btns">
-              <label class="checkout_option">
-                <input class="radio" type="radio" name="pickup_shop" value="" hidden="">
-                <div class="checkout_option__block">
-                  <div class="checkout_option__radio"></div>
-                  <div class="checkout_option__wrap">
-                    <p class="checkout_option__title">Диоптрика, Москва</p>
-                    <p class="checkout_option__text">Проспект 100-летия Владивостока 44</p>
-                    <p class="checkout_option__text checkout_option__text--upper">ПН–ВС, 08:00–20:00</p>
-                  </div>
-                </div>
-              </label>
-              <label class="checkout_option">
-                <input class="radio" type="radio" name="pickup_shop" value="" hidden="">
-                <div class="checkout_option__block">
-                  <div class="checkout_option__radio"></div>
-                  <div class="checkout_option__wrap">
-                    <p class="checkout_option__title">Диоптрика, Москва</p>
-                    <p class="checkout_option__text">Проспект 100-летия Владивостока 44</p>
-                    <p class="checkout_option__text checkout_option__text--upper">ПН–ВС, 08:00–20:00</p>
-                  </div>
-                </div>
-              </label>
-              <label class="checkout_option">
-                <input class="radio" type="radio" name="pickup_shop" value="" hidden="">
-                <div class="checkout_option__block">
-                  <div class="checkout_option__radio"></div>
-                  <div class="checkout_option__wrap">
-                    <p class="checkout_option__title">Диоптрика, Москва</p>
-                    <p class="checkout_option__text">Проспект 100-летия Владивостока 44</p>
-                    <p class="checkout_option__text checkout_option__text--upper">ПН–ВС, 08:00–20:00</p>
-                  </div>
-                </div>
-              </label>
-              <label class="checkout_option">
-                <input class="radio" type="radio" name="pickup_shop" value="" hidden="">
-                <div class="checkout_option__block">
-                  <div class="checkout_option__radio"></div>
-                  <div class="checkout_option__wrap">
-                    <p class="checkout_option__title">Диоптрика, Владивосток</p>
-                    <p class="checkout_option__text">Проспект 100-летия Владивостока 44</p>
-                    <p class="checkout_option__text checkout_option__text--upper">ПН–ВС, 08:00–20:00</p>
-                  </div>
-                </div>
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal_phone_confirm modal_delete_account modal_form modal" data-modal="modal_phone_confirm">
-      <button class="modal_close modal_form__close" data-modal-close="">
-        <svg class="icon">
-          <use xlink:href="#icon_cross"></use>
-        </svg>
-      </button>
-      <h3 class="modal_form__title">Подтвердить номер телефона</h3>
-      <p class="modal_form__text">В целях безопасности мы просим вас подтвердить ваш номер телефона.</p>
-      <div class="modal_checkout_moscow__input modal_checkout_moscow__input--margin">
-        <p class="modal_checkout_moscow__input_caption">Телефон</p>
-        <div class="input_wrapper input_wrapper--outlined" data-input-wrapper="">
-          <input class="input_wrapper__input" type="tel" name="phone" required autocomplete="off">
-          <label class="input_wrapper__label">Номер телефона </label>
-          <div class="input_wrapper__tooltip" data-input-tooltip=""></div>
-        </div>
-        <p class="modal_form__text modal_form__text--12">На этот номер мы отправим SMS с кодом</p>
-      </div>
-      <div class="modal_form__buttons modal_form__buttons--20">
-        <button class="modal_form__btn btn btn--filled"><span class="btn__text">Получить код</span></button>
-      </div>
-    </div>
-    <div class="modal_phone_confirm modal_delete_account modal_form modal" data-modal="modal_phone_confirm_2">
-      <button class="modal_close modal_form__close" data-modal-close="">
-        <svg class="icon">
-          <use xlink:href="#icon_cross"></use>
-        </svg>
-      </button>
-      <h3 class="modal_form__title">Введите код <br> подтверждения</h3>
-      <p class="modal_form__text">Код подтверждения мы отправили <br class="desktop"> на указанный вами номер.</p>
-      <div class="modal_checkout_moscow__input modal_checkout_moscow__input--margin">
-        <p class="modal_checkout_moscow__input_caption">Код</p>
-        <div class="modal_form__inputs_wrap">
-          <div class="input_wrapper input_wrapper--outlined">
-            <input class="input_wrapper__input input_wrapper__input--square" type="number" name="number" required
-              autocomplete="off">
-          </div>
-          <div class="input_wrapper input_wrapper--outlined">
-            <input class="input_wrapper__input input_wrapper__input--square" type="number" name="number" required
-              autocomplete="off">
-          </div>
-          <div class="input_wrapper input_wrapper--outlined">
-            <input class="input_wrapper__input input_wrapper__input--square" type="number" name="number" required
-              autocomplete="off">
-          </div>
-          <div class="input_wrapper input_wrapper--outlined">
-            <input class="input_wrapper__input input_wrapper__input--square" type="number" name="number" required
-              autocomplete="off">
-          </div>
-        </div>
-        <p class="modal_form__text modal_form__text--red modal_form__text--12">Неверный код, попробуйте ещё раз</p>
-      </div>
-      <div class="modal_form__buttons modal_form__buttons--44">
-        <button class="modal_form__btn btn btn--filled"><span class="btn__text">подтвердить номер</span></button>
-        <button class="modal_form__btn btn btn--grey"><span class="btn__text">отправить код ещё раз</span></button>
-      </div>
-    </div>
-    <div class="modal_video modal_form modal" data-modal="modal_video">
-      <button class="modal_close modal_form__close" data-modal-close="">
-        <svg class="icon">
-          <use xlink:href="#icon_cross"></use>
-        </svg>
-      </button>
-      <h3 class="modal_try_on__title">Видеоинструкция</h3>
-      <p class="modal_try_on__text">Для достижения максимального комфорта стоит <br class="desktop"> знать основные
-        принципы подбора очков.</p>
-      <div class="modal_video__content">
-        <video class="video" poster="/image/catalog/assets/img/video_pic.jpg" controls="">
-          <source>
-        </video>
-      </div>
-    </div>
-    <div class="modal_wishlistErr modal_form modal" data-modal="modal_wishlistErr">
-      <button class="modal_close modal_form__close" data-modal-close="">
-        <svg class="icon">
-          <use xlink:href="#icon_cross"></use>
-        </svg>
-      </button>
-      <h3 class="modal_try_on__title" style="margin-bottom: 20px;">Внимание</h3>
-      <p class="modal_try_on__text">Для добавления товара в избранное <a href="/login" style="text-decoration: underline;">войдите в аккаунт</a>, или <a href="/create-account" style="text-decoration: underline;">зарегистрируйтесь</a> на сайте </p>
-    </div>
-    <div class="modal_phone modal_form modal" data-modal="modal_phone">
-      <button class="modal_close modal_form__close" data-modal-close="">
-        <svg class="icon">
-          <use xlink:href="#icon_cross"></use>
-        </svg>
-      </button>
-      <h3 class="modal_form__title">Связаться с Диоптрикой</h3>
-      <div class="modal_phone__content"> <a class="modal_phone__link" href="tel:8 (800) 500-53-29">8 (800) 500-53-29
-          <svg class="icon">
-            <use xlink:href="#link_arrow"></use>
-          </svg></a><a class="modal_phone__link" href="https://wa.me/79019300808" target="_blank">WhatsApp
-          <svg class="icon">
-            <use xlink:href="#link_arrow"></use>
-          </svg></a><a class="modal_phone__link" href="/appointment">Запись на приём
-          <svg class="icon">
-            <use xlink:href="#link_arrow"></use>
-          </svg></a><a class="modal_phone__link" href="/returncall">Обратный звонок
-          <svg class="icon">
-            <use xlink:href="#link_arrow"></use>
-          </svg></a><a class="modal_phone__link" href="/contacts">Контакты
-          <svg class="icon">
-            <use xlink:href="#link_arrow"></use>
-          </svg></a></div>
-    </div>
-    <div class="modal_product_count modal_form modal" data-modal="modal_product_count">
-      <button class="modal_close modal_form__close" data-modal-close="">
-        <svg class="icon">
-          <use xlink:href="#icon_cross"></use>
-        </svg>
-      </button>
-      <h3 class="modal_form__title">Добавлено в корзину</h3>
-      <div class="modal_video__content">
-        <div class="cart_card">
-          <div class="cart_card__pic">
-            <picture class="image">
-              <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/cart_pic.webp" type="image/webp" />
-              <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/cart_pic.jpg" type="image/jpg" /><img
-                class="image" data-lazy="data-lazy" data-src="/image/catalog/assets/img/cart_pic.jpg" alt="" />
-            </picture>
-          </div>
-          <div class="cart_card__wrap">
-            <div class="cart_card__column">
-              <p class="cart__left_text cart__left_text--big">Palette 01</p>
-              <p class="cart__left_text">Prada</p>
-              <p class="cart__left_text">арт. 7478621</p>
-              <p class="cart__left_text">Оранжевый</p>
-            </div>
-            <div class="cart_card__prices">
-              <p class="cart_total__price">17 500 руб</p>
-            </div>
-            <div class="cart_card__amount">
-              <button class="cart_card__amount_icon cart_card__amount_icon--left">
-                <svg class="icon">
-                  <use xlink:href="#minus"></use>
-                </svg>
-              </button><span class="cart_card__amount_number">1</span>
-              <button class="cart_card__amount_icon cart_card__amount_icon--right">
-                <svg class="icon">
-                  <use xlink:href="#plus"></use>
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div><a class="modal_form__btn_add btn btn--filled" href="/cart"><span class="btn__text">Перейти в
-            корзину</span></a>
-      </div>
-    </div>
-  </div>
-
-  <div class="content">
+<body class="page__body main">
+  <div class="site-container">
     <header class="header">
-      <div class="header__overlay"></div>
-      <div class="header__line header__line--1">
-        <div class="header__line_wrap">
-          <button class="header__menu" data-linked-modal="modal_menu">
-            <svg class="icon">
-              <use xlink:href="#icon_menu"></use>
+      <div class="container">
+        <div class="header-top">
+          <nav class="nav header-top__nav" title="">
+            <ul class="list-reset nav__list">
+              <li class="nav__item"><a href="/about" class="nav__link">О нас</a></li>
+              <li class="nav__item"><a href="/brands" class="nav__link">Бренды</a></li>
+              <li class="nav__item"><a href="/delivery" class="nav__link">Доставка</a></li>
+              <li class="nav__item"><a href="/contacts" class="nav__link">Контакты</a></li>
+            </ul>
+          </nav>
+          <div class="header-top__separator"></div>
+          <div class="header-top__location">
+            <svg width="18" height="24" viewBox="0 0 18 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M9.0079 6.58166C8.3839 6.57084 7.77079 6.746 7.24668 7.08483C6.72257 7.42365 6.31117 7.91081 6.06488 8.48426C5.81859 9.0577 5.74856 9.69148 5.86371 10.3049C5.97886 10.9182 6.27398 11.4835 6.71147 11.9285C7.14897 12.3736 7.70904 12.6784 8.32035 12.8041C8.93166 12.9298 9.56655 12.8706 10.1441 12.6342C10.7217 12.3978 11.2159 11.9949 11.5637 11.4767C11.9115 10.9585 12.0971 10.3485 12.097 9.72436C12.1006 9.31516 12.0235 8.90929 11.8701 8.52989C11.7168 8.1505 11.4902 7.80503 11.2034 7.5132C10.9165 7.22137 10.575 6.9889 10.1983 6.82907C9.82159 6.66923 9.41709 6.58517 9.0079 6.58166ZM9.0079 11.4592C8.66331 11.4653 8.3247 11.3687 8.03522 11.1816C7.74575 10.9946 7.5185 10.7256 7.38244 10.4089C7.24638 10.0923 7.20767 9.74229 7.27123 9.40355C7.33478 9.06481 7.49774 8.75266 7.73934 8.50687C7.98093 8.26107 8.29023 8.09276 8.62782 8.02337C8.96542 7.95398 9.31602 7.98666 9.63498 8.11724C9.95393 8.24782 10.2268 8.4704 10.4188 8.75661C10.6108 9.04282 10.7133 9.37971 10.7131 9.72436C10.717 10.1806 10.5395 10.6197 10.2198 10.9452C9.90002 11.2707 9.46414 11.455 9.0079 11.4592ZM14.137 4.19069C13.4736 3.43228 12.6517 2.82894 11.7293 2.42336C10.807 2.01779 9.80672 1.81991 8.79941 1.84372C4.35029 1.84372 2.02148 5.52581 2.02148 9.162C2.02148 13.9229 8.41877 21.2756 8.69612 21.5951C8.75758 21.6706 8.83478 21.7318 8.92232 21.7744C9.00987 21.817 9.10566 21.84 9.20301 21.8418H9.21448C9.31076 21.8386 9.40539 21.8159 9.49267 21.7752C9.57995 21.7344 9.65807 21.6764 9.72232 21.6046C10.8582 20.3264 11.8983 18.9662 12.8344 17.5352C14.9318 14.3447 15.9905 11.5185 15.9905 9.14957C15.9829 7.32806 15.3257 5.56902 14.137 4.18878V4.19069ZM9.22692 20.0361C7.72825 18.2037 3.4159 12.6566 3.4159 9.14957C3.4159 6.31101 5.11062 3.25056 8.81089 3.25056C9.58355 3.2408 10.3502 3.38748 11.0647 3.68177C11.7792 3.97606 12.4268 4.41188 12.9684 4.963C13.51 5.51411 13.9346 6.16913 14.2164 6.88862C14.4983 7.60811 14.6317 8.37719 14.6085 9.14957C14.6085 13.2783 10.6558 18.3328 9.22692 20.0361Z"
+                fill="#4F649A" />
             </svg>
-          </button><a class="header__logo" href="/"><img class="image"
-              data-src="/image/catalog/assets/img/header_logo.svg" alt="" data-lazy="" /></a>
-          <button class="header__phone" data-linked-modal="modal_phone">
-            <svg class="icon">
-              <use xlink:href="#icon_phone"></use>
+            <span>Минск</span>
+          </div>
+          <div class="header-top__tel">
+            <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M12.7936 10.7416L12.7937 10.7416L12.8006 10.7345C12.8993 10.6328 13.0342 10.5742 13.1759 10.5716C13.3153 10.5689 13.4501 10.6206 13.552 10.7154L16.0089 13.1797C16.1065 13.2825 16.1602 13.4194 16.1585 13.5614C16.1567 13.7046 16.0986 13.8414 15.9967 13.9421C15.9966 13.9422 15.9964 13.9424 15.9962 13.9425L15.4439 14.4849L15.3418 14.5645C15.0932 14.7582 14.8176 14.9144 14.5237 15.028L14.5237 15.028L14.5191 15.0298C14.2503 15.1358 13.969 15.2072 13.6822 15.2423C13.65 15.2453 13.4383 15.2627 13.0779 15.2325C12.6854 15.1996 12.1145 15.1102 11.4053 14.8831C9.99087 14.4302 8.00108 13.4217 5.76474 11.1797L5.76449 11.1795C2.45429 7.864 1.42886 5.60691 1.71277 3.24751L1.71305 3.24507C1.74692 2.9556 1.81726 2.67154 1.92238 2.3997C2.03729 2.10344 2.19458 1.82544 2.38935 1.57436L2.49543 1.4376L3.00666 0.921688L3.00673 0.921757L3.01513 0.913002C3.06341 0.862668 3.12116 0.822371 3.18502 0.794427C3.24891 0.766469 3.31768 0.751406 3.38738 0.750094C3.45702 0.748783 3.5263 0.761242 3.59126 0.786803C3.65454 0.811699 3.71237 0.848497 3.76163 0.895171L6.21881 3.35873C6.31518 3.46183 6.36774 3.59847 6.36517 3.73975C6.36257 3.88309 6.30345 4.01959 6.20065 4.11955L6.20059 4.11949L6.19247 4.12763L5.78197 4.53923L5.78193 4.53928L4.94695 5.37636L4.54103 5.78332L4.82847 6.28108C4.85686 6.33024 4.88415 6.38001 4.91657 6.43912C4.92637 6.45698 4.93663 6.47569 4.94753 6.4955C6.13966 8.86288 8.05793 10.7867 10.4218 11.9858L10.6543 12.1152L11.1499 12.391L11.5502 11.9892L12.7936 10.7416Z"
+                stroke="#4F649A" stroke-width="1.5" />
             </svg>
-          </button>
+
+            <a href="tel:+375 17 123-45-67">+375 17 123-45-67</a>
+          </div>
         </div>
-
-        <div class="header__links">
-          <a class="header__link header__link--norm" href="/appointment">Запись на приём</a>
-          <a class="header__link header__link--norm" href="/returncall">Обратный звонок</a>
-          <a class="header__link header__link--norm" href="tel:8 (901) 930–08–08">8 (901) 930–08–08</a>
-          <a class="header__link header__link--norm"
-            href="{% if logged %}{{ order }}{% else %}{{ login }}{% endif %}">
-            {% if logged %}{{ text_account }}{% else %} Войти {% endif %}
-          </a>
-        </div>
-      </div>
-      <div class="header__line header__line--2">
-        <div class="header__links">
-          <button class="header__link header__link--catalog" data-catalog-btn="">каталог</button><a class="header__link"
-            href="/#services">услуги</a><a class="header__link" href="/brands">Бренды</a><a class="header__link"
-            href="/promotions">Акции и промо</a>
-        </div>
-        <div class="header__links">
-          <button class="header__link header__link--search" data-search-start=""> <span class="text">поиск</span>
-            <svg class="icon">
-              <use xlink:href="#icon_cross"></use>
-            </svg>
-          </button>
-          <!-- <a class="header__link" href="/favorites">Избранное (4)</a> -->
-          <!-- <a class="header__link header__cart" href="/cart">Корзина (3)</a> -->
-
-          <a href="{{ wishlist }}"
-            class="header__link trash-count wishlist_compare_header {% if wishlist_count == 0 and compare_count == 0 %}header-trash-count{% endif %}"
-            {% if wishlist_count + compare_count == 0 %}style="display:none;" {% endif %}>Избранное
-            ({{ wishlist_count + compare_count }})
-          </a>
-
-          <!-- <a href="{{ wishlist }}" id="wishlist-total" title="{{ text_wishlist }}">
-            <i class="fa fa-heart"></i>
-            <span class="hidden-xs hidden-sm hidden-md">{{ text_wishlist }}</span>
-          </a> -->
-
-          <!-- {% if theme_mt_text_basked_checked %}
-          <a href="{% if cart_products|length > 0 %}#basket{% else %}{{ checkout }}{% endif %}"
-            class="header__link {% if cart_products|length > 0 %} fancybox{% endif %}">
-            {{ theme_mt_text_basked }} (<span class="trash-count trash-header">{{ cart_product_count }}</span>)
-          </a>
-          {% endif %} -->
-
-          {% if theme_mt_text_basked_checked %}
-          <a href="{% if cart_products|length > 0 %}cart{% else %}{{ checkout }}{% endif %}" class="header__link">
-            {{ theme_mt_text_basked }} (<span class="trash-count trash-header">{{ cart_product_count }}</span>)
-          </a>
-          {% endif %}
-
-          <!-- {% if theme_mt_text_basked_checked %}
-          <a href="{% if cart_products|length > 0 %}#basket{% else %}{{ checkout }}{% endif %}"
-            class="account-btn my-trash {% if cart_products|length > 0 %} fancybox{% endif %}">
-            <div class="my-trash_icon">
-              <span class="i-custom icon-icon-trash"></span>
-              <span class="trash-count trash-header header-trash-count">{{ cart_product_count }}</span>
+        <div class="header-bottom">
+          <div class="header-bottom__logo">
+            <img loading="lazy" src="/image/catalog/assets/img/logo/head-logo.png" class="image" width="" height="" alt="">
+          </div>
+          <div class="header-bottom__content">
+            <div class="header-bottom__search header-bottom__search-desktop search">
+              <input class="input-reset search__input" type="text" placeholder="Введите поисковой запрос">
+              <button class="btn-reset search__button"></button>
             </div>
-            <p>{{ theme_mt_text_basked }}</p>
-          </a>
-          {% endif %} -->
 
-        </div>
-      </div>
-      <div class="header_search">
-        <div class="header_search__top">
-          <!-- <input class="header_search__input" type="search" placeholder="Поиск по бренду, названию, артикулу"> -->
-          <form action="/index.php" method="GET" class="search__form form-search" id="search-form">
-            <input type="hidden" name="route" id="" value="product/search">
-            <input class="header_search__input" autocomplete="off" type="search" name="search" id="search-input" value=""
-              data-error="Ошибка" placeholder="Поиск по бренду, названию, артикулу">
-            <!-- <input class="header_search__input" type="search" placeholder="Поиск по бренду, названию, артикулу"> -->
-            <button type="submit" class="form-search__button close_search">
-              <span class="i-custom icon-icon-search"></span>
+            <a href="{{ wishlist }}" class="btn-reset header-bottom__favorites">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M10 4.09353L9.86407 3.93889C8.91655 2.8609 7.46278 2.17778 5.95 2.17778C3.27413 2.17778 1.18 4.21148 1.18 6.79564C1.18 8.38407 1.91572 9.8399 3.24766 11.4186C4.57658 12.9938 6.47931 14.6689 8.78883 16.7022L8.81438 16.7247L9.99955 17.7621L11.1851 16.7164L11.1869 16.7149C13.5074 14.6763 15.4188 12.9971 16.7524 11.4175C18.0843 9.83989 18.82 8.38407 18.82 6.79564C18.82 4.21148 16.7259 2.17778 14.05 2.17778C12.5372 2.17778 11.0834 2.8609 10.1359 3.93889L10 4.09353ZM10 18L8.695 16.8578L8.65947 16.8265C4.04437 12.7634 1 10.0831 1 6.79564C1 4.11008 3.178 2 5.95 2C7.4528 2 8.89757 2.65041 9.8787 3.68923C9.91996 3.73292 9.96041 3.7773 10 3.82234C10.0396 3.7773 10.08 3.73292 10.1213 3.68923C11.1024 2.65041 12.5472 2 14.05 2C16.822 2 19 4.11008 19 6.79564C19 10.0888 15.945 12.7727 11.3164 16.839L11.305 16.849L10 18Z"
+                  stroke="#4F649A" stroke-width="0.8" />
+              </svg>
+              <span>({{ wishlist_count + compare_count }})</span>
+            </a>
+
+            <button class="btn-reset header-bottom__cabinet">
+              <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <mask id="path-1-inside-1_84_9721" fill="white">
+                  <path
+                    d="M19.5683 21.0341C19.5683 19.7821 19.3216 18.5423 18.8425 17.3856C18.3634 16.2288 17.6611 15.1778 16.7758 14.2925C15.8904 13.4072 14.8394 12.7049 13.6827 12.2257C12.5259 11.7466 11.2862 11.5 10.0341 11.5C8.78209 11.5 7.54231 11.7466 6.38557 12.2257C5.22884 12.7049 4.17781 13.4072 3.29248 14.2925C2.40716 15.1778 1.70488 16.2288 1.22574 17.3856C0.746607 18.5423 0.5 19.7821 0.5 21.0341L10.0341 21.0341H19.5683Z" />
+                </mask>
+                <path
+                  d="M19.5683 21.0341C19.5683 19.7821 19.3216 18.5423 18.8425 17.3856C18.3634 16.2288 17.6611 15.1778 16.7758 14.2925C15.8904 13.4072 14.8394 12.7049 13.6827 12.2257C12.5259 11.7466 11.2862 11.5 10.0341 11.5C8.78209 11.5 7.54231 11.7466 6.38557 12.2257C5.22884 12.7049 4.17781 13.4072 3.29248 14.2925C2.40716 15.1778 1.70488 16.2288 1.22574 17.3856C0.746607 18.5423 0.5 19.7821 0.5 21.0341L10.0341 21.0341H19.5683Z"
+                  stroke="#4F649A" stroke-width="2" mask="url(#path-1-inside-1_84_9721)" />
+                <circle cx="10.0115" cy="5.52709" r="4.52709" stroke="#4F649A" />
+              </svg>
+              <span>{% if logged %}{{ text_account }}{% else %} Войти {% endif %}</span>
             </button>
-          </form>
 
-          <div class="search_vars">
-          </div>
-
-          <!-- <script type="text/javascript">
-            var input = $('input[name="search"]'),
-              timeOut;
-            input.on('keyup', function () {
-              clearTimeout(timeOut);
-              timeOut = setTimeout(myfunc, 500, $(this).val());
-            });
-            input.on('keydown', function () {
-              clearTimeout(timeOut);
-            });
-
-            function myfunc(value) {
-              $.ajax({
-                url: 'index.php?route=mt/common/header/search',
-                type: 'post',
-                data: 'value=' + value,
-                dataType: 'json',
-                success: function (json) {
-                  console.log(json);
-                  if (json['success']) {
-                    $('.search_vars').empty();
-                    $('.search_vars').append(json['html']);
-                  }
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                  alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-                }
-              });
-            }
-          </script> -->
-        </div>
-
-        <div class="header_search__wrap">
-          <p class="header_search__caption">История поиска</p>
-          <div id="search-history-list" class="catalog_inner__categories header_search__categories">
-            
-          </div>
-        </div>
-
-        {% if manufacturers %}
-        <div class="header_search__wrap">
-          <p class="header_search__caption">Бренды</p>
-          <div class="catalog_inner__categories header_search__categories">
-            {% for manufacturer in manufacturers %}
-            <a href="{{ manufacturer.href }}" class="catalog_inner__cat_btn">{{ manufacturer.name }}</a>
-            {% endfor %}
-          </div>
-        </div>
-        {% endif %}
-
-        <div class="header_search__wrap">
-          <p class="header_search__caption">Популярные позиции</p>
-          <div class="header_search__cards header_search__categories">
-
-            {% if products %}
-            {% for product in products %}
-            <div class="hits_slide swiper-slide">
-              <div class="hits_slide__pic" data-linked-modal="modal_card">
-                <div class="hits_slide__pic_wrap" data-hover-images="">
-                  <img class="image" data-lazy data-src="{{ product.thumb }}" alt="{{ heading_title }}">
-                  {% for img in product.imgDop %}
-                  <img class="image" data-lazy data-src="{{ img.thumb }}" alt="{{ heading_title }}">
-                  {% endfor %}
-                </div>
-                <img class="loader" data-src="/image/catalog/assets/img/loader.svg" alt="" data-lazy="" />
-                <div class="hits_slide__hover_btn btn btn--filled">Быстрый просмотр</div>
-                <button class="hits_slide__btn hits_slide__btn--mob"><img class="image image__empty"
-                    data-src="/image/catalog/assets/img/icon_fav_empty.svg" alt="" data-lazy="" /><img
-                    class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg" alt=""
-                    data-lazy="" />
-                </button>
+            {% if theme_mt_text_basked_checked %}
+            <a href="{% if cart_products|length > 0 %}cart{% else %}{{ checkout }}{% endif %}" class="btn-reset button1 header-bottom__price">
+              <div class="header-bottom__price-icon">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_84_9729)">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M0.730175 2.48308H2.84888L5.87329 13.4241C5.91641 13.5825 6.00996 13.722 6.13929 13.8207C6.26862 13.9193 6.42645 13.9716 6.5881 13.9693H15.8807C16.0238 13.9692 16.1637 13.9274 16.2841 13.8488C16.4045 13.7702 16.5002 13.6581 16.5598 13.5259L19.9401 5.73994C19.9882 5.62772 20.0078 5.50502 19.9972 5.3831C19.9866 5.26118 19.9461 5.14396 19.8794 5.04207C19.8112 4.93851 19.7188 4.85372 19.6106 4.79536C19.5023 4.737 19.3815 4.70683 19.2589 4.7076H4.99564L5.07648 5L5.21473 5.5L5.40569 6.19066H18.1252L15.3861 12.4863H7.14638L4.12128 1.54525C4.07718 1.38736 3.98338 1.24857 3.85427 1.15008C3.72516 1.0516 3.56785 0.998862 3.40646 1.00002H0.728037C0.632288 1.00016 0.53748 1.01951 0.449074 1.0569C0.360667 1.0943 0.280384 1.14901 0.212779 1.21797C0.145174 1.28693 0.0915718 1.3688 0.0550605 1.45882C0.0185492 1.54884 -0.000140017 1.64524 7.89741e-07 1.74262C0.000141596 1.83999 0.019118 1.93642 0.0558895 2.02633C0.0926609 2.11624 0.146502 2.19789 0.214306 2.26664C0.28211 2.3354 0.362567 2.38987 0.45108 2.427C0.539594 2.46413 0.634426 2.48323 0.730175 2.48308ZM5.88755 19.1818C6.21299 19.1766 6.52969 19.0737 6.79783 18.8861C7.06596 18.6985 7.27359 18.4344 7.39463 18.1272C7.51567 17.8199 7.54472 17.4831 7.47813 17.1591C7.41154 16.8351 7.2523 16.5383 7.02038 16.3061C6.78846 16.0738 6.49422 15.9165 6.17463 15.8538C5.85505 15.791 5.52436 15.8258 5.22413 15.9536C4.9239 16.0814 4.66752 16.2966 4.48719 16.5722C4.30687 16.8478 4.21067 17.1714 4.21063 17.5024C4.21441 17.9512 4.39311 18.3801 4.70752 18.6949C5.02193 19.0098 5.44632 19.1849 5.88755 19.1818ZM16.3746 19.1818H16.4976C16.7165 19.1662 16.9302 19.1068 17.1265 19.007C17.3227 18.9072 17.4977 18.7689 17.6413 18.6002C17.7865 18.435 17.8975 18.2417 17.9675 18.0319C18.0375 17.822 18.0652 17.5999 18.0487 17.3789C18.0299 17.0465 17.9157 16.727 17.7204 16.4598C17.525 16.1926 17.257 15.9895 16.9494 15.8754C16.6418 15.7614 16.3081 15.7414 15.9895 15.818C15.6709 15.8946 15.3813 16.0644 15.1566 16.3065C14.9318 16.5486 14.7816 16.8523 14.7246 17.1802C14.6676 17.5081 14.7063 17.8458 14.8358 18.1516C14.9654 18.4574 15.1801 18.7178 15.4536 18.9009C15.7271 19.084 16.0472 19.1817 16.3746 19.1818Z"
+                      fill="#4D4D4D" />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_84_9729">
+                      <rect width="20" height="20" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg>
               </div>
-                <a href="{{ product.href }}" class="hits_slide_mobile btn btn--filled">
-                    Подробнее
-                </a>              
-              <div class="hits_slide__info">
-                <div class="hits_slide__left" data-linked-modal="modal_card">
-                  <p class="hits_slide__text hits_slide__text-name hits_slide__text--big">{{ product.name }}</p>
-                  <p class="hits_slide__text">
-                    {{ product.model }}
-                  </p>
-                        {% if product.stock == 'В наличии' %}
-                            <div class="hits_slide__stock" data-color="green">В наличии</div> 
-                            {% elseif product.stock == 'Нет в наличии' %} 
-                            <div class="hits_slide__stock" data-color="red">Нет в наличии</div> 
-                            {% elseif product.stock == 'Ожидание 2-3 дня' %} 
-                            <div class="hits_slide__stock" data-color="blue">Ожидание 2-3 дня</div> 
-                            {% elseif product.stock == 'Предзаказ' %}
-                            <div class="hits_slide__stock" data-color="blue">Предзаказ</div> 
-                        {% endif %}
-
-                        <div style="display: none;">
-                        {% if product.attrblock %}
-                            {% for attrblockitem in product.attrblock %}
-                                {% if attrblockitem.attribute_group_id == 7 %}
-                                <div class="attrs__size">
-                                    <span class="attr__size-name">{{ attrblockitem.name }}</span>
-                                    {% for attributeitem in attrblockitem.attribute %}
-                                        {% if attributeitem.attribute_id == 16 %}
-                                        <div class="attr__size-category shir">
-                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
-                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
-                                        </div>
-                                        {% endif %}
-                                        {% if attributeitem.attribute_id == 13 %}
-                                        <div class="attr__size-category leng">
-                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
-                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
-                                        </div>
-                                        {% endif %}
-                                        {% if attributeitem.attribute_id == 14 %}
-                                        <div class="attr__size-category heig-lin">
-                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
-                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
-                                        </div>
-                                        {% endif %}
-                                        {% if attributeitem.attribute_id == 12 %}
-                                        <div class="attr__size-category shir-lin">
-                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
-                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
-                                        </div>
-                                        {% endif %}
-                                        {% if attributeitem.attribute_id == 15 %}
-                                        <div class="attr__size-category most-len">
-                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
-                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
-                                        </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                </div>
-                                {% elseif attrblockitem.attribute_group_id == 8 %} 
-                                <div class="attrs__char">
-                                    <span class="attr__char-name">{{ attrblockitem.name }}</span>
-                                    {% for attributeitem in attrblockitem.attribute %}
-                                    <div class="attr__char-category">
-                                        <p class="attr__char-name">{{ attributeitem.name }}</p>
-                                        <p class="attr__char-cal">{{ attributeitem.text }}</p>
-                                    </div>
-                                    {% endfor %}
-                                </div>
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %}
-                        </div>
-
-                        <div class="hits_slide_option" style="display: none;">
-                            {% for attrblockitem in product.attrblock %}
-                                                                {% if attrblockitem.attribute_group_id == 29 %}
-                                                                    {% for attributeitem in attrblockitem.attribute %}
-                                                                    <div class="hits_slide_option_param">
-                                                                        <span>{{ attributeitem.name }}</span>
-                                                                        <a href="{{ product.hrefPiece }}{{ attributeitem.text }}"></a>
-                                                                    </div>
-                                                                    {% endfor %}
-                                                                {% endif %}
-                                                            {% endfor %}
-                        </div>
-                  <a class="hits_slide__href" href="{{ product.href }}"></a>
-                  <div class="hits_slide__price">
-                    {% if product.special %}
-                    <p class="hits_slide__text normal"> <text>{{ product.special }}</text> RUB</p>
-                    <p class="hits_slide__text old"><text>{{ product.price }}</text> RUB</p>
-                    {% else %}
-                    <p class="hits_slide__text normal"> <text>{{ product.price }}</text> RUB</p>
-                    {% endif %}
-                  </div>
-                </div>
-                <div class="hits_slide__right">
-                          {% if product.stock == 'В наличии' %}
-                            {% if theme_mt_category_product_cart_checked %}
-                                <button class="hits_slide__btn add-to-cart {% if product.in_cart %} added{% endif %}" id="add-to-cart"
-                                    onclick="add_in_cart('{{ product.product_id }}', '{{ product.minimum }}'); return false;">
-                                    {% if theme_mt_category_product_cart_text %}
-                                    <img class="image image__empty" data-src="/image/catalog/assets/img/icon_cart_empty.svg"
-                                        alt="" data-lazy="" />
-                                    <img class="image image__active" data-src="/image/catalog/assets/img/icon_cart_active.svg"
-                                        alt="" data-lazy="" />
-                                    {% else %}
-                                    {{ theme_mt_category_product_cart_text }}
-                                    {% endif %}
-                                </button>
-                            {% endif %} 
-                        {% endif %}
-
-                        {% if logged %}
-                          {% if theme_mt_category_product_wishlist_checked %}
-                          <button class="hits_slide__btn add-wish {% if product.in_wishlist %} added{% endif %}"
-                              onclick="{% if product.in_wishlist %}wishlist_remove('{{ product.product_id }}');{% else %}wishlist_add('{{ product.product_id }}');{% endif %} return false;"
-                              {% if not logged %}data-login="false" {% else %}data-login="true" {% endif %}>
-                              <img class="image image__empty" data-src="/image/catalog/assets/img/icon_fav_empty.svg"
-                                  alt="" data-lazy="" />
-                              <img class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg"
-                                  alt="" data-lazy="" />
-                          </button>
-                          {% endif %}
-                        {% else %} 
-                        <button class="hits_slide__btn showNoLogin" data-linked-modal="modal_wishlistErr">
-                            <img class="image image__empty" data-src="/image/catalog/assets/img/icon_fav_empty.svg" alt="" data-lazy="" />
-                            <img class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg" alt="" data-lazy="" />
-                        </button>
-                        {% endif %}
-                </div>
-              </div>
-            </div>
-            {% endfor %}
+              <span class="header-bottom__price-name">489,99 руб</span>
+              <div class="header-bottom__price-label">{{ cart_product_count }}</div>
+            </a>
             {% endif %}
 
-            <div class="header_search_card">
-              <div class="header_search_card__img">
-                <picture class="image">
-                  <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/header_search_pic.webp"
-                    type="image/webp" />
-                  <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/header_search_pic.jpg"
-                    type="image/jpg" /><img class="image" data-lazy="data-lazy"
-                    data-src="/image/catalog/assets/img/header_search_pic.jpg" alt="" />
-                </picture><img class="logo" data-src="/image/catalog/assets/img/header_logo.svg" alt="" data-lazy="" />
-                <a class="header_search_card__btn btn btn--white" href="/katalog">
-                  <span class="btn__text">перейти в каталог</span>
-                </a>
-              </div>
-              <p class="header_search_card__text">Больше позиций — в нашем каталоге</p>
-            </div>
           </div>
         </div>
-      </div>
-      <div class="header_catalog">
-        <div class="header_catalog__menu">
-          <div class="header_catalog__top">
-            <p class="header_catalog__title">Каталог</p>
-            <button class="header_catalog__close" data-btn-close="">
-              <svg class="icon">
-                <use xlink:href="#icon_cross"></use>
-              </svg>
-            </button>
+        <div class="header-search">
+          <div class="header-bottom__search header-bottom__search-mobile search">
+            <input class="input-reset search__input" type="text" placeholder="Введите поисковой запрос">
+            <button class="btn-reset search__button"></button>
           </div>
-          <div class="header_catalog__list">
-            
-            {{ menu }}
-
+        </div>
+        <div class="header-menu">
+          <button class="btn-reset sidebar__head js-header-sidebar-head">
+            <div class="sidebar__head-icon"></div>
+            <div class="sidebar__head-name">Каталог</div>
+          </button>
+          <div class="header-menu__inner js-header-sidebar-body">
+            <div class="header-menu__sidebar sidebar">
+              <ul class="sidebar__body">
+                <li class="sidebar__body-item js-sidebar-body-item">
+                  <a href="#" class="sidebar__body-name">Электротехника</a>
+                  <button class="btn-reset sidebar__body-button"></button>
+                  <ul class="sub-menu">
+                    <li class="menu-item">
+                      <a href="#">Электротехника 2</a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="#">Электротехника 2</a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="#">Электротехника 2</a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="#">Электротехника 2</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="sidebar__body-item js-sidebar-body-item">
+                  <a href="#" class="sidebar__body-name">Котлы и котельное оборудование</a>
+                  <button class="btn-reset sidebar__body-button"></button>
+                  <ul class="sub-menu">
+                    <li class="menu-item">
+                      <a href="#">Котлы 2</a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="#">Котлы 2</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="sidebar__body-item js-sidebar-body-item">
+                  <a href="#" class="sidebar__body-name">Климатическое оборудование</a>
+                  <button class="btn-reset sidebar__body-button"></button>
+                </li>
+                <li class="sidebar__body-item js-sidebar-body-item">
+                  <a href="#" class="sidebar__body-name">Водонагреватели</a>
+                  <button class="btn-reset sidebar__body-button"></button>
+                </li>
+                <li class="sidebar__body-item js-sidebar-body-item">
+                  <a href="#" class="sidebar__body-name">Детали трубопроводов, фитинги, хомутф, крепеж</a>
+                  <button class="btn-reset sidebar__body-button"></button>
+                </li>
+                <li class="sidebar__body-item js-sidebar-body-item">
+                  <a href="#" class="sidebar__body-name">Наружное водоснабжение</a>
+                  <button class="btn-reset sidebar__body-button"></button>
+                </li>
+                <li class="sidebar__body-item js-sidebar-body-item">
+                  <a href="#" class="sidebar__body-name">Пожарное оборудование</a>
+                  <button class="btn-reset sidebar__body-button"></button>
+                </li>
+                <li class="sidebar__body-item js-sidebar-body-item">
+                  <a href="#" class="sidebar__body-name">Банки расширительные, ёмкости</a>
+                  <button class="btn-reset sidebar__body-button"></button>
+                </li>
+                <li class="sidebar__body-item js-sidebar-body-item">
+                  <a href="#" class="sidebar__body-name">Вентиляционное оборудование</a>
+                  <button class="btn-reset sidebar__body-button"></button>
+                </li>
+                <li class="sidebar__body-item js-sidebar-body-item">
+                  <a href="#" class="sidebar__body-name">Теплоизоляция и уплотнительные материалы</a>
+                  <button class="btn-reset sidebar__body-button"></button>
+                </li>
+              </ul>
+            </div>
+            <nav class="nav" title="">
+              <ul class="list-reset nav__list">
+                <li class="nav__item"><a href="#" class="nav__link">О нас</a></li>
+                <li class="nav__item"><a href="#" class="nav__link">Бренды</a></li>
+                <li class="nav__item"><a href="#" class="nav__link">Доставка</a></li>
+                <li class="nav__item"><a href="#" class="nav__link">Контакты</a></li>
+              </ul>
+            </nav>
           </div>
-          <a class="header_catalog__link header_catalog__link--bottom" href="/katalog">перейти в каталог</a>
         </div>
       </div>
     </header>
-    <main class="view" data-app-layout="view" data-app-layout-namespace="examples">
-      <div class="home__tabs">
-        <a class="home__tab is-active" href="/">
-          <svg class="icon">
-            <use xlink:href="#tab_1"></use>
-          </svg><span class="text">Главная</span>
-        </a>
-        <a class="home__tab" href="/katalog">
-          <svg class="icon">
-            <use xlink:href="#tab_2"></use>
-          </svg><span class="text">Каталог</span>
-        </a>
-        <a class="home__tab" href="/cart">
-          <svg class="icon">
-            <use xlink:href="#tab_3"></use>
-          </svg><span class="text">Корзина</span>
-        </a>
+    <div class="header-line"></div>
+    <main class="main">
 
-        {% if logged %}
-        <a class="home__tab" href="{{ wishlist }}">
-          <svg class="icon">
-            <use xlink:href="#tab_4"></use>
-          </svg><span class="text">Избранное</span>
-        </a>
-        {% else %}
-        <a class="home__tab" data-linked-modal="modal_wishlistErr">
-          <svg class="icon">
-            <use xlink:href="#tab_4"></use>
-          </svg><span class="text">Избранное</span>
-        </a>
-        {% endif %}
 
-        <a class="home__tab" href="{% if logged %}{{ order }}{% else %}{{ login }}{% endif %}">
-          <svg class="icon">
-            <use xlink:href="#tab_5"></use>
-          </svg>
-          <span class="text">{% if logged %}{{ text_account }}{% else %} Войти {% endif %}</span>
-        </a>
-      </div>
-      <div id="basket"></div>
+    

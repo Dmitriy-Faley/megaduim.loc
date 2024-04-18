@@ -1,606 +1,72 @@
 </main>
-<div class="cookie" data-cookie-tooltip="">
-    <div class="cookie__wrap">
-        <p class="cookie__text">Продолжая пользоваться сайтом, вы соглашаетесь <br class="mobile"> с условиями обработки
-            персональных данных. <br class="mobile"> Подробности — на странице <a class="link"
-                href="/konfidencialnost">конфиденциальности</a>.</p>
-        <button class="cookie__btn btn btn--grey" data-cookie-btn=""><span class="btn__text">ОК</span></button>
-    </div>
-</div>
-<footer class="footer">
-    <div class="footer_table footer_table--first">
-        <div class="footer_table__cell">
-            <h4 class="footer_table__title">Каталог</h4>
-                {% for category in categories %}
-                    <a class="footer_table__link" href="{{ category.href }}" data-active-link="">{{ category.name }}
-                        <svg class="icon">
-                            <use xlink:href="#link_arrow"></use> 
-                        </svg>
-                    </a>
-                {% endfor %}
-                <a class="footer_table__link" href="/brands" data-active-link="">Бренды
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg></a>
-        </div>
-        <div class="footer_table__cell">
-            <h4 class="footer_table__title">Услуги</h4>
-            <a class="footer_table__link" href="/podbor-solncezaschitnyh-ochkov" data-active-link="">Подбор
-                солнцезащитных очков
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg>
-            </a>
-            <a class="footer_table__link" href="/proverka-svoih-ochkov" data-active-link="">Проверка очков
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg>
-            </a>
-            <a class="footer_table__link" href="/izgotovlenie-medicinskih-ochkov" data-active-link="">Изготовление
-                медицинских очков
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg>
-            </a>
-            <a class="footer_table__link" href="/remont-ochkov" data-active-link="">Ремонт очков
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg>
-            </a>
-            <a class="footer_table__link" href="/podbor-kontaktnyh-linz" data-active-link="">Подбор контактных линз
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg>
-            </a>
-            <a class="footer_table__link" href="/individualnyj-servis" data-active-link="">Индивидуальный сервис
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg>
-            </a>
-        </div>
-        <div class="footer_table__cell">
-            <h4 class="footer_table__title">Диоптрика</h4><a class="footer_table__link" href="/about"
-                data-active-link="">О компании
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg></a><a class="footer_table__link" href="/documents" data-active-link="">Документы
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg></a><a class="footer_table__link" href="/news" data-active-link="">Новости
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg></a><a class="footer_table__link" href="/blog" data-active-link="">Блог
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg></a><a class="footer_table__link" href="/pravila-magazina" data-active-link="">Правила магазина
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg></a><a class="footer_table__link" href="/contacts" data-active-link="">Контакты
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg></a>
-        </div>
-        <div class="footer_table__cell">
-            <h4 class="footer_table__title">Покупателям</h4>
-            <a class="footer_table__link" href="/delivery" data-active-link="">Доставка и оплата
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg>
-            </a>
-            <a class="footer_table__link" href="/promotions" data-active-link="">Акции и промо
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg>
-            </a>
-            <a class="footer_table__link" href="/faq" data-active-link="">Ответы на вопросы
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg>
-            </a>
-            <a class="footer_table__link" href="{% if logged %}{{ order }}{% else %}{{ login }}{% endif %}">
-                {% if logged %}{{ text_account }}{% else %} Войти {% endif %}
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg>
-            </a>
-
-            {% if logged %}
-            <a class="footer_table__link" href="/wishlist" data-active-link="">Избранное
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg>
-            </a>
-            {% else %}
-             <a class="footer_table__link" data-linked-modal="modal_wishlistErr" style="cursor: pointer;">Избранное
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg>
-            </a> 
-            {% endif %}
-
-            <a class="footer_table__link" href="/cart" data-active-link="">Корзина
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg>
-            </a>
-        </div>
-        <div class="footer_table__cell">
-            <h4 class="footer_table__title">Контакты</h4><a class="footer_table__link" href="tel:8 (901) 930–08–08">8
-                (901) 930–08–08
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg></a><a class="footer_table__link" href="mailto:dioptrikashop@yandex.ru">dioptrikashop@yandex.ru
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg></a><a class="footer_table__link" href="https://yandex.ru/maps/-/CCU8y8XUDB"
-                target="_blank">Москва, Островная 2, оф. 303
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg></a><a class="footer_table__link" href="https://wa.me/79019300808" target="_blank">WhatsApp
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg></a><a class="footer_table__link" href="/returncall">Обратный звонок
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg></a><a class="footer_table__link" href="/contacts">Все контакты
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg></a>
-        </div>
-        <div class="footer_table__cell">
-            <h4 class="footer_table__title footer_table__title--24">Follow Us</h4><a class="footer_table__link" href=""
-                target="_blank">Instagram
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg></a><a class="footer_table__link" href="" target="_blank">Telegram
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg></a><a class="footer_table__link" href="" target="_blank">ВКонтакте
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg></a><a class="footer_table__link" href="" target="_blank">Facebook
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg></a>
-        </div>
-        <style>
-        .input_wrapper__input-err label {
-          color: #ff0101;
-          line-height: normal;
-          font-size: 12px;
-        }
-        </style>
-        <form id="consult" class="footer_table__cell footer_table__form ajax_form" action="javascript();">
-            <input type="hidden" name="form" value="Бесплатная консультация или помощь с выбором (футер)">
-            <h4 class="footer_table__title footer_table__title--4">Бесплатная консультация</h4>
-            <p class="footer_table__text">Нужна помощь с выбором <br class="mobile"> или консультация специалиста?</p>
-            <div class="footer_table__form_wrap">
-                <div class="input_wrapper input_wrapper--outlined" data-input-wrapper="">
-                    <input class="input_wrapper__input" type="text" name="name" autocomplete="off">
-                    <label class="input_wrapper__label">Ваше имя</label>
-                    <div class="input_wrapper__tooltip" data-input-tooltip=""></div>
-                    <p class="input_wrapper__input-err"></p>
-                </div>
-                <div class="input_wrapper input_wrapper--outlined" data-input-wrapper="">
-                    <input class="input_wrapper__input" type="tel" name="phone" autocomplete="off">
-                    <label class="input_wrapper__label">Номер телефона</label>
-                    <div class="input_wrapper__tooltip" data-input-tooltip=""></div>
-                    <p class="input_wrapper__input-err"></p>
-                </div>
-                <button class="footer_table__form_btn btn btn--filled btn--icon_right"><span class="btn__text">отправить
-                        ЗАЯВКУ</span>
-                    <svg class="btn__icon btn__icon--white btn__icon--right">
-                        <use xlink:href="#icon_send"></use>
-                    </svg>
+<div class="graph-modal">
+    <!-- Зарегистрируйтесь или войдите, если у вас уже есть личный кабинет  -->
+    <div class="graph-modal__container" role="dialog" aria-modal="true" data-graph-target="modal1">
+        <button class="btn-reset js-modal-close graph-modal__close" aria-label="Закрыть модальное окно"></button>
+        <div class="graph-modal__content">
+            <div class="form reg-form form1">
+                <div class="form__title">Зарегистрируйтесь или войдите, если у вас уже есть личный кабинет</div>
+                <button class="btn-reset button3 form__button1">
+                    <span>Вход</span>
+                    <div class="button3__img"></div>
                 </button>
-            </div>
-            <p class="footer_table__text">Или пишите в WhatsApp по номеру: <br class="mobile"> <a class="link"
-                    href="https://wa.me/79019300808" target="_blank">8 (901) 930–08–08</a></p>
-        </form>
-    </div>
-
-
-
-    <div class="footer__wrap footer__wrap--brands">
-        <h4 class="footer_table__title">Популярные бренды</h4>
-
-        {% if manufacturers %}
-        <div class="footer__brands">
-            {% for manufacturer in manufacturers %}
-            <a class="footer_table__link footer_table__link--brands"
-                href="{{ manufacturer.href }}">{{ manufacturer.name }}
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg>
-            </a>
-            {{ manufacturer.description }}
-            {% endfor %}
-
-        </div>
-        {% endif %}
-
-    </div>
-    <div class="footer__wrap">
-        <h4 class="footer_table__title">Способы оплаты</h4>
-        <p class="footer_table__text">Принимаем к оплате карты зарубежных и российских банков. В салонах или при
-            доставке курьером вы можете <br class="desktop"> оплатить заказ картой, наличными или переводом с карты на
-            карту с помощью QR-кода.</p>
-        <p class="footer_table__text">Сайту подключён сертификат безопасности SSL, а также мы подключены к системе
-            платежей ЮKassa — все данные платежей <br class="desktop"> зашифрованы через протокол HTTPS, каждый год
-            ЮKassa проходит проверку безопасности по стандарту Visa и MasterCard (PCI DSS). </p>
-        <div class="footer__cards"><img class="image" data-src="/image/catalog/assets/img/card_visa.svg" alt=""
-                data-lazy="" /><img class="image" data-src="/image/catalog/assets/img/card_mir.svg" alt=""
-                data-lazy="" /><img class="image" data-src="/image/catalog/assets/img/card_master.svg" alt=""
-                data-lazy="" /><img class="image" data-src="/image/catalog/assets/img/card_maestro.svg" alt=""
-                data-lazy="" />
-        </div>
-    </div>
-    <div class="footer__wrap">
-        <h4 class="footer_table__title">Техническая информация</h4>
-        <div class="footer__wrap_line"> <a class="footer_table__link footer_table__link--right"
-                href="/konfidencialnost">Конфиденциальность
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg></a><a class="footer_table__link footer_table__link--right" href="/pravila-magazina">Правила
-                магазина
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg></a>
-            <button class="footer_table__link footer_table__link--mob footer_table__link--right"
-                data-search-start="">Поиск по сайту
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg>
-            </button>
-        </div>
-        <p class="footer_table__text footer_table__text--small">Бренды:
-            {% if manufacturers %}
-                {% for manufacturer in manufacturers %}
-                    <a class="link" href="{{ manufacturer.href }}">{{ manufacturer.name }},</a>
-                {% endfor %}
-            {% endif %}
-        </p>
-        {% for category in categories %}
-            {% if category.children %}
-            <p class="footer_table__text footer_table__text--small">{{ category.name }}: 
-                {% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
-                    {% for child in children %}
-                        <a class="link" href="{{ child.href }}">{{ child.nameNonum }}</a>,
-                    {% endfor %}
-                {% endfor %}
-            </p>
-            {% endif %}
-        {% endfor %}
-    </div>
-    <div class="footer__wrap footer__wrap--line">
-        <p class="footer_table__text">© ООО Диоптрика. Все права защищены. Разработано командой <a class="link"
-                href="https://itome.online/" target="_blank">itome.online</a> в 2023 году.</p><a class="itome"
-            href="https://itome.online/" target="_blank"><img class="image"
-                data-src="/image/catalog/assets/img/itome_logo.svg" alt="" data-lazy="" /></a>
-    </div>
-    <div class="footer__wrap footer__wrap--web">
-        <div class="footer_web_block">
-            <p class="footer_web_block__title">Owners</p>
-            <div class="footer_web_block__card">
-                <picture class="icon">
-                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/i_team_1.webp"
-                        type="image/webp" />
-                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/i_team_1.png"
-                        type="image/png" /><img class="icon" data-lazy="data-lazy"
-                        data-src="/image/catalog/assets/img/i_team_1.png" alt="" />
-                </picture>
-                <p class="footer_web_block__text"><a class="underline" href="https://t.me/seregato"
-                        target="_blank">Сергей Мещеряков</a></p>
-            </div>
-            <div class="footer_web_block__card">
-                <picture class="icon">
-                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/i_team_2.webp"
-                        type="image/webp" />
-                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/i_team_2.png"
-                        type="image/png" /><img class="icon" data-lazy="data-lazy"
-                        data-src="/image/catalog/assets/img/i_team_2.png" alt="" />
-                </picture>
-                <p class="footer_web_block__text"><a class="underline" href="https://t.me/germanskr"
-                        target="_blank">Герман Кривец</a></p>
-            </div>
-        </div>
-        <div class="footer_web_block">
-            <p class="footer_web_block__title">Marketing Team</p>
-            <div class="footer_web_block__card">
-                <picture class="icon">
-                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/i_team_7.webp"
-                        type="image/webp" />
-                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/i_team_7.png"
-                        type="image/png" /><img class="icon" data-lazy="data-lazy"
-                        data-src="/image/catalog/assets/img/i_team_7.png" alt="" />
-                </picture>
-                <p class="footer_web_block__text">Chief Marketing Officer: <br class="mobile"> <a class="underline"
-                        href="https://t.me/mercool" target="_blank">Егор Меркулов</a></p>
-            </div>
-            <div class="footer_web_block__card">
-                <picture class="icon">
-                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/i_team_8.webp"
-                        type="image/webp" />
-                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/i_team_8.png"
-                        type="image/png" /><img class="icon" data-lazy="data-lazy"
-                        data-src="/image/catalog/assets/img/i_team_8.png" alt="" />
-                </picture>
-                <p class="footer_web_block__text">Marketing Specialist: <br class="mobile"> <a class="underline"
-                        href="https://t.me/KaterinaKatyKat" target="_blank">Екатерина Горбачёва</a></p>
-            </div>
-        </div>
-        <div class="footer_web_block">
-            <p class="footer_web_block__title">Managment</p>
-            <div class="footer_web_block__card">
-                <picture class="icon">
-                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/i_team_4.webp"
-                        type="image/webp" />
-                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/i_team_4.png"
-                        type="image/png" /><img class="icon" data-lazy="data-lazy"
-                        data-src="/image/catalog/assets/img/i_team_4.png" alt="" />
-                </picture>
-                <p class="footer_web_block__text">Managing Director: <br class="mobile"> <a class="underline"
-                        href="https://t.me/andreyItome" target="_blank">Андрей Корсунский</a></p>
-            </div>
-            <div class="footer_web_block__card">
-                <picture class="icon">
-                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/i_team_5.webp"
-                        type="image/webp" />
-                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/i_team_5.png"
-                        type="image/png" /><img class="icon" data-lazy="data-lazy"
-                        data-src="/image/catalog/assets/img/i_team_5.png" alt="" />
-                </picture>
-                <p class="footer_web_block__text">Assisting Project Manager: <br class="mobile"> <a class="underline"
-                        href="https://t.me/NLizaveta" target="_blank">Елизавета Никиенко</a></p>
-            </div>
-        </div>
-        <div class="footer_web_block">
-            <p class="footer_web_block__title">Development Team</p>
-            <div class="footer_web_block__card">
-                <picture class="icon">
-                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/i_team_6.webp"
-                        type="image/webp" />
-                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/i_team_6.png"
-                        type="image/png" /><img class="icon" data-lazy="data-lazy"
-                        data-src="/image/catalog/assets/img/i_team_6.png" alt="" />
-                </picture>
-                <p class="footer_web_block__text">Front-end Developer: <br class="mobile"> <a class="underline"
-                        href="https://t.me/gerdasAri" target="_blank">Арина Гердасова</a></p>
-            </div>
-        </div>
-        <div class="footer_web_block">
-            <p class="footer_web_block__title">Design Team</p>
-            <div class="footer_web_block__card">
-                <picture class="icon">
-                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/i_team_3.webp"
-                        type="image/webp" />
-                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/i_team_3.png"
-                        type="image/png" /><img class="icon" data-lazy="data-lazy"
-                        data-src="/image/catalog/assets/img/i_team_3.png" alt="" />
-                </picture>
-                <p class="footer_web_block__text">Design Communication Director: <br class="mobile"> <a
-                        class="underline" href="https://t.me/jenyamake" target="_blank">Евгений Боев</a></p>
-            </div>
-        </div>
-        <div class="footer_web_block">
-            <p class="footer_web_block__title">Made with Love</p>
-            <div class="footer_web_block__card">
-                <picture class="icon">
-                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/i_team_9.webp"
-                        type="image/webp" />
-                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/i_team_9.png"
-                        type="image/png" /><img class="icon" data-lazy="data-lazy"
-                        data-src="/image/catalog/assets/img/i_team_9.png" alt="" />
-                </picture>
-                <p class="footer_web_block__text"> Разработано командой <br class="mobile"> <a class="underline"
-                        href="https://t.me/itome" target="_blank">itome.online</a></p>
+                <button class="btn-reset button-empty form__button2">Регистрация</button>
             </div>
         </div>
     </div>
-</footer>
-</div>
-
-<script src="https://polyfill.io/v3/polyfill.js?features=IntersectionObserver"></script>
-<script src="catalog/view/theme/mt/js/app.js" type="text/javascript"></script>
-<script src="catalog/view/theme/mt/js/search-history.js" type="text/javascript"></script>
-
-
-
-
-<div class="notifications">
-    <div class="notify_window" id="bookmark_added">
-        <div class="notify_window-content">
-            <div class="notify_icon">
-                <img src="catalog/view/theme/mt/stylesheet/icons/okay.svg" width="100%" height="100%" alt="ok">
+    <!-- Войти по номеру телефона -->
+    <div class="graph-modal__container" role="dialog" aria-modal="true" data-graph-target="modal2">
+        <button class="btn-reset js-modal-close graph-modal__close" aria-label="Закрыть модальное окно"></button>
+        <div class="graph-modal__content">
+            <div class="form reg-form form2">
+                <div class="form__title">Войти по номеру телефона</div>
+                <label class="form__label">
+                    <div class="form__span">Ваш телефон<span>*</span></div>
+                    <input type="text" name="" class="input-reset form__input"
+                        placeholder="+375 ( _ _ ) _ _ _ –_ _–_ _">
+                    <button class="btn-reset form__label-button">Получить код</button>
+                    <!-- active при введеном номере -->
+                    <!-- <button class="btn-reset form__label-button active">Получить код</button> -->
+                </label>
+                <a href="" class="form__login">Войти через почту</a>
+                <div class="form__reg">Регистрация</div>
             </div>
-            <div class="notify_text">Товар успешно добавлен <a href="/index.php?route=account/wishlist">в Избранное</a>
-            </div>
-            <button class="notify_close">
-                <img src="catalog/view/theme/mt/stylesheet/icons/mobile/close.svg" alt="Х" width="100%" height="100%">
-            </button>
         </div>
     </div>
-
-    <div class="notify_window" id="bookmark_deleted">
-        <div class="notify_window-content">
-            <div class="notify_icon">
-                <img src="catalog/view/theme/mt/stylesheet/icons/deleted.svg" width="100%" height="100%">
+    <!-- Войти по почте -->
+    <div class="graph-modal__container" role="dialog" aria-modal="true" data-graph-target="modal3">
+        <button class="btn-reset js-modal-close graph-modal__close" aria-label="Закрыть модальное окно"></button>
+        <div class="graph-modal__content">
+            <div class="form reg-form form3">
+                <div class="form__title">Войти по почте</div>
+                <label class="form__label">
+                    <div class="form__span">Ваш E-mail</div>
+                    <input type="text" name="" class="input-reset form__input" placeholder="Введите ваш E-mail">
+                </label>
+                <label class="form__label">
+                    <div class="form__span">Пароль</div>
+                    <input type="password" name="" class="input-reset form__input js-form-input"
+                        placeholder="Введите пароль">
+                    <button class="btn-reset form__label-password show js-form-password-button"></button>
+                </label>
+                <button class="btn-reset button2 form__button2">Войти</button>
+                <a href="#" class="form__recovery">Не помню пароль</a>
+                <a href="#" class="form__reg">Регистрация</a>
             </div>
-            <div class="notify_text">Товар удален <a href="/index.php?route=account/wishlist">из избранных</a></div>
-            <button class="notify_close">
-                <img src="catalog/view/theme/mt/stylesheet/icons/mobile/close.svg" alt="Х" width="100%" height="100%">
-            </button>
-        </div>
-    </div>
-
-    <div class="notify_window" id="bookmark_login">
-        <div class="notify_window-content">
-            <div class="notify_icon">
-                <img src="catalog/view/theme/mt/stylesheet/icons/deleted.svg" width="100%" height="100%" alt="X">
-            </div>
-            <div class="notify_text">Необходимо войти в свой аккаунт</div>
-            <button class="notify_close">
-                <img src="catalog/view/theme/mt/stylesheet/icons/mobile/close.svg" width="100%" height="100%" alt="X">
-            </button>
-        </div>
-    </div>
-
-
-    <div class="notify_window" id="compare_added">
-        <div class="notify_window-content">
-            <div class="notify_icon">
-                <img src="catalog/view/theme/mt/stylesheet/icons/okay.svg" width="100%" height="100%" alt="ok">
-            </div>
-            <div class="notify_text">Товар добавлен <a href="/index.php?route=product/compare">в сравнение</a></div>
-            <button class="notify_close">
-                <img src="catalog/view/theme/mt/stylesheet/icons/mobile/close.svg" width="100%" height="100%" alt="X">
-            </button>
-        </div>
-    </div>
-
-
-    <div class="notify_window" id="compare_deleted">
-        <div class="notify_window-content">
-            <div class="notify_icon">
-                <img src="catalog/view/theme/mt/stylesheet/icons/deleted.svg" width="100%" height="100%" alt="x">
-            </div>
-            <div class="notify_text">Товар удален <a href="/index.php?route=product/compare">из сравнения</a></div>
-            <button class="notify_close">
-                <img src="catalog/view/theme/mt/stylesheet/icons/mobile/close.svg" width="100%" height="100%" alt="X">
-            </button>
-        </div>
-    </div>
-
-    <div class="notify_window" id="cart_added">
-        <div class="notify_window-content">
-            <div class="notify_icon">
-                <img src="catalog/view/theme/mt/stylesheet/icons/okay.svg" width="100%" height="100%" alt="ok">
-            </div>
-            <div class="notify_text">Товар добавлен <a href="#basket" class="fancybox">в корзину</a></div>
-            <button class="notify_close">
-                <img src="catalog/view/theme/mt/stylesheet/icons/mobile/close.svg" alt="Х" width="100%" height="100%">
-            </button>
         </div>
     </div>
 </div>
 
-{% for style in styles %}
-<link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}" />
-{% endfor %}
-
-
-<link media="none" onload="if(media!='all')media='all'" rel="stylesheet" href="catalog/view/theme/mt/stylesheet/fontawesome.min.css">
-
-<!-- <link media="none" onload="if(media!='all')media='all'" rel="stylesheet"
-    href="catalog/view/theme/mt/stylesheet/fonts.css">
-<link media="none" onload="if(media!='all')media='all'" rel="stylesheet"
-    href="catalog/view/theme/mt/stylesheet/fancybox.css">
-<link media="none" onload="if(media!='all')media='all'" rel="stylesheet"
-    href="catalog/view/theme/mt/stylesheet/forms.css">
-<link media="none" onload="if(media!='all')media='all'" rel="stylesheet"
-    href="catalog/view/theme/mt/stylesheet/custom.css">
-<link media="none" onload="if(media!='all')media='all'" rel="stylesheet"
-    href="catalog/view/theme/mt/stylesheet/article.css">
-<link media="none" onload="if(media!='all')media='all'" rel="stylesheet"
-    href="catalog/view/theme/mt/stylesheet/footer.css"> -->
-
-
-
-<!-- <script src="catalog/view/theme/mt/js/fancybox.umd.js" async defer></script> -->
-<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
-<script src="catalog/view/theme/mt/js/device.js" async defer></script>
-<script src="catalog/view/theme/mt/js/scripts.js"></script>
-
-
-{% for script in scripts %}
-<script src="{{ script }}" type="text/javascript"></script>
-{% endfor %}
-
-
-
-<!-- bootstrap 5 bundle  от Opencart 4
-<link href="catalog/view/javascript/bootstrap/css/bootstrap5.css" type="text/css" rel="stylesheet" media="screen" />
-<script src="catalog/view/javascript/bootstrap/js/bootstrap5.js" type="text/javascript"></script>
--->
-
-<!-- </div> -->
-{% if theme_mt_text_html_body_end_checked %}{{ theme_mt_text_html_body_end }}{% endif %}
-
-<!-- Мобильные таблицы и удаление лишних параграфов -->
-<script type='text/javascript'>
-    $(function () {
-        $('table').wrap('<div class="table-scrolling"></div>');
-    });
-</script>
-
-<script type='text/javascript'>
-    $(function () {
-        $("td p").replaceWith(function () {
-            return this.innerHTML
-        })
-    });
-</script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-      <script type="text/javascript">
-
-      function formValidate() {
-        $('#consult').validate({
-            rules: {
-                name: {
-                    required: true,
-                    minlength: 4,
-                },
-                phone: {
-                    required: true,
-                    minlength: 11,
-                }
-            },
-            messages: {
-                name: {
-                    required: "Поле не заполнено",
-                    minlength: "Минимальное количество символов: 3"
-                },
-                phone: {
-                    required: "Поле не заполнено",
-                    minlength: "Минимальное количество символов: 11"
-                }
-            },
-            errorPlacement: function(error, element) {
-                error.appendTo( element.parent(".input_wrapper").find(".input_wrapper__input-err") );
-            }
-        });
-      };
-      formValidate();
-
-      jQuery("#consult").submit(function() {
-        let form = jQuery(this);
-        let name = jQuery(this).find('input[name="name"]');
-        let phone = jQuery(this).find('input[name="phone"]');
-       
-        if($('.input_wrapper__input').hasClass('error')) {
-            phone.parent().find('.input_wrapper__input-err').addClass('not-valid');
-            name.parent().find('.input_wrapper__input-err').addClass('not-valid');
-        } else {
-            jQuery.ajax({
-              type: "POST",
-              url: "index.php?route=mail/sendemail/send_form",
-              data: form.serialize(),
-              dataType: 'json',
-              success: function(json) {
-                if(json['error']){
-                  message.html(json['error']);
-                }
-                if(json['success']){
-                  window.location.href = "http://dioptrika.loc/success/";
-                }
-            }
-            });
-          return false;
-          }
-      });
-      </script>
-
+<div class="footer">
+    <div class="container">
+        <div class="footer__copy">
+            <p>© 2021-2023 Мегадюйм</p>
+            <p>ООО «Мегадюйм» УНП 193510749, Юридический адрес: 220021, Республика Беларусь, г. Минск, пер. Бехтерева,
+                10</p>
+        </div>
+    </div>
+</div>
+</div>
 </body>
 
 </html>
