@@ -10,21 +10,22 @@
   {% if theme_mt_text_html_head_top_checked %}{{ theme_mt_text_html_head_top|raw }}{% endif %}
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>{{ title }}</title>
-  <link rel="preload" href="fonts/OpenSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/OpenSans-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts//OpenSans-Bold.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/Circe-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/Circe-ExtraBold.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/Circe-Bold.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/Gilroy-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/Gilroy-Semibold.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/ArialMT.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/Arial-BoldMT.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/catalog/view/theme/mt/fonts/OpenSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/catalog/view/theme/mt/fonts/OpenSans-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/catalog/view/theme/mt/fonts/OpenSans-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/catalog/view/theme/mt/fonts/Circe-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/catalog/view/theme/mt/fonts/Circe-ExtraBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/catalog/view/theme/mt/fonts/Circe-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/catalog/view/theme/mt/fonts/Gilroy-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/catalog/view/theme/mt/fonts/Gilroy-Semibold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/catalog/view/theme/mt/fonts/ArialMT.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/catalog/view/theme/mt/fonts/Arial-BoldMT.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="catalog/view/theme/mt/css/vendor.css">
-  <link rel="stylesheet" href="catalog/view/theme/mt/css/main.css">
+  <link rel="stylesheet" href="/catalog/view/theme/mt/css/vendor.css">
+  <link rel="stylesheet" href="/catalog/view/theme/mt/css/main.css">
   <script defer src="catalog/view/theme/mt/js/main.js"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
@@ -96,8 +97,16 @@
           </div>
           <div class="header-bottom__content">
             <div class="header-bottom__search header-bottom__search-desktop search">
-              <input class="input-reset search__input" type="text" placeholder="Введите поисковой запрос">
-              <button class="btn-reset search__button"></button>
+              <!-- <input class="input-reset search__input" type="text" placeholder="Введите поисковой запрос">
+              <button class="btn-reset search__button"></button> -->
+
+              <form action="/index.php" method="GET" class="search__form form-search" id="search-form">
+                <input type="hidden" name="route" id="" value="product/search">
+                <input class="input-reset search__input" autocomplete="off" type="search" name="search" id="search-input" value="" data-error="Ошибка" placeholder="Введите поисковой запрос">
+                <button type="submit" class="btn-reset search__button">
+                  <span class="i-custom icon-icon-search"></span>
+                </button>
+              </form>
             </div>
 
             <a href="{{ wishlist }}" class="btn-reset header-bottom__favorites">
@@ -109,7 +118,7 @@
               <span>({{ wishlist_count + compare_count }})</span>
             </a>
 
-            <button class="btn-reset header-bottom__cabinet">
+            <a href="{% if logged %}{{ order }}{% else %}{{ login }}{% endif %}" class="btn-reset header-bottom__cabinet">
               <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <mask id="path-1-inside-1_84_9721" fill="white">
                   <path
@@ -121,7 +130,7 @@
                 <circle cx="10.0115" cy="5.52709" r="4.52709" stroke="#4F649A" />
               </svg>
               <span>{% if logged %}{{ text_account }}{% else %} Войти {% endif %}</span>
-            </button>
+            </a>
 
             {% if theme_mt_text_basked_checked %}
             <a href="{% if cart_products|length > 0 %}cart{% else %}{{ checkout }}{% endif %}" class="btn-reset button1 header-bottom__price">
@@ -148,8 +157,13 @@
         </div>
         <div class="header-search">
           <div class="header-bottom__search header-bottom__search-mobile search">
-            <input class="input-reset search__input" type="text" placeholder="Введите поисковой запрос">
-            <button class="btn-reset search__button"></button>
+            <form action="/index.php" method="GET" class="search__form form-search" id="search-form">
+              <input type="hidden" name="route" id="" value="product/search">
+              <input class="input-reset search__input" autocomplete="off" type="search" name="search" id="search-input" value="" data-error="Ошибка" placeholder="Введите поисковой запрос">
+              <button type="submit" class="btn-reset search__button">
+                <span class="i-custom icon-icon-search"></span>
+              </button>
+            </form>
           </div>
         </div>
         <div class="header-menu">

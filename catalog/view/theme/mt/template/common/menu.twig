@@ -1,70 +1,27 @@
 {% if categories %}
-<div class="header_catalog__list">
-  {% for category in categories %}
-    {% if category.children %}
-    <div class="header_catalog__link" data-catalog-link="">
-      <a href="{{ category.href }}">{{ category.name }}</a>
-        <svg class="icon">
-          <use xlink:href="#link_arrow"></use>  
-        </svg>
-        <div class="header_catalog__categories" data-categories="">
-            {% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
-            <div class="header_catalog__categories_block">
-              {% for child in children %}
-                <a href="{{ child.href }}" class="header_catalog__categories_title">{{ child.name }}</a>
-                {% for categoryInner in child.childrenTwo %}
-                  <a href="{{ categoryInner.href }}" class="header_catalog__categories_link">
-                    {{ categoryInner.name }}
-                  </a>     
-                {% endfor %}
-              {% endfor %}
-              </div>
-            {% endfor %}
-        </div>
-    </div>
-    {% else %}
-      <div class="header_catalog__link">
-        <a href="{{ category.href }}">{{ category.name }}</a>
-      </div>
-    {% endif %}
+<ul class="sidebar__body js-sidebar-body">
+{% for category in categories %}
+  {% if category.children %}
+  <li class="sidebar__body-item js-sidebar-body-item">
+    <a href="{{ category.href }}" class="sidebar__body-name">{{ category.name }}</a>
+    <button class="btn-reset sidebar__body-button"></button>
+    {% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
+    <ul class="sub-menu">
+      {% for child in children %}
+        <li class="menu-item">
+          <a href="{{ child.href }}">{{ child.name }} 2</a>
+        </li>
+      {% endfor %}
+    </ul>
+    {% endfor %}
+  </li>
+  {% else %}
+  <li class="sidebar__body-item js-sidebar-body-item">
+    <a href="{{ category.href }}" class="sidebar__body-name">{{ category.name }}</a>
+    <button class="btn-reset sidebar__body-button"></button>
+  </li>
+  {% endif %}
   {% endfor %}
-</div>
+</ul>
 {% endif %}
 
-
-
-<!-- {% if categories %}
-<div class="container">
-  <nav id="menu" class="navbar">
-    <div class="navbar-header"><span id="category" class="visible-xs">{{ text_category }}</span>
-      <button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse"
-        data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
-    </div>
-    <div class="collapse navbar-collapse navbar-ex1-collapse">
-      <ul class="nav navbar-nav">
-        {% for category in categories %}
-        {% if category.children %}
-        <li class="dropdown">
-          <a href="{{ category.href }}" class="dropdown-toggle" data-toggle="dropdown">{{ category.name }}</a>
-          <div class="dropdown-menu">
-            <div class="dropdown-inner">
-              {% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
-              <ul class="list-unstyled">
-                {% for child in children %}
-                <li><a href="{{ child.href }}">{{ child.name }}</a></li>
-                {% endfor %}
-              </ul>
-              {% endfor %}
-            </div>
-            <a href="{{ category.href }}" class="see-all">{{ text_all }} {{ category.name }}</a>
-          </div>
-        </li>
-        {% else %}
-        <li><a href="{{ category.href }}">{{ category.name }}</a></li>
-        {% endif %}
-        {% endfor %}
-      </ul>
-    </div>
-  </nav>
-</div>
-{% endif %} -->

@@ -8,7 +8,10 @@
         <div class="sidebar__head-icon"></div>
         <div class="sidebar__head-name">Каталог</div>
       </button>
-      <ul class="sidebar__body js-sidebar-body">
+
+      {{ menu }}
+
+      <!-- <ul class="sidebar__body js-sidebar-body">
         <li class="sidebar__body-item js-sidebar-body-item">
           <a href="#" class="sidebar__body-name">Электротехника</a>
           <button class="btn-reset sidebar__body-button"></button>
@@ -71,7 +74,8 @@
           <a href="#" class="sidebar__body-name">Теплоизоляция и уплотнительные материалы</a>
           <button class="btn-reset sidebar__body-button"></button>
         </li>
-      </ul>
+      </ul> -->
+
     </div>
     <div class="hero__content">
       <div class="swiper hero-swiper">
@@ -868,43 +872,22 @@
   </div>
 </section>
 
+{% if manufacturers %}
 <section class="section block-brands">
   <div class="container">
     <h2 class="block-brands__title h2">Наши бренДы</h2>
     <div class="block-brands__items">
-      <div class="block-brands__item">
+      {% for manufacturer in manufacturers %}
+      <a href="{{ manufacturer.href }}" class="block-brands__item">
         <div class="block-brands__item-image">
-          <img loading="lazy" src="/image/catalog/assets/img/brands/brand1.png" class="image" width="" height="" alt="">
+          <img loading="lazy" src="{{ manufacturer.thumb }}" class="image" width="" height="" alt="">
         </div>
-      </div>
-      <div class="block-brands__item">
-        <div class="block-brands__item-image">
-          <img loading="lazy" src="/image/catalog/assets/img/brands/brand2.png" class="image" width="" height="" alt="">
-        </div>
-      </div>
-      <div class="block-brands__item">
-        <div class="block-brands__item-image">
-          <img loading="lazy" src="/image/catalog/assets/img/brands/brand3.png" class="image" width="" height="" alt="">
-        </div>
-      </div>
-      <div class="block-brands__item">
-        <div class="block-brands__item-image">
-          <img loading="lazy" src="/image/catalog/assets/img/brands/brand2.png" class="image" width="" height="" alt="">
-        </div>
-      </div>
-      <div class="block-brands__item">
-        <div class="block-brands__item-image">
-          <img loading="lazy" src="/image/catalog/assets/img/brands/brand4.png" class="image" width="" height="" alt="">
-        </div>
-      </div>
-      <div class="block-brands__item">
-        <div class="block-brands__item-image">
-          <img loading="lazy" src="/image/catalog/assets/img/brands/brand3.png" class="image" width="" height="" alt="">
-        </div>
-      </div>
+      </a>
+      {% endfor %}
     </div>
   </div>
 </section>
+{% endif %}
 
 <section class="section block-contacts">
   <div class="container">
@@ -912,7 +895,7 @@
     <div class="block-contacts__container">
       <div class="block-contacts__content">
         <div class="block-contacts__text">
-          <p><b>Мегадюйм</b> — компания, занимающаяся оптовой продажей сантехники и сантехнических изделий.
+          <p><b>Мегадюйм</b> — компания, занимающаяся оптовой продажей сантехники и сантехнических изделий.
           </p>
           <br>
           <p>Компания располагает широким ассортиментом сантехнического оборудования.</p>

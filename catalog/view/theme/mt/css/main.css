@@ -2284,70 +2284,70 @@ body.compensate-for-scrollbar {
 /* stylelint-disable value-keyword-case */
 @font-face {
   font-family: "Open Sans";
-  src: url("../fonts/../fonts/OpenSans-Regular.woff2") format("woff2");
+  src: url("/catalog/view/theme/mt/fonts/OpenSans-Regular.woff2") format("woff2");
   font-weight: 400;
   font-display: swap;
   font-style: normal;
 }
 @font-face {
   font-family: "Open Sans";
-  src: url("../fonts/../fonts/OpenSans-SemiBold.woff2") format("woff2");
+  src: url("/catalog/view/theme/mt/fonts/OpenSans-SemiBold.woff2") format("woff2");
   font-weight: 600;
   font-display: swap;
   font-style: normal;
 }
 @font-face {
   font-family: "Open Sans";
-  src: url("../fonts/../fonts/OpenSans-Bold.woff2") format("woff2");
+  src: url("/catalog/view/theme/mt/fonts/OpenSans-Bold.woff2") format("woff2");
   font-weight: 700;
   font-display: swap;
   font-style: normal;
 }
 @font-face {
   font-family: "Circe";
-  src: url("../fonts/../fonts/Circe-Regular.woff2") format("woff2");
+  src: url("/catalog/view/theme/mt/fonts/Circe-Regular.woff2") format("woff2");
   font-weight: 400;
   font-display: swap;
   font-style: normal;
 }
 @font-face {
   font-family: "Circe";
-  src: url("../fonts/../fonts/Circe-ExtraBold.woff2") format("woff2");
+  src: url("/catalog/view/theme/mt/fonts/Circe-ExtraBold.woff2") format("woff2");
   font-weight: 600;
   font-display: swap;
   font-style: normal;
 }
 @font-face {
   font-family: "Circe";
-  src: url("../fonts/../fonts/Circe-Bold.woff2") format("woff2");
+  src: url("/catalog/view/theme/mt/fonts/Circe-Bold.woff2") format("woff2");
   font-weight: 700;
   font-display: swap;
   font-style: normal;
 }
 @font-face {
   font-family: "Gilroy";
-  src: url("../fonts/../fonts/Gilroy-Regular.woff2") format("woff2");
+  src: url("/catalog/view/theme/mt/fonts/Gilroy-Regular.woff2") format("woff2");
   font-weight: 400;
   font-display: swap;
   font-style: normal;
 }
 @font-face {
   font-family: "Gilroy";
-  src: url("../fonts/../fonts/Gilroy-Semibold.woff2") format("woff2");
+  src: url("/catalog/view/theme/mt/fonts/Gilroy-Semibold.woff2") format("woff2");
   font-weight: 600;
   font-display: swap;
   font-style: normal;
 }
 @font-face {
   font-family: "Arial";
-  src: url("../fonts/../fonts/ArialMT.woff2") format("woff2");
+  src: url("/catalog/view/theme/mt/fonts/ArialMT.woff2") format("woff2");
   font-weight: 400;
   font-display: swap;
   font-style: normal;
 }
 @font-face {
   font-family: "Arial";
-  src: url("../fonts/../fonts/Arial-BoldMT.woff2") format("woff2");
+  src: url("/catalog/view/theme/mt/fonts/Arial-BoldMT.woff2") format("woff2");
   font-weight: 700;
   font-display: swap;
   font-style: normal;
