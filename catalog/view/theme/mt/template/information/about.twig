@@ -1,5 +1,174 @@
 {{ header }}
 
+
+<section class="section hero">
+  <div class="container hero__container">
+    <div class="hero__sidebar sidebar">
+      <button class="btn-reset sidebar__head js-sidebar-head">
+        <div class="sidebar__head-icon"></div>
+        <div class="sidebar__head-name">Каталог</div>
+      </button>
+
+      {{ menu }}
+
+    </div>
+    <div class="hero__content">
+      <div class="swiper hero-swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <a href="#" class="hero-swiper__item"
+              style="background-image: url(/image/catalog/assets/img/image/image1.jpg);">
+              <div class="hero-swiper__item-inner">
+                <div class="hero-swiper__item-text">
+                  <strong>Большой выбор душевых кабин</strong>
+                  <p>Не пропусти такую</p>
+                </div>
+                <div class="hero-swiper__item-button">
+                  <span>от 102 руб</span>
+                  <svg width="5" height="10" viewBox="0 0 5 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M5 4.99805C4.99914 5.16543 4.93488 5.32644 4.82007 5.44824L1.05005 9.31787C0.934574 9.43304 0.778081 9.49805 0.61499 9.49805C0.4519 9.49805 0.295407 9.43304 0.179932 9.31787C0.0644593 9.19851 -2.00599e-08 9.03912 -2.73196e-08 8.87305C-3.45784e-08 8.70697 0.0644592 8.54758 0.179932 8.42822L3.52002 4.99805L0.179931 1.57812C0.0644589 1.45877 -3.58396e-07 1.29889 -3.65656e-07 1.13281C-3.72915e-07 0.96674 0.0644589 0.807346 0.179931 0.687988C0.235983 0.628986 0.303635 0.581909 0.378418 0.549805C0.4532 0.5177 0.533607 0.501465 0.61499 0.501465C0.696372 0.501465 0.777024 0.5177 0.851806 0.549805C0.926588 0.581909 0.993996 0.628986 1.05005 0.687988L4.82007 4.55811C4.87754 4.616 4.92297 4.68475 4.95386 4.76025C4.98475 4.83576 5.00042 4.91647 5 4.99805Z"
+                      fill="white" />
+                  </svg>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="swiper-slide">
+            <a href="#" class="hero-swiper__item"
+              style="background-image: url(/image/catalog/assets/img/image/image1.jpg);">
+              <div class="hero-swiper__item-inner">
+                <div class="hero-swiper__item-text">
+                  <p>Большой выбор душевых кабин</p>
+                  <p>Не пропусти такую</p>
+                </div>
+                <div class="hero-swiper__item-button">
+                  <span>от 102 руб</span>
+                  <svg width="5" height="10" viewBox="0 0 5 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M5 4.99805C4.99914 5.16543 4.93488 5.32644 4.82007 5.44824L1.05005 9.31787C0.934574 9.43304 0.778081 9.49805 0.61499 9.49805C0.4519 9.49805 0.295407 9.43304 0.179932 9.31787C0.0644593 9.19851 -2.00599e-08 9.03912 -2.73196e-08 8.87305C-3.45784e-08 8.70697 0.0644592 8.54758 0.179932 8.42822L3.52002 4.99805L0.179931 1.57812C0.0644589 1.45877 -3.58396e-07 1.29889 -3.65656e-07 1.13281C-3.72915e-07 0.96674 0.0644589 0.807346 0.179931 0.687988C0.235983 0.628986 0.303635 0.581909 0.378418 0.549805C0.4532 0.5177 0.533607 0.501465 0.61499 0.501465C0.696372 0.501465 0.777024 0.5177 0.851806 0.549805C0.926588 0.581909 0.993996 0.628986 1.05005 0.687988L4.82007 4.55811C4.87754 4.616 4.92297 4.68475 4.95386 4.76025C4.98475 4.83576 5.00042 4.91647 5 4.99805Z"
+                      fill="white" />
+                  </svg>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="swiper-pagination hero-swiper__swiper-pagination"></div>
+      </div>
+
+
+      <div class="block-products block-new-products">
+        <div class="block-products__top">
+          <h2 class="block-products__title h2">Новинки</h2>
+          <a href="#" class="button-link block-products__link">Смотреть все</a>
+        </div>
+        <div class="swiper swiper-style products-new-swiper">
+          <div class="swiper-wrapper">
+
+            {% for product_man in products %}
+            {% if product_man.attrblock %}
+            {% for attrblockitem in product_man.attrblock %}
+            {% if attrblockitem.attribute_group_id == 32 %}
+            {% for attributeitem in attrblockitem.attribute %}
+            {% if attributeitem.name == 'Новинка' %}
+
+            <div class="swiper-slide">
+              <div class="card-product">
+                <div class="card-product__head">
+                  <div class="card-product__image">
+
+                    <div class="hvr__images">
+                      <img class="hvr__image" src="{{ product_man.thumb }}" alt="{{ heading_title }}">
+                      {% for img in product_man.imgDop %}
+                      <img class="hvr__image" src="{{ img.thumb }}" alt="{{ heading_title }}">
+                      {% endfor %}
+                    </div>
+
+                  </div>
+                  <div class="card-product__content-mob">
+                    <div class="card-product__check">
+                      {% if product_man.stock == 'В наличии' %}
+                      <div class="card-product__status item1">В наличии</div>
+                      {% elseif product_man.stock == 'Нет в наличии' %}
+                      <div class="ard-product__status">Нет в наличии</div>
+                      {% elseif product_man.stock == 'Ожидание 2-3 дня' %}
+                      <div class="ard-product__status">Ожидание 2-3 дня</div>
+                      {% elseif product_man.stock == 'Предзаказ' %}
+                      <div class="ard-product__status">Предзаказ</div>
+                      {% endif %}
+                    </div>
+                    <div class="card-product__name1">{{ product_man.model }}</div>
+                    <a href="{{ product_man.href }}" class="card-product__name2">{{ product_man.name }}</a>
+                    <div class="card-product__articles">Арт. 5678909</div>
+                  </div>
+                </div>
+                <div class="card-product__body">
+                  <div class="card-product__content-desck">
+                    <div class="card-product__check">
+
+                      {% if product_man.stock == 'В наличии' %}
+                      <div class="card-product__status item1">В наличии</div>
+                      {% elseif product_man.stock == 'Нет в наличии' %}
+                      <div class="ard-product__status">Нет в наличии</div>
+                      {% elseif product_man.stock == 'Ожидание 2-3 дня' %}
+                      <div class="ard-product__status">Ожидание 2-3 дня</div>
+                      {% elseif product_man.stock == 'Предзаказ' %}
+                      <div class="ard-product__status">Предзаказ</div>
+                      {% endif %}
+
+                    </div>
+                    <div class="card-product__name1">{{ product_man.model }}</div>
+                    <a href="{{ product_man.href }}" class="card-product__name2">{{ product_man.name }}</a>
+                    <div class="card-product__articles">Арт. {{ product_man.sku }}</div>
+                  </div>
+                  <div class="card-product__line"></div>
+                  <div class="card-product__total">
+                    <div class="card-product__count">
+                      <button class="btn-reset card-product__count-button card-product__count-button-decrease">
+                        <svg width="12" height="3" viewBox="0 0 12 3" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M1 1.5H11" stroke="#919191" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
+                      </button>
+                      <input type="number" value="1" class="card-product__count-num">
+                      <button class="btn-reset card-product__count-button card-product__count-button-increase">
+                        <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M1 6.5H11" stroke="#919191" stroke-width="1.5" stroke-linecap="round" />
+                          <path d="M6 1.5L6 11.5" stroke="#919191" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
+                      </button>
+                    </div>
+                    <div class="card-product__price-single"><span>{{ product_man.price }}</span> руб</div>
+                  </div>
+                  <button class="btn-reset button2 card-product__button">В корзину</button>
+                  <div class="card-product__favourites">
+                    <div class="card-product__favourites-icon"></div>
+                    <span>Добавить в избранное</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            {% endfor %}
+
+          </div>
+          <div class="swiper-button-prev products-swiper__swiper-button-prev"></div>
+          <div class="swiper-button-next products-swiper__swiper-button-next"></div>
+          <div class="swiper-scrollbar products-swiper__swiper-scrollbar"></div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</section>
+
+
 <section class="about">
   <div class="section_block section_block--center">
     <h1 class="section_block__title">Добро пожаловать <br> в сеть салонов <br class="mobile"> оптики «Диоптрика»</h1>
@@ -36,15 +205,15 @@
       <div class="about__gallery_pic">
         <picture class="image">
           <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/about_pic_1.webp" type="image/webp" />
-          <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/about_pic_1.jpg" type="image/jpg" /><img class="image"
-            data-lazy="data-lazy" data-src="/image/catalog/assets/img/about_pic_1.jpg" alt="" />
+          <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/about_pic_1.jpg" type="image/jpg" /><img
+            class="image" data-lazy="data-lazy" data-src="/image/catalog/assets/img/about_pic_1.jpg" alt="" />
         </picture>
       </div>
       <div class="about__gallery_pic">
         <picture class="image">
           <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/about_pic_2.webp" type="image/webp" />
-          <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/about_pic_2.jpg" type="image/jpg" /><img class="image"
-            data-lazy="data-lazy" data-src="/image/catalog/assets/img/about_pic_2.jpg" alt="" />
+          <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/about_pic_2.jpg" type="image/jpg" /><img
+            class="image" data-lazy="data-lazy" data-src="/image/catalog/assets/img/about_pic_2.jpg" alt="" />
         </picture>
       </div>
     </div>
@@ -52,15 +221,15 @@
       <div class="about__gallery_pic">
         <picture class="image">
           <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/about_pic_3.webp" type="image/webp" />
-          <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/about_pic_3.jpg" type="image/jpg" /><img class="image"
-            data-lazy="data-lazy" data-src="/image/catalog/assets/img/about_pic_3.jpg" alt="" />
+          <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/about_pic_3.jpg" type="image/jpg" /><img
+            class="image" data-lazy="data-lazy" data-src="/image/catalog/assets/img/about_pic_3.jpg" alt="" />
         </picture>
       </div>
       <div class="about__gallery_pic">
         <picture class="image">
           <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/about_pic_4.webp" type="image/webp" />
-          <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/about_pic_4.jpg" type="image/jpg" /><img class="image"
-            data-lazy="data-lazy" data-src="/image/catalog/assets/img/about_pic_4.jpg" alt="" />
+          <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/about_pic_4.jpg" type="image/jpg" /><img
+            class="image" data-lazy="data-lazy" data-src="/image/catalog/assets/img/about_pic_4.jpg" alt="" />
         </picture>
       </div>
     </div>
@@ -68,40 +237,36 @@
 </section>
 
 <section class="news_section blog">
-    <div class="news_section__top">
-        <h2 class="section_block__title section_block__title--small">Новости</h2><a
-            class="news_section__btn btn btn--grey btn--icon_right" href="/news"><span class="btn__text">перейти в
-                новости</span>
-            <svg class="btn__icon btn__icon--black btn__icon--right">
-                <use xlink:href="#link_arrow"></use>
-            </svg></a>
-    </div>
-    <div class="news_section__content">
-        {% for result in news %}
-        <a class="news_section_card" href="{{ result.href }}">
-            <div class="news_section_card__img desktop">
-                <picture class="image">
-                    <source data-lazy="data-lazy" data-srcset="{{ result.thumb }}"
-                        type="image/webp" />
-                    <source data-lazy="data-lazy" data-srcset="{{ result.thumb }}"
-                        type="image/jpg" /><img class="image" data-lazy="data-lazy"
-                        data-src="{{ result.thumb }}" alt="" />
-                </picture>
-            </div>
-            <div class="news_section_card__img mobile">
-                <picture class="image">
-                    <source data-lazy="data-lazy" data-srcset="{{ result.thumb_adaptive }}"
-                        type="image/webp" />
-                    <source data-lazy="data-lazy" data-srcset="{{ result.thumb_adaptive }}"
-                        type="image/jpg" /><img class="image" data-lazy="data-lazy"
-                        data-src="{{ result.thumb_adaptive }}" alt="" />
-                </picture>
-            </div>
-            <p class="news_section_card__date">{{ result.date }}</p>
-            <p class="news_card__title">{{ result.name }}</p>
-            <p class="news_section_card__text">{{ result.intro }}</p>
-        </a>
-        {% endfor %}
-    </div>
+  <div class="news_section__top">
+    <h2 class="section_block__title section_block__title--small">Новости</h2><a
+      class="news_section__btn btn btn--grey btn--icon_right" href="/news"><span class="btn__text">перейти в
+        новости</span>
+      <svg class="btn__icon btn__icon--black btn__icon--right">
+        <use xlink:href="#link_arrow"></use>
+      </svg></a>
+  </div>
+  <div class="news_section__content">
+    {% for result in news %}
+    <a class="news_section_card" href="{{ result.href }}">
+      <div class="news_section_card__img desktop">
+        <picture class="image">
+          <source data-lazy="data-lazy" data-srcset="{{ result.thumb }}" type="image/webp" />
+          <source data-lazy="data-lazy" data-srcset="{{ result.thumb }}" type="image/jpg" /><img class="image"
+            data-lazy="data-lazy" data-src="{{ result.thumb }}" alt="" />
+        </picture>
+      </div>
+      <div class="news_section_card__img mobile">
+        <picture class="image">
+          <source data-lazy="data-lazy" data-srcset="{{ result.thumb_adaptive }}" type="image/webp" />
+          <source data-lazy="data-lazy" data-srcset="{{ result.thumb_adaptive }}" type="image/jpg" /><img class="image"
+            data-lazy="data-lazy" data-src="{{ result.thumb_adaptive }}" alt="" />
+        </picture>
+      </div>
+      <p class="news_section_card__date">{{ result.date }}</p>
+      <p class="news_card__title">{{ result.name }}</p>
+      <p class="news_section_card__text">{{ result.intro }}</p>
+    </a>
+    {% endfor %}
+  </div>
 </section>
 {{ footer }}

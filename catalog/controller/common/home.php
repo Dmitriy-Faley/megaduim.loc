@@ -230,6 +230,7 @@ class ControllerCommonHome extends Controller {
 				'imgDop'      => $data['images'],
 				'name'        => $result['name'],
 				'quantity'    => $result['quantity'],
+				'sku'    	  => $result['sku'],
 				'price'       => $price,
 				'special'     => $special,
 				'tax'         => $tax,
