@@ -24,10 +24,14 @@
   <link rel="preload" href="/catalog/view/theme/mt/fonts/ArialMT.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/catalog/view/theme/mt/fonts/Arial-BoldMT.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
   <link rel="stylesheet" href="/catalog/view/theme/mt/css/vendor.css">
   <link rel="stylesheet" href="/catalog/view/theme/mt/css/main.css">
+  <link rel="stylesheet" href="/catalog/view/theme/mt/css/style.css">
+  
   <script defer src="catalog/view/theme/mt/js/main.js"></script>
   <script defer src="catalog/view/theme/mt/js/script-new.js"></script>
+
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
@@ -133,7 +137,7 @@
               <span>{% if logged %}{{ text_account }}{% else %} Войти {% endif %}</span>
             </a>
 
-            {% if theme_mt_text_basked_checked %}
+            
             <a href="{% if cart_products|length > 0 %}cart{% else %}{{ checkout }}{% endif %}" class="btn-reset button1 header-bottom__price">
               <div class="header-bottom__price-icon">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -150,9 +154,9 @@
                 </svg>
               </div>
               <span class="header-bottom__price-name">489,99 руб</span>
-              <div class="header-bottom__price-label">{{ cart_product_count }}</div>
+              <div class="header-bottom__price-label trash-header">{{ cart_product_count }}</div>
             </a>
-            {% endif %}
+           
 
           </div>
         </div>
@@ -254,5 +258,5 @@
     <div class="header-line"></div>
     <main class="main">
 
-
+    <div id="basket"></div>
     

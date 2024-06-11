@@ -140,22 +140,25 @@
                                     </div>
 
                                     {% if product_man.stock == 'В наличии' %}
-                                      <button
-                                          class="hits_slide__btn add-to-cart {% if product_man.in_cart %} added{% endif %}"
-                                          id="add-to-cart"
-                                          onclick="add_in_cart('{{ product_man.product_id }}', '{{ product_man.minimum }}'); return false;">
-                                          <img class="image image__empty"
-                                              data-src="/image/catalog/assets/img/icon_cart_empty.svg" alt="" data-lazy="" />
-                                          <img class="image image__active"
-                                              data-src="/image/catalog/assets/img/icon_cart_active.svg" alt="" data-lazy="" />
-                                      </button>
-                                      {% endif %}
+                                      <button class="btn-reset button2 card-product__button add-to-cart" onclick="add_in_cart('{{ product_man.product_id }}', '{{ product_man.minimum }}'); return false;">В корзину</button>
+                                    {% endif %}
 
-                                    <button class="btn-reset button2 card-product__button">В корзину</button>
-                                    <div class="card-product__favourites">
-                                      <div class="card-product__favourites-icon"></div>
-                                      <span>Добавить в избранное</span>
-                                    </div>
+                                    {% if logged %}
+                                    <h1>1111</h1>
+                                      <button class="card-product__favourites"
+                                      onclick="{% if product_man.in_wishlist %}wishlist_remove('{{ product_man.product_id }}');{% else %}wishlist_add('{{ product_man.product_id }}');{% endif %} return false;"
+                                      {% if not logged %}data-login="false" {% else %}data-login="true" {% endif %}>
+                                        <div class="card-product__favourites-icon"></div>
+                                        <span>Добавить в избранное</span>
+                                      </button>
+                                    {% else %}
+                                    <h1>2222</h1>
+                                      <button class="card-product__favourites add-bookmark-login">
+                                        <div class="card-product__favourites-icon {% if product_man.in_wishlist %} active{% endif %}"></div>
+                                        <span>Добавить в избранное</span>
+                                      </button>
+                                    {% endif %}
+
                                   </div>
                                 </div>
                               </div>
