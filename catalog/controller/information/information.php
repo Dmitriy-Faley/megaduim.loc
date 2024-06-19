@@ -43,6 +43,7 @@ class ControllerInformationInformation extends Controller {
 			$data['content_bottom'] = $this->load->controller('common/content_bottom');
 			$data['footer'] = $this->load->controller('common/footer');
 			$data['header'] = $this->load->controller('common/header');
+			$data['menu'] = $this->load->controller('common/menu');
 
 			if($information_info['information_id'] == 4) {
 				$this->load->language('information/news');
