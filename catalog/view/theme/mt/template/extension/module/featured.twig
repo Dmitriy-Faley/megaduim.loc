@@ -1,9 +1,137 @@
-<section class="products">
+{% if products|length > 0 %}
+<section class="block-other">
+    <div class="container">
+        <h2 class="block-other__title h2">{{ heading_title }}</h2>
+        <div class="swiper swiper-style products-top-swiper">
+            <div class="swiper-wrapper">
+                
+                {% for product in products %}
+                <div class="swiper-slide">
+                    <div class="card-product">
+                        <div class="card-product__head">
+                            <div class="card-product__image">
+                                <div class="hvr__images">
+                                    <img class="hvr__image" src="{{ product.thumb }}" alt="{{ heading_title }}">
+                                    {% for img in product.imgDop %}
+                                        <img class="hvr__image" src="{{ img.thumb }}" alt="{{ heading_title }}">
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="card-product__content-mob">
+                                <div class="card-product__check">
+                                    {% if product.stock == 'В наличии' %}
+                                        <div class="card-product__status item1">В наличии</div>
+                                        {% elseif product.stock == 'Нет в наличии' %}
+                                        <div class="ard-product__status">Нет в наличии</div>
+                                        {% elseif product.stock == 'Ожидание 2-3 дня' %}
+                                        <div class="ard-product__status">Ожидание 2-3 дня</div>
+                                        {% elseif product.stock == 'Предзаказ' %}
+                                        <div class="ard-product__status">Предзаказ</div>
+                                    {% endif %}
+                                </div>
+                                <div class="card-product__name1">{{ product.model }}</div>
+                                <a href="{{ product.href }}" class="card-product__name2">{{ product.name }}</a>
+                                {% if product.sku %}
+                                    <div class="card-product__articles">Арт. {{ product.sku }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="card-product__body">
+                            <div class="card-product__content-desck">
+                                <div class="card-product__check">
+                                    {% if product.stock == 'В наличии' %}
+                                        <div class="card-product__status item1">В наличии</div>
+                                        {% elseif product.stock == 'Нет в наличии' %}
+                                        <div class="ard-product__status">Нет в наличии</div>
+                                        {% elseif product.stock == 'Ожидание 2-3 дня' %}
+                                        <div class="ard-product__status">Ожидание 2-3 дня</div>
+                                        {% elseif product.stock == 'Предзаказ' %}
+                                        <div class="ard-product__status">Предзаказ</div>
+                                    {% endif %}
+                                </div>
+                                <div class="card-product__name1">{{ product.model }}</div>
+                                <a href="{{ product.href }}" class="card-product__name2">{{ product.name }}</a>
+                                {% if product.sku %}
+                                    <div class="card-product__articles">Арт. {{ product.sku }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="card-product__line"></div>
+                            <div class="card-product__total">
+                                <div class="card-product__count">
+                                    <button
+                                        class="btn-reset card-product__count-button card-product__count-button-decrease">
+                                        <svg width="12" height="3" viewBox="0 0 12 3" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M1 1.5H11" stroke="#919191" stroke-width="1.5"
+                                                stroke-linecap="round" />
+                                        </svg>
+                                    </button>
+                                    <input type="number" value="1" class="card-product__count-num">
+                                    <button
+                                        class="btn-reset card-product__count-button card-product__count-button-increase">
+                                        <svg width="12" height="13" viewBox="0 0 12 13" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M1 6.5H11" stroke="#919191" stroke-width="1.5"
+                                                stroke-linecap="round" />
+                                            <path d="M6 1.5L6 11.5" stroke="#919191" stroke-width="1.5"
+                                                stroke-linecap="round" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                {% if product.special %}
+                                    <div class="card-product__price">
+                                        <div class="card-product__price-old"><span>{{ product.price }}</span> руб</div>
+                                        <div class="card-product__price-new"><span>{{ product.special }}</span> руб</div>
+                                    </div>
+                                {% else %}
+                                    <div class="card-product__price-single"><span>{{ product.price }}</span> руб</div>
+                                {% endif %}
+                            </div>
+
+                            {% if theme_mt_category_product_cart_checked %}
+                            <button class="btn-reset button2 card-product__button add-to-cart"
+                                onclick="add_in_cart('{{ product.product_id }}', '{{ product.minimum }}');">{{ theme_mt_category_product_cart_text }}</button>
+                            {% endif %}
+
+                            {% if logged %}
+                                <button class="btn-reset card-product__favourites"
+                                onclick="{% if product.in_wishlist %}wishlist_remove('{{ product.product_id }}');{% else %}wishlist_add('{{ product.product_id }}');{% endif %} return false;"
+                                {% if not logged %}data-login="false" {% else %}data-login="true" {% endif %}>
+                                <div class="card-product__favourites-icon {% if product.in_wishlist %} active{% endif %}"></div>
+                                <span>Добавить в избранное</span>
+                                </button>
+                            {% else %}
+                                <button class="btn-reset card-product__favourites" data-graph-path="modal1">
+                                <div class="card-product__favourites-icon"></div>
+                                <span>Добавить в избранное</span>
+                                </button>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                
+            </div>
+            <div class="swiper-button-prev products-swiper__swiper-button-prev"></div>
+            <div class="swiper-button-next products-swiper__swiper-button-next"></div>
+            <div class="swiper-scrollbar products-swiper__swiper-scrollbar"></div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+
+<!-- <section class="products">
     <div class="container">
         <div class="products__wrapper">
             <div class="tabs">
                 <div class="tabs__nav tabs-nav">
-                    {% if products|length > 0 %}<div class="tabs-nav__item is-active" data-tab-name="tab-1">{{ heading_title }}</div>{% endif %}
+                    {% if products|length > 0 %}
+                    <div class="tabs-nav__item is-active" data-tab-name="tab-1">
+                        {{ heading_title }}
+                    </div>
+                    {% endif %}
                 </div>
                 <div class="tabs__content">
                     <div class="tab {% if products|length > 0 %}is-active{% endif %} tab-1">
@@ -13,10 +141,13 @@
 
                                 <div class="sliders-arrows prev">
                                     <div class="arrow-prev">
-                                        <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M5.48209 3.01466e-07L6.57264 1.07928L2.93265 4.73116L14 4.73116L14 6.26884L2.93265 6.26884L6.57264 9.92072L5.48209 11L-1.24572e-06 5.5L5.48209 3.01466e-07Z" fill="#1F1F1F"/>
-                                        </svg>                              
-                                    </div>                
+                                        <svg width="14" height="11" viewBox="0 0 14 11" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M5.48209 3.01466e-07L6.57264 1.07928L2.93265 4.73116L14 4.73116L14 6.26884L2.93265 6.26884L6.57264 9.92072L5.48209 11L-1.24572e-06 5.5L5.48209 3.01466e-07Z"
+                                                fill="#1F1F1F" />
+                                        </svg>
+                                    </div>
                                 </div>
 
                                 <div class="swiper-wrapper">
@@ -29,16 +160,25 @@
 
                                                 <div class="product-photo__options">
                                                     {% if product.rating > 0 %}
-												   <div class="product-rating">
-														<span class="i-custom icon-icon-star {% if product.rating >= 1 %}rate{% else %}gray{% endif %}"></span>
-														<span class="i-custom icon-icon-star {% if product.rating >= 2 %}rate{% else %}gray{% endif %}"></span>
-														<span class="i-custom icon-icon-star {% if product.rating >= 3 %}rate{% else %}gray{% endif %}"></span>
-														<span class="i-custom icon-icon-star {% if product.rating >= 4 %}rate{% else %}gray{% endif %}"></span>
-														<span class="i-custom icon-icon-star {% if product.rating >= 5 %}rate{% else %}gray{% endif %}"></span> 
-												  </div>
+                                                    <div class="product-rating">
+                                                        <span
+                                                            class="i-custom icon-icon-star {% if product.rating >= 1 %}rate{% else %}gray{% endif %}"></span>
+                                                        <span
+                                                            class="i-custom icon-icon-star {% if product.rating >= 2 %}rate{% else %}gray{% endif %}"></span>
+                                                        <span
+                                                            class="i-custom icon-icon-star {% if product.rating >= 3 %}rate{% else %}gray{% endif %}"></span>
+                                                        <span
+                                                            class="i-custom icon-icon-star {% if product.rating >= 4 %}rate{% else %}gray{% endif %}"></span>
+                                                        <span
+                                                            class="i-custom icon-icon-star {% if product.rating >= 5 %}rate{% else %}gray{% endif %}"></span>
+                                                    </div>
                                                     {% endif %}
                                                     {% if theme_mt_category_product_wishlist_checked %}
-                                                      <button class="product-adds add-bookmark product-like {% if product.in_wishlist %}added{% endif %}" onclick="{% if product.in_wishlist %}wishlist_remove('{{ product.product_id }}');{% else %}wishlist_add('{{ product.product_id }}');{% endif %} return false;" {% if not logged %}data-login="false"{% else %}data-login="true"{% endif %}></button>
+                                                    <button
+                                                        class="product-adds add-bookmark product-like {% if product.in_wishlist %}added{% endif %}"
+                                                        onclick="{% if product.in_wishlist %}wishlist_remove('{{ product.product_id }}');{% else %}wishlist_add('{{ product.product_id }}');{% endif %} return false;"
+                                                        {% if not logged %}data-login="false"
+                                                        {% else %}data-login="true" {% endif %}></button>
                                                     {% endif %}
                                                 </div>
                                             </a>
@@ -50,21 +190,29 @@
                                                     {% if product.price %}
                                                     {% if product.special %}
                                                     <div class="current-price">
-                                                        {% if symbol_left %}<span class="price-currency">{{ symbol_left }}</span>{% endif %}
+                                                        {% if symbol_left %}<span
+                                                            class="price-currency">{{ symbol_left }}</span>{% endif %}
                                                         <div class="price-cost">{{ product.special }}</span>
                                                         </div>
-                                                        {% if symbol_right %}<span class="price-currency">{{ symbol_right }}</span>{% endif %}
+                                                        {% if symbol_right %}<span
+                                                            class="price-currency">{{ symbol_right }}</span>{% endif %}
                                                     </div>
-                                                    <div class="old-price">{% if symbol_left %}<span>{{ symbol_left }}</span>{% endif %}{{ product.price }}{% if symbol_right %}<span>{{ symbol_right }}</span>{% endif %}</div>
+                                                    <div class="old-price">
+                                                        {% if symbol_left %}<span>{{ symbol_left }}</span>{% endif %}{{ product.price }}{% if symbol_right %}<span>{{ symbol_right }}</span>{% endif %}
+                                                    </div>
                                                     {% else %}
                                                     <div class="current-price">
-                                                        {% if symbol_left %}<span class="price-currency">{{ symbol_left }}</span>{% endif %}
-                                                        <div class="price-cost">{{ product.price }}<span class="price-penny"></span></div>
-                                                        {% if symbol_right %}<span class="price-currency">{{ symbol_right }}</span>{% endif %}
+                                                        {% if symbol_left %}<span
+                                                            class="price-currency">{{ symbol_left }}</span>{% endif %}
+                                                        <div class="price-cost">{{ product.price }}<span
+                                                                class="price-penny"></span></div>
+                                                        {% if symbol_right %}<span
+                                                            class="price-currency">{{ symbol_right }}</span>{% endif %}
                                                     </div>
                                                     {% endif %}
                                                     {% elseif theme_mt_product_zero_text_checked %}
-                                                    <div class="product-price_zero">{{ theme_mt_product_zero_text }}</div>
+                                                    <div class="product-price_zero">{{ theme_mt_product_zero_text }}
+                                                    </div>
                                                     {% endif %}
 
                                                 </div>
@@ -75,16 +223,17 @@
                                                 </a>
                                                 {% if (theme_mt_category_product_attributes_checked and product.attributes|length > 0) or (product.description and theme_mt_category_product_description_checked) %}
                                                 <div class="product-additional">
-                                                        {% if product.description and theme_mt_category_product_description_checked %}
-                                                        {% if (theme_mt_category_product_attributes_priority_checked and product.attributes|length == 0) or not theme_mt_category_product_attributes_priority_checked %}
-                                                        <div class="product-cat-description">{{ product.description }}</span></div>
-                                                        {% endif %}
-                                                        {% endif %}
-                                                        {% if theme_mt_category_product_attributes_checked and ((not theme_mt_category_product_attributes_priority_checked and product.description == '') or theme_mt_category_product_attributes_priority_checked) %}
-                                                        {% for attribute in product.attributes %}
-                                                        <div>{{ attribute.name }}: <span>{{ attribute.text }}</span></div>
-                                                        {% endfor %}
-                                                        {% endif %}
+                                                    {% if product.description and theme_mt_category_product_description_checked %}
+                                                    {% if (theme_mt_category_product_attributes_priority_checked and product.attributes|length == 0) or not theme_mt_category_product_attributes_priority_checked %}
+                                                    <div class="product-cat-description">
+                                                        {{ product.description }}</span></div>
+                                                    {% endif %}
+                                                    {% endif %}
+                                                    {% if theme_mt_category_product_attributes_checked and ((not theme_mt_category_product_attributes_priority_checked and product.description == '') or theme_mt_category_product_attributes_priority_checked) %}
+                                                    {% for attribute in product.attributes %}
+                                                    <div>{{ attribute.name }}: <span>{{ attribute.text }}</span></div>
+                                                    {% endfor %}
+                                                    {% endif %}
                                                 </div>
                                                 {% endif %}
                                                 {% if theme_mt_category_product_stock_checked %}
@@ -105,7 +254,8 @@
                                             </div>
                                         </div>
                                         {% if theme_mt_category_product_cart_checked %}
-                                        <button class="button add-to-cart" onclick="add_in_cart('{{ product.product_id }}', '{{ product.minimum }}');">{{ theme_mt_category_product_cart_text }}</button>
+                                        <button class="button add-to-cart"
+                                            onclick="add_in_cart('{{ product.product_id }}', '{{ product.minimum }}');">{{ theme_mt_category_product_cart_text }}</button>
                                         {% endif %}
                                     </div>
                                     {% endfor %}
@@ -113,17 +263,16 @@
 
                                 <div class="sliders-arrows next">
                                     <div class="arrow-next">
-                                        <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M8.51791 11L7.42736 9.92073L11.0673 6.26884L-2.7402e-07 6.26884L-2.06805e-07 4.73116L11.0673 4.73116L7.42736 1.07928L8.51791 3.7233e-07L14 5.5L8.51791 11Z" fill="#1F1F1F"/>
-                                        </svg>                             
+                                        <svg width="14" height="11" viewBox="0 0 14 11" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M8.51791 11L7.42736 9.92073L11.0673 6.26884L-2.7402e-07 6.26884L-2.06805e-07 4.73116L11.0673 4.73116L7.42736 1.07928L8.51791 3.7233e-07L14 5.5L8.51791 11Z"
+                                                fill="#1F1F1F" />
+                                        </svg>
                                     </div>
                                 </div>
-                                
+
                             </div>
-
-
-
-
 
                         </div>
                     </div>
@@ -132,34 +281,36 @@
 
         </div>
     </div>
+
     <script type="text/javascript">
-    function add_in_cart(product_id, quantity) {
-        var btn = this;
-        $.ajax({
-        url: 'index.php?route=checkout/cart/add',
-        type: 'post',
-        data: 'product_id=' + product_id + '&quantity=' + (typeof(quantity) != 'undefined' ? quantity : 1),
-        dataType: 'json',
-        success: function(json) {
+        function add_in_cart(product_id, quantity) {
+            var btn = this;
+            $.ajax({
+                url: 'index.php?route=checkout/cart/add',
+                type: 'post',
+                data: 'product_id=' + product_id + '&quantity=' + (typeof (quantity) != 'undefined' ? quantity :
+                    1),
+                dataType: 'json',
+                success: function (json) {
 
-            if (json['redirect']) {
-            location = json['redirect'];
-            }
+                    if (json['redirect']) {
+                        location = json['redirect'];
+                    }
 
-            if (json['success']) {
-            if ($("#cart_added").hasClass('notify_action')) {
-                $('#cart_added').removeClass('notify_action');
-            }
-            $(document).find('#cart_added').addClass('notify_action').css('top', 90 + 'px'); 
-            active_notify();
-            $(btn).html('В корзине');
-            }
-        },
-        error: function(xhr, ajaxOptions, thrownError) {
-            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                    if (json['success']) {
+                        if ($("#cart_added").hasClass('notify_action')) {
+                            $('#cart_added').removeClass('notify_action');
+                        }
+                        $(document).find('#cart_added').addClass('notify_action').css('top', 90 + 'px');
+                        active_notify();
+                        $(btn).html('В корзине');
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                }
+            });
         }
-        });
-    }
     </script>
     <script>
         // слайдер рекомендуемые товары
@@ -183,4 +334,4 @@
             },
         });
     </script>
-</section>
+</section> -->

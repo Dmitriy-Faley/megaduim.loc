@@ -316,3 +316,17 @@
 }
 
 /*End Бренды*/
+
+/*Контакты*/
+.information .block-contacts__info{
+    
+    width: 743px;
+    margin-bottom: 50px;
+}
+
+@media screen and (max-width: 768px) {
+    .information .block-contacts__info{
+        width: 100%;
+    }
+}
+/*End Контакты*/

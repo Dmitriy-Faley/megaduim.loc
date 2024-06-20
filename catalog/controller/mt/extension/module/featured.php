@@ -7,6 +7,8 @@ class ControllerMTExtensionModuleFeatured extends Controller {
 
 		$this->load->model('tool/image');
 
+		$data['logged'] = $this->customer->isLogged();
+
 		$data = [];
 		
       $this->load->model('setting/setting');
@@ -94,12 +96,25 @@ class ControllerMTExtensionModuleFeatured extends Controller {
 						$rating = false;
 					}
 
+					$data['images'] = array();
+
+					$dops = $this->model_catalog_product->getProductImages($product_info['product_id']);
+
+					foreach ($dops as $dop) {
+						$data['images'][] = array(
+							'thumb' => $this->model_tool_image->resize($dop['image'], null, null)
+						);
+					}
+
 					$data['products'][] = array(
 						'product_id'  => $product_info['product_id'],
 						'in_wishlist' => (in_array($product_info['product_id'], array_column($wishlist, 'product_id')) ? 1 : 0),
 						'attributes'  => $attributes,
 						'thumb'       => $image,
+						'imgDop'      => $data['images'],
 						'name'        => $product_info['name'],
+						'model'        =>$product_info['model'],
+						'sku'    	  => $product_info['sku'],
 						'quantity'    => $product_info['quantity'],
 						'description' => utf8_substr(trim(strip_tags(html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8'))), 0, $this->config->get('theme_' . $this->config->get('config_theme') . '_product_description_length')),
 						'price'       => $price,

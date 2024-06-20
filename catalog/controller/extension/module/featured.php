@@ -50,12 +50,24 @@ class ControllerExtensionModuleFeatured extends Controller {
 						$rating = false;
 					}
 
+					$data['images'] = array();
+
+					$dops = $this->model_catalog_product->getProductImages($product_info['product_id']);
+
+					foreach ($dops as $dop) {
+						$data['images'][] = array(
+							'thumb' => $this->model_tool_image->resize($dop['image'], null, null)
+						);
+					}
 
 					$data['products'][] = array(
 						'product_id'  => $product_info['product_id'],
 						'thumb'       => $image,
+						'imgDop'      => $data['images'],
 						'name'        => $product_info['name'],
 						'model'        =>$product_info['model'],
+						'sku'    	  => $product_info['sku'],
+						'stock'       => $product_info['stock_status'],
 						'description' => utf8_substr(strip_tags(html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8')), 0, $this->config->get('theme_' . $this->config->get('config_theme') . '_product_description_length')) . '..',
 						'price'       => $price,
 						'special'     => $special,
@@ -68,6 +80,8 @@ class ControllerExtensionModuleFeatured extends Controller {
 				}
 			}
 		}
+
+		$data['logged'] = $this->customer->isLogged();
 
 		if ($data['products']) {
 			return $this->load->view('extension/module/featured', $data);

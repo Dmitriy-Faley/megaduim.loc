@@ -6,7 +6,7 @@ $(document).ready(function () {
 
     //инициализация остальных функций
     add_bookmarks();
-    add_bookmarks_login();
+    //add_bookmarks_login();
     add_compare();
     $(window).resize();
     acc_window();
@@ -830,7 +830,7 @@ function add_bookmarks() {
 
 
 // уведомление об входе в аккаунт
-function add_bookmarks_login() {
+/* function add_bookmarks_login() {
     let like_btn = $('.add-bookmark-login');
     [].forEach.call(like_btn, function (el) {
         el.addEventListener('click', (e) => {
@@ -841,7 +841,7 @@ function add_bookmarks_login() {
             active_notify();
         });
     })
-}
+} */
 
 
 // добавление/удаление в сравнение (+ уведомление об этом)

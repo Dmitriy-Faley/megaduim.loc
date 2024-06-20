@@ -229,6 +229,7 @@ class ControllerCommonHome extends Controller {
 				'thumb'       => $image,
 				'imgDop'      => $data['images'],
 				'name'        => $result['name'],
+				'model'        => $result['model'],
 				'quantity'    => $result['quantity'],
 				'sku'    	  => $result['sku'],
 				'price'       => $price,
