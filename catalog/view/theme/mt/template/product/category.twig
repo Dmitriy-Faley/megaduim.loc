@@ -1,534 +1,316 @@
 {{ header }}
 
-<section class="catalog_inner">
-    <div class="catalog__breadcrumbs breadcrumbs">
-        {% for breadcrumb in breadcrumbs %}
-        <a class="breadcrumbs__link  {% if breadcrumb == breadcrumbs|last %} is-active {% endif %}"
-            href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
-        {% if breadcrumb != breadcrumbs|last %}
-        <span class="slash">/</span>
-        {% endif %}
-        {% endfor %}
-    </div>
-    <h1 class="section_block__title">{{ heading_title }}</h1>
 
-    {% if theme_mt_category_subcategory and top_categories|length > 0 %}
-    <!-- <div class="catalog_inner__categories">
-        {% for category in top_categories %}
-        <a href="{{ category.href }}" class="catalog_inner__cat_btn">{{ category.name }}</a>
-        {% endfor %}
-    </div> -->
-    {% endif %}
-
-
-    {% if categoriesCat %}
-    <div class="catalog_inner__categories">
-        {% for childcategory in categoriesCat %}
-            <!-- <a href="{{childcategory.href}}" class="catalog_inner__cat_btn">{{ childcategory.name }}</a> -->
-            {% if childcategory.children %}
-                {% for childrentwo in childcategory.children %}
-                    <a href="{{ childrentwo.href }}" class="catalog_inner__cat_btn">{{ childrentwo.name }}</a>
-                {% endfor %}
-            {% endif %}
-        {% endfor %}
-    </div>
-    {% endif %}
-
-
-    <div class="catalog_inner__buttons">
-        <button class="catalog_inner__filter_btn news__sort_btn btn btn--filled btn--icon_right"
-            data-filter-btn=""><span class="btn__text">фильтрация</span>
-            <svg class="btn__initial btn__icon btn__icon--white btn__icon--right">
-                <use xlink:href="#icon_filter"></use>
-            </svg>
-            <svg class="btn__clicked btn__icon btn__icon--black btn__icon--left">
-                <use xlink:href="#icon_cross"></use>
-            </svg>
-        </button>
-
-        <!-- <button class="news__sort_btn btn btn--grey btn--icon_right" data-sort-btn="">
-            <span class="btn__text">сначала дорогие</span>
-            <svg class="btn__icon btn__icon--black btn__icon--right">
-                <use xlink:href="#icon_sort"></use>
-            </svg>
-        </button> -->
-
-        {% for s in sorts %}
-            {% if (s.code == sort) %}
-            <a href="{{ s.href }}"
-                class="news__sort_btn btn btn--grey btn--icon_right head_sorting-variant current-sort {% if order == 'ASC' %} sort_1{% else %} sort_2{% endif %}">
-                <span class="btn__text">
-                    {% if order == 'ASC' %} сначала дорогие{% else %} сначала дешевые{% endif %}
-                </span>
-                <svg class="btn__icon btn__icon--black btn__icon--right">
-                    <use xlink:href="#icon_sort"></use>
-                </svg>
-            </a>
-            {% else %}
-            <!-- <a href="{{ s.href }}" class="news__sort_btn btn btn--grey btn--icon_right head_sorting-variant">
-                <span class="btn__text">{{ s.text }}</span>
-                <svg class="btn__icon btn__icon--black btn__icon--right">
-                    <use xlink:href="#icon_sort"></use>
-                </svg>
-            </a> -->
-            {% endif %}
-        {% endfor %}
-    </div>
-
-    <div class="catalog_inner__content">
-        <div class="catalog_filters">
-            <div class="catalog_filters_aside">
-                <div class="catalog_filters_aside__top">
-                    <svg class="icon">
-                        <use xlink:href="#arrow_back"></use>
-                    </svg>
-                    <p class="catalog_filters__title catalog_filters__title--nopad">Бренд</p>
-                    <button class="catalog_filters_aside__reset_btn">Сбросить всё</button>
-                </div>
-                <div class="catalog_filters_aside__content">
-                   <!-- <div class="catalog_filters_aside_range" data-range-block="">
-                        <p class="catalog_filters_aside_range__caption">Длина заушника (в мм)</p>
-                        <div class="catalog_filters_aside_range__inputs">
-                            <div class="input_wrapper input_wrapper--outlined">
-                                <input class="input_wrapper__input input_wrapper__input--left" type="text"
-                                    name="parametr" data-input-left="">
-                            </div>
-                            <div class="input_wrapper input_wrapper--outlined">
-                                <input class="input_wrapper__input input_wrapper__input--right" type="text"
-                                    name="parametr" data-input-right="">
-                            </div>
-                        </div>
-                        <div class="catalog_filters_aside_range__slider" data-range-slider=""></div>
-                    </div>
-                    <div class="catalog_filters_aside_range" data-range-block="">
-                        <p class="catalog_filters_aside_range__caption">Диаметр линзы (в мм)</p>
-                        <div class="catalog_filters_aside_range__inputs">
-                            <div class="input_wrapper input_wrapper--outlined">
-                                <input class="input_wrapper__input input_wrapper__input--left" type="text"
-                                    name="parametr" data-input-left="">
-                            </div>
-                            <div class="input_wrapper input_wrapper--outlined">
-                                <input class="input_wrapper__input input_wrapper__input--right" type="text"
-                                    name="parametr" data-input-right="">
-                            </div>
-                        </div>
-                        <div class="catalog_filters_aside_range__slider" data-range-slider=""></div>
-                    </div>-->
-                    <div class="catalog_filters_aside_range" data-range-block="">
-                        <p class="catalog_filters_aside_range__caption">Ширина переносицы (в мм)</p>
-                        <div class="catalog_filters_aside_range__inputs">
-                            <div class="input_wrapper input_wrapper--outlined">
-                                <input class="input_wrapper__input input_wrapper__input--left" type="text"
-                                    name="parametr" data-input-left="">
-                            </div>
-                            <div class="input_wrapper input_wrapper--outlined">
-                                <input class="input_wrapper__input input_wrapper__input--right" type="text"
-                                    name="parametr" data-input-right="">
-                            </div>
-                        </div>
-                        <div class="catalog_filters_aside_range__slider" data-range-slider=""></div>
-                    </div>
-                </div>
-                <button class="catalog_filters__bottom_btn catalog_filters__bottom_btn--aside btn btn--filled"><span
-                        class="btn__text">применить</span></button>
+<section class="catalog">
+    <div class="container catalog__container">
+        <div class="catalog-filter js-catalog-filter">
+            <div class="catalog-filter__link-block">
+                <button
+                    class="btn-reset catalog-filter__link-head button-link-head js-catalog-filter-close">Назад</button>
             </div>
-            <div class="catalog_filters__block">
-                <button class="catalog_filters__close" data-filters-close="">
-                    <svg class="icon">
-                        <use xlink:href="#icon_cross"></use>
-                    </svg>
-                </button>
-                <p class="catalog_filters__title">Фильтрация</p>
-                <div class="catalog_filters__wrap">
-                    {{ column_right }}
-                    <!--<div class="catalog_filters__buttons">
-                        <button class="catalog_filters__main_btn">
-                            <div class="text">бренд</div>
-                            <svg class="icon">
-                                <use xlink:href="#link_arrow"></use>
-                            </svg>
-                        </button>
-                        <button class="catalog_filters__main_btn">
-                            <div class="text">страна</div>
-                            <svg class="icon">
-                                <use xlink:href="#link_arrow"></use>
-                            </svg>
-                        </button>
-                        <button class="catalog_filters__main_btn">
-                            <div class="text">пол</div>
-                            <svg class="icon">
-                                <use xlink:href="#link_arrow"></use>
-                            </svg>
-                        </button>
-                        <button class="catalog_filters__main_btn">
-                            <div class="text">возраст</div>
-                            <svg class="icon">
-                                <use xlink:href="#link_arrow"></use>
-                            </svg>
-                        </button>
-                        <button class="catalog_filters__main_btn">
-                            <div class="text">форма оправы</div>
-                            <svg class="icon">
-                                <use xlink:href="#link_arrow"></use>
-                            </svg>
-                        </button>
-                        <button class="catalog_filters__main_btn">
-                            <div class="text">цвет оправы</div>
-                            <svg class="icon">
-                                <use xlink:href="#link_arrow"></use>
-                            </svg>
-                        </button>
-                        <button class="catalog_filters__main_btn">
-                            <div class="text">материал оправы</div>
-                            <svg class="icon">
-                                <use xlink:href="#link_arrow"></use>
-                            </svg>
-                        </button>
-                    </div>-->
-                    <!--<div class="catalog_filters_sort">
-                        <label class="catalog_filters_sort__label">
-                            <input class="radio" type="radio" name="product_sort" value="" hidden="">
-                            <div class="catalog_filters_sort__radio">
-                                <svg class="icon">
-                                    <use xlink:href="#checkmark"></use>
-                                </svg>
+            <div class="catalog-filter__inner">
+                <div class="catalog-filter__name">Фильтр</div>
+                <div class="catalog-filter__items">
+                    <div class="catalog-filter__item">
+                        <button class="btn-reset catalog-filter__item-name js-catalog-filter-name">Цена, BYN</button>
+                        <div class="catalog-filter__item-content js-catalog-filter-content">
+                            <div id="slider-range" class="slider-price">
+                                <input type="text" id="slider-price-min" class="slider-price-min form__input"
+                                    value="1000">
+                                <input type="text" id="slider-price-max" class="slider-price-max form__input"
+                                    value="9000">
                             </div>
-                            <p class="catalog_filters_sort__text">Новинка</p>
-                        </label>
-                        <label class="catalog_filters_sort__label">
-                            <input class="radio" type="radio" name="product_sort" value="" hidden="">
-                            <div class="catalog_filters_sort__radio">
-                                <svg class="icon">
-                                    <use xlink:href="#checkmark"></use>
-                                </svg>
+                            <div id="slider-price-count" class="slider-price-count"></div>
+                        </div>
+                    </div>
+                    <div class="catalog-filter__item">
+                        <button
+                            class="btn-reset catalog-filter__item-name js-catalog-filter-name">Производитель</button>
+                        <div class="catalog-filter__item-content js-catalog-filter-content">
+                            <div class="catalog-filter__form-check form-check">
+                                <input class="form-check-input custom-checkbox" type="checkbox" value="ITAP" id="ITAP">
+                                <label class="form-check-label" for="ITAP">ITAP</label>
                             </div>
-                            <p class="catalog_filters_sort__text">Акция</p>
-                        </label>
-                        <label class="catalog_filters_sort__label">
-                            <input class="radio" type="radio" name="product_sort" value="" hidden="">
-                            <div class="catalog_filters_sort__radio">
-                                <svg class="icon">
-                                    <use xlink:href="#checkmark"></use>
-                                </svg>
+                            <div class="catalog-filter__form-check form-check">
+                                <input class="form-check-input custom-checkbox" type="checkbox" value="Wiega"
+                                    id="Wiega">
+                                <label class="form-check-label" for="Wiega">Wiega</label>
                             </div>
-                            <p class="catalog_filters_sort__text">Хит</p>
-                        </label>
-                    </div>-->
+                            <div class="catalog-filter__form-check form-check">
+                                <input class="form-check-input custom-checkbox" type="checkbox" value="General Fittings"
+                                    id="General Fittings">
+                                <label class="form-check-label" for="General Fittings">General Fittings</label>
+                            </div>
+                            <div class="catalog-filter__form-check form-check">
+                                <input class="form-check-input custom-checkbox" type="checkbox" value="Wester"
+                                    id="Wester">
+                                <label class="form-check-label" for="Wester">Wester</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="catalog-filter__item">
+                        <button class="btn-reset catalog-filter__item-name js-catalog-filter-name">Вид резьбового
+                            соединения</button>
+                        <div class="catalog-filter__item-content js-catalog-filter-content">
+                            <div class="catalog-filter__form-check form-check">
+                                <input class="form-check-input custom-checkbox" type="checkbox"
+                                    value="с наружной резьбой" id="с наружной резьбой">
+                                <label class="form-check-label" for="с наружной резьбой">с наружной резьбой</label>
+                            </div>
+                            <div class="catalog-filter__form-check form-check">
+                                <input class="form-check-input custom-checkbox" type="checkbox"
+                                    value="с внутренней и наружной резьбой" id="с внутренней и наружной резьбой">
+                                <label class="form-check-label" for="с внутренней и наружной резьбой">с внутренней и
+                                    наружной резьбой</label>
+                            </div>
+                            <div class="catalog-filter__form-check form-check">
+                                <input class="form-check-input custom-checkbox" type="checkbox"
+                                    value="с внутренней резьбой" id="с внутренней резьбой">
+                                <label class="form-check-label" for="с внутренней резьбой">с внутренней резьбой</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="catalog-filter__item">
+                        <button class="btn-reset catalog-filter__item-name js-catalog-filter-name">Тип</button>
+                        <div class="catalog-filter__item-content js-catalog-filter-content">
+                            <div class="catalog-filter__form-check form-check">
+                                <input class="form-check-input custom-checkbox" type="checkbox" value="тип1" id="тип1">
+                                <label class="form-check-label" for="тип1">тип1</label>
+                            </div>
+                            <div class="catalog-filter__form-check form-check">
+                                <input class="form-check-input custom-checkbox" type="checkbox" value="тип2" id="тип2">
+                                <label class="form-check-label" for="тип2">тип2</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="catalog-filter__item">
+                        <button class="btn-reset catalog-filter__item-name js-catalog-filter-name">Диаметр
+                            резьбы</button>
+                        <div class="catalog-filter__item-content js-catalog-filter-content">
+                            <div class="catalog-filter__form-check form-check">
+                                <input class="form-check-input custom-checkbox" type="checkbox" value="Диаметр резьбы1"
+                                    id="Диаметр резьбы1">
+                                <label class="form-check-label" for="Диаметр резьбы1">Диаметр резьбы1</label>
+                            </div>
+                            <div class="catalog-filter__form-check form-check">
+                                <input class="form-check-input custom-checkbox" type="checkbox" value="Диаметр резьбы2"
+                                    id="Диаметр резьбы2">
+                                <label class="form-check-label" for="Диаметр резьбы2">Диаметр резьбы2</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!--<div class="catalog_filters__bottom" data-filters-close="">
-                    <button class="catalog_filters__bottom_btn btn btn--filled"><span
-                            class="btn__text">применить</span></button>
-                </div>-->
+                <div class="catalog-filter__buttons">
+                    <button class="btn-reset button2 catalog-filter__button1">Применить</button>
+                    <button class="btn-reset button-clear catalog-filter__button2">Очистить фильтр</button>
+                </div>
             </div>
         </div>
-        <div class="catalog_inner__content_cards" id="catalog_inner__content_cards">
-            {% for product in products %}
-            <div class="hits_slide">
-                <div class="hits_slide__pic" data-linked-modal="modal_card">
-                    <div class="hits_slide__pic_wrap" data-hover-images="">
-                        <img class="image" data-lazy data-src="{{ product.thumb }}" alt="{{ heading_title }}">
-                        {% for img in product.imgDop %}
-                        <img class="image" data-lazy data-src="{{ img.thumb }}" alt="{{ heading_title }}">
-                        {% endfor %}
-                    </div>
-                    <img class="loader" data-src="/image/catalog/assets/img/loader.svg" alt="" data-lazy="" />
-                    <div class="hits_slide__hover_btn btn btn--filled">Быстрый просмотр</div>
-                    <button class="hits_slide__btn hits_slide__btn--mob"><img class="image image__empty"
-                            data-src="/image/catalog/assets/img/icon_fav_empty.svg" alt="" data-lazy="" /><img
-                            class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg" alt=""
-                            data-lazy="" />
-                    </button>
-                </div>
-                <a href="{{ product.href }}" class="hits_slide_mobile btn btn--filled">
-                    Подробнее
+        <div class="catalog-content">
+            <div class="breadcrumbs">
+                {% for breadcrumb in breadcrumbs %}
+                    {% if breadcrumb == breadcrumbs|first %}
+                    <a href="#">
+                    <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <mask id="path-1-outside-1_84_10392" maskUnits="userSpaceOnUse" x="-0.0625" y="0" width="18" height="16"
+                        fill="black">
+                        <rect fill="white" x="-0.0625" width="18" height="16"></rect>
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M15.0619 9.03125L8.99968 2L2.9375 9.03125H3.99968V15H6.99962V10H10.9996V15H13.9997V9.03125H15.0619Z">
+                        </path>
+                        </mask>
+                        <path
+                        d="M8.99968 2L9.75705 1.34701L8.99968 0.468574L8.24231 1.34701L8.99968 2ZM15.0619 9.03125V10.0312H17.2444L15.8192 8.37826L15.0619 9.03125ZM2.9375 9.03125L2.18013 8.37826L0.754965 10.0312H2.9375V9.03125ZM3.99968 9.03125H4.99968V8.03125H3.99968V9.03125ZM3.99968 15H2.99968V16H3.99968V15ZM6.99962 15V16H7.99962V15H6.99962ZM6.99962 10V9H5.99962V10H6.99962ZM10.9996 10H11.9996V9H10.9996V10ZM10.9996 15H9.99962V16H10.9996V15ZM13.9997 15V16H14.9997V15H13.9997ZM13.9997 9.03125V8.03125H12.9997V9.03125H13.9997ZM8.24231 2.65299L14.3045 9.68424L15.8192 8.37826L9.75705 1.34701L8.24231 2.65299ZM3.69487 9.68424L9.75705 2.65299L8.24231 1.34701L2.18013 8.37826L3.69487 9.68424ZM3.99968 8.03125H2.9375V10.0312H3.99968V8.03125ZM2.99968 9.03125V15H4.99968V9.03125H2.99968ZM3.99968 16H6.99962V14H3.99968V16ZM7.99962 15V10H5.99962V15H7.99962ZM6.99962 11H10.9996V9H6.99962V11ZM9.99962 10V15H11.9996V10H9.99962ZM10.9996 16H13.9997V14H10.9996V16ZM14.9997 15V9.03125H12.9997V15H14.9997ZM15.0619 8.03125H13.9997V10.0312H15.0619V8.03125Z"
+                        fill="#4F649A" mask="url(#path-1-outside-1_84_10392)"></path>
+                    </svg>
+                    </a>
+                    {% endif %}
+
+                    <a class="breadcrumbs__link  {% if breadcrumb == breadcrumbs|last %} is-active {% endif %}"
+                    href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+                    {% if breadcrumb != breadcrumbs|last %}
+                    <div class="breadcrumbs__separator"></div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="catalog-content__buttons">
+                <button class="btn-reset catalog-content__filters js-filters">
+                    <span>Фильтры</span>
+                    <img loading="lazy" src="img/icon/icon-filters.svg" class="image" width="" height="" alt="">
+                </button>
+
+                <!-- {% for s in sorts %}
+                    {% if (s.code == sort) %}
+                        <a href="{{ s.href }}"
+                            class="news__sort_btn btn btn--grey btn--icon_right head_sorting-variant current-sort {% if order == 'ASC' %} sort_1{% else %} sort_2{% endif %}">
+                            <span class="btn__text">
+                                {% if order == 'ASC' %} сначала дорогие{% else %} сначала дешевые{% endif %}
+                            </span>
+                            <svg class="btn__icon btn__icon--black btn__icon--right">
+                                <use xlink:href="#icon_sort"></use>
+                            </svg>
+                        </a>
+                    {% endif %}
+                {% endfor %} -->
+
+                {% if sorts|length > 0 and products|length > 0 %}
+        <div class="products-head_sorting">
+            <div class="head_sorting-list">
+                {% for s in sorts %}
+                {% if (s.code == sort) %}
+                <a href="{{ s.href }}"
+                    class="news__sort_btn btn btn--grey btn--icon_right head_sorting-variant current-sort {% if order == 'ASC' %}sort_1{% else %}sort_2{% endif %}">
+                    <span class="btn__text">{{ s.text }}</span>
+                    <span class="sort-arr btn__icon btn__icon--black btn__icon--right">
+                        <svg class="btn__icon btn__icon--black btn__icon--right">
+                            <use xlink:href="#icon_sort"></use>
+                        </svg>
+                    </span>
                 </a>
-                <div class="hits_slide__info">
-                    <div class="hits_slide__left" data-linked-modal="modal_card">
-                        <p class="hits_slide__text hits_slide__text-name hits_slide__text--big">{{ product.name }}</p>
-                        <p class="hits_slide__text">
-                            {{ product.model }}
-                        </p>
-                        {% if product.stock == 'В наличии' %}
-                        <div class="hits_slide__stock" data-color="green">В наличии</div>
-                        {% elseif product.stock == 'Нет в наличии' %}
-                        <div class="hits_slide__stock" data-color="red">Нет в наличии</div>
-                        {% elseif product.stock == 'Ожидание 2-3 дня' %}
-                        <div class="hits_slide__stock" data-color="blue">Ожидание 2-3 дня</div>
-                        {% elseif product.stock == 'Предзаказ' %}
-                        <div class="hits_slide__stock" data-color="blue">Предзаказ</div>
-                        {% endif %}
+                {% else %}
+                <a href="{{ s.href }}" class="head_sorting-variant">
+                    <span>{{ s.text }}</span>
+                </a>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
 
+                <div class="catalog-content__sort">
+                    <label for="speed"></label>
+                    <select name="speed" id="speed" class="catalog-content__sort-button">
+                        <option selected="selected">По популярности</option>
+                        <option>С дешевых</option>
+                        <option>С дорогих</option>
+                    </select>
+                </div>
+            </div>
 
-                        <div style="display: none;">
-                            {% if product.attrblock %}
-                                {% for attrblockitem in product.attrblock %}
-                                    {% if attrblockitem.attribute_group_id == 7 %}
-                                    <div class="attrs__size">
-                                        <span class="attr__size-name">{{ attrblockitem.name }}</span>
-                                        {% for attributeitem in attrblockitem.attribute %}
-                                        {% if attributeitem.attribute_id == 16 %}
-                                        <div class="attr__size-category shir">
-                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
-                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
-                                        </div>
-                                        {% endif %}
-                                        {% if attributeitem.attribute_id == 13 %}
-                                        <div class="attr__size-category leng">
-                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
-                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
-                                        </div>
-                                        {% endif %}
-                                        {% if attributeitem.attribute_id == 14 %}
-                                        <div class="attr__size-category heig-lin">
-                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
-                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
-                                        </div>
-                                        {% endif %}
-                                        {% if attributeitem.attribute_id == 12 %}
-                                        <div class="attr__size-category shir-lin">
-                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
-                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
-                                        </div>
-                                        {% endif %}
-                                        {% if attributeitem.attribute_id == 15 %}
-                                        <div class="attr__size-category most-len">
-                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
-                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
-                                        </div>
-                                        {% endif %}
-                                        {% endfor %}
-                                    </div>
-                                    {% elseif attrblockitem.attribute_group_id == 8 %}
-                                    <div class="attrs__char">
-                                        <span class="attr__char-name">{{ attrblockitem.name }}</span>
-                                        {% for attributeitem in attrblockitem.attribute %}
-                                        <div class="attr__char-category">
-                                            <p class="attr__char-name">{{ attributeitem.name }}</p>
-                                            <p class="attr__char-cal">{{ attributeitem.text }}</p>
-                                        </div>
-                                        {% endfor %}
-                                    </div>
+            <div class="swiper-style catalog-content__items">
+                {% for product in products %}
+                    <div class="card-product">
+                        <div class="card-product__head">
+                            <div class="card-product__image">
+                                <div class="hvr__images">
+                                    <img class="hvr__image" src="{{ product.thumb }}" alt="{{ heading_title }}">
+                                    {% for img in product.imgDop %}
+                                        <img class="hvr__image" src="{{ img.thumb }}" alt="{{ heading_title }}">
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="card-product__content-mob">
+                                <div class="card-product__check">
+                                    {% if product.stock == 'В наличии' %}
+                                        <div class="card-product__status item1">В наличии</div>
+                                        {% elseif product.stock == 'Нет в наличии' %}
+                                        <div class="ard-product__status">Нет в наличии</div>
+                                        {% elseif product.stock == 'Ожидание 2-3 дня' %}
+                                        <div class="ard-product__status">Ожидание 2-3 дня</div>
+                                        {% elseif product.stock == 'Предзаказ' %}
+                                        <div class="ard-product__status">Предзаказ</div>
                                     {% endif %}
-                                {% endfor %}
-                            {% endif %}
+                                </div>
+                                <div class="card-product__name1">{{ product.model }}</div>
+                                <a href="{{ product.href }}" class="card-product__name2">{{ product.name }}</a>
+                                {% if product.sku %}
+                                    <div class="card-product__articles">Арт. {{ product.sku }}</div>
+                                {% endif %}
+                            </div>
                         </div>
-
-                        <div class="hits_slide_option" style="display: none;">
-                            {% for attrblockitem in product.attrblock %}
-                                                                {% if attrblockitem.attribute_group_id == 29 %}
-                                                                    {% for attributeitem in attrblockitem.attribute %}
-                                                                    <div class="hits_slide_option_param">
-                                                                        <span>{{ attributeitem.name }}</span>
-                                                                        <a href="{{ product.hrefPiece }}{{ attributeitem.text }}"></a>
-                                                                    </div>
-                                                                    {% endfor %}
-                                                                {% endif %}
-                                                            {% endfor %}
-                        </div>
-
-
-                        <a class="hits_slide__href" href="{{ product.href }}"></a>
-                        <p class="hits_slide__descr" style="display: none;">{{ product.description }}</p>
-                        <div class="hits_slide__price">
-                            {% if product.special %}
-                            <p class="hits_slide__text normal"> <text>{{ product.special }}</text> RUB</p>
-                            <p class="hits_slide__text old"><text>{{ product.price }}</text> RUB</p>
-                            {% else %}
-                            <p class="hits_slide__text normal"> <text>{{ product.price }}</text> RUB</p>
+                        <div class="card-product__body">
+                            <div class="card-product__content-desck">
+                                <div class="card-product__check">
+                                    {% if product.stock == 'В наличии' %}
+                                        <div class="card-product__status item1">В наличии</div>
+                                        {% elseif product.stock == 'Нет в наличии' %}
+                                        <div class="ard-product__status">Нет в наличии</div>
+                                        {% elseif product.stock == 'Ожидание 2-3 дня' %}
+                                        <div class="ard-product__status">Ожидание 2-3 дня</div>
+                                        {% elseif product.stock == 'Предзаказ' %}
+                                        <div class="ard-product__status">Предзаказ</div>
+                                    {% endif %}
+                                </div>
+                                <div class="card-product__name1">{{ product.model }}</div>
+                                <a href="{{ product.href }}" class="card-product__name2">{{ product.name }}</a>
+                                {% if product.sku %}
+                                    <div class="card-product__articles">Арт. {{ product.sku }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="card-product__line"></div>
+                            <div class="card-product__total">
+                                <div class="card-product__count">
+                                    <button
+                                        class="btn-reset card-product__count-button card-product__count-button-decrease">
+                                        <svg width="12" height="3" viewBox="0 0 12 3" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M1 1.5H11" stroke="#919191" stroke-width="1.5"
+                                                stroke-linecap="round" />
+                                        </svg>
+                                    </button>
+                                    <input type="number" value="1" class="card-product__count-num">
+                                    <button
+                                        class="btn-reset card-product__count-button card-product__count-button-increase">
+                                        <svg width="12" height="13" viewBox="0 0 12 13" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M1 6.5H11" stroke="#919191" stroke-width="1.5"
+                                                stroke-linecap="round" />
+                                            <path d="M6 1.5L6 11.5" stroke="#919191" stroke-width="1.5"
+                                                stroke-linecap="round" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                {% if product.special %}
+                                    <div class="card-product__price">
+                                        <div class="card-product__price-old"><span>{{ product.price }}</span> руб</div>
+                                        <div class="card-product__price-new"><span>{{ product.special }}</span> руб</div>
+                                    </div>
+                                {% else %}
+                                    <div class="card-product__price-single"><span>{{ product.price }}</span> руб</div>
+                                {% endif %}
+                            </div>
+                            {% if theme_mt_category_product_cart_checked %}
+                            <button class="btn-reset button2 card-product__button add-to-cart"
+                                onclick="add_in_cart('{{ product.product_id }}', '{{ product.minimum }}');">{{ theme_mt_category_product_cart_text }}</button>
                             {% endif %}
-                        </div>
-                    </div>
-                    <div class="hits_slide__right">
 
-                        <!-- {% if theme_mt_category_product_cart_checked %}
-                        <button class="button add-to-cart"
-                            onclick="add_in_cart('{{ product.product_id }}', '{{ product.minimum }}');">{{ theme_mt_category_product_cart_text }}</button>
-                        {% endif %} -->
-
-                        {% if product.stock == 'В наличии' %}
-                        {% if theme_mt_category_product_cart_checked %}
-                        <button class="hits_slide__btn add-to-cart {% if product.in_cart %} added{% endif %}"
-                            id="add-to-cart"
-                            onclick="add_in_cart('{{ product.product_id }}', '{{ product.minimum }}'); return false;">
-                            {% if theme_mt_category_product_cart_text %}
-                            <img class="image image__empty" data-src="/image/catalog/assets/img/icon_cart_empty.svg"
-                                alt="" data-lazy="" />
-                            <img class="image image__active" data-src="/image/catalog/assets/img/icon_cart_active.svg"
-                                alt="" data-lazy="" />
-                            {% else %}
-                            {{ theme_mt_category_product_cart_text }}
-                            {% endif %}
-                        </button>
-                        {% endif %}
-                        {% endif %}
-
-                        {% if logged %}
-                            {% if theme_mt_category_product_wishlist_checked %}
-                            <button class="hits_slide__btn add-wish {% if product.in_wishlist %} added{% endif %}"
+                            {% if logged %}
+                                <button class="btn-reset card-product__favourites"
                                 onclick="{% if product.in_wishlist %}wishlist_remove('{{ product.product_id }}');{% else %}wishlist_add('{{ product.product_id }}');{% endif %} return false;"
                                 {% if not logged %}data-login="false" {% else %}data-login="true" {% endif %}>
-                                <img class="image image__empty" data-src="/image/catalog/assets/img/icon_fav_empty.svg"
-                                    alt="" data-lazy="" />
-                                <img class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg"
-                                    alt="" data-lazy="" />
-                            </button>
-                        {% endif %}
-                        {% else %} 
-                        <button class="hits_slide__btn showNoLogin" data-linked-modal="modal_wishlistErr">
-                            <img class="image image__empty" data-src="/image/catalog/assets/img/icon_fav_empty.svg" alt="" data-lazy="" />
-                            <img class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg" alt="" data-lazy="" />
-                        </button>
-                        {% endif %}
+                                <div class="card-product__favourites-icon {% if product.in_wishlist %} active{% endif %}"></div>
+                                <span>Добавить в избранное</span>
+                                </button>
+                            {% else %}
+                                <button class="btn-reset card-product__favourites" data-graph-path="modal1">
+                                <div class="card-product__favourites-icon"></div>
+                                <span>Добавить в избранное</span>
+                                </button>
+                            {% endif %}
+                        </div>
                     </div>
-                </div>
+                {% endfor %}
+
+                <button class="btn-reset catalog-content__button">Показать еще</button>
+
+                {% if pagination %}
+                    {{ pagination }}
+                {% endif %}
+
+                <!-- <div class="pagination catalog-content__pagination">
+                    <div class="pagination__item active">1</div>
+                    <div class="pagination__item">2</div>
+                    <div class="pagination__item">3</div>
+                    <div class="pagination__item">4</div>
+                    <div class="pagination__item">…</div>
+                    <div class="pagination__item">35</div>
+                </div> -->
             </div>
-            {% endfor %}
         </div>
     </div>
-    <!-- <div class="catalog_inner__pagination pagination">
-        <button class="pagination__btn_more btn btn--grey"><span class="btn__text">Показать ещё</span></button>
-
-         <div class="pagination__wrap">
-            <button class="pagination__num is-active">1</button>
-            <button class="pagination__num">2</button>
-            <button class="pagination__num">3</button>
-            <button class="pagination__num">...</button>
-            <button class="pagination__num">12</button>
-        </div> 
-    </div> -->
-    {% if pagination %}
-    <div class="catalog_inner__pagination pagination">
-        {% if pagCustom.last != pagCustom.page %}
-            <a href="{{ pagCustom.url }}" class="pagination__btn_more btn btn--grey"><span class="btn__text">Показать ещё</span></a>
-        {% endif %}
-        {{ pagination }}
-    </div> 
-    {% endif %}
-
-    {% if theme_mt_category_subcategory and top_categories|length > 0 %}
-    <div class="catalog_inner__also">
-        <h2 class="section_block__title section_block__title--small">Также ищут</h2>
-        <div class="catalog_inner__also_wrap">
-            {% for category in top_categories %}
-            <a href="{{ category.href }}" class="catalog_inner__cat_btn">{{ category.name }}</a>
-            {% endfor %}
-        </div>
-    </div>
-    {% endif %}
-</section>
- 
-    
-<section class="catalog_inner_additional">
-
-    <p class="catalog_inner_additional__text">{{ description }}</p>
-    
-    <!-- <p class="catalog_inner_additional__text">Предлагаем в каталоге официального магазина выбрать солнцезащитные очки
-        Chopard или оправу для зрения точно по размеру, параметрам и форме и купить с доставкой по Москве на бесплатную
-        примерку (до 4-х моделей), в любой город России – до 2-х пар.</p>
-    <p class="catalog_inner_additional__text">Chopard - это люксовое элитное направление в оптике, все изделия
-        производят в Италии на итальянской фабрике De Rigo. В наличии представлены женские и мужские модели очков Шопард
-        в которых используются декоративные элементы украшений из основной линейки продукции модного бренда. Линзы
-        выполнены из оптического материала CR39 и имеют наивысшие показатели по защите глаз от вредных солнечных лучей
-        UV UF, в некоторых используется прочный поликарбонат, подходит для винтовых оправ на леске.</p>
-    <p class="catalog_inner_additional__text">Есть и классические оправы (с покрытием из 23-х каратного золота),
-        декорированные стразами Swarovski – очень удобно сидят на лице за счет флексов и продуманного дизайна, и
-        сочетают в себе изысканность ювелирной мысли основателя Луи-Уиллиса Шопарда.</p> -->
-    {% if faqs %}
-    <div class="catalog_inner_additional__faq">
-        {% for faq in faqs %}
-        <div class="faq_dropdown" data-dropdown-block="">
-            <div class="faq_dropdown__top" data-dropdown-block-btn>
-                <h3 class="faq_dropdown__title">{{ faq.title }}</h3>
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg>
-            </div>
-            <div class="faq_dropdown__info">
-                <p class="faq_dropdown__text">{{ faq.description }}</p>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-    {% endif %}
 </section>
 
-
-<section class="news_section blog">
-    <div class="news_section__top">
-        <h2 class="section_block__title section_block__title--small">Блог</h2><a
-            class="news_section__btn btn btn--grey btn--icon_right" href="/news"><span class="btn__text">перейти в
-                новости</span>
-            <svg class="btn__icon btn__icon--black btn__icon--right">
-                <use xlink:href="#link_arrow"></use>
-            </svg></a>
-    </div>
-    <div class="news_section__content">
-        {% for result in news %}
-        <a class="news_section_card" href="{{ result.href }}">
-            <div class="news_section_card__img desktop">
-                <picture class="image">
-                    <source data-lazy="data-lazy" data-srcset="{{ result.thumb }}"
-                        type="image/webp" />
-                    <source data-lazy="data-lazy" data-srcset="{{ result.thumb }}"
-                        type="image/jpg" /><img class="image" data-lazy="data-lazy"
-                        data-src="{{ result.thumb }}" alt="" />
-                </picture>
-            </div>
-            <div class="news_section_card__img mobile">
-                <picture class="image">
-                    <source data-lazy="data-lazy" data-srcset="{{ result.thumb_adaptive }}"
-                        type="image/webp" />
-                    <source data-lazy="data-lazy" data-srcset="{{ result.thumb_adaptive }}"
-                        type="image/jpg" /><img class="image" data-lazy="data-lazy"
-                        data-src="{{ result.thumb_adaptive }}" alt="" />
-                </picture>
-            </div>
-            <p class="news_section_card__date">{{ result.date }}</p>
-            <p class="news_card__title">{{ result.name }}</p>
-            <p class="news_section_card__text">{{ result.intro }}</p>
-        </a>
-        {% endfor %}
-        <!--<a class="news_section_card" href="/news_card">
-            <div class="news_section_card__img">
-                <picture class="image">
-                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/news_pic_1.webp"
-                        type="image/webp" />
-                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/news_pic_1.jpg"
-                        type="image/jpg" /><img class="image" data-lazy="data-lazy"
-                        data-src="/image/catalog/assets/img/news_pic_1.jpg" alt="" />
-                </picture>
-            </div>
-            <p class="news_section_card__text">Вы их искали: прямые черные брюки, как у Кайи Гербер</p>
-            <p class="news_section_card__date">8 марта, 2023</p>
-        </a>
-        <a class="news_section_card" href="/news_card">
-            <div class="news_section_card__img">
-                <picture class="image">
-                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/news_pic_1.webp"
-                        type="image/webp" />
-                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/news_pic_1.jpg"
-                        type="image/jpg" /><img class="image" data-lazy="data-lazy"
-                        data-src="/image/catalog/assets/img/news_pic_1.jpg" alt="" />
-                </picture>
-            </div>
-            <p class="news_section_card__text">Вы их искали: прямые черные брюки, как у Кайи Гербер</p>
-            <p class="news_section_card__date">8 марта, 2023</p>
-        </a>
-        <a class="news_section_card" href="/news_card">
-            <div class="news_section_card__img">
-                <picture class="image">
-                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/news_pic_1.webp"
-                        type="image/webp" />
-                    <source data-lazy="data-lazy" data-srcset="/image/catalog/assets/img/news_pic_1.jpg"
-                        type="image/jpg" /><img class="image" data-lazy="data-lazy"
-                        data-src="/image/catalog/assets/img/news_pic_1.jpg" alt="" />
-                </picture>
-            </div>
-            <p class="news_section_card__text">Вы их искали: прямые черные брюки, как у Кайи Гербер</p>
-            <p class="news_section_card__date">8 марта, 2023</p>
-        </a>-->
-    </div>
-</section>
 
 
 <script type="text/javascript">
@@ -563,11 +345,4 @@
 </script>
 
 
-
-
 {{ footer }}
-
-
-
-
-
