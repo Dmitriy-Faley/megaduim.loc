@@ -68,6 +68,38 @@
     </div>
 </div>
 
+<script type="text/javascript">
+    function add_in_cart(product_id) {
+        var btn = this;
+        var quantity = $('#input-quantity' + product_id).val();
+        $.ajax({
+            url: 'index.php?route=checkout/cart/add',
+            type: 'post',
+            data: 'product_id=' + product_id + '&quantity=' + (typeof (quantity) != 'undefined' ? quantity : 1),
+            dataType: 'json',
+            success: function (json) {
+
+                if (json['redirect']) {
+                    location = json['redirect'];
+                }
+
+                if (json['success']) {
+                    if ($("#cart_added").hasClass('notify_action')) {
+                        $('#cart_added').removeClass('notify_action');
+                    }
+                    $(document).find('#cart_added').addClass('notify_action').css('top', 90 + 'px');
+                    active_notify();
+                    $(btn).html('В корзине');
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    }
+</script>
+
+
 <script src="catalog/view/theme/mt/js/scripts.js"></script>
 
 

@@ -330,3 +330,37 @@
     }
 }
 /*End Контакты*/
+
+
+/*Product card*/
+.card-content__pirce--single{
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28.8px;
+    white-space: nowrap;
+    padding-bottom: 22px;
+}
+
+.card-content__pirce{
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28.8px;
+    white-space: nowrap;
+    padding-bottom: 22px;
+}
+
+.card-content__pirce-new{
+    color: #FF9017;
+    padding-right: 11px
+}
+
+.card-content__pirce-old{
+    color: #999999;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.8px;
+    text-decoration: line-through;
+}
+/*End*/

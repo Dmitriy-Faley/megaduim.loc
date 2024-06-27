@@ -129,17 +129,22 @@
                                     <div class="card-product__line"></div>
                                     <div class="card-product__total">
                                       <div class="card-product__count">
-                                        <button class="btn-reset card-product__count-button card-product__count-button-decrease">
-                                          <svg width="12" height="3" viewBox="0 0 12 3" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M1 1.5H11" stroke="#919191" stroke-width="1.5" stroke-linecap="round" />
-                                          </svg>
+                                        <button class="btn-reset amount-minus card-product__count-button card-product__count-button-decrease">
+                                            <svg width="12" height="3" viewBox="0 0 12 3" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1 1.5H11" stroke="#919191" stroke-width="1.5"
+                                                    stroke-linecap="round" />
+                                            </svg>
                                         </button>
-                                        <input type="number" value="1" class="card-product__count-num">
-                                        <button class="btn-reset card-product__count-button card-product__count-button-increase">
-                                          <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M1 6.5H11" stroke="#919191" stroke-width="1.5" stroke-linecap="round" />
-                                            <path d="M6 1.5L6 11.5" stroke="#919191" stroke-width="1.5" stroke-linecap="round" />
-                                          </svg>
+                                        <input class="card-product__count-num" id="input-quantity{{ product_man.product_id }}" value="1" size="2">
+                                        <button class="btn-reset amount-plus card-product__count-button card-product__count-button-increase">
+                                            <svg width="12" height="13" viewBox="0 0 12 13" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1 6.5H11" stroke="#919191" stroke-width="1.5"
+                                                    stroke-linecap="round" />
+                                                <path d="M6 1.5L6 11.5" stroke="#919191" stroke-width="1.5"
+                                                    stroke-linecap="round" />
+                                            </svg>
                                         </button>
                                       </div>
 
@@ -732,7 +737,7 @@
 {{ content_bottom }}
 
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     function add_in_cart(product_id, quantity) {
         var btn = this;
         $.ajax({
@@ -761,6 +766,6 @@
             }
         });
     }
-</script>
+</script> -->
 
 {{ footer }}

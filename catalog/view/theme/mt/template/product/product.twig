@@ -92,11 +92,18 @@
                         <div class="card-content__count-reviews">(10 отзывов)</div>
                     </div>
                 </div>
-                <!-- <div class="card-content__pirce">9.80 <span>руб</span></div>
+
+                {% if price %}
+                {% if special %}
                 <div class="card-content__pirce">
-                    <div class="card-content__pirce-new">9.80 <span>руб</span></div>
-                    <div class="card-content__pirce-old">13 руб</div>
-                </div> -->
+                    <div class="card-content__pirce-new">{{ special }} <span>руб</span></div>
+                    <div class="card-content__pirce-old">{{ price }} руб</div>
+                </div>
+                {% else %}
+                <div class="card-content__pirce--single">{{ price }} <span>руб</span></div>
+                {% endif %}
+                {% endif %}
+
                 <div class="card-content__size">
                     <div class="card-content__size-name">Другие размеры</div>
                     <div class="card-content__size-items">
@@ -111,32 +118,34 @@
                 </div>
                 <div class="card-content__bottom">
 
-                    <div class="card-product__count">
-                        <button
-                            class="btn-reset amount-minus card-product__count-button card-product__count-button-decrease">
-                            <svg width="12" height="3" viewBox="0 0 12 3" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M1 1.5H11" stroke="#919191" stroke-width="1.5" stroke-linecap="round" />
-                            </svg>
-                        </button>
-                        <input class="card-product__count-num" id="input-quantity{{ product.product_id }}" value="1"
-                            size="2">
-                        <button
-                            class="btn-reset amount-plus card-product__count-button card-product__count-button-increase">
-                            <svg width="12" height="13" viewBox="0 0 12 13" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M1 6.5H11" stroke="#919191" stroke-width="1.5" stroke-linecap="round" />
-                                <path d="M6 1.5L6 11.5" stroke="#919191" stroke-width="1.5" stroke-linecap="round" />
-                            </svg>
-                        </button>
+                    <div class="card-product__total">
+                        <div class="card-product__count">
+                            <button class="btn-reset amount-minus card-product__count-button card-product__count-button-decrease">
+                                <svg width="12" height="3" viewBox="0 0 12 3" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 1.5H11" stroke="#919191" stroke-width="1.5" stroke-linecap="round" />
+                                </svg>
+                            </button>
+                            <input class="card-product__count-num" id="input-quantity{{ product_id }}" value="1"
+                                size="2">
+                            <button class="btn-reset amount-plus card-product__count-button card-product__count-button-increase">
+                                <svg width="12" height="13" viewBox="0 0 12 13" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 6.5H11" stroke="#919191" stroke-width="1.5" stroke-linecap="round" />
+                                    <path d="M6 1.5L6 11.5" stroke="#919191" stroke-width="1.5"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
 
-                    {% if theme_mt_category_product_cart_checked %}
-                    <button class="btn-reset button2 card-content__other" id="button-cart">В корзину</button>
-                    {% endif %}
 
+
+                    {% if theme_mt_category_product_cart_checked %}
+                    <button class="btn-reset button2 card-content__other add-to-cart" onclick="add_in_cart('{{ product_id }}', '{{ minimum }}');">В корзину</button>
+                    {% endif %}
                     
-                    <!-- <button class="btn-reset button2 card-content__other check">Похожие товары</button> -->
+
                 </div>
 
                 {% if theme_mt_product_wishlist_checked %}
@@ -163,82 +172,30 @@
                 <li class="tabs__nav-item"><button class="btn-reset tabs__nav-btn" type="button">отзывы</button></li>
             </ul>
             <div class="tabs__content">
+                {% if attribute_groups %}
                 <div class="tabs__panel">
                     <div class="tab-descr">
+
+
                         <ul class="list-reset tab-descr__inner">
+                            {% for attribute_group in attribute_groups %}
+                            {% for attribute in attribute_group.attribute %}
                             <li class="tab-descr__item">
-                                <div class="tab-descr__item-name">Заводской номер</div>
+                                {% if theme_mt_product_attr_group_name_checked %}
+                                <div class="tab-descr__item-name">{{ attribute.name }}</div>
+                                {% endif %}
                                 <div class="tab-descr__item-line"></div>
-                                <div class="tab-descr__item-name">4PN6789056</div>
+                                <div class="tab-descr__item-name">{{ attribute.text }}</div>
                             </li>
-                            <li class="tab-descr__item">
-                                <div class="tab-descr__item-name">Вид фитинга</div>
-                                <div class="tab-descr__item-line"></div>
-                                <div class="tab-descr__item-name">угол</div>
-                            </li>
-                            <li class="tab-descr__item">
-                                <div class="tab-descr__item-name">Тип соединения</div>
-                                <div class="tab-descr__item-line"></div>
-                                <div class="tab-descr__item-name">под пресс</div>
-                            </li>
-                            <li class="tab-descr__item">
-                                <div class="tab-descr__item-name">Угол, о</div>
-                                <div class="tab-descr__item-line"></div>
-                                <div class="tab-descr__item-name">90</div>
-                            </li>
-                            <li class="tab-descr__item">
-                                <div class="tab-descr__item-name">Диаметр, мм</div>
-                                <div class="tab-descr__item-line"></div>
-                                <div class="tab-descr__item-name">16×½'' BP</div>
-                            </li>
-                            <li class="tab-descr__item">
-                                <div class="tab-descr__item-name">Диаметр трубы</div>
-                                <div class="tab-descr__item-line"></div>
-                                <div class="tab-descr__item-name">16 мм</div>
-                            </li>
-                            <li class="tab-descr__item">
-                                <div class="tab-descr__item-name">Вид резьбы</div>
-                                <div class="tab-descr__item-line"></div>
-                                <div class="tab-descr__item-name">внутренняя</div>
-                            </li>
-                            <li class="tab-descr__item">
-                                <div class="tab-descr__item-name">Вид фитинга</div>
-                                <div class="tab-descr__item-line"></div>
-                                <div class="tab-descr__item-name">угол</div>
-                            </li>
-                            <li class="tab-descr__item">
-                                <div class="tab-descr__item-name">Заводской номер</div>
-                                <div class="tab-descr__item-line"></div>
-                                <div class="tab-descr__item-name">4PN6789056</div>
-                            </li>
-                            <li class="tab-descr__item">
-                                <div class="tab-descr__item-name">Угол, о</div>
-                                <div class="tab-descr__item-line"></div>
-                                <div class="tab-descr__item-name">90</div>
-                            </li>
-                            <li class="tab-descr__item">
-                                <div class="tab-descr__item-name">Тип соединения</div>
-                                <div class="tab-descr__item-line"></div>
-                                <div class="tab-descr__item-name">под пресс</div>
-                            </li>
-                            <li class="tab-descr__item">
-                                <div class="tab-descr__item-name">Вид резьбы</div>
-                                <div class="tab-descr__item-line"></div>
-                                <div class="tab-descr__item-name">внутренняя</div>
-                            </li>
-                            <li class="tab-descr__item">
-                                <div class="tab-descr__item-name">Диаметр, мм</div>
-                                <div class="tab-descr__item-line"></div>
-                                <div class="tab-descr__item-name">16×½'' BP</div>
-                            </li>
-                            <li class="tab-descr__item">
-                                <div class="tab-descr__item-name">Диаметр трубы</div>
-                                <div class="tab-descr__item-line"></div>
-                                <div class="tab-descr__item-name">16 мм</div>
-                            </li>
+                            {% endfor %}
+                            {% endfor %}
                         </ul>
+
+
                     </div>
                 </div>
+                {% endif %}
+
                 <div class="tabs__panel">
                     <div class="tab-content content">
                         {{ description }}
@@ -495,35 +452,7 @@
 
 
 <script type="text/javascript">
-    <!--
-    $('select[name=\'recurring_id\'], input[name="quantity"]').change(function () {
-        $.ajax({
-            url: 'index.php?route=product/product/getRecurringDescription',
-            type: 'post',
-            data: $(
-                'input[name=\'product_id\'], input[name=\'quantity\'], select[name=\'recurring_id\']'
-            ),
-            dataType: 'json',
-            beforeSend: function () {
-                $('#recurring-description').html('');
-            },
-            success: function (json) {
-                $('.alert-dismissible, .text-danger').remove();
-
-                if (json['success']) {
-                    $('#recurring-description').html(json['success']);
-                }
-            }
-        });
-    });
-    //
-    -->
-</script>
-<script type="text/javascript">
-    $('#button-cart').on('click', function () {
-        /*  console.log($(
-             '#product input[type=\'text\'], #product input[type=\'hidden\'], #product input[type=\'radio\']:checked, #product input[type=\'checkbox\']:checked, #product select, #product textarea, #input-quantity'
-             )); */
+    /* $('#button-cart').on('click', function () {
         $.ajax({
             url: 'index.php?route=checkout/cart/add',
             type: 'post',
@@ -579,9 +508,9 @@
                 alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
             }
         });
-    });
+    }); */
 
-    function add_in_cart(product_id, quantity) {
+    /* function add_in_cart(product_id, quantity) {
         var btn = this;
         $.ajax({
             url: 'index.php?route=checkout/cart/add',
@@ -607,27 +536,10 @@
                 alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
             }
         });
-    }
-    //
+    } */
 </script>
 
 <script type="text/javascript">
-    /* $('.date').datetimepicker({
-        language: '{{ datepicker }}',
-        pickTime: false
-    });
-
-    $('.datetime').datetimepicker({
-        language: '{{ datepicker }}',
-        pickDate: true,
-        pickTime: true
-    });
-
-    $('.time').datetimepicker({
-        language: '{{ datepicker }}',
-        pickDate: false
-    }); */
-
     $('button[id^=\'button-upload\']').on('click', function () {
         var node = this;
 
@@ -728,22 +640,6 @@
         });
     });
 </script>
+
+
 {{ footer }}
-
-
-<script>
-    //Изменение Toolbar для галереи
-    /*  Fancybox.bind('[data-fancybox="prod"], [data-fancybox="prodMob"]', {
-         compact: false,
-         Carousel: {
-             Navigation: false
-         },
-         Toolbar: {
-             display: {
-                 left: [],
-                 middle: ["prev", "infobar", "next"],
-                 right: ["close"],
-             }
-         }
-     }); */
-</script>
