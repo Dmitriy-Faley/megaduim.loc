@@ -1,198 +1,295 @@
 {{ header }}
 
-
-
-<section class="catalog_inner catalog_inner--brands">
-    <div class="catalog__breadcrumbs breadcrumbs">
-        {% for breadcrumb in breadcrumbs %}
-        <a class="breadcrumbs__link  {% if breadcrumb == breadcrumbs|last %} is-active {% endif %}"
-            href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
-        {% if breadcrumb != breadcrumbs|last %}
-        <span class="slash">/</span>
-        {% endif %}
-        {% endfor %}
-    </div>
-    <h1 class="section_block__title">{{ heading_title }}</h1>
-
-    <div class="catalog_inner__categories">
-        {% for itemCat in categoriesCount %}
-            <a href="{{ itemCat.href }}" class="catalog_inner__cat_btn">{{ itemCat.name }} ({{ itemCat.count }})</a>
-        {% endfor %}
-    </div>
-    <div class="brands__content">
-
-        {% for product in products %}
-            <div class="hits_slide swiper-slide">
-                <div class="hits_slide__pic" data-linked-modal="modal_card">
-                    <div class="hits_slide__pic_wrap" data-hover-images="">
-                        <img class="image" data-lazy data-src="{{ product.thumb }}" alt="{{ heading_title }}">
-                        {% for img in product.imgDop %}
-                            <img class="image" data-lazy data-src="{{ img.thumb }}" alt="{{ heading_title }}">
-                        {% endfor %}
+<section class="catalog">
+    <div class="container catalog__container">
+        <div class="catalog-filter js-catalog-filter">
+            <div class="catalog-filter__link-block">
+                <button
+                    class="btn-reset catalog-filter__link-head button-link-head js-catalog-filter-close">Назад</button>
+            </div>
+            <div class="catalog-filter__inner">
+                <div class="catalog-filter__name">Фильтр</div>
+                <div class="catalog-filter__items">
+                    <div class="catalog-filter__item">
+                        <button class="btn-reset catalog-filter__item-name js-catalog-filter-name">Цена, BYN</button>
+                        <div class="catalog-filter__item-content js-catalog-filter-content">
+                            <div id="slider-range" class="slider-price">
+                                <input type="text" id="slider-price-min" class="slider-price-min form__input"
+                                    value="1000">
+                                <input type="text" id="slider-price-max" class="slider-price-max form__input"
+                                    value="9000">
+                            </div>
+                            <div id="slider-price-count" class="slider-price-count"></div>
+                        </div>
                     </div>
-                    <img class="loader" data-src="/image/catalog/assets/img/loader.svg" alt="" data-lazy="" />
-                    <div class="hits_slide__hover_btn btn btn--filled">Быстрый просмотр</div>
-                    <button class="hits_slide__btn hits_slide__btn--mob"><img class="image image__empty"
-                            data-src="/image/catalog/assets/img/icon_fav_empty.svg" alt="" data-lazy="" /><img
-                            class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg" alt=""
-                            data-lazy="" />
-                    </button>
+                    <div class="catalog-filter__item">
+                        <button
+                            class="btn-reset catalog-filter__item-name js-catalog-filter-name">Производитель</button>
+                        <div class="catalog-filter__item-content js-catalog-filter-content">
+                            <div class="catalog-filter__form-check form-check">
+                                <input class="form-check-input custom-checkbox" type="checkbox" value="ITAP" id="ITAP">
+                                <label class="form-check-label" for="ITAP">ITAP</label>
+                            </div>
+                            <div class="catalog-filter__form-check form-check">
+                                <input class="form-check-input custom-checkbox" type="checkbox" value="Wiega"
+                                    id="Wiega">
+                                <label class="form-check-label" for="Wiega">Wiega</label>
+                            </div>
+                            <div class="catalog-filter__form-check form-check">
+                                <input class="form-check-input custom-checkbox" type="checkbox" value="General Fittings"
+                                    id="General Fittings">
+                                <label class="form-check-label" for="General Fittings">General Fittings</label>
+                            </div>
+                            <div class="catalog-filter__form-check form-check">
+                                <input class="form-check-input custom-checkbox" type="checkbox" value="Wester"
+                                    id="Wester">
+                                <label class="form-check-label" for="Wester">Wester</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="catalog-filter__item">
+                        <button class="btn-reset catalog-filter__item-name js-catalog-filter-name">Вид резьбового
+                            соединения</button>
+                        <div class="catalog-filter__item-content js-catalog-filter-content">
+                            <div class="catalog-filter__form-check form-check">
+                                <input class="form-check-input custom-checkbox" type="checkbox"
+                                    value="с наружной резьбой" id="с наружной резьбой">
+                                <label class="form-check-label" for="с наружной резьбой">с наружной резьбой</label>
+                            </div>
+                            <div class="catalog-filter__form-check form-check">
+                                <input class="form-check-input custom-checkbox" type="checkbox"
+                                    value="с внутренней и наружной резьбой" id="с внутренней и наружной резьбой">
+                                <label class="form-check-label" for="с внутренней и наружной резьбой">с внутренней и
+                                    наружной резьбой</label>
+                            </div>
+                            <div class="catalog-filter__form-check form-check">
+                                <input class="form-check-input custom-checkbox" type="checkbox"
+                                    value="с внутренней резьбой" id="с внутренней резьбой">
+                                <label class="form-check-label" for="с внутренней резьбой">с внутренней резьбой</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="catalog-filter__item">
+                        <button class="btn-reset catalog-filter__item-name js-catalog-filter-name">Тип</button>
+                        <div class="catalog-filter__item-content js-catalog-filter-content">
+                            <div class="catalog-filter__form-check form-check">
+                                <input class="form-check-input custom-checkbox" type="checkbox" value="тип1" id="тип1">
+                                <label class="form-check-label" for="тип1">тип1</label>
+                            </div>
+                            <div class="catalog-filter__form-check form-check">
+                                <input class="form-check-input custom-checkbox" type="checkbox" value="тип2" id="тип2">
+                                <label class="form-check-label" for="тип2">тип2</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="catalog-filter__item">
+                        <button class="btn-reset catalog-filter__item-name js-catalog-filter-name">Диаметр
+                            резьбы</button>
+                        <div class="catalog-filter__item-content js-catalog-filter-content">
+                            <div class="catalog-filter__form-check form-check">
+                                <input class="form-check-input custom-checkbox" type="checkbox" value="Диаметр резьбы1"
+                                    id="Диаметр резьбы1">
+                                <label class="form-check-label" for="Диаметр резьбы1">Диаметр резьбы1</label>
+                            </div>
+                            <div class="catalog-filter__form-check form-check">
+                                <input class="form-check-input custom-checkbox" type="checkbox" value="Диаметр резьбы2"
+                                    id="Диаметр резьбы2">
+                                <label class="form-check-label" for="Диаметр резьбы2">Диаметр резьбы2</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <a href="{{ product.href }}" class="hits_slide_mobile btn btn--filled">
-                        Подробнее
-                </a> 
-                <div class="hits_slide__info">
-                    <div class="hits_slide__left" data-linked-modal="modal_card">
-                        <p class="hits_slide__text hits_slide__text-name hits_slide__text--big">{{ product.name }}</p>
-                        <p class="hits_slide__text">
-                            {{ product.model }}
-                        </p>          
+                <div class="catalog-filter__buttons">
+                    <button class="btn-reset button2 catalog-filter__button1">Применить</button>
+                    <button class="btn-reset button-clear catalog-filter__button2">Очистить фильтр</button>
+                </div>
+            </div>
+        </div>
+        <div class="catalog-content">
+            
+        <div class="breadcrumbs">
+            {% for breadcrumb in breadcrumbs %}
+            {% if breadcrumb == breadcrumbs|first %}
+                <a href="/">
+                <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <mask id="path-1-outside-1_84_10392" maskUnits="userSpaceOnUse" x="-0.0625" y="0" width="18" height="16"
+                    fill="black">
+                    <rect fill="white" x="-0.0625" width="18" height="16"></rect>
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M15.0619 9.03125L8.99968 2L2.9375 9.03125H3.99968V15H6.99962V10H10.9996V15H13.9997V9.03125H15.0619Z">
+                    </path>
+                    </mask>
+                    <path
+                    d="M8.99968 2L9.75705 1.34701L8.99968 0.468574L8.24231 1.34701L8.99968 2ZM15.0619 9.03125V10.0312H17.2444L15.8192 8.37826L15.0619 9.03125ZM2.9375 9.03125L2.18013 8.37826L0.754965 10.0312H2.9375V9.03125ZM3.99968 9.03125H4.99968V8.03125H3.99968V9.03125ZM3.99968 15H2.99968V16H3.99968V15ZM6.99962 15V16H7.99962V15H6.99962ZM6.99962 10V9H5.99962V10H6.99962ZM10.9996 10H11.9996V9H10.9996V10ZM10.9996 15H9.99962V16H10.9996V15ZM13.9997 15V16H14.9997V15H13.9997ZM13.9997 9.03125V8.03125H12.9997V9.03125H13.9997ZM8.24231 2.65299L14.3045 9.68424L15.8192 8.37826L9.75705 1.34701L8.24231 2.65299ZM3.69487 9.68424L9.75705 2.65299L8.24231 1.34701L2.18013 8.37826L3.69487 9.68424ZM3.99968 8.03125H2.9375V10.0312H3.99968V8.03125ZM2.99968 9.03125V15H4.99968V9.03125H2.99968ZM3.99968 16H6.99962V14H3.99968V16ZM7.99962 15V10H5.99962V15H7.99962ZM6.99962 11H10.9996V9H6.99962V11ZM9.99962 10V15H11.9996V10H9.99962ZM10.9996 16H13.9997V14H10.9996V16ZM14.9997 15V9.03125H12.9997V15H14.9997ZM15.0619 8.03125H13.9997V10.0312H15.0619V8.03125Z"
+                    fill="#4F649A" mask="url(#path-1-outside-1_84_10392)"></path>
+                </svg>
+                </a>
+            {% elseif breadcrumb == breadcrumbs|last %}
+                <span>{{ breadcrumb.text }}</span>
+            {% else %}
+            <a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+            {% endif %}
 
-                        {% if product.stock == 'В наличии' %}
-                            <div class="hits_slide__stock" data-color="green">В наличии</div> 
-                            {% elseif product.stock == 'Нет в наличии' %} 
-                            <div class="hits_slide__stock" data-color="red">Нет в наличии</div> 
-                            {% elseif product.stock == 'Ожидание 2-3 дня' %} 
-                            <div class="hits_slide__stock" data-color="blue">Ожидание 2-3 дня</div> 
-                            {% elseif product.stock == 'Предзаказ' %}
-                            <div class="hits_slide__stock" data-color="blue">Предзаказ</div> 
+            {% if breadcrumb != breadcrumbs|last %}
+                <div class="breadcrumbs__separator"></div>
+            {% endif %}
+            {% endfor %}
+        </div>
+
+            <div class="catalog-content__buttons">
+                <button class="btn-reset catalog-content__filters js-filters">
+                    <span>Фильтры</span>
+                    <img loading="lazy" src="img/icon/icon-filters.svg" class="image" width="" height="" alt="">
+                </button>
+
+
+                {% if sorts|length > 0 and products|length > 0 %}
+                <div class="catalog-content__sort">
+                    <select name="speed" class="select catalog-content__sort-button">
+                        {% for s in sorts %}
+                        {% if (s.code == sort) %}
+                            <option selected value="{{ s.href }}">
+                               {{ s.text }}
+                            </option>
+                        {% else %}
+                            <option value="{{ s.href }}">
+                                {{ s.text }}
+                            </option>
                         {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+                {% endif %}
 
-                        <div style="display: none;">
-                        {% if product.attrblock %}
-                            {% for attrblockitem in product.attrblock %}
-                                {% if attrblockitem.attribute_group_id == 7 %}
-                                <div class="attrs__size">
-                                    <span class="attr__size-name">{{ attrblockitem.name }}</span>
-                                    {% for attributeitem in attrblockitem.attribute %}
-                                        {% if attributeitem.attribute_id == 16 %}
-                                        <div class="attr__size-category shir">
-                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
-                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
-                                        </div>
-                                        {% endif %}
-                                        {% if attributeitem.attribute_id == 13 %}
-                                        <div class="attr__size-category leng">
-                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
-                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
-                                        </div>
-                                        {% endif %}
-                                        {% if attributeitem.attribute_id == 14 %}
-                                        <div class="attr__size-category heig-lin">
-                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
-                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
-                                        </div>
-                                        {% endif %}
-                                        {% if attributeitem.attribute_id == 12 %}
-                                        <div class="attr__size-category shir-lin">
-                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
-                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
-                                        </div>
-                                        {% endif %}
-                                        {% if attributeitem.attribute_id == 15 %}
-                                        <div class="attr__size-category most-len">
-                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
-                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
-                                        </div>
-                                        {% endif %}
+            </div>
+
+            <div class="swiper-style catalog-content__items">
+                {% for product in products %}
+                    <div class="card-product">
+                        <div class="card-product__head">
+                            <div class="card-product__image">
+                                <div class="hvr__images">
+                                    <img class="hvr__image" src="{{ product.thumb }}" alt="{{ heading_title }}">
+                                    {% for img in product.imgDop %}
+                                        <img class="hvr__image" src="{{ img.thumb }}" alt="{{ heading_title }}">
                                     {% endfor %}
                                 </div>
-                                {% elseif attrblockitem.attribute_group_id == 8 %} 
-                                <div class="attrs__char">
-                                    <span class="attr__char-name">{{ attrblockitem.name }}</span>
-                                    {% for attributeitem in attrblockitem.attribute %}
-                                    <div class="attr__char-category">
-                                        <p class="attr__char-name">{{ attributeitem.name }}</p>
-                                        <p class="attr__char-cal">{{ attributeitem.text }}</p>
-                                    </div>
-                                    {% endfor %}
+                            </div>
+                            <div class="card-product__content-mob">
+                                <div class="card-product__check">
+                                    {% if product.stock == 'В наличии' %}
+                                        <div class="card-product__status item1">В наличии</div>
+                                        {% elseif product.stock == 'Нет в наличии' %}
+                                        <div class="ard-product__status">Нет в наличии</div>
+                                        {% elseif product.stock == 'Ожидание 2-3 дня' %}
+                                        <div class="ard-product__status">Ожидание 2-3 дня</div>
+                                        {% elseif product.stock == 'Предзаказ' %}
+                                        <div class="ard-product__status">Предзаказ</div>
+                                    {% endif %}
                                 </div>
+                                <div class="card-product__name1">{{ product.model }}</div>
+                                <a href="{{ product.href }}" class="card-product__name2">{{ product.name }}</a>
+                                {% if product.sku %}
+                                    <div class="card-product__articles">Арт. {{ product.sku }}</div>
                                 {% endif %}
-                            {% endfor %}
-                        {% endif %}
+                            </div>
                         </div>
+                        <div class="card-product__body">
+                            <div class="card-product__content-desck">
+                                <div class="card-product__check">
+                                    {% if product.stock == 'В наличии' %}
+                                        <div class="card-product__status item1">В наличии</div>
+                                        {% elseif product.stock == 'Нет в наличии' %}
+                                        <div class="ard-product__status">Нет в наличии</div>
+                                        {% elseif product.stock == 'Ожидание 2-3 дня' %}
+                                        <div class="ard-product__status">Ожидание 2-3 дня</div>
+                                        {% elseif product.stock == 'Предзаказ' %}
+                                        <div class="ard-product__status">Предзаказ</div>
+                                    {% endif %}
+                                </div>
+                                <div class="card-product__name1">{{ product.model }}</div>
+                                <a href="{{ product.href }}" class="card-product__name2">{{ product.name }}</a>
+                                {% if product.sku %}
+                                    <div class="card-product__articles">Арт. {{ product.sku }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="card-product__line"></div>
+                            <div class="card-product__total">
+                                <div class="card-product__count">
+                                    <button class="btn-reset amount-minus card-product__count-button card-product__count-button-decrease">
+                                        <svg width="12" height="3" viewBox="0 0 12 3" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M1 1.5H11" stroke="#919191" stroke-width="1.5"
+                                                stroke-linecap="round" />
+                                        </svg>
+                                    </button>
+                                    <input class="card-product__count-num" id="input-quantity{{ product.product_id }}" value="1" size="2">
+                                    <button class="btn-reset amount-plus card-product__count-button card-product__count-button-increase">
+                                        <svg width="12" height="13" viewBox="0 0 12 13" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M1 6.5H11" stroke="#919191" stroke-width="1.5"
+                                                stroke-linecap="round" />
+                                            <path d="M6 1.5L6 11.5" stroke="#919191" stroke-width="1.5"
+                                                stroke-linecap="round" />
+                                        </svg>
+                                    </button>
+                                </div>
 
-                        <div class="hits_slide_option" style="display: none;">
-                            {% for attrblockitem in product.attrblock %}
-                                {% if attrblockitem.attribute_group_id == 29 %}
-                                    {% for attributeitem in attrblockitem.attribute %}
-                                    <div class="hits_slide_option_param">
-                                        <span>{{ attributeitem.name }}</span>
-                                        <a href="{{ product.hrefPiece }}{{ attributeitem.text }}"></a>
+                                {% if product.special %}
+                                    <div class="card-product__price">
+                                        <div class="card-product__price-old"><span>{{ product.price }}</span> руб</div>
+                                        <div class="card-product__price-new"><span>{{ product.special }}</span> руб</div>
                                     </div>
-                                    {% endfor %}
+                                {% else %}
+                                    <div class="card-product__price-single"><span>{{ product.price }}</span> руб</div>
                                 {% endif %}
-                            {% endfor %}
-                        </div>
+                            </div>
+                            {% if theme_mt_category_product_cart_checked %}
+                            <button class="btn-reset button2 card-product__button add-to-cart"
+                                onclick="add_in_cart('{{ product.product_id }}', '{{ product.minimum }}');">{{ theme_mt_category_product_cart_text }}</button>
+                            {% endif %}
 
-                        <a class="hits_slide__href" href="{{ product.href }}"></a>
-
-                        <p class="hits_slide__descr" style="display: none;">{{ product.description }}</p>
-                        <div class="hits_slide__price">
-                            {% if product.special %}
-                                <p class="hits_slide__text normal"> <text>{{ product.special }}</text> RUB</p>
-                                <p class="hits_slide__text old"><text>{{ product.price }}</text> RUB</p>
+                            {% if logged %}
+                                <button class="btn-reset card-product__favourites"
+                                onclick="{% if product.in_wishlist %}wishlist_remove('{{ product.product_id }}');{% else %}wishlist_add('{{ product.product_id }}');{% endif %} return false;"
+                                {% if not logged %}data-login="false" {% else %}data-login="true" {% endif %}>
+                                <div class="card-product__favourites-icon {% if product.in_wishlist %} active{% endif %}"></div>
+                                <span>Добавить в избранное</span>
+                                </button>
                             {% else %}
-                                <p class="hits_slide__text normal"> <text>{{ product.price }}</text> RUB</p>
+                                <button class="btn-reset card-product__favourites" data-graph-path="modal1">
+                                <div class="card-product__favourites-icon"></div>
+                                <span>Добавить в избранное</span>
+                                </button>
                             {% endif %}
                         </div>
                     </div>
+                {% endfor %}
 
-                    <div class="hits_slide__right">
-                        {% if product.stock == 'В наличии' %}
-                            {% if theme_mt_category_product_cart_checked %}
-                                <button class="hits_slide__btn add-to-cart {% if product.in_cart %} added{% endif %}" id="add-to-cart"
-                                    onclick="add_in_cart('{{ product.product_id }}', '{{ product.minimum }}'); return false;">
-                                    {% if theme_mt_category_product_cart_text %}
-                                    <img class="image image__empty" data-src="/image/catalog/assets/img/icon_cart_empty.svg"
-                                        alt="" data-lazy="" />
-                                    <img class="image image__active" data-src="/image/catalog/assets/img/icon_cart_active.svg"
-                                        alt="" data-lazy="" />
-                                    {% else %}
-                                    {{ theme_mt_category_product_cart_text }}
-                                    {% endif %}
-                                </button>
-                            {% endif %} 
-                        {% endif %}
+                {% if pagination %}
+                    {% if pagCustom.last != pagCustom.page %}
+                        <a href="{{ pagCustom.url }}" class="pagination__btn_more btn btn--grey"><span class="btn__text">Показать ещё</span></a>
+                        <button class="btn-reset catalog-content__button">Показать еще</button>
+                    {% endif %}
+                    {{ pagination }}
+                {% endif %}
 
-                        {% if logged %}
-                        {% if theme_mt_category_product_wishlist_checked %}
-                        <button class="hits_slide__btn add-wish {% if product.in_wishlist %} added{% endif %}"
-                            onclick="{% if product.in_wishlist %}wishlist_remove('{{ product.product_id }}');{% else %}wishlist_add('{{ product.product_id }}');{% endif %} return false;"
-                            {% if not logged %}data-login="false" {% else %}data-login="true" {% endif %}>
-                            <img class="image image__empty" data-src="/image/catalog/assets/img/icon_fav_empty.svg"
-                                alt="" data-lazy="" />
-                            <img class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg"
-                                alt="" data-lazy="" />
-                        </button>
-                        {% endif %}
-                        {% else %}
-                        <button class="hits_slide__btn showNoLogin" data-linked-modal="modal_wishlistErr">
-                            <img class="image image__empty" data-src="/image/catalog/assets/img/icon_fav_empty.svg" alt="" data-lazy="" />
-                            <img class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg" alt="" data-lazy="" />
-                        </button>
-                        {% endif %}
-                    </div>
-                </div>
             </div>
-        {% endfor %}
+        </div>
     </div>
-    
-    {% if pagination %}
-    <div class="catalog_inner__pagination pagination">
-        {% if pagCustom.last != pagCustom.page %}
-            <a href="{{ pagCustom.url }}" class="pagination__btn_more btn btn--grey"><span class="btn__text">Показать ещё</span></a>
-        {% endif %}
-        {{ pagination }}
-    </div>
-    {% endif %}
-
 </section>
 
 
 <script type="text/javascript">
-    function add_in_cart(product_id, quantity) {
+    $(document).ready(function(){
+        $('.select').change(function(){
+            window.location.href = $(this).val();
+        });
+    });
+
+    function add_in_cart(product_id) {
         var btn = this;
+        var quantity = $('#input-quantity' + product_id).val();
         $.ajax({
             url: 'index.php?route=checkout/cart/add',
             type: 'post',

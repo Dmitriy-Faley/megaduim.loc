@@ -1,822 +1,394 @@
 {{ header }}
 
+<section class="section card">
+    <div class="container">
 
-<section class="product_page" id="beginning" data-scroll-id="beginning">
-    <div class="product_page__breadcrumbs breadcrumbs">
-        {% for breadcrumb in breadcrumbs %}
-        <a class="breadcrumbs__link  {% if breadcrumb == breadcrumbs|last %} is-active {% endif %}"
-            href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
-        {% if breadcrumb != breadcrumbs|last %}
-        <span class="slash">/</span>
-        {% endif %}
-        {% endfor %}
-    </div>
-    <h1 class="section_block__title">{{ heading_title }}</h1>
-    <div class="product_page__content" id="product">
-        <div class="product_page__gallery">
-            {% if attribute_groupsProd %}
-                {% for attribute_group in attribute_groupsProd %}
-                    
-                    {% if attribute_group.attribute_group_id == 32 %}
-                        {% for attribute in attribute_group.attribute %}
-                            {% if attribute.attribute_id == 50 %}
-                                <div class="product_page__tag is-new">
-                                    <svg class="bg">
-                                        <use xlink:href="#tag"></use>
-                                    </svg>
-                                    <div class="text">новинка</div>
-                                </div> 
-                            {% endif %}
-                            {% if attribute.attribute_id == 51 %}
-                                <div class="product_page__tag is-hit">
-                                    <svg class="bg">
-                                        <use xlink:href="#tag"></use>
-                                    </svg>
-                                    <div class="text">Хит</div>
-                                </div> 
-                            {% endif %}
-                            {% if attribute.attribute_id == 52 %}
-                                <div class="product_page__tag is-promo">
-                                    <svg class="bg">
-                                        <use xlink:href="#tag"></use>
-                                    </svg>
-                                    <div class="text">Акция</div>
-                                </div> 
-                            {% endif %}
-                        {% endfor %}  
-                    {% endif %}
-                {% endfor %}
+        <div class="breadcrumbs">
+            {% for breadcrumb in breadcrumbs %}
+            {% if breadcrumb == breadcrumbs|first %}
+            <a href="/">
+                <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <mask id="path-1-outside-1_84_10392" maskUnits="userSpaceOnUse" x="-0.0625" y="0" width="18"
+                        height="16" fill="black">
+                        <rect fill="white" x="-0.0625" width="18" height="16"></rect>
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M15.0619 9.03125L8.99968 2L2.9375 9.03125H3.99968V15H6.99962V10H10.9996V15H13.9997V9.03125H15.0619Z">
+                        </path>
+                    </mask>
+                    <path
+                        d="M8.99968 2L9.75705 1.34701L8.99968 0.468574L8.24231 1.34701L8.99968 2ZM15.0619 9.03125V10.0312H17.2444L15.8192 8.37826L15.0619 9.03125ZM2.9375 9.03125L2.18013 8.37826L0.754965 10.0312H2.9375V9.03125ZM3.99968 9.03125H4.99968V8.03125H3.99968V9.03125ZM3.99968 15H2.99968V16H3.99968V15ZM6.99962 15V16H7.99962V15H6.99962ZM6.99962 10V9H5.99962V10H6.99962ZM10.9996 10H11.9996V9H10.9996V10ZM10.9996 15H9.99962V16H10.9996V15ZM13.9997 15V16H14.9997V15H13.9997ZM13.9997 9.03125V8.03125H12.9997V9.03125H13.9997ZM8.24231 2.65299L14.3045 9.68424L15.8192 8.37826L9.75705 1.34701L8.24231 2.65299ZM3.69487 9.68424L9.75705 2.65299L8.24231 1.34701L2.18013 8.37826L3.69487 9.68424ZM3.99968 8.03125H2.9375V10.0312H3.99968V8.03125ZM2.99968 9.03125V15H4.99968V9.03125H2.99968ZM3.99968 16H6.99962V14H3.99968V16ZM7.99962 15V10H5.99962V15H7.99962ZM6.99962 11H10.9996V9H6.99962V11ZM9.99962 10V15H11.9996V10H9.99962ZM10.9996 16H13.9997V14H10.9996V16ZM14.9997 15V9.03125H12.9997V15H14.9997ZM15.0619 8.03125H13.9997V10.0312H15.0619V8.03125Z"
+                        fill="#4F649A" mask="url(#path-1-outside-1_84_10392)"></path>
+                </svg>
+            </a>
+            {% elseif breadcrumb == breadcrumbs|last %}
+            <span>{{ breadcrumb.text }}</span>
+            {% else %}
+            <a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
             {% endif %}
 
-
-            <div class="product_page__gallery_wrap">
-                {% for image in imagesMain %}
-                <a href="{{ image.additional }}" data-fancybox="prod" class="product_page__gallery_pic">
-                    <picture class="image">
-                        <source data-lazy="data-lazy" data-srcset="{{ image.additional }}" type="image/jpg" />
-                        <img class="image" data-lazy="data-lazy" data-src="{{ image.additional }}"
-                            alt="{{ heading_title }}" />
-                    </picture>
-                </a>
-                {% endfor %}
-            </div>
-            <div class="product_page__slider slider swiper">
-                <div class="swiper-wrapper">
-                    {% for imageq in imagesMain %}
-                    <a href="{{ imageq.additional }}" data-fancybox="prodMob" class="product_page__gallery_pic swiper-slide">
-                        <picture class="image">
-                            <source data-lazy="data-lazy" data-srcset="{{ imageq.additional }}" type="image/webp" />
-                            <img class="image" data-lazy="data-lazy" data-src="{{ imageq.additional }}"
-                                alt="{{ heading_title }}" />
-                        </picture>
-                    </a>
-                    {% endfor %}
-                </div>
-                <div class="product_page__slider_pagination"></div>
-            </div>
+            {% if breadcrumb != breadcrumbs|last %}
+            <div class="breadcrumbs__separator"></div>
+            {% endif %}
+            {% endfor %}
         </div>
-        <div class="product_page_info">
-            <div class="product_page_info__container">
-                <div class="product_page_info__block product_page_info__block--fix">
 
-
-                    {% if stock == 'В наличии' %}
-                            <span
-                        class="product_page_info__text product_page_info__text--small in-stock" data-color="green">{{ stock }}</span>
-                            {% elseif stock == 'Нет в наличии' %} 
-                            <span
-                        class="product_page_info__text product_page_info__text--small in-stock" data-color="red">{{ stock }}</span>
-                            {% elseif stock == 'Ожидание 2-3 дня' %} 
-                            <span
-                        class="product_page_info__text product_page_info__text--small in-stock" data-color="blue">{{ stock }}</span>
-                            {% elseif stock == 'Предзаказ' %}
-                            <span
-                        class="product_page_info__text product_page_info__text--small in-stock" data-color="blue">{{ stock }}</span>
-                    {% endif %}
-
-
-                    <p class="product_page_info__title">{{ heading_title }}</p>
-                    {% if price %}
-                    {% if special %}
-                    <div class="product_page_info__line"> <span class="product_page_info__price">{{ special }}
-                            руб</span>
-                        <span class="product_page_info__price old">{{ price }} руб</span>
-                    </div>
-                    {% endif %}
-                    {% endif %}
-                    <p class="product_page_info__text">
-                        {{ description }}
-                    </p>
-                    <div class="product_page_info__buttons product_page_info__buttons--page">
-
-                        {% if stock == 'В наличии' or stock == 'Предзаказ' %}
-                        {% if theme_mt_product_cart_checked %}
-                        <div class="product_page_info__buttons_wrap">
-
-                            {% if theme_mt_product_cart_quantity_checked %}
-                            <div class="product_page_counter">
-                                <button class="product_page_counter__btn product_page_counter__btn--minus">
-                                    <svg class="icon">
-                                        <use xlink:href="#minus"></use>
-                                    </svg>
-                                </button>
-                                <p class="product_page_counter__text">количество:
-                                    <input type="number" pattern="[0-9]+" min="1" max="10" readonly
-                                        class="number-amount" name="quantity" value="{{ minimum }}" size="2"
-                                        id="input-quantity">
-                                </p>
-                                <button class="product_page_counter__btn product_page_counter__btn--plus">
-                                    <svg class="icon">
-                                        <use xlink:href="#plus"></use>
-                                    </svg>
-                                </button>
+        <div class="card__container">
+            <div class="card-image">
+                <div class="swiper product-single-swiper">
+                    <div class="swiper-wrapper">
+                        {% for image in imagesMain %}
+                        <div class="swiper-slide">
+                            <div class="product-single-swiper__item">
+                                <img src="{{ image.additional }}" alt="{{ heading_title }}" />
                             </div>
-                            {% else %}
-                            <input type="hidden" name="quantity" value="{{ minimum }}" size="2" id="input-quantity">
-                            {% endif %}
-
-                            <button type="button" id="button-cart" data-loading-text="{{ text_loading }}"
-                                class="product_page_info__btn product_page_info__btn--cart btn btn--filled btn--icon_right">
-                                <span class="btn__text btn__text--initial">добавить в корзину</span>
-                                <span class="btn__text btn__text--added">в корзине</span>
-                                <svg class="btn__icon btn__icon--initial btn__icon--white btn__icon--right">
-                                    <use xlink:href="#cart"></use>
-                                </svg>
-                                <svg class="btn__icon btn__icon--added btn__icon--black btn__icon--right">
-                                    <use xlink:href="#icon_okay"></use>
-                                </svg>
-                            </button>
-                            <input type="hidden" name="product_id" value="{{ product_id }}" />
-
                         </div>
-                        {% endif %}
-                        {% endif %}
-                        {% for itemInfo in dopInfoProduct %}
-                            {% if logged %}
-                            <button class="product_page_info__btn add-wish product_page_info__btn--fav btn btn--grey btn--icon_right {% if itemInfo.in_wishlist %} is-added{% endif %}"
-                                onclick="{% if itemInfo.in_wishlist %}wishlist_remove('{{ itemInfo.product_id }}');{% else %}wishlist_add('{{ itemInfo.product_id }}');{% endif %} return false;"
-                            {% if not logged %}data-login="false" {% else %}data-login="true" {% endif %}>
-                                <span class="btn__text btn__text--initial">избранное</span>
-                                <span class="btn__text btn__text--added">в избранном</span>
-                            <svg class="btn__icon btn__icon--initial btn__icon--black btn__icon--right">
-                                <use xlink:href="#heart"></use>
-                                </svg>
-                                <svg class="btn__icon btn__icon--added btn__icon--red btn__icon--right">
-                                <use xlink:href="#heart_red"></use>
-                                </svg>
-                            </button>
-                            {% else %}
-                            <button class="product_page_info__btn--fav btn btn--grey btn--icon_right" style="width: 100%; height: 3.8571428571em;"  data-linked-modal="modal_wishlistErr">
-                                <span class="btn__text--initial">избранное</span>
-                                <svg class="btn__icon btn__icon--initial btn__icon--black btn__icon--right">
-                                    <use xlink:href="#heart"></use>
-                                </svg>
-                            </button>
-                            {% endif %} 
                         {% endfor %}
-                        
-
-                       <!-- {% if theme_mt_product_wishlist_checked %}
-                        <button class="product-adds add-bookmark product-like {% if in_wishlist %}added{% endif %}"
-                            onclick="{% if in_wishlist %}wishlist_remove('{{ product_id }}');{% else %}wishlist_add('{{ product_id }}');{% endif %} return false;"
-                            {% if not logged %}data-login="false" {% else %}data-login="true" {% endif %}>
-                            {{ theme_mt_product_wishlist }}
-                        </button>
-                        {% endif %}-->
                     </div>
                 </div>
-
-                {% if attribute_groupsProd %}
-                    {% for attribute_group in attribute_groupsProd %}
-                        {% if attribute_group.attribute_group_id == 29 %}
-                            <div  class="product_page_info__block product_page_info__block--scroll">
-                                <p class="product_page_info__caption">Выберите цвет</p>
-                                <div class="product_page_info__colors">
-                                    {% for attribute in attribute_group.attribute %}
-                                    <a href="{{ hrefPiece }}{{ attribute.text }}" class="product_page_info__colors_btn">
-                                        <p class="text">{{ attribute.name }}</p>
-                                    </a>
-                                    {% endfor %}
-                                </div>
-                                <div class="select select--outlined product_page_info__select" data-dropdown=""
-                                    data-dropdown-name="colors" data-dropdown-placeholder="Выбрать" data-dropdown-readonly="true"
-                                    data-dropdown-options="[{&quot;key&quot;:&quot;Чёрный&quot;,&quot;value&quot;:&quot;Чёрный&quot;},{&quot;key&quot;:&quot;Красный&quot;,&quot;value&quot;:&quot;Красный&quot;},{&quot;key&quot;:&quot;Белый&quot;,&quot;value&quot;:&quot;Белый&quot;},{&quot;key&quot;:&quot;Оранжевый&quot;,&quot;value&quot;:&quot;Оранжевый&quot;}]">
+                <div class="product-single-thumb-swiper-wrapper">
+                    <div thumbsSlider="" class="swiper product-single-thumb-swiper">
+                        <div class="swiper-wrapper">
+                            {% for image in imagesMain %}
+                            <div class="swiper-slide">
+                                <div class="product-single-thumb-swiper__item">
+                                    <img src="{{ image.additional }}" />
                                 </div>
                             </div>
-                        {% endif %}
-                    {% endfor %} 
-                {% endif %}
-
-
-                {% if attribute_groupsProd %}
-                {% for attribute_group in attribute_groupsProd %}
-                {% if attribute_group.attribute_group_id == 7 %}
-                <div class="product_page_info__block product_page_info__block--scroll">
-                    <div class="product_page_info_dropdown" data-dropdown-block="">
-
-                        <div class="product_page_info_dropdown__top" data-dropdown-block-btn>
-                            <p class="product_page_info__caption">{{ attribute_group.name }}</p>
-                            <svg class="icon">
-                                <use xlink:href="#link_arrow"></use>
-                            </svg>
-                        </div>
-                        <div class="product_page_info_dropdown__content">
-                            {% for attribute in attribute_group.attribute %}
-                            {% if attribute.name == 'Ширина' %}
-                            <div class="product_page_size_block">
-                                <div class="product_page_size_block__pic"><img class="image"
-                                        data-src="/image/catalog/assets/img/glasses_size_1.svg" alt="" data-lazy="" />
-                                </div>
-                                <p class="product_page_size_block__text">{{ attribute.name }}:</p>
-                                <p class="product_page_size_block__text">{{ attribute.text }}</p>
-                            </div>
-                            {% endif %}
-                            {% if attribute.name == 'Длина дужки' %}
-                            <div class="product_page_size_block">
-                                <div class="product_page_size_block__pic">
-                                    <img class="image" data-src="/image/catalog/assets/img/glasses_size_2.svg" alt=""
-                                        data-lazy="" />
-                                </div>
-                                <p class="product_page_size_block__text">{{ attribute.name }}:</p>
-                                <p class="product_page_size_block__text">{{ attribute.text }}</p>
-                            </div>
-                            {% endif %}
-                            {% if attribute.name == 'Высота линзы' %}
-                            <div class="product_page_size_block">
-                                <div class="product_page_size_block__pic"><img class="image"
-                                        data-src="/image/catalog/assets/img/glasses_size_3.svg" alt="" data-lazy="" />
-                                </div>
-                                <p class="product_page_size_block__text">{{ attribute.name }}:</p>
-                                <p class="product_page_size_block__text">{{ attribute.text }}</p>
-                            </div>
-                            {% endif %}
-                            {% if attribute.name == 'Ширина линзы' %}
-                            <div class="product_page_size_block">
-                                <div class="product_page_size_block__pic"><img class="image"
-                                        data-src="/image/catalog/assets/img/glasses_size_4.svg" alt="" data-lazy="" />
-                                </div>
-                                <p class="product_page_size_block__text">{{ attribute.name }}:</p>
-                                <p class="product_page_size_block__text">{{ attribute.text }}</p>
-                            </div>
-                            {% endif %}
-                            {% if attribute.name == 'Длина моста' %}
-                            <div class="product_page_size_block">
-                                <div class="product_page_size_block__pic"><img class="image"
-                                        data-src="/image/catalog/assets/img/glasses_size_5.svg" alt="" data-lazy="" />
-                                </div>
-                                <p class="product_page_size_block__text">{{ attribute.name }}:</p>
-                                <p class="product_page_size_block__text">{{ attribute.text }}</p>
-                            </div>
-                            {% endif %}
-
                             {% endfor %}
                         </div>
                     </div>
                 </div>
-                {% endif %}
-                {% endfor %}
+            </div>
+            <div class="card-content">
+                <div class="card-content__top">
+                    <div class="card-content__subname">{{ model }}</div>
+                    {% if stock == 'В наличии' %}
+                    <div class="card-content__status check">{{ stock }}</div>
+                    {% elseif stocl == 'Нет в наличии' %}
+                    <div class="card-content__status">{{ stock }}</div>
+                    {% endif %}
+                </div>
+                <h1 class="card-content__name">{{ heading_title }}</h1>
+                <div class="card-content__info">
+                    <div class="card-content__vendor">
+                        {% if sku %}
+                        <div class="card-content__vendor-name">Артикул:</div>
+                        <div class="card-content__vendor-name">{{ sku }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="card-content__rating">
+                        <div class="rating-area ">
+                            <input type="radio" id="star-1" name="rating" value="1">
+                            <label for="star-1" title="Оценка «1»"></label>
+                            <input type="radio" id="star-2" name="rating" value="2">
+                            <label for="star-2" title="Оценка «2»"></label>
+                            <input type="radio" id="star-3" name="rating" value="3">
+                            <label for="star-3" title="Оценка «3»"></label>
+                            <input type="radio" id="star-4" name="rating" value="4">
+                            <label for="star-4" title="Оценка «4»"></label>
+                            <input type="radio" id="star-5" name="rating" value="5">
+                            <label for="star-5" title="Оценка «5»"></label>
+                        </div>
+                        <div class="card-content__count-reviews">(10 отзывов)</div>
+                    </div>
+                </div>
+                <!-- <div class="card-content__pirce">9.80 <span>руб</span></div>
+                <div class="card-content__pirce">
+                    <div class="card-content__pirce-new">9.80 <span>руб</span></div>
+                    <div class="card-content__pirce-old">13 руб</div>
+                </div> -->
+                <div class="card-content__size">
+                    <div class="card-content__size-name">Другие размеры</div>
+                    <div class="card-content__size-items">
+                        <div class="card-content__size-item">20 мм х ½''</div>
+                        <div class="card-content__size-item">20 мм х ¾''</div>
+                        <div class="card-content__size-item">26 мм х ¾''</div>
+                        <div class="card-content__size-item">32 мм х 1''</div>
+                        <div class="card-content__size-item">20 мм х ½''</div>
+                        <div class="card-content__size-item">20 мм х ½''</div>
+                        <div class="card-content__size-item">20 мм х ½''</div>
+                    </div>
+                </div>
+                <div class="card-content__bottom">
+
+                    <div class="card-product__count">
+                        <button
+                            class="btn-reset amount-minus card-product__count-button card-product__count-button-decrease">
+                            <svg width="12" height="3" viewBox="0 0 12 3" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1.5H11" stroke="#919191" stroke-width="1.5" stroke-linecap="round" />
+                            </svg>
+                        </button>
+                        <input class="card-product__count-num" id="input-quantity{{ product.product_id }}" value="1"
+                            size="2">
+                        <button
+                            class="btn-reset amount-plus card-product__count-button card-product__count-button-increase">
+                            <svg width="12" height="13" viewBox="0 0 12 13" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 6.5H11" stroke="#919191" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M6 1.5L6 11.5" stroke="#919191" stroke-width="1.5" stroke-linecap="round" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    {% if theme_mt_category_product_cart_checked %}
+                    <button class="btn-reset button2 card-content__other" id="button-cart">В корзину</button>
+                    {% endif %}
+
+                    
+                    <!-- <button class="btn-reset button2 card-content__other check">Похожие товары</button> -->
+                </div>
+
+                {% if theme_mt_product_wishlist_checked %}
+                <button class="btn-reset card-product__favourites"
+                    onclick="{% if in_wishlist %}wishlist_remove('{{ product_id }}');{% else %}wishlist_add('{{ product_id }}');{% endif %} return false;"
+                    {% if not logged %}data-login="false" {% else %}data-login="true" {% endif %}>
+                    <div class="card-product__favourites-icon"></div>
+                    <span>Добавить в избранное</span>
+                </button>
                 {% endif %}
 
+            </div>
+        </div>
+    </div>
+</section>
 
-                {% if attribute_groupsProd %}
-                    {% for attribute_group in attribute_groupsProd %}
-                        {% if attribute_group.attribute_group_id == 8 %}
-                            <div class="product_page_info__block product_page_info__block--scroll">
-                                <div class="product_page_info_dropdown" data-dropdown-block="">
-                                    <div class="product_page_info_dropdown__top" data-dropdown-block-btn>
-                                        <p class="product_page_info__caption">{{ attribute_group.name }}</p>
-                                        <svg class="icon">
-                                            <use xlink:href="#link_arrow"></use>
-                                        </svg>
-                                    </div>
-                                    <div class="product_page_info_dropdown__content">
-                                        {% for attribute in attribute_group.attribute %}
-                                        <div class="product_page_characteristics_block">
-                                            <p class="product_page_characteristics_block__text">{{ attribute.name }}</p>
-                                            <p class="product_page_characteristics_block__text">{{ attribute.text }}</p>
-                                        </div>
-                                        {% endfor %}
-                                    </div>
+<section class="section block-info">
+    <div class="container">
+        <div class="tabs" data-tabs="tab">
+            <ul class="list-reset tabs__nav">
+                <li class="tabs__nav-item"><button class="btn-reset tabs__nav-btn" type="button">Описание</button></li>
+                <li class="tabs__nav-item"><button class="btn-reset tabs__nav-btn" type="button">характеристики</button>
+                </li>
+                <li class="tabs__nav-item"><button class="btn-reset tabs__nav-btn" type="button">отзывы</button></li>
+            </ul>
+            <div class="tabs__content">
+                <div class="tabs__panel">
+                    <div class="tab-descr">
+                        <ul class="list-reset tab-descr__inner">
+                            <li class="tab-descr__item">
+                                <div class="tab-descr__item-name">Заводской номер</div>
+                                <div class="tab-descr__item-line"></div>
+                                <div class="tab-descr__item-name">4PN6789056</div>
+                            </li>
+                            <li class="tab-descr__item">
+                                <div class="tab-descr__item-name">Вид фитинга</div>
+                                <div class="tab-descr__item-line"></div>
+                                <div class="tab-descr__item-name">угол</div>
+                            </li>
+                            <li class="tab-descr__item">
+                                <div class="tab-descr__item-name">Тип соединения</div>
+                                <div class="tab-descr__item-line"></div>
+                                <div class="tab-descr__item-name">под пресс</div>
+                            </li>
+                            <li class="tab-descr__item">
+                                <div class="tab-descr__item-name">Угол, о</div>
+                                <div class="tab-descr__item-line"></div>
+                                <div class="tab-descr__item-name">90</div>
+                            </li>
+                            <li class="tab-descr__item">
+                                <div class="tab-descr__item-name">Диаметр, мм</div>
+                                <div class="tab-descr__item-line"></div>
+                                <div class="tab-descr__item-name">16×½'' BP</div>
+                            </li>
+                            <li class="tab-descr__item">
+                                <div class="tab-descr__item-name">Диаметр трубы</div>
+                                <div class="tab-descr__item-line"></div>
+                                <div class="tab-descr__item-name">16 мм</div>
+                            </li>
+                            <li class="tab-descr__item">
+                                <div class="tab-descr__item-name">Вид резьбы</div>
+                                <div class="tab-descr__item-line"></div>
+                                <div class="tab-descr__item-name">внутренняя</div>
+                            </li>
+                            <li class="tab-descr__item">
+                                <div class="tab-descr__item-name">Вид фитинга</div>
+                                <div class="tab-descr__item-line"></div>
+                                <div class="tab-descr__item-name">угол</div>
+                            </li>
+                            <li class="tab-descr__item">
+                                <div class="tab-descr__item-name">Заводской номер</div>
+                                <div class="tab-descr__item-line"></div>
+                                <div class="tab-descr__item-name">4PN6789056</div>
+                            </li>
+                            <li class="tab-descr__item">
+                                <div class="tab-descr__item-name">Угол, о</div>
+                                <div class="tab-descr__item-line"></div>
+                                <div class="tab-descr__item-name">90</div>
+                            </li>
+                            <li class="tab-descr__item">
+                                <div class="tab-descr__item-name">Тип соединения</div>
+                                <div class="tab-descr__item-line"></div>
+                                <div class="tab-descr__item-name">под пресс</div>
+                            </li>
+                            <li class="tab-descr__item">
+                                <div class="tab-descr__item-name">Вид резьбы</div>
+                                <div class="tab-descr__item-line"></div>
+                                <div class="tab-descr__item-name">внутренняя</div>
+                            </li>
+                            <li class="tab-descr__item">
+                                <div class="tab-descr__item-name">Диаметр, мм</div>
+                                <div class="tab-descr__item-line"></div>
+                                <div class="tab-descr__item-name">16×½'' BP</div>
+                            </li>
+                            <li class="tab-descr__item">
+                                <div class="tab-descr__item-name">Диаметр трубы</div>
+                                <div class="tab-descr__item-line"></div>
+                                <div class="tab-descr__item-name">16 мм</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tabs__panel">
+                    <div class="tab-content content">
+                        {{ description }}
+                    </div>
+                </div>
+                <div class="tabs__panel">
+                    <!-- по макету может не быть -->
+                    <div class="tab-reviews">
+                        <div class="tab-reviews__item">
+                            <div class="tab-reviews__item-top">
+                                <div class="tab-reviews__item-name">Артур</div>
+                                <div class="tab-reviews__item-date">20.10.2023</div>
+                            </div>
+                            <div class="tab-reviews__item-rating">
+                                <div class="rating-area">
+                                    <input type="radio" id="star-1" name="rating" value="1">
+                                    <label for="star-1" title="Оценка «1»"></label>
+                                    <input type="radio" id="star-2" name="rating" value="2">
+                                    <label for="star-2" title="Оценка «2»"></label>
+                                    <input type="radio" id="star-3" name="rating" value="3">
+                                    <label for="star-3" title="Оценка «3»"></label>
+                                    <input type="radio" id="star-4" name="rating" value="4">
+                                    <label for="star-4" title="Оценка «4»"></label>
+                                    <input type="radio" id="star-5" name="rating" value="5">
+                                    <label for="star-5" title="Оценка «5»"></label>
                                 </div>
                             </div>
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
-
-                <div class="product_page_info__block product_page_info__block--scroll">
-                    <div class="product_page_info_dropdown" data-dropdown-block="">
-                        <div class="product_page_info_dropdown__top" data-dropdown-block-btn>
-                            <p class="product_page_info__caption">Гарантия</p>
-                            <svg class="icon">
-                                <use xlink:href="#link_arrow"></use>
-                            </svg>
+                            <div class="tab-reviews__item-content">
+                                <div class="tab-reviews__item-text js-tab-reviews-text">
+                                    <p><b>Уголок с креплением пресс-гайка 16(2.0)*½» ш.</b> — предназначен для
+                                        герметичного
+                                        соединения участка трубопровода под углом 90* и переходом на внутреннюю резьбу с
+                                        возможностью закрепления к стене. <br>
+                                        Технология производства позволяет замоноличивать пресс-фитинги в стяжку или в
+                                        стену.</p>
+                                    <p><b>Уголок с креплением пресс-гайка 16(2.0)*½» ш.</b> — предназначен для
+                                        герметичного
+                                        соединения участка трубопровода под углом 90* и переходом на внутреннюю резьбу с
+                                        возможностью закрепления к стене.
+                                        Технология производства позволяет замоноличивать пресс-фитинги в стяжку или в
+                                        стену.</p>
+                                </div>
+                                <button
+                                    class="btn-reset button-link tab-reviews__item-button js-tab-reviews-button">Читать
+                                    полностью</button>
+                            </div>
                         </div>
-                        <div class="product_page_info_dropdown__content product_page_info_dropdown__content--38">
-                            <p class="product_page_characteristics_block__text">Гарантия на все очки и на данную модель
-                                распространяется на все очки и линзы, как изготовленные в нашей компании, так и от
-                                сторонних брендов, в том числе и на продукцию заводов «Оптикс» и «Гелиос».</p>
+                        <div class="tab-reviews__item">
+                            <div class="tab-reviews__item-top">
+                                <div class="tab-reviews__item-name">Пётр</div>
+                                <div class="tab-reviews__item-date">20.10.2023</div>
+                            </div>
+                            <div class="tab-reviews__item-rating">
+                                <div class="rating-area">
+                                    <input type="radio" id="star-1" name="rating" value="1">
+                                    <label for="star-1" title="Оценка «1»"></label>
+                                    <input type="radio" id="star-2" name="rating" value="2">
+                                    <label for="star-2" title="Оценка «2»"></label>
+                                    <input type="radio" id="star-3" name="rating" value="3">
+                                    <label for="star-3" title="Оценка «3»"></label>
+                                    <input type="radio" id="star-4" name="rating" value="4">
+                                    <label for="star-4" title="Оценка «4»"></label>
+                                    <input type="radio" id="star-5" name="rating" value="5">
+                                    <label for="star-5" title="Оценка «5»"></label>
+                                </div>
+                            </div>
+                            <div class="tab-reviews__item-content">
+                                <div class="tab-reviews__item-text js-tab-reviews-text">
+                                    <p><b>Уголок с креплением пресс-гайка 16(2.0)*½» ш.</b> — предназначен для
+                                        герметичного
+                                        соединения участка трубопровода под углом 90* и переходом на внутреннюю резьбу с
+                                        возможностью закрепления к стене. <br>
+                                        Технология производства позволяет замоноличивать пресс-фитинги в стяжку или в
+                                        стену.</p>
+                                    <p><b>Уголок с креплением пресс-гайка 16(2.0)*½» ш.</b> — предназначен для
+                                        герметичного
+                                        соединения участка трубопровода под углом 90* и переходом на внутреннюю резьбу с
+                                        возможностью закрепления к стене.
+                                        Технология производства позволяет замоноличивать пресс-фитинги в стяжку или в
+                                        стену.</p>
+                                </div>
+                                <button
+                                    class="btn-reset button-link tab-reviews__item-button js-tab-reviews-button">Читать
+                                    полностью</button>
+                            </div>
                         </div>
+                        <!-- по макету может не быть -->
+                        <button class="btn-reset button2 tab-reviews__button">Добавить отзыв</button>
                     </div>
-                </div>
-                
-                <div class="product_page_info__block product_page_info__block--scroll">
-                    <p class="product_page_info__caption">Помощь</p>
-                    <div class="product_page_info__help_buttons">
-                        <button class="product_page_info__help_btn btn btn--outlined"
-                            data-linked-modal="modal_try_on"><span class="btn__text">Как померить?</span></button>
-                            <a class="product_page_info__help_btn btn btn--outlined" href="/receipt"><span
-                                class="btn__text">изготовление по рецепту</span></a>
-                    </div>
-                </div>
-                <div class="product_page_info__block product_page_info__block--scroll">
-                    <p class="product_page_info__caption">Поделиться с друзьями</p>
-                    <div class="product_page_info__help_buttons product_page_info__help_buttons--socials">
-                                <!--<a class="product_page_info__socials_btn" target="_blank" href="/">
-                                    <img class="image" data-src="/image/catalog/assets/img/icon_inst.svg" alt="" data-lazy="" />
-                                </a>-->
-                                {% for itemShare in dopInfoProduct %}
-                                    <a class="product_page_info__socials_btn" target="_blank" href="https://t.me/share/url?url={{itemShare.url}}&text={{heading_title}}&image={{itemShare.image}}">
-                                        <img class="image" data-src="/image/catalog/assets/img/icon_tg.svg" alt="" data-lazy="" />
-                                    </a>
-                                    <a class="product_page_info__socials_btn" target="_blank" href="https://vk.com/share.php?url={{itemShare.url}}&title={{heading_title}}&image={{itemShare.image}}&noparse=true">
-                                        <img class="image" data-src="/image/catalog/assets/img/icon_vk.svg" alt="" data-lazy="" />
-                                    </a>
-                                    <a class="product_page_info__socials_btn" target="_blank" href="https://www.facebook.com/sharer.php?u={{itemShare.url}}","sharer","status=0,toolbar=0,width=650,height=500">
-                                        <img class="image" data-src="/image/catalog/assets/img/icon_fb.svg" alt="" data-lazy="" />
-                                    </a>
-                                    <a class="product_page_info__socials_btn" target="_blank" href="https://connect.ok.ru/offer?url={{itemShare.url}}&title={{heading_title}}">
-                                        <img class="image" data-src="/image/catalog/assets/img/icon_ok.svg" alt="" data-lazy="" />
-                                    </a>
-                                    <a class="product_page_info__socials_btn" target="_blank" href="https://twitter.com/intent/tweet?text={{heading_title}}&url={{itemShare.url}}">
-                                        <img class="image" data-src="/image/catalog/assets/img/icon_tw.svg" alt="" data-lazy="" />
-                                    </a>
-                                    <a class="product_page_info__socials_btn" target="_blank" href="https://pinterest.com/pin/create/button/?url={{itemShare.url}}&description={{heading_title}}">
-                                        <img class="image" data-src="/image/catalog/assets/img/icon_pin.svg" alt="" data-lazy="" />
-                                    </a>
-                                    <a class="product_page_info__socials_btn" target="_blank" href="https://api.whatsapp.com/send?text={{heading_title}}">
-                                        <img class="image" data-src="/image/catalog/assets/img/icon_wa.svg" alt="" data-lazy="" />
-                                    </a>
-                                {% endfor %}
-
- 
-                                
+                    <!-- по макету может не быть -->
+                    <form action="#" class="form tab-form">
+                        <div class="form__text">У данного товара нет отзывов. Оставьте ваш отзыв первым. </div>
+                        <label class="form__label">
+                            <div class="form__span">Ваше имя</div>
+                            <input type="text" name="" class="input-reset form__input" placeholder="Ваше имя">
+                        </label>
+                        <label class="form__label">
+                            <div class="form__span">Email</div>
+                            <input type="text" name="" class="input-reset form__input" placeholder="example@gmail.com">
+                        </label>
+                        <label class="form__label">
+                            <div class="form__span">Заголовок</div>
+                            <input type="text" name="" class="input-reset form__input"
+                                placeholder="Напишите заголовок отзыва">
+                        </label>
+                        <div class="form__label tab-form__rating">
+                            <div class="tab-form__rating-name">Оцените товар</div>
+                            <div class="tab-form__rating-count">
+                                <div class="rating-area ">
+                                    <input type="radio" id="star-1" name="rating" value="1">
+                                    <label for="star-1" title="Оценка «1»"></label>
+                                    <input type="radio" id="star-2" name="rating" value="2">
+                                    <label for="star-2" title="Оценка «2»"></label>
+                                    <input type="radio" id="star-3" name="rating" value="3">
+                                    <label for="star-3" title="Оценка «3»"></label>
+                                    <input type="radio" id="star-4" name="rating" value="4">
+                                    <label for="star-4" title="Оценка «4»"></label>
+                                    <input type="radio" id="star-5" name="rating" value="5">
+                                    <label for="star-5" title="Оценка «5»"></label>
+                                </div>
                             </div>
-                </div>
-            </div>
-            <div class="product_page_info__container">
-                <div class="product_page_info__block product_page_info__block--scroll">
-                    <p class="product_page_info__title">Бесплатная консультация</p>
-                    <p class="product_page_info__text product_page_info__text--margin14">Оставьте заявку на
-                        консультацию, <br class="mobile"> и мы перезвоним вам.</p>
-                    <form class="product_page_info_form form ajax_form" id="questionProduct"  action="javascript();" data-mailer=""
-                        data-form-id="product_page_form">
-                        <input type="hidden" name="form" value="Бесплатная консультация ({{heading_title}})">
-                        <div class="product_page_info_form__inputs">
-                            <div class="input_wrapper input_wrapper--textarea_grey" data-input-wrapper="">
-                                <textarea class="input_wrapper__textarea" name="question"
-                                    placeholder="Ваш вопрос"></textarea>
-                            </div>
-                            <p class="input_wrapper__input-err"></p>
-                            <div class="input_wrapper input_wrapper--outlined" data-input-wrapper="">
-                                <input class="input_wrapper__input input_wrapper__input--12" type="text" name="name"
-                                    required autocomplete="off">
-                                <label class="input_wrapper__label input_wrapper__label--12">Ваше имя</label>
-                                <div class="input_wrapper__tooltip" data-input-tooltip=""></div>
-                            </div> 
-                            <p class="input_wrapper__input-err"></p>
-                            <div class="input_wrapper input_wrapper--outlined" data-input-wrapper="">
-                                <input class="input_wrapper__input input_wrapper__input--12" type="tel" name="phone"
-                                    required autocomplete="off">
-                                <label class="input_wrapper__label input_wrapper__label--12">Номер телефона</label>
-                                <div class="input_wrapper__tooltip" data-input-tooltip=""></div>
-                            </div>
-                            <p class="input_wrapper__input-err"></p>
                         </div>
-                        <div class="product_page_info_form__bottom">
-                            <p class="product_page_info_form__text">Нажимая на кнопку, вы даёте своё соглашение <br
-                                    class="desktop"> на обработку персональных данных</p>
-                            <button class="product_page_info_form__btn btn btn--filled"><span
-                                    class="btn__text">отправить</span></button>
-                        </div>
+                        <label class="form__label form__label-textarea">
+                            <div class="form__span">Отзыв</div>
+                            <textarea name="" id="" class="input-reset form__textarea"
+                                placeholder="Оставьте ваш отзыв"></textarea>
+                        </label>
+                        <button class="btn-reset form__btn button2">Добавить отзыв</button>
                     </form>
                 </div>
             </div>
-            <div class="product_page_info__block product_page_info__block--last"><a
-                    class="product_page_info__up_btn btn btn--filled" href="/#beginning" data-anchor="beginning">
-                    <div class="text">подняться наверх</div>
-                    <svg class="icon_up">
-                        <use xlink:href="#link_arrow"></use>
-                    </svg>
-                </a></div>
         </div>
     </div>
 </section>
 
-{% if products_variant %}
-<section class="hits">
-    <div class="hits__top">
-        <h2 class="section_block__title section_block__title--small">Похожие товары</h2>
-        <div class="hits__nav slider__buttons">
-            <button class="slider__button slider__button--prev hits__nav_btn--prev">
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg>
-            </button>
-            <button class="slider__button slider__button--next hits__nav_btn--next">
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg>
-            </button>
-        </div>
-    </div>
-    <div class="hits__slider slider swiper">
-        <div class="swiper-wrapper">
-            {% for product_variant in products_variant %}
-            <div class="hits_slide swiper-slide">
-                <div class="hits_slide__pic" data-linked-modal="modal_card">
-                    <div class="hits_slide__pic_wrap" data-hover-images="">
-                        <img class="image" data-lazy data-src="{{ product_variant.thumb }}" alt="{{ heading_title }}">
-                        {% for img in product_variant.imgDop %}
-                            <img class="image" data-lazy data-src="{{ img.thumb }}" alt="{{ heading_title }}">
-                        {% endfor %}
-                    </div>
-                    <img class="loader" data-src="/image/catalog/assets/img/loader.svg" alt="" data-lazy="" />
-                    <div class="hits_slide__hover_btn btn btn--filled">Быстрый просмотр</div>
-                    <button class="hits_slide__btn hits_slide__btn--mob"><img class="image image__empty"
-                            data-src="/image/catalog/assets/img/icon_fav_empty.svg" alt="" data-lazy="" /><img
-                            class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg" alt=""
-                            data-lazy="" />
-                    </button>
-                </div>
-                <a href="{{ product_variant.href }}" class="hits_slide_mobile btn btn--filled">
-                    Подробнее
-                </a>
-                <div class="hits_slide__info">
-                    <div class="hits_slide__left" data-linked-modal="modal_card">
-                        <p class="hits_slide__text hits_slide__text-name hits_slide__text--big">{{ product_variant.name }}</p>
-                        <p class="hits_slide__text">
-                            {{ product_variant.model }}
-                        </p>            
-                        {% if product_variant.stock == 'В наличии' %}
-                            <div class="hits_slide__stock" data-color="green">В наличии</div> 
-                            {% elseif product_variant.stock == 'Нет в наличии' %} 
-                            <div class="hits_slide__stock" data-color="red">Нет в наличии</div> 
-                            {% elseif product_variant.stock == 'Ожидание 2-3 дня' %} 
-                            <div class="hits_slide__stock" data-color="blue">Ожидание 2-3 дня</div> 
-                            {% elseif product_variant.stock == 'Предзаказ' %}
-                            <div class="hits_slide__stock" data-color="blue">Предзаказ</div> 
-                        {% endif %}
 
 
-                        <div style="display: none;">
-                        {% if product_variant.attrblock %}
-                            {% for attrblockitem in product_variant.attrblock %}
-                                {% if attrblockitem.attribute_group_id == 7 %}
-                                <div class="attrs__size">
-                                    <span class="attr__size-name">{{ attrblockitem.name }}</span>
-                                    {% for attributeitem in attrblockitem.attribute %}
-                                        {% if attributeitem.attribute_id == 16 %}
-                                        <div class="attr__size-category shir">
-                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
-                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
-                                        </div>
-                                        {% endif %}
-                                        {% if attributeitem.attribute_id == 13 %}
-                                        <div class="attr__size-category leng">
-                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
-                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
-                                        </div>
-                                        {% endif %}
-                                        {% if attributeitem.attribute_id == 14 %}
-                                        <div class="attr__size-category heig-lin">
-                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
-                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
-                                        </div>
-                                        {% endif %}
-                                        {% if attributeitem.attribute_id == 12 %}
-                                        <div class="attr__size-category shir-lin">
-                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
-                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
-                                        </div>
-                                        {% endif %}
-                                        {% if attributeitem.attribute_id == 15 %}
-                                        <div class="attr__size-category most-len">
-                                            <p class="attr__size-name">{{ attributeitem.name }}</p>
-                                            <p class="attr__size-cal">{{ attributeitem.text }}</p>
-                                        </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                </div>
-                                {% elseif attrblockitem.attribute_group_id == 8 %} 
-                                <div class="attrs__char">
-                                    <span class="attr__char-name">{{ attrblockitem.name }}</span>
-                                    {% for attributeitem in attrblockitem.attribute %}
-                                    <div class="attr__char-category">
-                                        <p class="attr__char-name">{{ attributeitem.name }}</p>
-                                        <p class="attr__char-cal">{{ attributeitem.text }}</p>
-                                    </div>
-                                    {% endfor %}
-                                </div>
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %}
-                        </div>
-
-                        <div class="hits_slide_option" style="display: none;">
-                            {% for attrblockitem in product_variant.attrblock %}
-                                                                {% if attrblockitem.attribute_group_id == 29 %}
-                                                                    {% for attributeitem in attrblockitem.attribute %}
-                                                                    <div class="hits_slide_option_param">
-                                                                        <span>{{ attributeitem.name }}</span>
-                                                                        <a href="{{ product_variant.hrefPiece }}{{ attributeitem.text }}"></a>
-                                                                    </div>
-                                                                    {% endfor %}
-                                                                {% endif %}
-                                                            {% endfor %}
-                        </div>
-
-
-                        <a class="hits_slide__href" href="{{ product_variant.href }}"></a>
-                        <p class="hits_slide__descr" style="display: none;">{{ product_variant.description }}</p>
-                        <div class="hits_slide__price">
-                            {% if product_variant.special %}
-                                <p class="hits_slide__text normal"> <text>{{ product_variant.special }}</text> RUB</p>
-                                <p class="hits_slide__text old"><text>{{ product_variant.price }}</text> RUB</p>
-                            {% else %}
-                                <p class="hits_slide__text normal"> <text>{{ product_variant.price }}</text> RUB</p>
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="hits_slide__right">
-
-                        <!-- {% if theme_mt_category_product_cart_checked %}
-                        <button class="button add-to-cart"
-                            onclick="add_in_cart('{{ product.product_id }}', '{{ product.minimum }}');">{{ theme_mt_category_product_cart_text }}</button>
-                        {% endif %} -->
-
-                        {% if product_variant.stock == 'В наличии' %}
-                            <button class="hits_slide__btn add-to-cart {% if product_variant.in_cart %} added{% endif %}" id="add-to-cart"
-                                    onclick="add_in_cart('{{ product_variant.product_id }}', '{{ product_variant.minimum }}'); return false;">
-                                    <img class="image image__empty" data-src="/image/catalog/assets/img/icon_cart_empty.svg"
-                                        alt="" data-lazy="" />
-                                    <img class="image image__active" data-src="/image/catalog/assets/img/icon_cart_active.svg"
-                                        alt="" data-lazy="" />
-                                </button>
-                        {% endif %}
-
-                        {% if logged %}
-                        <button class="hits_slide__btn add-wish {% if product_variant.in_wishlist %} added{% endif %}"
-                            onclick="{% if product_accessory.in_wishlist %}wishlist_remove('{{ product_accessory.product_id }}');{% else %}wishlist_add('{{ product_accessory.product_id }}');{% endif %} return false;"
-                            {% if not logged %}data-login="false" {% else %}data-login="true" {% endif %}>
-                            <img class="image image__empty" data-src="/image/catalog/assets/img/icon_fav_empty.svg"
-                                alt="" data-lazy="" />
-                            <img class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg"
-                                alt="" data-lazy="" />
-                        </button>
-                        {% else %}
-                            <button class="hits_slide__btn showNoLogin" data-linked-modal="modal_wishlistErr">
-                                <img class="image image__empty" data-src="/image/catalog/assets/img/icon_fav_empty.svg" alt="" data-lazy="" />
-                                <img class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg" alt="" data-lazy="" />
-                            </button>
-                        {% endif %} 
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
-{% endif %}
-
-
-
-{% if checkAccesoryCount %}
-<section class="hits">
-    <div class="hits__top">
-        <h2 class="section_block__title">Подобрать аксессуары</h2>
-        <div class="hits__nav slider__buttons">
-            <button class="slider__button slider__button--prev hits__nav_btn--prev">
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg>
-            </button>
-            <button class="slider__button slider__button--next hits__nav_btn--next">
-                <svg class="icon">
-                    <use xlink:href="#link_arrow"></use>
-                </svg>
-            </button>
-        </div>
-    </div>
-    <div class="hits__slider slider swiper">
-        <div class="swiper-wrapper">
-            {% for product_accessory in products_accessory %}
-                {% if product_accessory.attrblock %}
-                  {% for attrblockitemAcc in product_accessory.attrblock %}
-                      {% if attrblockitemAcc.attribute_group_id == 33 %}
-                        <div class="hits_slide swiper-slide">
-                            <div class="hits_slide__pic" data-linked-modal="modal_card">
-                                <div class="hits_slide__pic_wrap" data-hover-images="">
-                                    {% for img in product_accessory.imgDops %}
-                                        <img class="image" data-lazy data-src="{{ img.thumb }}" alt="{{ heading_title }}">
-                                    {% endfor %}
-                                </div>
-                                <img class="loader" data-src="/image/catalog/assets/img/loader.svg" alt="" data-lazy="" />
-                                <div class="hits_slide__hover_btn btn btn--filled">Быстрый просмотр</div>
-                                <button class="hits_slide__btn hits_slide__btn--mob"><img class="image image__empty"
-                                        data-src="/image/catalog/assets/img/icon_fav_empty.svg" alt="" data-lazy="" /><img
-                                        class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg" alt=""
-                                        data-lazy="" />
-                                </button>
-                            </div>
-                            <a href="{{ product_accessory.href }}" class="hits_slide_mobile btn btn--filled">
-                                Подробнее
-                            </a>
-                            <div class="hits_slide__info">
-                                <div class="hits_slide__left" data-linked-modal="modal_card">
-                                    <p class="hits_slide__text hits_slide__text-name hits_slide__text--big">{{ product_accessory.name }}</p>
-                                    <p class="hits_slide__text">
-                                        {{ product_accessory.model }}
-                                    </p>            
-                                    {% if product_accessory.stock == 'В наличии' %}
-                                        <div class="hits_slide__stock" data-color="green">В наличии</div> 
-                                        {% elseif product_accessory.stock == 'Нет в наличии' %} 
-                                        <div class="hits_slide__stock" data-color="red">Нет в наличии</div> 
-                                        {% elseif product_accessory.stock == 'Ожидание 2-3 дня' %} 
-                                        <div class="hits_slide__stock" data-color="blue">Ожидание 2-3 дня</div> 
-                                        {% elseif product_accessory.stock == 'Предзаказ' %}
-                                        <div class="hits_slide__stock" data-color="blue">Предзаказ</div> 
-                                    {% endif %}
-
-
-                                    <div style="display: none;">
-                                    {% if product_accessory.attrblock %}
-                                        {% for attrblockitemAcc in product_accessory.attrblock %}
-                                            {% if attrblockitemAcc.attribute_group_id == 7 %}
-                                            <div class="attrs__size">
-                                                <span class="attr__size-name">{{ attrblockitemAcc.name }}</span>
-                                                {% for attributeitemAccr in attrblockitemAcc.attribute %}
-                                                    {% if attributeitem.attribute_id == 16 %}
-                                                    <div class="attr__size-category shir">
-                                                        <p class="attr__size-name">{{ attributeitemAccr.name }}</p>
-                                                        <p class="attr__size-cal">{{ attributeitemAccr.text }}</p>
-                                                    </div>
-                                                    {% endif %}
-                                                    {% if attributeitemAccr.attribute_id == 13 %}
-                                                    <div class="attr__size-category leng">
-                                                        <p class="attr__size-name">{{ attributeitemAccr.name }}</p>
-                                                        <p class="attr__size-cal">{{ attributeitemAccr.text }}</p>
-                                                    </div>
-                                                    {% endif %}
-                                                    {% if attributeitemAccr.attribute_id == 14 %}
-                                                    <div class="attr__size-category heig-lin">
-                                                        <p class="attr__size-name">{{ attributeitemAccr.name }}</p>
-                                                        <p class="attr__size-cal">{{ attributeitemAccr.text }}</p>
-                                                    </div>
-                                                    {% endif %}
-                                                    {% if attributeitemAccr.attribute_id == 12 %}
-                                                    <div class="attr__size-category shir-lin">
-                                                        <p class="attr__size-name">{{ attributeitemAccr.name }}</p>
-                                                        <p class="attr__size-cal">{{ attributeitemAccr.text }}</p>
-                                                    </div>
-                                                    {% endif %}
-                                                    {% if attributeitemAccr.attribute_id == 15 %}
-                                                    <div class="attr__size-category most-len">
-                                                        <p class="attr__size-name">{{ attributeitemAccr.name }}</p>
-                                                        <p class="attr__size-cal">{{ attributeitemAccr.text }}</p>
-                                                    </div>
-                                                    {% endif %}
-                                                {% endfor %}
-                                            </div>
-                                            {% elseif attrblockitemAcc.attribute_group_id == 8 %} 
-                                            <div class="attrs__char">
-                                                <span class="attr__char-name">{{ attrblockitemAcc.name }}</span>
-                                                {% for attributeitemAccr in attrblockitemAcc.attribute %}
-                                                <div class="attr__char-category">
-                                                    <p class="attr__char-name">{{ attributeitemAccr.name }}</p>
-                                                    <p class="attr__char-cal">{{ attributeitemAccr.text }}</p>
-                                                </div>
-                                                {% endfor %}
-                                            </div>
-                                            {% endif %}
-                                        {% endfor %}
-                                    {% endif %}
-                                    </div>
-                                    
-                                    <div class="hits_slide_option" style="display: none;">
-                                    {% if product_accessory.attrblock %}
-                                        {% for attrblockitemAcc in product_accessory.attrblock %}
-                                            {% if attrblockitemAcc.attribute_group_id == 29 %}
-                                                {% for attributeitemAccr in attrblockitemAcc.attribute %}
-                                                <div class="hits_slide_option_param">
-                                                    <span>{{ attributeitemAccr.name }}</span>
-                                                    <a href="{{ product_accessory.hrefPiece }}{{ attributeitemAccr.text }}"></a>
-                                                </div>
-                                                {% endfor %}
-                                            {% endif %}
-                                        {% endfor %} 
-                                    {% endif %}       
-                                    </div>
-
-
-                                    <a class="hits_slide__href" href="{{ product_accessory.href }}"></a>
-                                    <p class="hits_slide__descr" style="display: none;">{{ product_accessory.description }}</p>
-                                    <div class="hits_slide__price">
-                                        {% if product_accessory.special %}
-                                            <p class="hits_slide__text normal"> <text>{{ product_accessory.special }}</text> RUB</p>
-                                            <p class="hits_slide__text old"><text>{{ product_accessory.price }}</text> RUB</p>
-                                        {% else %}
-                                            <p class="hits_slide__text normal"> <text>{{ product_accessory.price }}</text> RUB</p>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="hits_slide__right">
-
-                                    <!-- {% if theme_mt_category_product_cart_checked %}
-                                    <button class="button add-to-cart"
-                                        onclick="add_in_cart('{{ product.product_id }}', '{{ product.minimum }}');">{{ theme_mt_category_product_cart_text }}</button>
-                                    {% endif %} -->
-
-                                    {% if product_accessory.stock == 'В наличии' %}
-                                        <button class="hits_slide__btn add-to-cart {% if product_accessory.in_cart %} added{% endif %}" id="add-to-cart"
-                                                onclick="add_in_cart('{{ product_accessory.product_id }}', '{{ product_accessory.minimum }}'); return false;">
-                                                <img class="image image__empty" data-src="/image/catalog/assets/img/icon_cart_empty.svg"
-                                                    alt="" data-lazy="" />
-                                                <img class="image image__active" data-src="/image/catalog/assets/img/icon_cart_active.svg"
-                                                    alt="" data-lazy="" />
-                                            </button>
-                                    {% endif %}
-
-                                    
-                                    {% if logged %}
-                                    <button class="hits_slide__btn add-wish {% if product_accessory.in_wishlist %} added{% endif %}"
-                                        onclick="{% if product_accessory.in_wishlist %}wishlist_remove('{{ product_accessory.product_id }}');{% else %}wishlist_add('{{ product_accessory.product_id }}');{% endif %} return false;"
-                                        {% if not logged %}data-login="false" {% else %}data-login="true" {% endif %}>
-                                        <img class="image image__empty" data-src="/image/catalog/assets/img/icon_fav_empty.svg"
-                                            alt="" data-lazy="" />
-                                        <img class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg"
-                                            alt="" data-lazy="" />
-                                    </button>
-                                    {% else %}
-                                        <button class="hits_slide__btn showNoLogin" data-linked-modal="modal_wishlistErr">
-                                            <img class="image image__empty" data-src="/image/catalog/assets/img/icon_fav_empty.svg" alt="" data-lazy="" />
-                                            <img class="image image__active" data-src="/image/catalog/assets/img/icon_fav_active.svg" alt="" data-lazy="" />
-                                        </button>
-                                    {% endif %} 
-                                </div>
-                            </div>
-                        </div>
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
-            {% endfor %}
-        </div>
-    </div>
-</section>
-{% endif %}
-
+{{ content_bottom }}
 
 {{ content_top }}
 
 
 
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"
+    integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-    // слайдер продукта
-    /* let product__slider = new Swiper('.product__block-slider', {
-        thumbs: {
-            swiper: {
-                el: '.product__block-navslider',
-                slidesPerView: "auto",
-                direction: 'vertical',
-                spaceBetween: 20,
-                navigation: {
-                    nextEl: '.block-navslider.arrow-down',
-                    prevEl: '.block-navslider.arrow-up',
-                },
-            }
-        },
-        slidesPerView: "auto",
-        spaceBetween: 25,
-        loop: false,
-        pagination: false,
-        autoplay: false,
-        navigation: {
-            nextEl: '.product-slider_arrows.arrow-next',
-            prevEl: '.product-slider_arrows.arrow-prev',
-        },
-        breakpoints: {
-            320: {
-                allowTouchMove: true,
-            },
-            1024: {
-                allowTouchMove: false,
-            },
-        },
-    }); */
-      function formValidate() {
+    function formValidate() {
         $('#questionProduct').validate({
             rules: {
                 name: {
@@ -846,32 +418,33 @@
                     minlength: "Минимальное количество символов: 10"
                 }
             },
-            errorPlacement: function(error, element) {
-                error.appendTo( element.parent(".input_wrapper").next("p") );
+            errorPlacement: function (error, element) {
+                error.appendTo(element.parent(".input_wrapper").next("p"));
             }
         });
-      };
-      formValidate();
-            jQuery("#questionProduct").submit(function() {
+    };
+    formValidate();
+    jQuery("#questionProduct").submit(function () {
         let form = jQuery(this);
         let name = jQuery(this).find('input[name="name"]');
         let phone = jQuery(this).find('input[name="phone"]');
-       
-        if($('.input_wrapper__input').hasClass('error')) {
+
+        if ($('.input_wrapper__input').hasClass('error')) {
             phone.parent().addClass('not-valid');
             name.parent().addClass('not-valid');
-          } else {
+        } else {
             jQuery.ajax({
                 type: "POST",
                 url: "index.php?route=mail/sendemail/send_form",
                 data: form.serialize(),
                 dataType: 'json',
-                success: function(json) {
-                    if(json['error']){
-                    message.html(json['error']);
+                success: function (json) {
+                    if (json['error']) {
+                        message.html(json['error']);
                     }
-                    if(json['success']){
-                        $('#questionProduct').parent().find('.product_page_info__title').text('Спасибо за заявку! Мы скоро с вами свяжемся')
+                    if (json['success']) {
+                        $('#questionProduct').parent().find('.product_page_info__title').text(
+                            'Спасибо за заявку! Мы скоро с вами свяжемся')
                         $('#questionProduct').parent().find('.product_page_info__text').remove();
                         setTimeout(() => {
                             $('#questionProduct').remove();
@@ -879,76 +452,9 @@
                     }
                 }
             });
-          return false;
-          }
-      });
-    //выбор даты и времени 
-    $('#datetimepicker').datetimepicker({
-        mask: true,
-        format: 'd.m.Y H:i',
-        lang: 'ru',
+            return false;
+        }
     });
-
-    $.datetimepicker.setLocale('ru');
-
-    $('#button_datetime').click(function () {
-        $('#datetimepicker').datetimepicker('toggle');
-    });
-    //
-    $('#datepicker').datetimepicker({
-        mask: true,
-        format: 'd.m.Y',
-        lang: 'ru',
-    });
-
-    $.datetimepicker.setLocale('ru');
-
-    $('#button_date').click(function () {
-        $('#datepicker').datetimepicker('toggle');
-    });
-    //
-    $('#timepicker').datetimepicker({
-        mask: true,
-        format: 'H:i',
-        lang: 'ru',
-    });
-
-    $.datetimepicker.setLocale('ru');
-
-    $('#button_time').click(function () {
-        $('#timepicker').datetimepicker('toggle');
-    });
-
-    //галерея по клику на фото товара
-    lightGallery(document.getElementById('lightgallery'), {
-        hideBarsDelay: 99999,
-        backdropDuration: 0,
-        mode: 'lg-fade',
-        enableDrag: true,
-        closable: false,
-        appendCounterTo: '.lg',
-        addClass: 'product_gall',
-        nextHtml: '<svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="34" height="34" rx="17" fill="#EDEEE9"></rect><path d="M18.5179 22.5L17.4274 21.4207L21.0673 17.7688L10 17.7688L10 16.2312L21.0673 16.2312L17.4274 12.5793L18.5179 11.5L24 17L18.5179 22.5Z" fill="#1F1F1F"></path></svg>',
-        prevHtml: '<svg width="34" height="34" viewBox="0 0 34 34"" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="34" height="34" rx="17" fill="#EDEEE9"></rect><path d="M18.5179 22.5L17.4274 21.4207L21.0673 17.7688L10 17.7688L10 16.2312L21.0673 16.2312L17.4274 12.5793L18.5179 11.5L24 17L18.5179 22.5Z" fill="#1F1F1F"></path></svg>'
-    });
-
-    //слайдер "похожие товары"
-    /* let similar_slider = new Swiper('.descr__similar-slider', {
-        slidesPerView: "auto",
-        spaceBetween: 10,
-        loop: false,
-        pagination: false,
-        autoplay: false,
-        navigation: {
-            nextEl: '.similar-slider_arrows.arrow-next',
-            prevEl: '.similar-slider_arrows.arrow-prev',
-        },
-        breakpoints: {
-            1480: {
-                spaceBetween: 10,
-            },
-        },
-    }); */
 </script>
 
 <script>
@@ -1106,7 +612,7 @@
 </script>
 
 <script type="text/javascript">
-    $('.date').datetimepicker({
+    /* $('.date').datetimepicker({
         language: '{{ datepicker }}',
         pickTime: false
     });
@@ -1120,7 +626,7 @@
     $('.time').datetimepicker({
         language: '{{ datepicker }}',
         pickDate: false
-    });
+    }); */
 
     $('button[id^=\'button-upload\']').on('click', function () {
         var node = this;
@@ -1227,17 +733,17 @@
 
 <script>
     //Изменение Toolbar для галереи
-    Fancybox.bind('[data-fancybox="prod"], [data-fancybox="prodMob"]', {
-    compact: false,
-    Carousel: {
-        Navigation : false
-    },
-    Toolbar: {
-        display: {
-        left: [],
-        middle: ["prev", "infobar", "next"],
-        right: ["close"],
-        }
-    }
-    });    
+    /*  Fancybox.bind('[data-fancybox="prod"], [data-fancybox="prodMob"]', {
+         compact: false,
+         Carousel: {
+             Navigation: false
+         },
+         Toolbar: {
+             display: {
+                 left: [],
+                 middle: ["prev", "infobar", "next"],
+                 right: ["close"],
+             }
+         }
+     }); */
 </script>

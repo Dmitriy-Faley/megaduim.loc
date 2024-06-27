@@ -1,6 +1,5 @@
 {{ header }}
 
-
 <section class="catalog">
     <div class="container catalog__container">
         <div class="catalog-filter js-catalog-filter">
@@ -107,32 +106,35 @@
             </div>
         </div>
         <div class="catalog-content">
-            <div class="breadcrumbs">
-                {% for breadcrumb in breadcrumbs %}
-                    {% if breadcrumb == breadcrumbs|first %}
-                    <a href="#">
-                    <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <mask id="path-1-outside-1_84_10392" maskUnits="userSpaceOnUse" x="-0.0625" y="0" width="18" height="16"
-                        fill="black">
-                        <rect fill="white" x="-0.0625" width="18" height="16"></rect>
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                            d="M15.0619 9.03125L8.99968 2L2.9375 9.03125H3.99968V15H6.99962V10H10.9996V15H13.9997V9.03125H15.0619Z">
-                        </path>
-                        </mask>
-                        <path
-                        d="M8.99968 2L9.75705 1.34701L8.99968 0.468574L8.24231 1.34701L8.99968 2ZM15.0619 9.03125V10.0312H17.2444L15.8192 8.37826L15.0619 9.03125ZM2.9375 9.03125L2.18013 8.37826L0.754965 10.0312H2.9375V9.03125ZM3.99968 9.03125H4.99968V8.03125H3.99968V9.03125ZM3.99968 15H2.99968V16H3.99968V15ZM6.99962 15V16H7.99962V15H6.99962ZM6.99962 10V9H5.99962V10H6.99962ZM10.9996 10H11.9996V9H10.9996V10ZM10.9996 15H9.99962V16H10.9996V15ZM13.9997 15V16H14.9997V15H13.9997ZM13.9997 9.03125V8.03125H12.9997V9.03125H13.9997ZM8.24231 2.65299L14.3045 9.68424L15.8192 8.37826L9.75705 1.34701L8.24231 2.65299ZM3.69487 9.68424L9.75705 2.65299L8.24231 1.34701L2.18013 8.37826L3.69487 9.68424ZM3.99968 8.03125H2.9375V10.0312H3.99968V8.03125ZM2.99968 9.03125V15H4.99968V9.03125H2.99968ZM3.99968 16H6.99962V14H3.99968V16ZM7.99962 15V10H5.99962V15H7.99962ZM6.99962 11H10.9996V9H6.99962V11ZM9.99962 10V15H11.9996V10H9.99962ZM10.9996 16H13.9997V14H10.9996V16ZM14.9997 15V9.03125H12.9997V15H14.9997ZM15.0619 8.03125H13.9997V10.0312H15.0619V8.03125Z"
-                        fill="#4F649A" mask="url(#path-1-outside-1_84_10392)"></path>
-                    </svg>
-                    </a>
-                    {% endif %}
+            
+        <div class="breadcrumbs">
+            {% for breadcrumb in breadcrumbs %}
+            {% if breadcrumb == breadcrumbs|first %}
+                <a href="/">
+                <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <mask id="path-1-outside-1_84_10392" maskUnits="userSpaceOnUse" x="-0.0625" y="0" width="18" height="16"
+                    fill="black">
+                    <rect fill="white" x="-0.0625" width="18" height="16"></rect>
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M15.0619 9.03125L8.99968 2L2.9375 9.03125H3.99968V15H6.99962V10H10.9996V15H13.9997V9.03125H15.0619Z">
+                    </path>
+                    </mask>
+                    <path
+                    d="M8.99968 2L9.75705 1.34701L8.99968 0.468574L8.24231 1.34701L8.99968 2ZM15.0619 9.03125V10.0312H17.2444L15.8192 8.37826L15.0619 9.03125ZM2.9375 9.03125L2.18013 8.37826L0.754965 10.0312H2.9375V9.03125ZM3.99968 9.03125H4.99968V8.03125H3.99968V9.03125ZM3.99968 15H2.99968V16H3.99968V15ZM6.99962 15V16H7.99962V15H6.99962ZM6.99962 10V9H5.99962V10H6.99962ZM10.9996 10H11.9996V9H10.9996V10ZM10.9996 15H9.99962V16H10.9996V15ZM13.9997 15V16H14.9997V15H13.9997ZM13.9997 9.03125V8.03125H12.9997V9.03125H13.9997ZM8.24231 2.65299L14.3045 9.68424L15.8192 8.37826L9.75705 1.34701L8.24231 2.65299ZM3.69487 9.68424L9.75705 2.65299L8.24231 1.34701L2.18013 8.37826L3.69487 9.68424ZM3.99968 8.03125H2.9375V10.0312H3.99968V8.03125ZM2.99968 9.03125V15H4.99968V9.03125H2.99968ZM3.99968 16H6.99962V14H3.99968V16ZM7.99962 15V10H5.99962V15H7.99962ZM6.99962 11H10.9996V9H6.99962V11ZM9.99962 10V15H11.9996V10H9.99962ZM10.9996 16H13.9997V14H10.9996V16ZM14.9997 15V9.03125H12.9997V15H14.9997ZM15.0619 8.03125H13.9997V10.0312H15.0619V8.03125Z"
+                    fill="#4F649A" mask="url(#path-1-outside-1_84_10392)"></path>
+                </svg>
+                </a>
+            {% elseif breadcrumb == breadcrumbs|last %}
+                <span>{{ breadcrumb.text }}</span>
+            {% else %}
+            <a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+            {% endif %}
 
-                    <a class="breadcrumbs__link  {% if breadcrumb == breadcrumbs|last %} is-active {% endif %}"
-                    href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
-                    {% if breadcrumb != breadcrumbs|last %}
-                    <div class="breadcrumbs__separator"></div>
-                    {% endif %}
-                {% endfor %}
-            </div>
+            {% if breadcrumb != breadcrumbs|last %}
+                <div class="breadcrumbs__separator"></div>
+            {% endif %}
+            {% endfor %}
+        </div>
 
             <div class="catalog-content__buttons">
                 <button class="btn-reset catalog-content__filters js-filters">
@@ -140,52 +142,25 @@
                     <img loading="lazy" src="img/icon/icon-filters.svg" class="image" width="" height="" alt="">
                 </button>
 
-                <!-- {% for s in sorts %}
-                    {% if (s.code == sort) %}
-                        <a href="{{ s.href }}"
-                            class="news__sort_btn btn btn--grey btn--icon_right head_sorting-variant current-sort {% if order == 'ASC' %} sort_1{% else %} sort_2{% endif %}">
-                            <span class="btn__text">
-                                {% if order == 'ASC' %} сначала дорогие{% else %} сначала дешевые{% endif %}
-                            </span>
-                            <svg class="btn__icon btn__icon--black btn__icon--right">
-                                <use xlink:href="#icon_sort"></use>
-                            </svg>
-                        </a>
-                    {% endif %}
-                {% endfor %} -->
 
                 {% if sorts|length > 0 and products|length > 0 %}
-        <div class="products-head_sorting">
-            <div class="head_sorting-list">
-                {% for s in sorts %}
-                {% if (s.code == sort) %}
-                <a href="{{ s.href }}"
-                    class="news__sort_btn btn btn--grey btn--icon_right head_sorting-variant current-sort {% if order == 'ASC' %}sort_1{% else %}sort_2{% endif %}">
-                    <span class="btn__text">{{ s.text }}</span>
-                    <span class="sort-arr btn__icon btn__icon--black btn__icon--right">
-                        <svg class="btn__icon btn__icon--black btn__icon--right">
-                            <use xlink:href="#icon_sort"></use>
-                        </svg>
-                    </span>
-                </a>
-                {% else %}
-                <a href="{{ s.href }}" class="head_sorting-variant">
-                    <span>{{ s.text }}</span>
-                </a>
-                {% endif %}
-                {% endfor %}
-            </div>
-        </div>
-        {% endif %}
-
                 <div class="catalog-content__sort">
-                    <label for="speed"></label>
-                    <select name="speed" id="speed" class="catalog-content__sort-button">
-                        <option selected="selected">По популярности</option>
-                        <option>С дешевых</option>
-                        <option>С дорогих</option>
+                    <select name="speed" class="select catalog-content__sort-button">
+                        {% for s in sorts %}
+                        {% if (s.code == sort) %}
+                            <option selected value="{{ s.href }}">
+                               {{ s.text }}
+                            </option>
+                        {% else %}
+                            <option value="{{ s.href }}">
+                                {{ s.text }}
+                            </option>
+                        {% endif %}
+                        {% endfor %}
                     </select>
                 </div>
+                {% endif %}
+
             </div>
 
             <div class="swiper-style catalog-content__items">
@@ -241,17 +216,15 @@
                             <div class="card-product__line"></div>
                             <div class="card-product__total">
                                 <div class="card-product__count">
-                                    <button
-                                        class="btn-reset card-product__count-button card-product__count-button-decrease">
+                                    <button class="btn-reset amount-minus card-product__count-button card-product__count-button-decrease">
                                         <svg width="12" height="3" viewBox="0 0 12 3" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path d="M1 1.5H11" stroke="#919191" stroke-width="1.5"
                                                 stroke-linecap="round" />
                                         </svg>
                                     </button>
-                                    <input type="number" value="1" class="card-product__count-num">
-                                    <button
-                                        class="btn-reset card-product__count-button card-product__count-button-increase">
+                                    <input class="card-product__count-num" id="input-quantity{{ product.product_id }}" value="1" size="2">
+                                    <button class="btn-reset amount-plus card-product__count-button card-product__count-button-increase">
                                         <svg width="12" height="13" viewBox="0 0 12 13" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path d="M1 6.5H11" stroke="#919191" stroke-width="1.5"
@@ -261,6 +234,7 @@
                                         </svg>
                                     </button>
                                 </div>
+
                                 {% if product.special %}
                                     <div class="card-product__price">
                                         <div class="card-product__price-old"><span>{{ product.price }}</span> руб</div>
@@ -292,9 +266,11 @@
                     </div>
                 {% endfor %}
 
-                <button class="btn-reset catalog-content__button">Показать еще</button>
-
                 {% if pagination %}
+                    {% if pagCustom.last != pagCustom.page %}
+                        <a href="{{ pagCustom.url }}" class="pagination__btn_more btn btn--grey"><span class="btn__text">Показать ещё</span></a>
+                        <button class="btn-reset catalog-content__button">Показать еще</button>
+                    {% endif %}
                     {{ pagination }}
                 {% endif %}
 
@@ -314,6 +290,13 @@
 
 
 <script type="text/javascript">
+
+    $(document).ready(function(){
+        $('.select').change(function(){
+            window.location.href = $(this).val();
+        });
+    });
+
     function add_in_cart(product_id) {
         var btn = this;
         var quantity = $('#input-quantity' + product_id).val();
